@@ -1,0 +1,87 @@
+#:kivy 1.9.1
+
+<MainScreen>:
+    id: main_screen
+
+    BoxLayout:
+        id: main_layout
+        orientation: 'horizontal'
+
+        BoxLayout:
+            id: di_layout
+            orientation: 'vertical'
+            spacing: 5
+            padding: 5
+            size_hint_x: None
+            width: 200
+
+            DIIndicator:
+                text: 'Input 1'
+                index: 0
+            DIIndicator:
+                text: 'Input 2'
+                index: 1
+            DIIndicator:
+                text: 'Input 3'
+                index: 2
+            DIIndicator:
+                text: 'Input 4'
+                index: 3
+            DIIndicator:
+                text: 'Input 5'
+                index: 4
+            DIIndicator:
+                text: 'Input 6'
+                index: 5
+
+        GridLayout:
+            id: do_layout
+            cols: 3
+            rows: 3
+            spacing: 5
+            padding: 5
+            size_hint_x: None
+            width: 475
+
+            DOToggle:
+                text: 'Output 1'
+                index: 0
+            DOToggle:
+                text: 'Output 2'
+                index: 1
+            DOToggle:
+                text: 'Output 3'
+                index: 2
+            DOToggle:
+                text: 'Output 4'
+                index: 3
+            DOToggle:
+                text: 'Output 5'
+                index: 4
+            DOToggle:
+                text: 'Output 6'
+                index: 5
+
+        RelativeLayout:
+            id: settings_layout
+            size_hint_x: None
+            width: 124
+
+            Slider:
+                id: screen_light_slider
+                on_touch_move: app.brightness(self.value)
+                orientation: 'vertical'
+                min: 20
+                max: 200
+                value: 200
+                pos: 0, 90
+                size_hint_y: None
+                height: 300
+
+            Button:
+                id: exit_button
+                on_press: app.exit_app()
+                text: 'X'
+                size_hint: None, None
+                size: 20, 20
+                pos: 105, 0
