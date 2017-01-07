@@ -7,8 +7,8 @@ from kivy.lang import Builder
 Builder.load_string("""
 <DOToggle>:
     font_size: '20sp'
-    size_hint: None, None
-    size: 153.33, 153.33
+    #size_hint: None, None
+    #size: 153.33, 153.33
     ignition_input: app.arduino.ignition_input
     on_press: app.arduino.set('digital/' + str(self.index) + '/', self.state)
 

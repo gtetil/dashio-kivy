@@ -28,7 +28,7 @@ debug_mode = 0
 class ScreenManagement(ScreenManager):
     passcode = '1234'
     passcode_try = ''
-    logged_in = 0
+    logged_in = 1
     ignition_input = NumericProperty(0)
     reverse_input = NumericProperty(0)
     passcode_ref = ObjectProperty(None)
@@ -39,23 +39,31 @@ class ScreenManagement(ScreenManager):
 
     def on_ignition_input(self, instance, state):
         if state == 1:
-            self.current = 'passcode_screen'
+            #self.current = 'passcode_screen'
+            self.current = 'main_screen'
             state_str = '0'
         else:
-            self.logged_in = 0
+            Clock.schedule_once(self.delayed_screen_off, 5)
             state_str = '1'
         #_power = open(os.path.join(BASE, "bl_power"), "w")
         #_power.write(state_str)
         #_power.close()
 
+    def delayed_screen_off(self, dt):
+        self.current = 'off_screen'
+        self.logged_in = 0
+
     def on_reverse_input(self, instance, state):
         if state == 1:
             self.current = "camera_screen"
         else:
-            if self.logged_in == 1:
-                self.current = "main_screen"
+            if self.ignition_input == 1:
+                if self.logged_in == 1:
+                    self.current = "main_screen"
+                else:
+                    self.current = "passcode_screen"
             else:
-                self.current = "passcode_screen"
+                self.current = 'off_screen'
 
     def try_passcode(self, number):
         self.passcode_try = self.passcode_try + number
