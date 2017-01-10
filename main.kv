@@ -20,12 +20,22 @@
     id: main_screen
     dynamic_layout: dynamic_layout
 
+    Button:
+        id: end_modify_button
+        on_press: dynamic_layout.end_modify(); self.parent.remove_widget(self)
+        text: 'End Screen Modify'
+        color: 0.88, 0.72, 0.1, 1
+        size_hint: None, None
+        size: 150, 42
+        right: root.right - 226
+        top: root.top - 2
+        on_parent: if self.parent == main_screen: self.parent.remove_widget(self)
+
     DynamicLayout:
         id: dynamic_layout
         indicator_layout: indicator_layout
         button_layout: button_layout
-        indicator_edit_popup: indicator_edit_popup
-        button_edit_popup: button_edit_popup
+        item_edit_popup: item_edit_popup
         modify_mode: False
         on_parent: if self.parent == main_screen: self.parent.remove_widget(self)
 
@@ -63,38 +73,58 @@
 
             RelativeLayout:
                 id: settings_layout
-                size_hint_x: None
-                width: 124
 
                 BoxLayout:
-                    orientation: 'vertical'
+                    id: backlight_layout
+                    orientation: 'horizontal'
                     padding: 10
                     spacing: 5
 
-                    Label:
-                        text: 'Screen\nBrightness'
-                        markup: True
-                        size_hint_y: 0.1
-                        text_size: self.size
-                        halign: 'center'
-                        valign: 'middle'
-
-                    Slider:
-                        id: screen_light_slider
-                        on_touch_move: app.brightness(self.value)
+                    BoxLayout:
+                        id: backlight_layout
                         orientation: 'vertical'
-                        min: 20
-                        max: 200
-                        value: 200
-                        size_hint_y: 0.9
+                        size_hint_x: 0.2
+                        padding: 10
+                        spacing: 5
 
-                ToggleButton:
-                    id: modify_screen
-                    text: 'Modify Screen'
-                    size_hint: 0.1, 1
-                    on_press:
-                        if self.state == 'down': dynamic_layout.modify_screen()
-                        else: dynamic_layout.end_modify()
+                        Label:
+                            text: 'Screen\nBrightness'
+                            markup: True
+                            size_hint_y: 0.1
+                            text_size: self.size
+                            halign: 'center'
+                            valign: 'middle'
+
+                        Slider:
+                            id: screen_light_slider
+                            on_touch_move: app.brightness(self.value)
+                            orientation: 'vertical'
+                            min: 20
+                            max: 200
+                            value: 200
+                            size_hint_y: 0.9
+
+                    BoxLayout:
+                        orientation: 'vertical'
+                        size_hint_x: 0.2
+                        padding: 10
+                        spacing: 5
+
+                        Button:
+                            id: modify_screen
+                            text: 'Modify\n Main Screen'
+                            halign: 'center'
+                            valign: 'middle'
+                            size_hint: None, None
+                            size: 150, 60
+                            top: screen_light_slider.top
+                            on_press: if not dynamic_layout.modify_mode: dynamic_layout.modify_screen(); main_tabbed_panel.switch_to(home_tab); root.add_widget(end_modify_button)
+
+                    BoxLayout:
+                        orientation: 'vertical'
+                        size_hint_x: 0.6
+                        padding: 10
+                        spacing: 5
 
                 Button:
                     id: exit_button
@@ -104,63 +134,16 @@
                     size: 20, 20
                     right: root.right
 
-    IndicatorEditPopup:
-        id: indicator_edit_popup
-        ind_label_input: ind_label_input
-        ind_channel_spinner: ind_channel_spinner
-        dynamic_layout: dynamic_layout
-        modify_mode: dynamic_layout.modify_mode
-        title: "Change Indicator Label"
-        size_hint: None, None
-        size: 300, 250
-        pos_hint: {'middle': 1, 'top': 1}
-        on_parent: if self.parent == main_screen: self.parent.remove_widget(self)
-
-        BoxLayout:
-            orientation: 'vertical'
-            spacing: 5
-            padding: 5
-
-            TextInput:
-                id: ind_label_input
-                size_hint: 1, .35
-
-            BoxLayout:
-                orientation: 'horizontal'
-                size_hint: 1, .25
-
-                Label:
-                    text: 'Channel:'
-                    size_hint: .3, 1
-
-                Spinner:
-                    id: ind_channel_spinner
-                    size_hint: .7, 1
-                    text: '0'
-                    values: ('0', '1', '2', '3', '4', '5')
-
-            GridLayout:
-                rows: 1
-                cols: 2
-                size_hint: 1, .4
-                spacing: 5
-
-                Button:
-                    text: 'OK'
-                    on_press: indicator_edit_popup.save_indicator()
-
-                Button:
-                    text: 'Cancel'
-                    on_press: indicator_edit_popup.dismiss()
-
-    ButtonEditPopup:
-        id: button_edit_popup
+    ScreenItemEditPopup:
+        id: item_edit_popup
         label_input: label_input
         toggle_check: toggle_check
+        enable_check: enable_check
         channel_spinner: channel_spinner
+        toggle_layout: toggle_layout
         dynamic_layout: dynamic_layout
         modify_mode: dynamic_layout.modify_mode
-        title: "Change Button Label"
+        title: "Modify"
         size_hint: None, None
         size: 300, 250
         pos_hint: {'middle': 1, 'top': 1}
@@ -170,36 +153,52 @@
             orientation: 'vertical'
             spacing: 5
             padding: 5
+
+            GridLayout:
+                rows: 2
+                cols: 2
+                size_hint: 1, 0.43
+                spacing: 5
+
+                BoxLayout:
+                    orientation: 'horizontal'
+
+                    Label:
+                        text: 'Enable?:'
+                        size_hint: .6, 1
+
+                    CheckBox:
+                        id: enable_check
+                        size_hint: .4, 1
+
+                BoxLayout:
+                    id: toggle_layout
+                    orientation: 'horizontal'
+
+                    Label:
+                        text: 'Toggle?:'
+                        size_hint: .6, 1
+
+                    CheckBox:
+                        id: toggle_check
+                        size_hint: .4, 1
+
+                BoxLayout:
+                    orientation: 'horizontal'
+
+                    Label:
+                        text: 'Channel:'
+                        size_hint: .6, 1
+
+                    Spinner:
+                        id: channel_spinner
+                        size_hint: .4, 1
+                        text: '0'
+                        values: ('0', '1', '2', '3', '4', '5')
 
             TextInput:
                 id: label_input
-                size_hint: 1, 0.3
-
-            BoxLayout:
-                orientation: 'horizontal'
-                size_hint: 1, .2
-
-                Label:
-                    text: 'Toggle?:'
-                    size_hint: .3, 1
-
-                CheckBox:
-                    id: toggle_check
-                    size_hint: .7, 1
-
-            BoxLayout:
-                orientation: 'horizontal'
-                size_hint: 1, .2
-
-                Label:
-                    text: 'Channel:'
-                    size_hint: .3, 1
-
-                Spinner:
-                    id: channel_spinner
-                    size_hint: .7, 1
-                    text: '0'
-                    values: ('0', '1', '2', '3', '4', '5')
+                size_hint: 1, 0.27
 
             GridLayout:
                 rows: 1
@@ -209,11 +208,11 @@
 
                 Button:
                     text: 'OK'
-                    on_press: button_edit_popup.save_button()
+                    on_press: item_edit_popup.save_item()
 
                 Button:
                     text: 'Cancel'
-                    on_press: button_edit_popup.dismiss()
+                    on_press: item_edit_popup.dismiss()
 
 
 <IndicatorButton, DynToggleButton, DynButton>:
