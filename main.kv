@@ -18,6 +18,16 @@
 
 <MainScreen>:
     id: main_screen
+    dynamic_layout: dynamic_layout
+
+    DynamicLayout:
+        id: dynamic_layout
+        indicator_layout: indicator_layout
+        button_layout: button_layout
+        indicator_edit_popup: indicator_edit_popup
+        button_edit_popup: button_edit_popup
+        modify_mode: False
+        on_parent: if self.parent == main_screen: self.parent.remove_widget(self)
 
     TabbedPanel:
         id: main_tabbed_panel
@@ -33,57 +43,19 @@
                 padding: 10
 
                 GridLayout:
-                    id: di_layout
+                    id: indicator_layout
                     cols: 1
                     spacing: 5
                     padding: 5
                     size_hint_x: 0.25
 
-                    DIIndicator:
-                        text: 'Input 1'
-                        index: 0
-                    DIIndicator:
-                        text: 'Input 2'
-                        index: 1
-                    DIIndicator:
-                        text: 'Input 3'
-                        index: 2
-                    DIIndicator:
-                        text: 'Input 4'
-                        index: 3
-                    DIIndicator:
-                        text: 'Input 5'
-                        index: 4
-                    DIIndicator:
-                        text: 'Input 6'
-                        index: 5
-
                 GridLayout:
-                    id: do_layout
+                    id: button_layout
                     cols: 3
                     rows: 2
                     spacing: 5
                     padding: 5
                     size_hint_x: 0.75
-
-                    DOToggle:
-                        text: 'Output 1'
-                        index: 0
-                    DOToggle:
-                        text: 'Output 2'
-                        index: 1
-                    DOToggle:
-                        text: 'Output 3'
-                        index: 2
-                    DOToggle:
-                        text: 'Output 4'
-                        index: 3
-                    DOToggle:
-                        text: 'Output 5'
-                        index: 4
-                    DOToggle:
-                        text: 'Output 6'
-                        index: 5
 
         TabbedPanelItem:
             text: 'Settings'
@@ -116,6 +88,14 @@
                         value: 200
                         size_hint_y: 0.9
 
+                ToggleButton:
+                    id: modify_screen
+                    text: 'Modify Screen'
+                    size_hint: 0.1, 1
+                    on_press:
+                        if self.state == 'down': dynamic_layout.modify_screen()
+                        else: dynamic_layout.end_modify()
+
                 Button:
                     id: exit_button
                     on_press: app.exit_app()
@@ -123,6 +103,124 @@
                     size_hint: None, None
                     size: 20, 20
                     right: root.right
+
+    IndicatorEditPopup:
+        id: indicator_edit_popup
+        ind_label_input: ind_label_input
+        ind_channel_spinner: ind_channel_spinner
+        dynamic_layout: dynamic_layout
+        modify_mode: dynamic_layout.modify_mode
+        title: "Change Indicator Label"
+        size_hint: None, None
+        size: 300, 250
+        pos_hint: {'middle': 1, 'top': 1}
+        on_parent: if self.parent == main_screen: self.parent.remove_widget(self)
+
+        BoxLayout:
+            orientation: 'vertical'
+            spacing: 5
+            padding: 5
+
+            TextInput:
+                id: ind_label_input
+                size_hint: 1, .35
+
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint: 1, .25
+
+                Label:
+                    text: 'Channel:'
+                    size_hint: .3, 1
+
+                Spinner:
+                    id: ind_channel_spinner
+                    size_hint: .7, 1
+                    text: '0'
+                    values: ('0', '1', '2', '3', '4', '5')
+
+            GridLayout:
+                rows: 1
+                cols: 2
+                size_hint: 1, .4
+                spacing: 5
+
+                Button:
+                    text: 'OK'
+                    on_press: indicator_edit_popup.save_indicator()
+
+                Button:
+                    text: 'Cancel'
+                    on_press: indicator_edit_popup.dismiss()
+
+    ButtonEditPopup:
+        id: button_edit_popup
+        label_input: label_input
+        toggle_check: toggle_check
+        channel_spinner: channel_spinner
+        dynamic_layout: dynamic_layout
+        modify_mode: dynamic_layout.modify_mode
+        title: "Change Button Label"
+        size_hint: None, None
+        size: 300, 250
+        pos_hint: {'middle': 1, 'top': 1}
+        on_parent: if self.parent == main_screen: self.parent.remove_widget(self)
+
+        BoxLayout:
+            orientation: 'vertical'
+            spacing: 5
+            padding: 5
+
+            TextInput:
+                id: label_input
+                size_hint: 1, 0.3
+
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint: 1, .2
+
+                Label:
+                    text: 'Toggle?:'
+                    size_hint: .3, 1
+
+                CheckBox:
+                    id: toggle_check
+                    size_hint: .7, 1
+
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint: 1, .2
+
+                Label:
+                    text: 'Channel:'
+                    size_hint: .3, 1
+
+                Spinner:
+                    id: channel_spinner
+                    size_hint: .7, 1
+                    text: '0'
+                    values: ('0', '1', '2', '3', '4', '5')
+
+            GridLayout:
+                rows: 1
+                cols: 2
+                size_hint: 1, 0.3
+                spacing: 5
+
+                Button:
+                    text: 'OK'
+                    on_press: button_edit_popup.save_button()
+
+                Button:
+                    text: 'Cancel'
+                    on_press: button_edit_popup.dismiss()
+
+
+<IndicatorButton, DynToggleButton, DynButton>:
+    text_size: self.size
+    font_size: '18sp'
+    halign: 'center'
+    valign: 'middle'
 
 <PasscodeScreen>:
     id: passcode_screen

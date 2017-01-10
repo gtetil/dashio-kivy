@@ -1,0 +1,56 @@
+{
+    "button_0": {
+        "channel": 1, 
+        "label": "this is a\nnew test", 
+        "toggle": false
+    }, 
+    "button_1": {
+        "channel": 0, 
+        "label": "button_1", 
+        "toggle": false
+    }, 
+    "button_2": {
+        "channel": 0, 
+        "label": "button_2", 
+        "toggle": false
+    }, 
+    "button_3": {
+        "channel": 2, 
+        "label": "button_3", 
+        "toggle": true
+    }, 
+    "button_4": {
+        "channel": 0, 
+        "label": "button_4", 
+        "toggle": true
+    }, 
+    "button_5": {
+        "channel": 0, 
+        "label": "", 
+        "toggle": true
+    }, 
+    "indicator_0": {
+        "channel": 1, 
+        "label": "test\n37"
+    }, 
+    "indicator_1": {
+        "channel": 0, 
+        "label": "hi"
+    }, 
+    "indicator_2": {
+        "channel": 0, 
+        "label": "Jenna"
+    }, 
+    "indicator_3": {
+        "channel": 2, 
+        "label": "text_3"
+    }, 
+    "indicator_4": {
+        "channel": 0, 
+        "label": "tetilx"
+    }, 
+    "indicator_5": {
+        "channel": 0, 
+        "label": "text_5"
+    }
+}
