@@ -1,58 +1,58 @@
 {
     "button_0": {
-        "channel": 4, 
-        "enable": true, 
-        "label": "button_1", 
-        "toggle": true
-    }, 
-    "button_1": {
-        "channel": 5, 
-        "enable": true, 
-        "label": "button", 
-        "toggle": true
-    }, 
-    "button_2": {
         "channel": 0, 
         "enable": true, 
-        "label": "button_2", 
-        "toggle": true
+        "label": "violet loves dady", 
+        "toggle": false
     }, 
-    "button_3": {
+    "button_1": {
+        "channel": 1, 
+        "enable": true, 
+        "label": "i love jj", 
+        "toggle": false
+    }, 
+    "button_2": {
         "channel": 2, 
         "enable": true, 
-        "label": "button_3", 
+        "label": "DO_2", 
+        "toggle": false
+    }, 
+    "button_3": {
+        "channel": 3, 
+        "enable": true, 
+        "label": "DO_3", 
         "toggle": true
     }, 
     "button_4": {
-        "channel": 1, 
+        "channel": 4, 
         "enable": true, 
-        "label": "button_4", 
+        "label": "DO_4", 
         "toggle": true
     }, 
     "button_5": {
-        "channel": 1, 
-        "enable": false, 
-        "label": "test", 
-        "toggle": false
+        "channel": 5, 
+        "enable": true, 
+        "label": "DO_5", 
+        "toggle": true
     }, 
     "indicator_0": {
-        "channel": 4, 
+        "channel": 0, 
         "enable": true, 
-        "label": "test\n37"
+        "label": "DI_0"
     }, 
     "indicator_1": {
-        "channel": 0, 
+        "channel": 1, 
         "enable": true, 
-        "label": "hi"
+        "label": "hello my name is canton"
     }, 
     "indicator_2": {
-        "channel": 0, 
-        "enable": true, 
-        "label": "Jenna"
+        "channel": 1, 
+        "enable": false, 
+        "label": "DI_1"
     }, 
     "indicator_3": {
         "channel": 2, 
-        "enable": true, 
+        "enable": false, 
         "label": "text_3"
     }, 
     "indicator_4": {

@@ -32,12 +32,12 @@ import serial
 import os
 BASE = "/sys/class/backlight/rpi_backlight/"
 
-debug_mode = 1
+debug_mode = 0
 
 class ScreenManagement(ScreenManager):
-    passcode = '1234'
+    passcode = '7'
     passcode_try = ''
-    logged_in = 1
+    logged_in = 0
     ignition_input = NumericProperty(0)
     reverse_input = NumericProperty(0)
     passcode_ref = ObjectProperty(None)
@@ -198,6 +198,8 @@ class DynToggleButton(ToggleButton):
     toggle = BooleanProperty(True)
     enable = BooleanProperty(True)
     channel = NumericProperty(0)
+    ignition_input = NumericProperty(0)
+    app_ref = ObjectProperty(True)
 
     def set_properties(self, ref, channel, enable):
         self.dynamic_layout = ref
@@ -205,15 +207,26 @@ class DynToggleButton(ToggleButton):
         self.enable = enable
         ChangeItemBackground(self)
 
-    def on_press(self):
-        if self.dynamic_layout.modify_mode or not self.enable:
+    def on_ignition_input(self, instance, state):
+        if state == 0:
             self.state = 'normal'
+            self.output_cmd()
+
+    def on_press(self):
+        self.output_cmd()
+
+    def output_cmd(self):
+        if self.dynamic_layout.modify_mode or not self.enable or not self.app_ref.arduino.ignition_input:
+            self.state = 'normal'
+        self.app_ref.arduino.set('digital/' + str(self.channel) + '/', self.state)
 
 class DynButton(Button):
     dynamic_layout = ObjectProperty(None)
     toggle = BooleanProperty(False)
     enable = BooleanProperty(True)
     channel = NumericProperty(0)
+    ignition_input = NumericProperty(0)
+    app_ref = ObjectProperty(True)
 
     def set_properties(self, ref, channel, enable):
         self.dynamic_layout = ref
@@ -221,19 +234,42 @@ class DynButton(Button):
         self.enable = enable
         ChangeItemBackground(self)
 
-    def on_press(self):
-        if self.dynamic_layout.modify_mode or not self.enable:
+    def on_ignition_input(self, instance, state):
+        if state == 0:
             self.state = 'normal'
+            self.output_cmd()
+
+    def on_press(self):
+        self.output_cmd()
+
+    def on_release(self):
+        self.output_cmd()
+
+    def output_cmd(self):
+        if self.dynamic_layout.modify_mode or not self.enable or not self.app_ref.arduino.ignition_input:
+            self.state = 'normal'
+        self.app_ref.arduino.set('digital/' + str(self.channel) + '/', self.state)
 
 class IndicatorButton(Button):
     channel = NumericProperty(0)
     toggle = BooleanProperty(False)
     enable = BooleanProperty(True)
+    digital_inputs = NumericProperty(0)
 
     def set_properties(self, ref, channel, enable):
         self.channel = channel
         self.enable = enable
         ChangeItemBackground(self)
+
+    def on_digital_inputs(self, instance, di_byte):
+        if self.enable:
+            mask = 1 << self.channel
+            state = di_byte & mask
+            state = state >> self.channel
+            if state == 1:
+                self.state = 'down'
+            else:
+                self.state = 'normal'
 
     def on_press(self):
         self.state = 'normal'
@@ -291,8 +327,8 @@ class Arduino(Widget):
 
     def update_data(self, dt):
         try:
-            #serial_data = ser.readline().rstrip()
-            serial_data = '255'
+            serial_data = ser.readline().rstrip()
+            #serial_data = '255'
             self.digital_inputs = 0
             try:
                 self.digital_inputs = int(serial_data)

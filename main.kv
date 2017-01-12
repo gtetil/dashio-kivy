@@ -104,8 +104,7 @@
                             value: 200
                             size_hint_y: 0.9
 
-                    BoxLayout:
-                        orientation: 'vertical'
+                    StackLayout:
                         size_hint_x: 0.2
                         padding: 10
                         spacing: 5
@@ -220,6 +219,14 @@
     font_size: '18sp'
     halign: 'center'
     valign: 'middle'
+
+<DynToggleButton, DynButton>:
+    app_ref: app
+    ignition_input: app.arduino.ignition_input
+
+<IndicatorButton>:
+    digital_inputs: app.arduino.digital_inputs
+
 
 <PasscodeScreen>:
     id: passcode_screen
