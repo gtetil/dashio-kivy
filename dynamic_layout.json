@@ -2,13 +2,13 @@
     "button_0": {
         "channel": 0, 
         "enable": true, 
-        "label": "violet loves dady", 
+        "label": "DO_0", 
         "toggle": false
     }, 
     "button_1": {
         "channel": 1, 
         "enable": true, 
-        "label": "i love jj", 
+        "label": "DO_1", 
         "toggle": false
     }, 
     "button_2": {
@@ -43,7 +43,7 @@
     "indicator_1": {
         "channel": 1, 
         "enable": true, 
-        "label": "hello my name is canton"
+        "label": "DI_1"
     }, 
     "indicator_2": {
         "channel": 1, 

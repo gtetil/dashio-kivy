@@ -75,7 +75,7 @@
                 id: settings_layout
 
                 BoxLayout:
-                    id: backlight_layout
+                    id: settings_box_layout
                     orientation: 'horizontal'
                     padding: 10
                     spacing: 5
@@ -104,20 +104,52 @@
                             value: 200
                             size_hint_y: 0.9
 
-                    StackLayout:
+                    BoxLayout:
+                        orientation: 'vertical'
                         size_hint_x: 0.2
                         padding: 10
-                        spacing: 5
+                        spacing: 15
 
                         Button:
                             id: modify_screen
                             text: 'Modify\n Main Screen'
                             halign: 'center'
                             valign: 'middle'
-                            size_hint: None, None
-                            size: 150, 60
-                            top: screen_light_slider.top
-                            on_press: if not dynamic_layout.modify_mode: dynamic_layout.modify_screen(); main_tabbed_panel.switch_to(home_tab); root.add_widget(end_modify_button)
+                            size_hint_y: 0.15
+                            on_press: if not dynamic_layout.modify_mode: enter_modify_popup.open()
+
+                        BoxLayout:
+                            orientation: 'vertical'
+                            size_hint_y: 0.17
+                            padding: 5, 0, 0, 0
+
+                            Label:
+                                text: 'Screen Off Delay:'
+
+                            BoxLayout:
+                                orientation: 'horizontal'
+
+                                TextInput:
+                                    text: '30'
+                                    size_hint_x: 0.4
+
+                                Label:
+                                    text: 'seconds'
+                                    size_hint_x: 0.6
+
+                        BoxLayout:
+                            orientation: 'vertical'
+                            size_hint_y: 0.17
+                            padding: 5, 0, 0, 0
+
+                            Label:
+                                text: 'Password Disable:'
+
+                            Switch:
+
+                        BoxLayout:
+                            orientation: 'vertical'
+                            size_hint_y: 0.53
 
                     BoxLayout:
                         orientation: 'vertical'
@@ -132,6 +164,41 @@
                     size_hint: None, None
                     size: 20, 20
                     right: root.right
+
+        Popup:
+            id: enter_modify_popup
+            title: "Modify Main Screen"
+            size_hint: None, None
+            size: 275, 250
+            pos_hint: {'middle': 1, 'center': 1}
+            on_parent:
+                if self.parent == settings_tab: self.parent.remove_widget(self)
+
+            BoxLayout:
+                orientation: 'vertical'
+
+                Label:
+                    text: 'Entering Modify Main Screen will turn off all outputs.  Proceed?'
+                    size_hint: 1, .7
+                    height: self.texture_size[1]
+                    font_size: '18sp'
+                    text_size: self.size
+                    halign: 'center'
+                    valign: 'middle'
+
+                GridLayout:
+                    rows: 1
+                    cols: 2
+                    size_hint: 1, .3
+
+                    Button:
+                        text: 'Yes'
+                        on_release: enter_modify_popup.dismiss(); dynamic_layout.modify_screen(); main_tabbed_panel.switch_to(home_tab); root.add_widget(end_modify_button)
+
+                    Button:
+                        text: 'Cancel'
+                        on_release: enter_modify_popup.dismiss()
+
 
     ScreenItemEditPopup:
         id: item_edit_popup

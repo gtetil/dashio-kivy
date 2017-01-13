@@ -32,7 +32,7 @@ import serial
 import os
 BASE = "/sys/class/backlight/rpi_backlight/"
 
-debug_mode = 0
+debug_mode = 1
 
 class ScreenManagement(ScreenManager):
     passcode = '7'
@@ -148,6 +148,7 @@ class DynamicLayout(Widget):
             self.animate(indicator)
         for button in self.button_layout.children:
             self.animate(button)
+            button.output_cmd()
 
     def end_modify(self):
         self.modify_mode = False
@@ -327,8 +328,8 @@ class Arduino(Widget):
 
     def update_data(self, dt):
         try:
-            serial_data = ser.readline().rstrip()
-            #serial_data = '255'
+            #serial_data = ser.readline().rstrip()
+            serial_data = '255'
             self.digital_inputs = 0
             try:
                 self.digital_inputs = int(serial_data)
@@ -345,7 +346,7 @@ class Arduino(Widget):
             int_state = '1/'
         else:
             int_state = '0/'
-        ser.write(command + int_state)
+        #ser.write(command + int_state)
 
 if __name__ == '__main__':
 
