@@ -38,14 +38,31 @@ class ScreenManagement(ScreenManager):
     passcode = '7'
     passcode_try = ''
     logged_in = 0
+    main_screen = ObjectProperty(None)
     ignition_input = NumericProperty(0)
     reverse_input = NumericProperty(0)
-    passcode_ref = ObjectProperty(None)
+    settings_file = 'settings.json'
 
     def __init__(self,**kwargs):
         super (ScreenManagement,self).__init__(**kwargs)
         self.transition = NoTransition()
-        self.screens[1].dynamic_layout.build_layout()
+        self.main_screen.dynamic_layout.build_layout()
+
+        with open(self.settings_file, 'r') as file:
+            data = json.load(file)
+            self.main_screen.screen_brightness_slider.value = data['settings']['screen_brightness']
+            self.main_screen.screen_off_delay_input.text = str(data['settings']['screen_off_delay'])
+            self.main_screen.password_disable_switch.active = data['settings']['password_disable']
+
+    def save_settings(self):
+        data = {}
+        config = {}
+        config['screen_brightness'] = int(self.main_screen.screen_brightness_slider.value)
+        config['screen_off_delay'] = int(self.main_screen.screen_off_delay_input.text)
+        config['password_disable'] = self.main_screen.password_disable_switch.active
+        data['settings'] = config
+        with open(self.settings_file, 'w') as file:
+            json.dump(data, file, sort_keys=True, indent=4)
 
     def on_ignition_input(self, instance, state):
         if state == 1:
@@ -111,14 +128,14 @@ class DynamicLayout(Widget):
             config['channel'] = button.channel
             config['enable'] = button.enable
             data[button.id] = config
-        with open(self.layout_file, 'w') as fp:
-            json.dump(data, fp, sort_keys=True, indent=4)
+        with open(self.layout_file, 'w') as file:
+            json.dump(data, file, sort_keys=True, indent=4)
 
     def build_layout(self):
         self.indicator_layout.clear_widgets()
         self.button_layout.clear_widgets()
-        with open(self.layout_file, 'r') as fp:
-            data = json.load(fp)
+        with open(self.layout_file, 'r') as file:
+            data = json.load(file)
         for i in range(6):
             label = data['indicator_'+str(i)]['label']
             channel = data['indicator_' + str(i)]['channel']
