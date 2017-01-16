@@ -17,7 +17,6 @@ from kivy.properties import StringProperty, NumericProperty, ObjectProperty, Boo
 from kivy.uix.camera import Camera
 from kivy.uix.screenmanager import ScreenManager, Screen, NoTransition
 from kivy.uix.popup import Popup
-from kivy.lang import Builder
 from kivy.core.window import Window
 from kivy.animation import Animation
 
@@ -27,7 +26,6 @@ from functools import partial
 Window.size = (800,480)
 Config.set('graphics', 'maxfps', '100')
 
-import diIndicator, doToggle
 import serial
 import os
 BASE = "/sys/class/backlight/rpi_backlight/"
@@ -35,7 +33,7 @@ BASE = "/sys/class/backlight/rpi_backlight/"
 debug_mode = 1
 
 class ScreenManagement(ScreenManager):
-    passcode = '7'
+    passcode = '1234'
     passcode_try = ''
     logged_in = 0
     main_screen = ObjectProperty(None)
@@ -53,6 +51,7 @@ class ScreenManagement(ScreenManager):
             self.main_screen.screen_brightness_slider.value = data['settings']['screen_brightness']
             self.main_screen.screen_off_delay_input.text = str(data['settings']['screen_off_delay'])
             self.main_screen.password_disable_switch.active = data['settings']['password_disable']
+        self.brightness(int(self.main_screen.screen_brightness_slider.value))
 
     def save_settings(self):
         data = {}
@@ -64,28 +63,44 @@ class ScreenManagement(ScreenManager):
         with open(self.settings_file, 'w') as file:
             json.dump(data, file, sort_keys=True, indent=4)
 
+    def brightness(self, value):
+        if value > 0 and value < 256:
+            #_brightness = open(os.path.join(BASE, "brightness"), "w")
+            #_brightness.write(str(value))
+            #_brightness.close()
+            return
+        raise TypeError("Brightness should be between 0 and 255")
+
     def on_ignition_input(self, instance, state):
         if state == 1:
-            #self.current = 'passcode_screen'
-            self.current = 'main_screen'
-            state_str = '0'
+            if self.main_screen.password_disable_switch.active:
+                self.current = 'main_screen'
+            else:
+                self.current = 'passcode_screen'
+            #self.backlight_on(True)
         else:
-            Clock.schedule_once(self.delayed_screen_off, 5)
-            state_str = '1'
-        #_power = open(os.path.join(BASE, "bl_power"), "w")
-        #_power.write(state_str)
-        #_power.close()
+            Clock.schedule_once(self.delayed_screen_off, int(self.main_screen.screen_off_delay_input.text))
 
     def delayed_screen_off(self, dt):
         self.current = 'off_screen'
         self.logged_in = 0
+        self.backlight_on(False)
+
+    def backlight_on(self, state):
+        if state:
+            state_str = '0'
+        else:
+            state_str = '1'
+        _power = open(os.path.join(BASE, "bl_power"), "w")
+        _power.write(state_str)
+        _power.close()
 
     def on_reverse_input(self, instance, state):
         if state == 1:
             self.current = "camera_screen"
         else:
             if self.ignition_input == 1:
-                if self.logged_in == 1:
+                if self.logged_in == 1 or self.main_screen.password_disable_switch.active:
                     self.current = "main_screen"
                 else:
                     self.current = "passcode_screen"
@@ -323,14 +338,6 @@ class MainApp(App):
         self.arduino = Arduino()
         return ScreenManagement()
 
-    def brightness(self, value):
-        if value > 0 and value < 256:
-            #_brightness = open(os.path.join(BASE, "brightness"), "w")
-            #_brightness.write(str(value))
-            #_brightness.close()
-            return
-        raise TypeError("Brightness should be between 0 and 255")
-
     def exit_app(self):
         self.stop()
 
@@ -345,8 +352,8 @@ class Arduino(Widget):
 
     def update_data(self, dt):
         try:
-            #serial_data = ser.readline().rstrip()
-            serial_data = '255'
+            serial_data = ser.readline().rstrip()
+            #serial_data = '255'
             self.digital_inputs = 0
             try:
                 self.digital_inputs = int(serial_data)
@@ -363,7 +370,7 @@ class Arduino(Widget):
             int_state = '1/'
         else:
             int_state = '0/'
-        #ser.write(command + int_state)
+        ser.write(command + int_state)
 
 if __name__ == '__main__':
 
