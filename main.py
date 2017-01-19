@@ -356,7 +356,7 @@ class Arduino(Widget):
 
     def __init__(self, **kwargs):
         super(Arduino, self).__init__(**kwargs)
-        Clock.schedule_interval(self.update_data, 0)
+        self.toggle_ser_read(True)
 
     def update_data(self, dt):
         try:
@@ -372,6 +372,15 @@ class Arduino(Widget):
         except:
             print('Serial Read Failure')
             exit()
+
+    def toggle_ser_read(self, state):
+        if state:
+            self.read_clock = Clock.schedule_interval(self.update_data, 0)
+        else:
+            try:
+                self.read_clock.cancel()
+            except:
+                pass
 
     def set(self, command, state):
         if state == "down":
