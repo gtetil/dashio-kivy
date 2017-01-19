@@ -3,7 +3,7 @@ kivy.require('1.9.1') # replace with your current kivy version !
 
 from kivy.config import Config
 Config.set('kivy', 'keyboard_mode', 'systemanddock')
-Config.set('graphics', 'maxfps', '10')
+Config.set('graphics', 'maxfps', '100')
 
 from kivy.app import App
 from kivy.uix.widget import Widget
@@ -24,13 +24,12 @@ import json
 from functools import partial
 
 Window.size = (800,480)
-Config.set('graphics', 'maxfps', '100')
 
 import serial
 import os
 BASE = "/sys/class/backlight/rpi_backlight/"
 
-debug_mode = 1
+debug_mode = 0
 
 class ScreenManagement(ScreenManager):
     passcode = '1234'
@@ -51,7 +50,7 @@ class ScreenManagement(ScreenManager):
             self.main_screen.screen_brightness_slider.value = data['settings']['screen_brightness']
             self.main_screen.screen_off_delay_input.text = str(data['settings']['screen_off_delay'])
             self.main_screen.password_disable_switch.active = data['settings']['password_disable']
-        self.brightness(int(self.main_screen.screen_brightness_slider.value))
+        self.brightness()
 
     def save_settings(self):
         data = {}
@@ -63,23 +62,31 @@ class ScreenManagement(ScreenManager):
         with open(self.settings_file, 'w') as file:
             json.dump(data, file, sort_keys=True, indent=4)
 
-    def brightness(self, value):
+    def brightness(self):
+        value = int(self.main_screen.screen_brightness_slider.value)
         if value > 0 and value < 256:
-            #_brightness = open(os.path.join(BASE, "brightness"), "w")
-            #_brightness.write(str(value))
-            #_brightness.close()
+            _brightness = open(os.path.join(BASE, "brightness"), "w")
+            _brightness.write(str(value))
+            _brightness.close()
             return
         raise TypeError("Brightness should be between 0 and 255")
 
     def on_ignition_input(self, instance, state):
         if state == 1:
-            if self.main_screen.password_disable_switch.active:
-                self.current = 'main_screen'
+            if self.reverse_input == 0:
+                if self.main_screen.password_disable_switch.active:
+                    self.current = 'main_screen'
+                else:
+                    self.current = 'passcode_screen'
             else:
-                self.current = 'passcode_screen'
-            #self.backlight_on(True)
+                self.current = 'camera_screen'
+            self.backlight_on(True)
+            try:
+                self.event.cancel()
+            except:
+                print('event probably was not created yet')
         else:
-            Clock.schedule_once(self.delayed_screen_off, int(self.main_screen.screen_off_delay_input.text))
+            self.event = Clock.schedule_once(self.delayed_screen_off, int(self.main_screen.screen_off_delay_input.text))
 
     def delayed_screen_off(self, dt):
         self.current = 'off_screen'
@@ -319,10 +326,11 @@ class PasscodeScreen(Screen):
     pass
 
 class CameraScreen(Screen):
-    reverse_input = NumericProperty(0)
+    pass
+    '''reverse_input = NumericProperty(0)
 
-    def __init__(self,**kwargs):
-        super (CameraScreen,self).__init__(**kwargs)
+    def __init__(self, **kwargs):
+        super(CameraScreen, self).__init__(**kwargs)
         self.cam = Camera(resolution=(800, 480))
         self.add_widget(self.cam)
 
@@ -330,7 +338,7 @@ class CameraScreen(Screen):
         if state == 1:
             self.cam.play = True
         else:
-            self.cam.play = False
+            self.cam.play = False'''
 
 class MainApp(App):
 
