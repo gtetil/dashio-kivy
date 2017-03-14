@@ -2,6 +2,7 @@
     "settings": {
         "password_disable": true, 
         "screen_brightness": 200, 
-        "screen_off_delay": 1
+        "screen_off_delay": 1, 
+        "shutdown_delay": 30
     }
 }

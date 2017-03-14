@@ -30,6 +30,7 @@ import os
 BASE = "/sys/class/backlight/rpi_backlight/"
 
 debug_mode = 0
+pc_mode = True
 
 class ScreenManagement(ScreenManager):
     passcode = '1234'
@@ -49,6 +50,7 @@ class ScreenManagement(ScreenManager):
             data = json.load(file)
             self.main_screen.screen_brightness_slider.value = data['settings']['screen_brightness']
             self.main_screen.screen_off_delay_input.text = str(data['settings']['screen_off_delay'])
+            self.main_screen.shutdown_delay_input.text = str(data['settings']['shutdown_delay'])
             self.main_screen.password_disable_switch.active = data['settings']['password_disable']
         self.brightness()
 
@@ -57,6 +59,7 @@ class ScreenManagement(ScreenManager):
         config = {}
         config['screen_brightness'] = int(self.main_screen.screen_brightness_slider.value)
         config['screen_off_delay'] = int(self.main_screen.screen_off_delay_input.text)
+        config['shutdown_delay'] = int(self.main_screen.shutdown_delay_input.text)
         config['password_disable'] = self.main_screen.password_disable_switch.active
         data['settings'] = config
         with open(self.settings_file, 'w') as file:
@@ -64,12 +67,13 @@ class ScreenManagement(ScreenManager):
 
     def brightness(self):
         value = int(self.main_screen.screen_brightness_slider.value)
-        if value > 0 and value < 256:
-            _brightness = open(os.path.join(BASE, "brightness"), "w")
-            _brightness.write(str(value))
-            _brightness.close()
-            return
-        raise TypeError("Brightness should be between 0 and 255")
+        if not pc_mode:
+            if value > 0 and value < 256:
+                _brightness = open(os.path.join(BASE, "brightness"), "w")
+                _brightness.write(str(value))
+                _brightness.close()
+                return
+            raise TypeError("Brightness should be between 0 and 255")
 
     def on_ignition_input(self, instance, state):
         if state == 1:
@@ -87,20 +91,25 @@ class ScreenManagement(ScreenManager):
                 print('event probably was not created yet')
         else:
             self.event = Clock.schedule_once(self.delayed_screen_off, int(self.main_screen.screen_off_delay_input.text))
+            self.event = Clock.schedule_once(self.delayed_shutdown, int(self.main_screen.shutdown_delay_input.text))
 
     def delayed_screen_off(self, dt):
         self.current = 'off_screen'
         self.logged_in = 0
         self.backlight_on(False)
 
+    def delayed_shutdown(self, dt):
+        os.system("poweroff")
+
     def backlight_on(self, state):
-        if state:
-            state_str = '0'
-        else:
-            state_str = '1'
-        _power = open(os.path.join(BASE, "bl_power"), "w")
-        _power.write(state_str)
-        _power.close()
+        if not pc_mode:
+            if state:
+                state_str = '0'
+            else:
+                state_str = '1'
+            _power = open(os.path.join(BASE, "bl_power"), "w")
+            _power.write(state_str)
+            _power.close()
 
     def on_reverse_input(self, instance, state):
         if state == 1:

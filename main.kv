@@ -23,6 +23,7 @@
     dynamic_layout: dynamic_layout
     screen_brightness_slider: screen_brightness_slider
     screen_off_delay_input: screen_off_delay_input
+    shutdown_delay_input: shutdown_delay_input
     password_disable_switch: password_disable_switch
 
     Button:
@@ -140,6 +141,29 @@
                                     on_text: root.sm.save_settings()
                                     text: '30'
                                     size_hint_x: 0.4
+                                    multiline: False
+
+                                Label:
+                                    text: 'seconds'
+                                    size_hint_x: 0.6
+
+                        BoxLayout:
+                            orientation: 'vertical'
+                            size_hint_y: 0.17
+                            padding: 5, 0, 0, 0
+
+                            Label:
+                                text: 'Shutdown Delay:'
+
+                            BoxLayout:
+                                orientation: 'horizontal'
+
+                                TextInput:
+                                    id: shutdown_delay_input
+                                    on_text: root.sm.save_settings()
+                                    text: '30'
+                                    size_hint_x: 0.4
+                                    multiline: False
 
                                 Label:
                                     text: 'seconds'
@@ -159,7 +183,7 @@
 
                         BoxLayout:
                             orientation: 'vertical'
-                            size_hint_y: 0.53
+                            size_hint_y: 0.36
 
                     BoxLayout:
                         orientation: 'vertical'
