@@ -32,6 +32,31 @@ BASE = "/sys/class/backlight/rpi_backlight/"
 debug_mode = True
 pc_mode = True
 
+class Variable(Widget):
+    var_tag = StringProperty('')
+    var_description = StringProperty('')
+    var_id = NumericProperty(0)
+    var_data_type = StringProperty('')
+    var_widget_type = StringProperty('')
+    var_writeable = BooleanProperty(False)
+    var_value = StringProperty('')
+
+    def __init__(self,**kwargs):
+        super (Variable,self).__init__(**kwargs)
+        self.get_from_json()
+
+    def get_from_json(self):
+        self.var_tag = self.app.sys_data_json['settings'][self.var_tag]
+        self.var_description = self.app.sys_data_json['settings'][self.var_description]
+        self.var_id = self.app.sys_data_json['settings'][self.var_id]
+        self.var_data_type = self.app.sys_data_json['settings'][self.var_data_type]
+        self.var_widget_type = self.app.sys_data_json['settings'][self.var_widget_type]
+        self.var_writeable = self.app.sys_data_json['settings'][self.var_writeable]
+        self.var_value = self.app.sys_data_json['settings'][self.var_value]
+
+    def set_to_json(self):
+
+
 class ScreenManagement(ScreenManager):
     passcode = '1234'
     passcode_try = ''
@@ -39,7 +64,7 @@ class ScreenManagement(ScreenManager):
     main_screen = ObjectProperty(None)
     ignition_input = NumericProperty(0)
     reverse_input = NumericProperty(0)
-    app_ref = ObjectProperty(True)
+    app_ref = ObjectProperty(None)
     settings_file = 'settings.json'
 
     def __init__(self,**kwargs):
@@ -322,7 +347,16 @@ class MainApp(App):
         self.arduino = Arduino()
         self.system = System()
         self.screen_man = ScreenManagement()
+        self.open_sys_data()
         return self.screen_man
+
+    def open_sys_data(self):
+        with open(self.settings_file, 'r') as file:
+            self.sys_data_json = json.load(file)
+
+    def save_sys_data(self):
+        with open(self.settings_file, 'w') as file:
+            json.dump(self.sys_data_json, file, sort_keys=True, indent=4)
 
     def exit_app(self):
         self.stop()
