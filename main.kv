@@ -4,6 +4,7 @@
     id: _sm
     ignition_input: app.arduino.ignition_input
     reverse_input: app.arduino.reverse_input
+    app_ref: app
     main_screen: main_screen
     Screen:
         name: 'off_screen'
@@ -17,6 +18,9 @@
     PasscodeScreen:
         name: 'passcode_screen'
         sm: _sm
+
+<System>:
+    app_ref: app
 
 <MainScreen>:
     id: main_screen
@@ -94,7 +98,7 @@
                         spacing: 5
 
                         Label:
-                            text: 'Screen\nBrightness'
+                            text: 'Screen Dim\nBrightness'
                             markup: True
                             size_hint_y: 0.1
                             text_size: self.size
@@ -103,7 +107,7 @@
 
                         Slider:
                             id: screen_brightness_slider
-                            on_touch_move: root.sm.brightness()
+                            on_touch_move: app.system.backlight_brightness(self.value)
                             on_touch_up: root.sm.save_settings()
                             orientation: 'vertical'
                             min: 20
@@ -191,13 +195,13 @@
                         padding: 10
                         spacing: 5
 
-                Button:
-                    id: exit_button
-                    on_press: app.exit_app()
-                    text: 'X'
-                    size_hint: None, None
-                    size: 20, 20
-                    right: root.right
+                #Button:
+                    #id: exit_button
+                    #on_press: app.exit_app()
+                    #text: 'X'
+                    #size_hint: None, None
+                    #size: 20, 20
+                    #right: root.right
 
         Popup:
             id: enter_modify_popup
@@ -255,9 +259,9 @@
             padding: 5
 
             GridLayout:
-                rows: 2
+                rows: 1
                 cols: 2
-                size_hint: 1, 0.43
+                size_hint: 1, 0.22
                 spacing: 5
 
                 BoxLayout:
@@ -283,18 +287,19 @@
                         id: toggle_check
                         size_hint: .4, 1
 
-                BoxLayout:
-                    orientation: 'horizontal'
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint: 1, 0.21
 
-                    Label:
-                        text: 'Channel:'
-                        size_hint: .6, 1
+                Label:
+                    text: 'Channel:'
+                    size_hint: .3, 1
 
-                    Spinner:
-                        id: channel_spinner
-                        size_hint: .4, 1
-                        text: '0'
-                        values: ('0', '1', '2', '3', '4', '5')
+                Spinner:
+                    id: channel_spinner
+                    size_hint: .7, 1
+                    text: 'DI_0'
+                    values: ('DI_0', 'DI_1', 'DI_2', 'DI_3', 'DI_4', 'DI_5', 'DO_0', 'DO_1', 'DO_2', 'DO_3', 'DO_4', 'DO_5', 'SYS_DIM_BACKLIGHT')
 
             TextInput:
                 id: label_input

@@ -1,67 +1,67 @@
 {
     "button_0": {
-        "channel": 0, 
+        "channel": "SYS_DIM_BACKLIGHT", 
         "enable": true, 
-        "label": "DO_0", 
-        "toggle": false
+        "label": "dim", 
+        "toggle": true
     }, 
     "button_1": {
-        "channel": 1, 
+        "channel": "DO_1", 
         "enable": true, 
         "label": "DO_1", 
         "toggle": false
     }, 
     "button_2": {
-        "channel": 2, 
+        "channel": "DO_2", 
         "enable": true, 
         "label": "DO_2", 
         "toggle": false
     }, 
     "button_3": {
-        "channel": 3, 
+        "channel": "DO_4", 
         "enable": true, 
         "label": "DO_3", 
         "toggle": true
     }, 
     "button_4": {
-        "channel": 4, 
+        "channel": "DO_4", 
         "enable": true, 
         "label": "DO_4", 
-        "toggle": true
+        "toggle": false
     }, 
     "button_5": {
-        "channel": 5, 
+        "channel": "DO_5", 
         "enable": true, 
         "label": "DO_5", 
         "toggle": true
     }, 
     "indicator_0": {
-        "channel": 0, 
+        "channel": "DI_0", 
         "enable": true, 
         "label": "DI_0"
     }, 
     "indicator_1": {
-        "channel": 1, 
+        "channel": "DI_1", 
         "enable": true, 
         "label": "DI_1"
     }, 
     "indicator_2": {
-        "channel": 1, 
+        "channel": "DI_0", 
         "enable": false, 
         "label": "DI_1"
     }, 
     "indicator_3": {
-        "channel": 2, 
+        "channel": "DI_0", 
         "enable": false, 
         "label": "text_3"
     }, 
     "indicator_4": {
-        "channel": 0, 
+        "channel": "DI_0", 
         "enable": false, 
         "label": "tetilx"
     }, 
     "indicator_5": {
-        "channel": 0, 
+        "channel": "DI_0", 
         "enable": false, 
         "label": "text_5"
     }

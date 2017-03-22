@@ -29,7 +29,7 @@ import serial
 import os
 BASE = "/sys/class/backlight/rpi_backlight/"
 
-debug_mode = 0
+debug_mode = True
 pc_mode = True
 
 class ScreenManagement(ScreenManager):
@@ -39,6 +39,7 @@ class ScreenManagement(ScreenManager):
     main_screen = ObjectProperty(None)
     ignition_input = NumericProperty(0)
     reverse_input = NumericProperty(0)
+    app_ref = ObjectProperty(True)
     settings_file = 'settings.json'
 
     def __init__(self,**kwargs):
@@ -67,13 +68,7 @@ class ScreenManagement(ScreenManager):
 
     def brightness(self):
         value = int(self.main_screen.screen_brightness_slider.value)
-        if not pc_mode:
-            if value > 0 and value < 256:
-                _brightness = open(os.path.join(BASE, "brightness"), "w")
-                _brightness.write(str(value))
-                _brightness.close()
-                return
-            raise TypeError("Brightness should be between 0 and 255")
+        self.app_ref.system.backlight_brightness(value)
 
     def on_ignition_input(self, instance, state):
         if state == 1:
@@ -229,7 +224,7 @@ class ScreenItemEditPopup(Popup):
             self.label_input.text = self.item.text
             self.toggle_check.active = self.item.toggle
             self.enable_check.active = self.item.enable
-            self.channel_spinner.text = str(self.item.channel)
+            self.channel_spinner.text = self.item.channel
             self.toggle_layout.disabled = indicator
             self.open()
 
@@ -237,49 +232,26 @@ class ScreenItemEditPopup(Popup):
         self.item.text = self.label_input.text
         self.item.toggle = self.toggle_check.active
         self.item.enable = self.enable_check.active
-        self.item.channel = int(self.channel_spinner.text)
+        self.item.channel = self.channel_spinner.text
         self.dynamic_layout.save_layout()
         self.dynamic_layout.build_layout()
         self.dismiss()
 
-class DynToggleButton(ToggleButton):
+class DynItem(Widget):
     dynamic_layout = ObjectProperty(None)
     toggle = BooleanProperty(True)
     enable = BooleanProperty(True)
-    channel = NumericProperty(0)
+    channel = StringProperty("")
+    channel_type = StringProperty("")
     ignition_input = NumericProperty(0)
+    digital_inputs = NumericProperty(0)
     app_ref = ObjectProperty(True)
 
     def set_properties(self, ref, channel, enable):
         self.dynamic_layout = ref
         self.channel = channel
-        self.enable = enable
-        ChangeItemBackground(self)
-
-    def on_ignition_input(self, instance, state):
-        if state == 0:
-            self.state = 'normal'
-            self.output_cmd()
-
-    def on_press(self):
-        self.output_cmd()
-
-    def output_cmd(self):
-        if self.dynamic_layout.modify_mode or not self.enable or not self.app_ref.arduino.ignition_input:
-            self.state = 'normal'
-        self.app_ref.arduino.set('digital/' + str(self.channel) + '/', self.state)
-
-class DynButton(Button):
-    dynamic_layout = ObjectProperty(None)
-    toggle = BooleanProperty(False)
-    enable = BooleanProperty(True)
-    channel = NumericProperty(0)
-    ignition_input = NumericProperty(0)
-    app_ref = ObjectProperty(True)
-
-    def set_properties(self, ref, channel, enable):
-        self.dynamic_layout = ref
-        self.channel = channel
+        self.channel_type = self.channel.split('_')[0]
+        self.variable = self.channel.split('_')[1]
         self.enable = enable
         ChangeItemBackground(self)
 
@@ -292,33 +264,41 @@ class DynButton(Button):
         self.output_cmd()
 
     def on_release(self):
-        self.output_cmd()
+        if not self.toggle:
+            self.output_cmd()
 
     def output_cmd(self):
-        if self.dynamic_layout.modify_mode or not self.enable or not self.app_ref.arduino.ignition_input:
+        if not self.dynamic_layout.modify_mode and self.enable and self.app_ref.arduino.ignition_input:
+            if self.channel_type == 'DO':
+                self.app_ref.arduino.set('digital/' + self.variable + '/', self.state)
+            if self.channel_type == 'SYS':
+                if self.state == 'normal':
+                    dim_state = 0
+                else:
+                    dim_state = 1
+                self.app_ref.system.sys_cmd('DIM_BACKLIGHT', dim_state)
+        else:
             self.state = 'normal'
-        self.app_ref.arduino.set('digital/' + str(self.channel) + '/', self.state)
 
-class IndicatorButton(Button):
-    channel = NumericProperty(0)
+class DynToggleButton(DynItem, ToggleButton):
+    pass
+
+class DynButton(DynItem, Button):
     toggle = BooleanProperty(False)
-    enable = BooleanProperty(True)
-    digital_inputs = NumericProperty(0)
 
-    def set_properties(self, ref, channel, enable):
-        self.channel = channel
-        self.enable = enable
-        ChangeItemBackground(self)
+class IndicatorButton(DynItem, Button):
+    toggle = BooleanProperty(False)
 
     def on_digital_inputs(self, instance, di_byte):
         if self.enable:
-            mask = 1 << self.channel
-            state = di_byte & mask
-            state = state >> self.channel
-            if state == 1:
-                self.state = 'down'
-            else:
-                self.state = 'normal'
+            if self.channel_type == 'DI':
+                mask = 1 << int(self.variable)
+                state = di_byte & mask
+                state = state >> int(self.variable)
+                if state == 1:
+                    self.state = 'down'
+                else:
+                    self.state = 'normal'
 
     def on_press(self):
         self.state = 'normal'
@@ -336,27 +316,40 @@ class PasscodeScreen(Screen):
 
 class CameraScreen(Screen):
     pass
-    '''reverse_input = NumericProperty(0)
-
-    def __init__(self, **kwargs):
-        super(CameraScreen, self).__init__(**kwargs)
-        self.cam = Camera(resolution=(800, 480))
-        self.add_widget(self.cam)
-
-    def on_reverse_input(self, instance, state):
-        if state == 1:
-            self.cam.play = True
-        else:
-            self.cam.play = False'''
 
 class MainApp(App):
-
     def build(self):
         self.arduino = Arduino()
-        return ScreenManagement()
+        self.system = System()
+        self.screen_man = ScreenManagement()
+        return self.screen_man
 
     def exit_app(self):
         self.stop()
+
+class System(Widget):
+    backlight_dim_value = NumericProperty(0)
+    app_ref = ObjectProperty(None)
+    main_screen = ObjectProperty(None)
+
+    def sys_cmd(self, command, value):
+        print(command + ", " + str(value))
+        if command == 'DIM_BACKLIGHT':
+            if value == 1:
+                self.backlight_brightness(self.app_ref.screen_man.main_screen.screen_brightness_slider.value)
+            else:
+                self.backlight_brightness(255)
+
+
+    def backlight_brightness(self, value):
+        print(value)
+        if not pc_mode:
+            if value > 0 and value < 256:
+                _brightness = open(os.path.join(BASE, "brightness"), "w")
+                _brightness.write(str(value))
+                _brightness.close()
+                return
+            raise TypeError("Brightness should be between 0 and 255")
 
 class Arduino(Widget):
     digital_inputs = NumericProperty(0)
@@ -368,19 +361,20 @@ class Arduino(Widget):
         self.toggle_ser_read(True)
 
     def update_data(self, dt):
-        try:
-            serial_data = ser.readline().rstrip()
-            #serial_data = '255'
-            self.digital_inputs = 0
+        if not debug_mode:
             try:
-                self.digital_inputs = int(serial_data)
-                self.reverse_input = self.digital_inputs & 1
-                self.ignition_input = (self.digital_inputs & 1000000) >> 6
-            except ValueError:
-                print('value error')
-        except:
-            print('Serial Read Failure')
-            exit()
+                serial_data = ser.readline().rstrip()
+                try:
+                    self.digital_inputs = int(serial_data)
+                except ValueError:
+                    print('value error')
+            except:
+                print('Serial Read Failure')
+                exit()
+        else:
+            self.digital_inputs = 112
+        self.reverse_input = self.digital_inputs & 1
+        self.ignition_input = (self.digital_inputs & 1000000) >> 6
 
     def toggle_ser_read(self, state):
         if state:
@@ -396,11 +390,12 @@ class Arduino(Widget):
             int_state = '1/'
         else:
             int_state = '0/'
-        ser.write(command + int_state)
+        if not debug_mode:
+            ser.write(command + int_state)
 
 if __name__ == '__main__':
 
-    if debug_mode == 0:
+    if not debug_mode:
         try:
             ser = serial.Serial('/dev/ttyUSB0', 115200)
         except:
