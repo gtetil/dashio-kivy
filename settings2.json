@@ -1,0 +1,11 @@
+{
+    "SYS_SCREEN_BRIGHTNESS": {
+        "data_type": "", 
+        "description": "", 
+        "id": 0, 
+        "tag": "SYS_SCREEN_BRIGHTNESS", 
+        "var_value": "20", 
+        "widget_type": "", 
+        "writeable": false
+    }
+}

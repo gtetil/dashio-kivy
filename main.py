@@ -12,6 +12,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.button import Button
 from kivy.uix.togglebutton import ToggleButton
+from kivy.uix.slider import Slider
 from kivy.clock import Clock
 from kivy.properties import StringProperty, NumericProperty, ObjectProperty, BooleanProperty
 from kivy.uix.camera import Camera
@@ -40,22 +41,41 @@ class Variable(Widget):
     var_widget_type = StringProperty('')
     var_writeable = BooleanProperty(False)
     var_value = StringProperty('')
+    app_ref = ObjectProperty(None)
 
-    def __init__(self,**kwargs):
-        super (Variable,self).__init__(**kwargs)
+    def on_var_tag(self, instance, value):
         self.get_from_json()
 
+    def on_var_value(self, instance, value):
+        self.set_to_json()
+        self.app_ref.save_sys_data()
+        print(self.app_ref.sys_data_json)
+
     def get_from_json(self):
-        self.var_tag = self.app.sys_data_json['settings'][self.var_tag]
-        self.var_description = self.app.sys_data_json['settings'][self.var_description]
-        self.var_id = self.app.sys_data_json['settings'][self.var_id]
-        self.var_data_type = self.app.sys_data_json['settings'][self.var_data_type]
-        self.var_widget_type = self.app.sys_data_json['settings'][self.var_widget_type]
-        self.var_writeable = self.app.sys_data_json['settings'][self.var_writeable]
-        self.var_value = self.app.sys_data_json['settings'][self.var_value]
+        self.var_tag = self.app_ref.sys_data_json[self.var_tag]['tag']
+        self.var_description = self.app_ref.sys_data_json[self.var_tag]['description']
+        self.var_id = self.app_ref.sys_data_json[self.var_tag]['id']
+        self.var_data_type = self.app_ref.sys_data_json[self.var_tag]['data_type']
+        self.var_widget_type = self.app_ref.sys_data_json[self.var_tag]['widget_type']
+        self.var_writeable = self.app_ref.sys_data_json[self.var_tag]['writeable']
+        self.var_value = self.app_ref.sys_data_json[self.var_tag]['var_value']
+        print('get, ' + self.var_value)
 
     def set_to_json(self):
+        variable = {}
+        variable['tag'] = str(self.var_tag)
+        variable['description'] = str(self.var_description)
+        variable['id'] = self.var_id
+        variable['data_type'] = str(self.var_data_type)
+        variable['widget_type'] = str(self.var_widget_type)
+        variable['writeable'] = self.var_writeable
+        variable['var_value'] = str(self.var_value)
+        print('set, ' + self.var_value)
+        self.app_ref.sys_data_json[str(self.var_tag)] = variable
 
+class VarSlider(Variable, Slider):
+    def on_value(self, instance, value):
+        self.var_value = str(int(self.value))
 
 class ScreenManagement(ScreenManager):
     passcode = '1234'
@@ -74,7 +94,7 @@ class ScreenManagement(ScreenManager):
 
         with open(self.settings_file, 'r') as file:
             data = json.load(file)
-            self.main_screen.screen_brightness_slider.value = data['settings']['screen_brightness']
+            #self.main_screen.screen_brightness_slider.value = data['settings']['screen_brightness']
             self.main_screen.screen_off_delay_input.text = str(data['settings']['screen_off_delay'])
             self.main_screen.shutdown_delay_input.text = str(data['settings']['shutdown_delay'])
             self.main_screen.password_disable_switch.active = data['settings']['password_disable']
@@ -83,7 +103,7 @@ class ScreenManagement(ScreenManager):
     def save_settings(self):
         data = {}
         config = {}
-        config['screen_brightness'] = int(self.main_screen.screen_brightness_slider.value)
+        #config['screen_brightness'] = int(self.main_screen.screen_brightness_slider.value)
         config['screen_off_delay'] = int(self.main_screen.screen_off_delay_input.text)
         config['shutdown_delay'] = int(self.main_screen.shutdown_delay_input.text)
         config['password_disable'] = self.main_screen.password_disable_switch.active
@@ -343,11 +363,13 @@ class CameraScreen(Screen):
     pass
 
 class MainApp(App):
+    settings_file = 'settings2.json'
+
     def build(self):
+        self.open_sys_data()
         self.arduino = Arduino()
         self.system = System()
         self.screen_man = ScreenManagement()
-        self.open_sys_data()
         return self.screen_man
 
     def open_sys_data(self):
