@@ -116,7 +116,7 @@
                             orientation: 'vertical'
                             min: 20
                             max: 200
-                            #value: self.var_value
+                            #var_value: str(int(self.value))
                             size_hint_y: 0.9
 
                     BoxLayout:
@@ -144,10 +144,11 @@
                             BoxLayout:
                                 orientation: 'horizontal'
 
-                                TextInput:
+                                VarTextInput:
+                                    var_tag: 'SYS_SCREEN_OFF_DELAY'
                                     id: screen_off_delay_input
-                                    on_text: root.sm.save_settings()
-                                    text: '30'
+                                    #on_text: root.sm.save_settings()
+                                    #text: '30'
                                     size_hint_x: 0.4
                                     multiline: False
 
@@ -166,10 +167,11 @@
                             BoxLayout:
                                 orientation: 'horizontal'
 
-                                TextInput:
+                                VarTextInput:
+                                    var_tag: 'SYS_SHUTDOWN_DELAY'
                                     id: shutdown_delay_input
-                                    on_text: root.sm.save_settings()
-                                    text: '30'
+                                    #on_text: root.sm.save_settings()
+                                    #text: '30'
                                     size_hint_x: 0.4
                                     multiline: False
 
@@ -185,7 +187,8 @@
                             Label:
                                 text: 'Password Disable:'
 
-                            Switch:
+                            VarSwitch:
+                                var_tag: 'SYS_PASSWORD_DISABLE'
                                 id: password_disable_switch
                                 on_active: root.sm.save_settings()
 

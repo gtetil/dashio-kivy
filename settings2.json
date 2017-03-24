@@ -1,10 +1,37 @@
 {
+    "SYS_PASSWORD_DISABLE": {
+        "data_type": "", 
+        "description": "", 
+        "id": 0, 
+        "tag": "SYS_PASSWORD_DISABLE", 
+        "var_value": "True", 
+        "widget_type": "", 
+        "writeable": false
+    }, 
     "SYS_SCREEN_BRIGHTNESS": {
         "data_type": "", 
         "description": "", 
         "id": 0, 
         "tag": "SYS_SCREEN_BRIGHTNESS", 
-        "var_value": "20", 
+        "var_value": "100", 
+        "widget_type": "", 
+        "writeable": false
+    }, 
+    "SYS_SCREEN_OFF_DELAY": {
+        "data_type": "", 
+        "description": "", 
+        "id": 0, 
+        "tag": "SYS_SCREEN_OFF_DELAY", 
+        "var_value": "6", 
+        "widget_type": "", 
+        "writeable": false
+    }, 
+    "SYS_SHUTDOWN_DELAY": {
+        "data_type": "", 
+        "description": "", 
+        "id": 0, 
+        "tag": "SYS_SHUTDOWN_DELAY", 
+        "var_value": "10", 
         "widget_type": "", 
         "writeable": false
     }

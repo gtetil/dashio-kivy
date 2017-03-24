@@ -13,6 +13,8 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.button import Button
 from kivy.uix.togglebutton import ToggleButton
 from kivy.uix.slider import Slider
+from kivy.uix.textinput import TextInput
+from kivy.uix.switch import Switch
 from kivy.clock import Clock
 from kivy.properties import StringProperty, NumericProperty, ObjectProperty, BooleanProperty
 from kivy.uix.camera import Camera
@@ -47,19 +49,44 @@ class Variable(Widget):
         self.get_from_json()
 
     def on_var_value(self, instance, value):
+        try:
+            self.value = int(value)
+        except:
+            pass
+        try:
+            self.text = value
+        except:
+            pass
+        try:
+            if value == 'True':
+                self.active = True
+            else:
+                self.active = False
+        except:
+            pass
         self.set_to_json()
         self.app_ref.save_sys_data()
-        print(self.app_ref.sys_data_json)
+
+    def on_value(self, instance, value):
+        self.var_value = str(int(value))
+
+    def on_text(self, instance, value):
+        self.var_value = value
+
+    def on_active(self, instance, value):
+        self.var_value = str(value)
 
     def get_from_json(self):
-        self.var_tag = self.app_ref.sys_data_json[self.var_tag]['tag']
-        self.var_description = self.app_ref.sys_data_json[self.var_tag]['description']
-        self.var_id = self.app_ref.sys_data_json[self.var_tag]['id']
-        self.var_data_type = self.app_ref.sys_data_json[self.var_tag]['data_type']
-        self.var_widget_type = self.app_ref.sys_data_json[self.var_tag]['widget_type']
-        self.var_writeable = self.app_ref.sys_data_json[self.var_tag]['writeable']
-        self.var_value = self.app_ref.sys_data_json[self.var_tag]['var_value']
-        print('get, ' + self.var_value)
+        try:
+            self.var_tag = self.app_ref.sys_data_json[self.var_tag]['tag']
+            self.var_description = self.app_ref.sys_data_json[self.var_tag]['description']
+            self.var_id = self.app_ref.sys_data_json[self.var_tag]['id']
+            self.var_data_type = self.app_ref.sys_data_json[self.var_tag]['data_type']
+            self.var_widget_type = self.app_ref.sys_data_json[self.var_tag]['widget_type']
+            self.var_writeable = self.app_ref.sys_data_json[self.var_tag]['writeable']
+            self.var_value = self.app_ref.sys_data_json[self.var_tag]['var_value']
+        except:
+            pass
 
     def set_to_json(self):
         variable = {}
@@ -70,12 +97,16 @@ class Variable(Widget):
         variable['widget_type'] = str(self.var_widget_type)
         variable['writeable'] = self.var_writeable
         variable['var_value'] = str(self.var_value)
-        print('set, ' + self.var_value)
         self.app_ref.sys_data_json[str(self.var_tag)] = variable
 
 class VarSlider(Variable, Slider):
-    def on_value(self, instance, value):
-        self.var_value = str(int(self.value))
+    pass
+
+class VarTextInput(Variable, TextInput):
+    pass
+
+class VarSwitch(Variable, Switch):
+    pass
 
 class ScreenManagement(ScreenManager):
     passcode = '1234'
@@ -91,25 +122,7 @@ class ScreenManagement(ScreenManager):
         super (ScreenManagement,self).__init__(**kwargs)
         self.transition = NoTransition()
         self.main_screen.dynamic_layout.build_layout()
-
-        with open(self.settings_file, 'r') as file:
-            data = json.load(file)
-            #self.main_screen.screen_brightness_slider.value = data['settings']['screen_brightness']
-            self.main_screen.screen_off_delay_input.text = str(data['settings']['screen_off_delay'])
-            self.main_screen.shutdown_delay_input.text = str(data['settings']['shutdown_delay'])
-            self.main_screen.password_disable_switch.active = data['settings']['password_disable']
         self.brightness()
-
-    def save_settings(self):
-        data = {}
-        config = {}
-        #config['screen_brightness'] = int(self.main_screen.screen_brightness_slider.value)
-        config['screen_off_delay'] = int(self.main_screen.screen_off_delay_input.text)
-        config['shutdown_delay'] = int(self.main_screen.shutdown_delay_input.text)
-        config['password_disable'] = self.main_screen.password_disable_switch.active
-        data['settings'] = config
-        with open(self.settings_file, 'w') as file:
-            json.dump(data, file, sort_keys=True, indent=4)
 
     def brightness(self):
         value = int(self.main_screen.screen_brightness_slider.value)
