@@ -40,7 +40,7 @@ class Variable(Widget):
     var_description = StringProperty('')
     var_id = NumericProperty(0)
     var_data_type = StringProperty('')
-    var_widget_type = StringProperty('')
+    var_variable_type = StringProperty('')
     var_writeable = BooleanProperty(False)
     var_value = StringProperty('')
     app_ref = ObjectProperty(None)
@@ -49,21 +49,15 @@ class Variable(Widget):
         self.get_from_json()
 
     def on_var_value(self, instance, value):
-        try:
+        if self.var_data_type == 'integer':
             self.value = int(value)
-        except:
-            pass
-        try:
+        if self.var_data_type == 'string':
             self.text = value
-        except:
-            pass
-        try:
+        if self.var_data_type == 'boolean':
             if value == 'True':
                 self.active = True
             else:
                 self.active = False
-        except:
-            pass
         self.set_to_json()
         self.app_ref.save_sys_data()
 
@@ -82,7 +76,7 @@ class Variable(Widget):
             self.var_description = self.app_ref.sys_data_json[self.var_tag]['description']
             self.var_id = self.app_ref.sys_data_json[self.var_tag]['id']
             self.var_data_type = self.app_ref.sys_data_json[self.var_tag]['data_type']
-            self.var_widget_type = self.app_ref.sys_data_json[self.var_tag]['widget_type']
+            self.var_variable_type = self.app_ref.sys_data_json[self.var_tag]['variable_type']
             self.var_writeable = self.app_ref.sys_data_json[self.var_tag]['writeable']
             self.var_value = self.app_ref.sys_data_json[self.var_tag]['var_value']
         except:
@@ -94,7 +88,7 @@ class Variable(Widget):
         variable['description'] = str(self.var_description)
         variable['id'] = self.var_id
         variable['data_type'] = str(self.var_data_type)
-        variable['widget_type'] = str(self.var_widget_type)
+        variable['variable_type'] = str(self.var_variable_type)
         variable['writeable'] = self.var_writeable
         variable['var_value'] = str(self.var_value)
         self.app_ref.sys_data_json[str(self.var_tag)] = variable
@@ -376,7 +370,7 @@ class CameraScreen(Screen):
     pass
 
 class MainApp(App):
-    settings_file = 'settings2.json'
+    variables_file = 'variables.json'
 
     def build(self):
         self.open_sys_data()
@@ -386,11 +380,11 @@ class MainApp(App):
         return self.screen_man
 
     def open_sys_data(self):
-        with open(self.settings_file, 'r') as file:
+        with open(self.variables_file, 'r') as file:
             self.sys_data_json = json.load(file)
 
     def save_sys_data(self):
-        with open(self.settings_file, 'w') as file:
+        with open(self.variables_file, 'w') as file:
             json.dump(self.sys_data_json, file, sort_keys=True, indent=4)
 
     def exit_app(self):
@@ -428,6 +422,8 @@ class Arduino(Widget):
     def __init__(self, **kwargs):
         super(Arduino, self).__init__(**kwargs)
         self.toggle_ser_read(True)
+        self.di_0 = Variable(var_tag = 'DI_0')
+        #self.add_widget(self.di_0)
 
     def update_data(self, dt):
         if not debug_mode:

@@ -1,38 +1,47 @@
 {
+    "DI_0": {
+        "data_type": "boolean", 
+        "description": "", 
+        "id": 0, 
+        "tag": "DI_0", 
+        "var_value": "False", 
+        "variable_type": "di", 
+        "writeable": false
+    }, 
     "SYS_PASSWORD_DISABLE": {
-        "data_type": "", 
+        "data_type": "boolean", 
         "description": "", 
         "id": 0, 
         "tag": "SYS_PASSWORD_DISABLE", 
         "var_value": "True", 
-        "widget_type": "", 
-        "writeable": false
+        "variable_type": "system", 
+        "writeable": true
     }, 
     "SYS_SCREEN_BRIGHTNESS": {
-        "data_type": "", 
+        "data_type": "integer", 
         "description": "", 
         "id": 0, 
         "tag": "SYS_SCREEN_BRIGHTNESS", 
         "var_value": "100", 
-        "widget_type": "", 
-        "writeable": false
+        "variable_type": "system", 
+        "writeable": true
     }, 
     "SYS_SCREEN_OFF_DELAY": {
-        "data_type": "", 
+        "data_type": "string", 
         "description": "", 
         "id": 0, 
         "tag": "SYS_SCREEN_OFF_DELAY", 
         "var_value": "6", 
-        "widget_type": "", 
-        "writeable": false
+        "variable_type": "system", 
+        "writeable": true
     }, 
     "SYS_SHUTDOWN_DELAY": {
-        "data_type": "", 
+        "data_type": "string", 
         "description": "", 
         "id": 0, 
         "tag": "SYS_SHUTDOWN_DELAY", 
         "var_value": "10", 
-        "widget_type": "", 
-        "writeable": false
+        "variable_type": "system", 
+        "writeable": true
     }
 }
