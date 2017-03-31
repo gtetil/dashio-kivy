@@ -19,6 +19,9 @@
         name: 'passcode_screen'
         sm: _sm
 
+<SystemVariables>:
+    di_0: app.arduino.di_0.var_value
+
 <System>:
     app_ref: app
 
@@ -46,6 +49,7 @@
 
     DynamicLayout:
         id: dynamic_layout
+        app_ref: app
         indicator_layout: indicator_layout
         button_layout: button_layout
         item_edit_popup: item_edit_popup
@@ -338,7 +342,7 @@
     ignition_input: app.arduino.ignition_input
 
 <IndicatorButton>:
-    digital_inputs: app.arduino.digital_inputs
+    #digital_inputs: app.arduino.digital_inputs
 
 
 <PasscodeScreen>:

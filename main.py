@@ -30,10 +30,14 @@ Window.size = (800,480)
 
 import serial
 import os
+import time
 BASE = "/sys/class/backlight/rpi_backlight/"
 
-debug_mode = True
+debug_mode = False
 pc_mode = True
+
+class SystemVariables(Widget):
+    di_0 = StringProperty('')
 
 class Variable(Widget):
     var_tag = StringProperty('')
@@ -183,7 +187,8 @@ class ScreenManagement(ScreenManager):
 class MainScreen(Screen):
     pass
 
-class DynamicLayout(Widget):
+class DynamicLayout(SystemVariables):
+    app_ref = ObjectProperty(None)
     indicator_layout = ObjectProperty(None)
     button_layout = ObjectProperty(None)
     indicator_edit_popup = ObjectProperty(None)
@@ -220,6 +225,7 @@ class DynamicLayout(Widget):
             enable = data['indicator_' + str(i)]['enable']
             indicator_button = IndicatorButton(text=label, id='indicator_' + str(i))
             indicator_button.bind(on_press=partial(self.item_edit_popup.edit_popup, 'indicator_' + str(i), indicator=True))
+            indicator_button.bind(di_0=indicator_button.setter('var_state'))
             indicator_button.set_properties('null', channel, enable)
             self.indicator_layout.add_widget(indicator_button)
 
@@ -338,10 +344,18 @@ class DynToggleButton(DynItem, ToggleButton):
 class DynButton(DynItem, Button):
     toggle = BooleanProperty(False)
 
-class IndicatorButton(DynItem, Button):
+class IndicatorButton(DynItem, Button, SystemVariables):
     toggle = BooleanProperty(False)
+    var_state = StringProperty('')
 
-    def on_digital_inputs(self, instance, di_byte):
+    def on_var_state(self, instance, state):
+        print('state: ' + state)
+        if state == '1':
+            self.state = 'down'
+        else:
+            self.state = 'normal'
+
+    '''def on_digital_inputs(self, instance, di_byte):
         if self.enable:
             if self.channel_type == 'DI':
                 mask = 1 << int(self.variable)
@@ -351,6 +365,7 @@ class IndicatorButton(DynItem, Button):
                     self.state = 'down'
                 else:
                     self.state = 'normal'
+                    '''
 
     def on_press(self):
         self.state = 'normal'
@@ -421,25 +436,38 @@ class Arduino(Widget):
 
     def __init__(self, **kwargs):
         super(Arduino, self).__init__(**kwargs)
+        self.array_size = 8
+        self.data_array = ['0'] * self.array_size
         self.toggle_ser_read(True)
-        self.di_0 = Variable(var_tag = 'DI_0')
-        #self.add_widget(self.di_0)
+        self.di_0 = Variable(var_tag='DI_0')
+        self.di_1 = Variable(var_tag='DI_1')
+        self.di_2 = Variable(var_tag='DI_2')
+        self.di_3 = Variable(var_tag='DI_3')
+        self.di_4 = Variable(var_tag='DI_4')
+        self.di_5 = Variable(var_tag='DI_5')
+        self.di_ignition = Variable(var_tag='DI_Ignition')
+        self.add_widget(self.di_0)
 
     def update_data(self, dt):
         if not debug_mode:
             try:
-                serial_data = ser.readline().rstrip()
-                try:
-                    self.digital_inputs = int(serial_data)
-                except ValueError:
-                    print('value error')
+                self.data_array = ser.readline().rstrip().split(',')
             except:
                 print('Serial Read Failure')
                 exit()
         else:
             self.digital_inputs = 112
-        self.reverse_input = self.digital_inputs & 1
-        self.ignition_input = (self.digital_inputs & 1000000) >> 6
+            self.data_array = ['0'] * self.array_size
+        self.reverse_input = 0 #self.digital_inputs & 1
+        self.ignition_input = 1 #(self.digital_inputs & 1000000) >> 6
+        if len(self.data_array) == self.array_size:
+            self.di_0.var_value = self.data_array[0]
+            self.di_1.var_value = self.data_array[1]
+            self.di_2.var_value = self.data_array[2]
+            self.di_3.var_value = self.data_array[3]
+            self.di_4.var_value = self.data_array[4]
+            self.di_5.var_value = self.data_array[5]
+            self.di_ignition.var_value = self.data_array[6]
 
     def toggle_ser_read(self, state):
         if state:
@@ -450,19 +478,28 @@ class Arduino(Widget):
             except:
                 pass
 
-    def set(self, command, state):
+    def get(self, index):
+        return self.data_array[index]
+
+    def set(self, command):
+        ser.write(command)
+        time.sleep(.1)
+
+    def set_state(self, command, state):
         if state == "down":
             int_state = '1/'
         else:
             int_state = '0/'
-        if not debug_mode:
-            ser.write(command + int_state)
+        ser.write(command + int_state)
 
 if __name__ == '__main__':
 
     if not debug_mode:
         try:
-            ser = serial.Serial('/dev/ttyUSB0', 115200)
+            if not pc_mode:
+                ser = serial.Serial('/dev/ttyUSB0', 115200)
+            else:
+                ser = serial.Serial('COM6', 115200)
         except:
             print "Failed to connect"
             exit()

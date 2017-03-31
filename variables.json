@@ -1,11 +1,65 @@
 {
     "DI_0": {
-        "data_type": "boolean", 
+        "data_type": "", 
         "description": "", 
         "id": 0, 
         "tag": "DI_0", 
-        "var_value": "False", 
-        "variable_type": "di", 
+        "var_value": "1", 
+        "variable_type": "", 
+        "writeable": false
+    }, 
+    "DI_1": {
+        "data_type": "", 
+        "description": "", 
+        "id": 0, 
+        "tag": "DI_1", 
+        "var_value": "1", 
+        "variable_type": "", 
+        "writeable": false
+    }, 
+    "DI_2": {
+        "data_type": "", 
+        "description": "", 
+        "id": 0, 
+        "tag": "DI_2", 
+        "var_value": "1", 
+        "variable_type": "", 
+        "writeable": false
+    }, 
+    "DI_3": {
+        "data_type": "", 
+        "description": "", 
+        "id": 0, 
+        "tag": "DI_3", 
+        "var_value": "1", 
+        "variable_type": "", 
+        "writeable": false
+    }, 
+    "DI_4": {
+        "data_type": "", 
+        "description": "", 
+        "id": 0, 
+        "tag": "DI_4", 
+        "var_value": "1", 
+        "variable_type": "", 
+        "writeable": false
+    }, 
+    "DI_5": {
+        "data_type": "", 
+        "description": "", 
+        "id": 0, 
+        "tag": "DI_5", 
+        "var_value": "1", 
+        "variable_type": "", 
+        "writeable": false
+    }, 
+    "DI_Ignition": {
+        "data_type": "", 
+        "description": "", 
+        "id": 0, 
+        "tag": "DI_Ignition", 
+        "var_value": "1", 
+        "variable_type": "", 
         "writeable": false
     }, 
     "SYS_PASSWORD_DISABLE": {
