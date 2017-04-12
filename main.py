@@ -37,7 +37,8 @@ debug_mode = False
 pc_mode = True
 
 class SystemVariables(Widget):
-    di_0 = StringProperty('')
+    pass
+    #di_0 = StringProperty('')
 
 class Variable(Widget):
     var_tag = StringProperty('')
@@ -66,6 +67,7 @@ class Variable(Widget):
         self.app_ref.save_sys_data()
 
     def on_value(self, instance, value):
+        print(value)
         self.var_value = str(int(value))
 
     def on_text(self, instance, value):
@@ -95,6 +97,7 @@ class Variable(Widget):
         variable['variable_type'] = str(self.var_variable_type)
         variable['writeable'] = self.var_writeable
         variable['var_value'] = str(self.var_value)
+        print(variable)
         self.app_ref.sys_data_json[str(self.var_tag)] = variable
 
 class VarSlider(Variable, Slider):
@@ -187,7 +190,7 @@ class ScreenManagement(ScreenManager):
 class MainScreen(Screen):
     pass
 
-class DynamicLayout(SystemVariables):
+class DynamicLayout(Widget):
     app_ref = ObjectProperty(None)
     indicator_layout = ObjectProperty(None)
     button_layout = ObjectProperty(None)
@@ -225,7 +228,7 @@ class DynamicLayout(SystemVariables):
             enable = data['indicator_' + str(i)]['enable']
             indicator_button = IndicatorButton(text=label, id='indicator_' + str(i))
             indicator_button.bind(on_press=partial(self.item_edit_popup.edit_popup, 'indicator_' + str(i), indicator=True))
-            indicator_button.bind(di_0=indicator_button.setter('var_state'))
+            indicator_button.fbind('self.app_ref.arduino.di_0', indicator_button.on_var_state)
             indicator_button.set_properties('null', channel, enable)
             self.indicator_layout.add_widget(indicator_button)
 
@@ -344,7 +347,7 @@ class DynToggleButton(DynItem, ToggleButton):
 class DynButton(DynItem, Button):
     toggle = BooleanProperty(False)
 
-class IndicatorButton(DynItem, Button, SystemVariables):
+class IndicatorButton(DynItem, Button):
     toggle = BooleanProperty(False)
     var_state = StringProperty('')
 
@@ -392,6 +395,7 @@ class MainApp(App):
         self.arduino = Arduino()
         self.system = System()
         self.screen_man = ScreenManagement()
+        self.sysvars = SystemVariables()
         return self.screen_man
 
     def open_sys_data(self):
@@ -433,20 +437,21 @@ class Arduino(Widget):
     digital_inputs = NumericProperty(0)
     reverse_input = NumericProperty(0)
     ignition_input = NumericProperty(0)
+    di_0 = StringProperty('')
 
     def __init__(self, **kwargs):
         super(Arduino, self).__init__(**kwargs)
         self.array_size = 8
         self.data_array = ['0'] * self.array_size
         self.toggle_ser_read(True)
-        self.di_0 = Variable(var_tag='DI_0')
+        '''self.di_0 = Variable(var_tag='DI_0')
         self.di_1 = Variable(var_tag='DI_1')
         self.di_2 = Variable(var_tag='DI_2')
         self.di_3 = Variable(var_tag='DI_3')
         self.di_4 = Variable(var_tag='DI_4')
         self.di_5 = Variable(var_tag='DI_5')
         self.di_ignition = Variable(var_tag='DI_Ignition')
-        self.add_widget(self.di_0)
+        self.add_widget(self.di_0)'''
 
     def update_data(self, dt):
         if not debug_mode:
@@ -461,13 +466,13 @@ class Arduino(Widget):
         self.reverse_input = 0 #self.digital_inputs & 1
         self.ignition_input = 1 #(self.digital_inputs & 1000000) >> 6
         if len(self.data_array) == self.array_size:
-            self.di_0.var_value = self.data_array[0]
-            self.di_1.var_value = self.data_array[1]
+            self.di_0 = self.data_array[0]
+            '''self.di_1.var_value = self.data_array[1]
             self.di_2.var_value = self.data_array[2]
             self.di_3.var_value = self.data_array[3]
             self.di_4.var_value = self.data_array[4]
             self.di_5.var_value = self.data_array[5]
-            self.di_ignition.var_value = self.data_array[6]
+            self.di_ignition.var_value = self.data_array[6]'''
 
     def toggle_ser_read(self, state):
         if state:
