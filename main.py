@@ -36,11 +36,9 @@ BASE = "/sys/class/backlight/rpi_backlight/"
 debug_mode = False
 pc_mode = True
 
-class SystemVariables(Widget):
-    pass
-    #di_0 = StringProperty('')
+current_milli_time = lambda: int(round(time.time() * 1000))
 
-class Variable(Widget):
+class SysVar(Widget):
     var_tag = StringProperty('')
     var_description = StringProperty('')
     var_id = NumericProperty(0)
@@ -67,7 +65,6 @@ class Variable(Widget):
         self.app_ref.save_sys_data()
 
     def on_value(self, instance, value):
-        print(value)
         self.var_value = str(int(value))
 
     def on_text(self, instance, value):
@@ -97,16 +94,15 @@ class Variable(Widget):
         variable['variable_type'] = str(self.var_variable_type)
         variable['writeable'] = self.var_writeable
         variable['var_value'] = str(self.var_value)
-        print(variable)
         self.app_ref.sys_data_json[str(self.var_tag)] = variable
 
-class VarSlider(Variable, Slider):
+class VarSlider(SysVar, Slider):
     pass
 
-class VarTextInput(Variable, TextInput):
+class VarTextInput(SysVar, TextInput):
     pass
 
-class VarSwitch(Variable, Switch):
+class VarSwitch(SysVar, Switch):
     pass
 
 class ScreenManagement(ScreenManager):
@@ -204,6 +200,7 @@ class DynamicLayout(Widget):
         for indicator in self.indicator_layout.children:
             config = {}
             config['label'] = indicator.text
+            config['toggle'] = indicator.toggle
             config['channel'] = indicator.channel
             config['enable'] = indicator.enable
             data[indicator.id] = config
@@ -224,13 +221,16 @@ class DynamicLayout(Widget):
             data = json.load(file)
         for i in range(6):
             label = data['indicator_'+str(i)]['label']
+            toggle = data['indicator_' + str(i)]['toggle']
             channel = data['indicator_' + str(i)]['channel']
             enable = data['indicator_' + str(i)]['enable']
-            indicator_button = IndicatorButton(text=label, id='indicator_' + str(i))
-            indicator_button.bind(on_press=partial(self.item_edit_popup.edit_popup, 'indicator_' + str(i), indicator=True))
-            indicator_button.fbind('self.app_ref.arduino.di_0', indicator_button.on_var_state)
-            indicator_button.set_properties('null', channel, enable)
-            self.indicator_layout.add_widget(indicator_button)
+            if toggle:
+                button = DynToggleButton(text=label, id='indicator_' + str(i))
+            else:
+                button = DynButton(text=label, id='indicator_' + str(i))
+            button.bind(on_press=partial(self.item_edit_popup.edit_popup, 'button_' + str(i), indicator=False))
+            button.set_properties(self, channel, enable)
+            self.indicator_layout.add_widget(button)
 
             label = data['button_' + str(i)]['label']
             toggle = data['button_' + str(i)]['toggle']
@@ -303,16 +303,21 @@ class DynItem(Widget):
     toggle = BooleanProperty(True)
     enable = BooleanProperty(True)
     channel = StringProperty("")
-    channel_type = StringProperty("")
     ignition_input = NumericProperty(0)
     digital_inputs = NumericProperty(0)
-    app_ref = ObjectProperty(True)
+    app_ref = ObjectProperty(None)
+    data_change = BooleanProperty(False)
+
+    def on_data_change(self, instance, value):
+        state = self.app_ref.variables.get(self.channel)
+        if state == '1':
+            self.state = 'down'
+        else:
+            self.state = 'normal'
 
     def set_properties(self, ref, channel, enable):
         self.dynamic_layout = ref
-        self.channel = channel
-        self.channel_type = self.channel.split('_')[0]
-        self.variable = self.channel.split('_')[1]
+        self.channel = str(channel)
         self.enable = enable
         ChangeItemBackground(self)
 
@@ -329,15 +334,12 @@ class DynItem(Widget):
             self.output_cmd()
 
     def output_cmd(self):
-        if not self.dynamic_layout.modify_mode and self.enable and self.app_ref.arduino.ignition_input:
-            if self.channel_type == 'DO':
-                self.app_ref.arduino.set('digital/' + self.variable + '/', self.state)
-            if self.channel_type == 'SYS':
-                if self.state == 'normal':
-                    dim_state = 0
-                else:
-                    dim_state = 1
-                self.app_ref.system.sys_cmd('DIM_BACKLIGHT', dim_state)
+        if not self.dynamic_layout.modify_mode and self.enable and self.app_ref.variables.DI_IGNITION:
+            if self.state == 'normal':
+                state = '0'
+            else:
+                state = '1'
+            self.app_ref.variables.set(self.channel, state)
         else:
             self.state = 'normal'
 
@@ -346,32 +348,6 @@ class DynToggleButton(DynItem, ToggleButton):
 
 class DynButton(DynItem, Button):
     toggle = BooleanProperty(False)
-
-class IndicatorButton(DynItem, Button):
-    toggle = BooleanProperty(False)
-    var_state = StringProperty('')
-
-    def on_var_state(self, instance, state):
-        print('state: ' + state)
-        if state == '1':
-            self.state = 'down'
-        else:
-            self.state = 'normal'
-
-    '''def on_digital_inputs(self, instance, di_byte):
-        if self.enable:
-            if self.channel_type == 'DI':
-                mask = 1 << int(self.variable)
-                state = di_byte & mask
-                state = state >> int(self.variable)
-                if state == 1:
-                    self.state = 'down'
-                else:
-                    self.state = 'normal'
-                    '''
-
-    def on_press(self):
-        self.state = 'normal'
 
 def ChangeItemBackground(item):
     if item.enable:
@@ -388,14 +364,13 @@ class CameraScreen(Screen):
     pass
 
 class MainApp(App):
-    variables_file = 'variables.json'
+    variables_file = 'system_variables.json'
 
     def build(self):
         self.open_sys_data()
-        self.arduino = Arduino()
+        self.variables = Variables()
         self.system = System()
         self.screen_man = ScreenManagement()
-        self.sysvars = SystemVariables()
         return self.screen_man
 
     def open_sys_data(self):
@@ -415,7 +390,6 @@ class System(Widget):
     main_screen = ObjectProperty(None)
 
     def sys_cmd(self, command, value):
-        print(command + ", " + str(value))
         if command == 'DIM_BACKLIGHT':
             if value == 1:
                 self.backlight_brightness(self.app_ref.screen_man.main_screen.screen_brightness_slider.value)
@@ -424,7 +398,6 @@ class System(Widget):
 
 
     def backlight_brightness(self, value):
-        print(value)
         if not pc_mode:
             if value > 0 and value < 256:
                 _brightness = open(os.path.join(BASE, "brightness"), "w")
@@ -433,46 +406,71 @@ class System(Widget):
                 return
             raise TypeError("Brightness should be between 0 and 255")
 
-class Arduino(Widget):
-    digital_inputs = NumericProperty(0)
-    reverse_input = NumericProperty(0)
-    ignition_input = NumericProperty(0)
-    di_0 = StringProperty('')
+class Variables(Widget):
+    app_ref = ObjectProperty(None)
+    data_change = BooleanProperty(False)
+    arduino_input_tags = ['DI_REVERSE', 'DI_1', 'DI_2', 'DI_3', 'DI_4', 'DI_5', 'DI_IGNITION']
+    arduino_output_tags = ['DO_0', 'DO_1', 'DO_2', 'DO_3', 'DO_4', 'DO_5']
+    sys_var_tags = ['SYS_PASSWORD_DISABLE', 'SYS_SCREEN_BRIGHTNESS', 'SYS_SCREEN_OFF_DELAY', 'SYS_SHUTDOWN_DELAY']
+    var_tags = arduino_input_tags + arduino_output_tags
+    var_tags = var_tags + sys_var_tags
+    DI_REVERSE = StringProperty('0')
+    DI_1 = StringProperty('0')
+    DI_2 = StringProperty('0')
+    DI_3 = StringProperty('0')
+    DI_4 = StringProperty('0')
+    DI_5 = StringProperty('0')
+    DI_IGNITION = StringProperty('0')
+    DO_0 = StringProperty('0')
+    DO_1 = StringProperty('0')
+    DO_2 = StringProperty('0')
+    DO_3 = StringProperty('0')
+    DO_4 = StringProperty('0')
+    DO_5 = StringProperty('0')
+    SYS_PASSWORD_DISABLE = StringProperty('0')
+    SYS_SCREEN_BRIGHTNESS = StringProperty('0')
+    SYS_SCREEN_OFF_DELAY = StringProperty('0')
+    SYS_SHUTDOWN_DELAY = StringProperty('0')
 
     def __init__(self, **kwargs):
-        super(Arduino, self).__init__(**kwargs)
-        self.array_size = 8
-        self.data_array = ['0'] * self.array_size
+        super(Variables, self).__init__(**kwargs)
+        self.variable_data = ['0'] * len(self.var_tags)
+        self.old_variable_data = ['0'] * len(self.var_tags)
         self.toggle_ser_read(True)
-        '''self.di_0 = Variable(var_tag='DI_0')
-        self.di_1 = Variable(var_tag='DI_1')
-        self.di_2 = Variable(var_tag='DI_2')
-        self.di_3 = Variable(var_tag='DI_3')
-        self.di_4 = Variable(var_tag='DI_4')
-        self.di_5 = Variable(var_tag='DI_5')
-        self.di_ignition = Variable(var_tag='DI_Ignition')
-        self.add_widget(self.di_0)'''
 
     def update_data(self, dt):
         if not debug_mode:
-            try:
-                self.data_array = ser.readline().rstrip().split(',')
-            except:
+            #try:
+            self.old_variable_data = list(self.variable_data) #'list()' must be used, otherwise it only copies a reference to the original list
+            self.arduino_data = ser.readline().rstrip().split(',')
+            for i in range(7):
+                self.variable_data[i] = self.arduino_data[i]
+            if self.variable_data == self.old_variable_data:
+                self.data_change = False
+            else:
+                self.data_change = True
+            '''except:
                 print('Serial Read Failure')
-                exit()
+                exit()'''
         else:
-            self.digital_inputs = 112
-            self.data_array = ['0'] * self.array_size
-        self.reverse_input = 0 #self.digital_inputs & 1
-        self.ignition_input = 1 #(self.digital_inputs & 1000000) >> 6
-        if len(self.data_array) == self.array_size:
-            self.di_0 = self.data_array[0]
-            '''self.di_1.var_value = self.data_array[1]
-            self.di_2.var_value = self.data_array[2]
-            self.di_3.var_value = self.data_array[3]
-            self.di_4.var_value = self.data_array[4]
-            self.di_5.var_value = self.data_array[5]
-            self.di_ignition.var_value = self.data_array[6]'''
+            pass
+        self.DI_REVERSE = '0' #self.variable_data[0]
+        self.DI_1 = self.variable_data[1]
+        self.DI_2 = self.variable_data[2]
+        self.DI_3 = self.variable_data[3]
+        self.DI_4 = self.variable_data[4]
+        self.DI_5 = self.variable_data[5]
+        self.DI_IGNITION = '1' #self.variable_data[6]
+        self.DO_0 = self.variable_data[7]
+        self.DO_1 = self.variable_data[8]
+        self.DO_2 = self.variable_data[9]
+        self.DO_3 = self.variable_data[10]
+        self.DO_4 = self.variable_data[11]
+        self.DO_5 = self.variable_data[12]
+        self.SYS_PASSWORD_DISABLE = self.variable_data[13]
+        self.SYS_SCREEN_BRIGHTNESS = self.variable_data[14]
+        self.SYS_SCREEN_OFF_DELAY = self.variable_data[15]
+        self.SYS_SHUTDOWN_DELAY = self.variable_data[16]
 
     def toggle_ser_read(self, state):
         if state:
@@ -483,19 +481,26 @@ class Arduino(Widget):
             except:
                 pass
 
-    def get(self, index):
-        return self.data_array[index]
+    def get(self, tag):
+        index = self.var_tags.index(tag)
+        return self.variable_data[index]
 
-    def set(self, command):
+    def write_arduino(self, command):
         ser.write(command)
         time.sleep(.1)
 
-    def set_state(self, command, state):
-        if state == "down":
-            int_state = '1/'
-        else:
-            int_state = '0/'
-        ser.write(command + int_state)
+    def set(self, tag, value):
+        index = self.var_tags.index(tag)
+        self.variable_data[index] = value
+        channel_type = self.var_tags[index].split('_')[0]
+        if channel_type == 'DO':
+            self.write_arduino('digital_output/' + tag + '/' + value + '/')
+        if channel_type == 'SYS':
+            if self.state == 'normal':
+                dim_state = 0
+            else:
+                dim_state = 1
+            self.app_ref.system.sys_cmd('DIM_BACKLIGHT', dim_state)
 
 if __name__ == '__main__':
 

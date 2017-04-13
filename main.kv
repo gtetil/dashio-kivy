@@ -2,8 +2,8 @@
 
 <ScreenManagement>:
     id: _sm
-    ignition_input: app.arduino.ignition_input
-    reverse_input: app.arduino.reverse_input
+    ignition_input: int(app.variables.DI_IGNITION)
+    reverse_input: int(app.variables.DI_REVERSE)
     app_ref: app
     main_screen: main_screen
     Screen:
@@ -19,15 +19,13 @@
         name: 'passcode_screen'
         sm: _sm
 
-<SystemVariables>:
-    Variable:
-        var_tag: 'DI_0'
-        var_value: app.arduino.di_0
-
 <System>:
     app_ref: app
 
-<Variable>:
+<Variables>:
+    app_ref: app
+
+<SysVar>:
     app_ref: app
 
 <MainScreen>:
@@ -40,7 +38,7 @@
 
     Button:
         id: end_modify_button
-        on_press: dynamic_layout.end_modify(); self.parent.remove_widget(self); app.arduino.toggle_ser_read(True)
+        on_press: dynamic_layout.end_modify(); self.parent.remove_widget(self); app.variables.toggle_ser_read(True)
         text: 'End Screen Modify'
         color: 0.88, 0.72, 0.1, 1
         size_hint: None, None
@@ -137,7 +135,7 @@
                             halign: 'center'
                             valign: 'middle'
                             size_hint_y: 0.15
-                            on_press: if not dynamic_layout.modify_mode: enter_modify_popup.open(); app.arduino.toggle_ser_read(False)
+                            on_press: if not dynamic_layout.modify_mode: enter_modify_popup.open(); app.variables.toggle_ser_read(False)
 
                         BoxLayout:
                             orientation: 'vertical'
@@ -248,7 +246,7 @@
 
                     Button:
                         text: 'Cancel'
-                        on_release: enter_modify_popup.dismiss(); app.arduino.toggle_ser_read(True)
+                        on_release: enter_modify_popup.dismiss(); app.variables.toggle_ser_read(True)
 
 
     ScreenItemEditPopup:
@@ -333,19 +331,18 @@
                     on_press: item_edit_popup.dismiss()
 
 
-<IndicatorButton, DynToggleButton, DynButton>:
+<DynToggleButton, DynButton>:
     text_size: self.size
     font_size: '18sp'
     halign: 'center'
     valign: 'middle'
 
 <DynToggleButton, DynButton>:
+    ignition_input: int(app.variables.DI_IGNITION)
+
+<DynItem>:
     app_ref: app
-    ignition_input: app.arduino.ignition_input
-
-<IndicatorButton>:
-    #digital_inputs: app.arduino.digital_inputs
-
+    data_change: app.variables.data_change
 
 <PasscodeScreen>:
     id: passcode_screen

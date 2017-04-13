@@ -85,7 +85,7 @@
         "description": "", 
         "id": 0, 
         "tag": "SYS_SCREEN_OFF_DELAY", 
-        "var_value": "6", 
+        "var_value": "7", 
         "variable_type": "system", 
         "writeable": true
     }, 
