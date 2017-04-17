@@ -38,7 +38,7 @@ pc_mode = True
 
 current_milli_time = lambda: int(round(time.time() * 1000))
 
-class SysVar(Widget):
+'''class SysVar(Widget):
     var_tag = StringProperty('')
     var_description = StringProperty('')
     var_id = NumericProperty(0)
@@ -63,6 +63,7 @@ class SysVar(Widget):
                 self.active = False
         self.set_to_json()
         self.app_ref.save_sys_data()
+        self.app_ref.variables.set(self.var_tag, value)
 
     def on_value(self, instance, value):
         self.var_value = str(int(value))
@@ -76,12 +77,14 @@ class SysVar(Widget):
     def get_from_json(self):
         try:
             self.var_tag = self.app_ref.sys_data_json[self.var_tag]['tag']
+            print(self.var_tag)
             self.var_description = self.app_ref.sys_data_json[self.var_tag]['description']
             self.var_id = self.app_ref.sys_data_json[self.var_tag]['id']
             self.var_data_type = self.app_ref.sys_data_json[self.var_tag]['data_type']
             self.var_variable_type = self.app_ref.sys_data_json[self.var_tag]['variable_type']
             self.var_writeable = self.app_ref.sys_data_json[self.var_tag]['writeable']
             self.var_value = self.app_ref.sys_data_json[self.var_tag]['var_value']
+            print(self.var_value)
         except:
             pass
 
@@ -103,7 +106,7 @@ class VarTextInput(SysVar, TextInput):
     pass
 
 class VarSwitch(SysVar, Switch):
-    pass
+    pass'''
 
 class ScreenManagement(ScreenManager):
     passcode = '1234'
@@ -364,7 +367,6 @@ class CameraScreen(Screen):
     pass
 
 class MainApp(App):
-    variables_file = 'system_variables.json'
 
     def build(self):
         self.open_sys_data()
@@ -373,21 +375,11 @@ class MainApp(App):
         self.screen_man = ScreenManagement()
         return self.screen_man
 
-    def open_sys_data(self):
-        with open(self.variables_file, 'r') as file:
-            self.sys_data_json = json.load(file)
-
-    def save_sys_data(self):
-        with open(self.variables_file, 'w') as file:
-            json.dump(self.sys_data_json, file, sort_keys=True, indent=4)
-
     def exit_app(self):
         self.stop()
 
 class System(Widget):
-    backlight_dim_value = NumericProperty(0)
     app_ref = ObjectProperty(None)
-    main_screen = ObjectProperty(None)
 
     def sys_cmd(self, command, value):
         if command == 'DIM_BACKLIGHT':
@@ -396,8 +388,8 @@ class System(Widget):
             else:
                 self.backlight_brightness(255)
 
-
     def backlight_brightness(self, value):
+        print(value)
         if not pc_mode:
             if value > 0 and value < 256:
                 _brightness = open(os.path.join(BASE, "brightness"), "w")
@@ -409,9 +401,10 @@ class System(Widget):
 class Variables(Widget):
     app_ref = ObjectProperty(None)
     data_change = BooleanProperty(False)
+    variables_file = 'variables.json'
     arduino_input_tags = ['DI_REVERSE', 'DI_1', 'DI_2', 'DI_3', 'DI_4', 'DI_5', 'DI_IGNITION']
     arduino_output_tags = ['DO_0', 'DO_1', 'DO_2', 'DO_3', 'DO_4', 'DO_5']
-    sys_var_tags = ['SYS_PASSWORD_DISABLE', 'SYS_SCREEN_BRIGHTNESS', 'SYS_SCREEN_OFF_DELAY', 'SYS_SHUTDOWN_DELAY']
+    sys_var_tags = ['SYS_DIM_BACKLIGHT', 'SYS_PASSWORD_DISABLE', 'SYS_SCREEN_BRIGHTNESS', 'SYS_SCREEN_OFF_DELAY', 'SYS_SHUTDOWN_DELAY']
     var_tags = arduino_input_tags + arduino_output_tags
     var_tags = var_tags + sys_var_tags
     DI_REVERSE = StringProperty('0')
@@ -427,6 +420,7 @@ class Variables(Widget):
     DO_3 = StringProperty('0')
     DO_4 = StringProperty('0')
     DO_5 = StringProperty('0')
+    SYS_DIM_BACKLIGHT = StringProperty('0')
     SYS_PASSWORD_DISABLE = StringProperty('0')
     SYS_SCREEN_BRIGHTNESS = StringProperty('0')
     SYS_SCREEN_OFF_DELAY = StringProperty('0')
@@ -438,10 +432,18 @@ class Variables(Widget):
         self.old_variable_data = ['0'] * len(self.var_tags)
         self.toggle_ser_read(True)
 
+    def open_variables(self):
+        with open(self.variables_file, 'r') as file:
+            self.sys_data_json = json.load(file)
+        self.var_value = self.app_ref.sys_data_json[self.var_tag]['var_value']
+
+    def save_variables(self):
+        with open(self.variables_file, 'w') as file:
+            json.dump(self.sys_data_json, file, sort_keys=True, indent=4)
+
     def update_data(self, dt):
         if not debug_mode:
             #try:
-            self.old_variable_data = list(self.variable_data) #'list()' must be used, otherwise it only copies a reference to the original list
             self.arduino_data = ser.readline().rstrip().split(',')
             for i in range(7):
                 self.variable_data[i] = self.arduino_data[i]
@@ -449,6 +451,8 @@ class Variables(Widget):
                 self.data_change = False
             else:
                 self.data_change = True
+                print(self.variable_data)
+            self.old_variable_data = list(self.variable_data)  # 'list()' must be used, otherwise it only copies a reference to the original list
             '''except:
                 print('Serial Read Failure')
                 exit()'''
@@ -467,10 +471,11 @@ class Variables(Widget):
         self.DO_3 = self.variable_data[10]
         self.DO_4 = self.variable_data[11]
         self.DO_5 = self.variable_data[12]
-        self.SYS_PASSWORD_DISABLE = self.variable_data[13]
-        self.SYS_SCREEN_BRIGHTNESS = self.variable_data[14]
-        self.SYS_SCREEN_OFF_DELAY = self.variable_data[15]
-        self.SYS_SHUTDOWN_DELAY = self.variable_data[16]
+        self.SYS_DIM_BACKLIGHT = self.variable_data[13]
+        self.SYS_PASSWORD_DISABLE = self.variable_data[14]
+        self.SYS_SCREEN_BRIGHTNESS = self.variable_data[15]
+        self.SYS_SCREEN_OFF_DELAY = self.variable_data[16]
+        self.SYS_SHUTDOWN_DELAY = self.variable_data[17]
 
     def toggle_ser_read(self, state):
         if state:
@@ -496,11 +501,9 @@ class Variables(Widget):
         if channel_type == 'DO':
             self.write_arduino('digital_output/' + tag + '/' + value + '/')
         if channel_type == 'SYS':
-            if self.state == 'normal':
-                dim_state = 0
-            else:
-                dim_state = 1
-            self.app_ref.system.sys_cmd('DIM_BACKLIGHT', dim_state)
+            if tag == 'SYS_DIM_BACKLIGHT':
+                self.ids.SYS_DIM_BACKLIGHT.var_value = value
+                self.app_ref.system.sys_cmd('DIM_BACKLIGHT', int(value))
 
 if __name__ == '__main__':
 

@@ -1,4 +1,13 @@
 {
+    "": {
+        "data_type": "", 
+        "description": "", 
+        "id": 0, 
+        "tag": "", 
+        "var_value": "0", 
+        "variable_type": "", 
+        "writeable": false
+    }, 
     "DI_0": {
         "data_type": "string", 
         "description": "", 
@@ -61,6 +70,15 @@
         "var_value": "1", 
         "variable_type": "", 
         "writeable": false
+    }, 
+    "SYS_DIM_BACKLIGHT": {
+        "data_type": "integer", 
+        "description": "", 
+        "id": 0, 
+        "tag": "SYS_DIM_BACKLIGHT", 
+        "var_value": "1", 
+        "variable_type": "system", 
+        "writeable": true
     }, 
     "SYS_PASSWORD_DISABLE": {
         "data_type": "boolean", 

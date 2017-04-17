@@ -30,9 +30,9 @@
         "toggle": false
     }, 
     "button_5": {
-        "channel": "DO_5", 
-        "enable": true, 
-        "label": "DO_5", 
+        "channel": "DO_5",
+        "enable": true,
+        "label": "DO_5",
         "toggle": true
     }, 
     "indicator_0": {
@@ -54,9 +54,9 @@
         "toggle": false
     }, 
     "indicator_3": {
-        "channel": "DI_2", 
-        "enable": false, 
-        "label": "text_3", 
+        "channel": "DI_REVERSE", 
+        "enable": true, 
+        "label": "Reverse", 
         "toggle": true
     }, 
     "indicator_4": {
