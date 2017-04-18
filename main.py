@@ -25,6 +25,7 @@ from kivy.animation import Animation
 
 import json
 from functools import partial
+import autoVar
 
 Window.size = (800,480)
 
@@ -307,9 +308,11 @@ class Variables(Widget):
     variables_file = 'variables.json'
     arduino_input_tags = ['DI_0', 'DI_1', 'DI_2', 'DI_3', 'DI_4', 'DI_5', 'DI_IGNITION']
     arduino_output_tags = ['DO_0', 'DO_1', 'DO_2', 'DO_3', 'DO_4', 'DO_5']
-    sys_save_var_tags = ['SYS_PASSWORD_DISABLE', 'SYS_SCREEN_BRIGHTNESS', 'SYS_DIM_BACKLIGHT', 'SYS_SCREEN_OFF_DELAY', 'SYS_SHUTDOWN_DELAY']
     sys_var_tags = ['SYS_REVERSE_CAM_ON']
-    var_tags = arduino_input_tags + arduino_output_tags + sys_save_var_tags + sys_var_tags
+    sys_save_var_tags = ['SYS_PASSWORD_DISABLE', 'SYS_SCREEN_BRIGHTNESS', 'SYS_DIM_BACKLIGHT', 'SYS_SCREEN_OFF_DELAY', 'SYS_SHUTDOWN_DELAY']
+    auto_var_tags = ['AUTOVAR_OPERATOR_1', 'AUTOVAR_GET_VAR_1', 'AUTOVAR_SET_VAR_1', 'AUTOVAR_OPERATOR_2', 'AUTOVAR_GET_VAR_2', 'AUTOVAR_SET_VAR_2', 'AUTOVAR_OPERATOR_3', 'AUTOVAR_GET_VAR_3', 'AUTOVAR_SET_VAR_3', 'AUTOVAR_OPERATOR_4', 'AUTOVAR_GET_VAR_4', 'AUTOVAR_SET_VAR_4']
+    var_tags = arduino_input_tags + arduino_output_tags + sys_var_tags + sys_save_var_tags + auto_var_tags + ['']
+    save_var_tags = sys_save_var_tags + auto_var_tags
     DI_0 = StringProperty('0')
     DI_1 = StringProperty('0')
     DI_2 = StringProperty('0')
@@ -323,12 +326,24 @@ class Variables(Widget):
     DO_3 = StringProperty('0')
     DO_4 = StringProperty('0')
     DO_5 = StringProperty('0')
+    SYS_REVERSE_CAM_ON = StringProperty('0')
     SYS_DIM_BACKLIGHT = StringProperty('0')
     SYS_PASSWORD_DISABLE = StringProperty('0')
     SYS_SCREEN_BRIGHTNESS = StringProperty('0')
     SYS_SCREEN_OFF_DELAY = StringProperty('0')
     SYS_SHUTDOWN_DELAY = StringProperty('0')
-    SYS_REVERSE_CAM_ON = StringProperty('0')
+    AUTOVAR_OPERATOR_1 = StringProperty('')
+    AUTOVAR_GET_VAR_1 = StringProperty('')
+    AUTOVAR_SET_VAR_1 = StringProperty('')
+    AUTOVAR_OPERATOR_2 = StringProperty('')
+    AUTOVAR_GET_VAR_2 = StringProperty('')
+    AUTOVAR_SET_VAR_2 = StringProperty('')
+    AUTOVAR_OPERATOR_3 = StringProperty('')
+    AUTOVAR_GET_VAR_3 = StringProperty('')
+    AUTOVAR_SET_VAR_3 = StringProperty('')
+    AUTOVAR_OPERATOR_4 = StringProperty('')
+    AUTOVAR_GET_VAR_4 = StringProperty('')
+    AUTOVAR_SET_VAR_4 = StringProperty('')
 
     def __init__(self, **kwargs):
         super(Variables, self).__init__(**kwargs)
@@ -340,12 +355,15 @@ class Variables(Widget):
     def open_variables(self):
         with open(self.variables_file, 'r') as file:
             self.sys_data_json = json.load(file)
-        for tag in self.sys_save_var_tags:
-            value = self.sys_data_json[tag]
-            self.set(tag, value)
+        try:
+            for tag in self.save_var_tags:
+                value = str(self.sys_data_json[tag])
+                self.set(tag, value)
+        except:
+            print('error: maybe tag did not exist yet?')
 
     def save_variables(self):
-        for tag in self.sys_save_var_tags:
+        for tag in self.save_var_tags:
             self.sys_data_json[tag] = self.get(tag)
         with open(self.variables_file, 'w') as file:
             json.dump(self.sys_data_json, file, sort_keys=True, indent=4)
@@ -362,7 +380,7 @@ class Variables(Widget):
                 self.data_change = True
                 print('variable data')
                 print(self.variable_data)
-                if self.variable_data[13:18] <> self.old_variable_data[13:18]:
+                if self.variable_data[13:31] <> self.old_variable_data[13:31]:
                     self.save_variables()
                     print('saved vars')
             self.old_variable_data = list(self.variable_data)  # 'list()' must be used, otherwise it only copies a reference to the original list
@@ -384,14 +402,55 @@ class Variables(Widget):
         self.DO_3 = self.variable_data[10]
         self.DO_4 = self.variable_data[11]
         self.DO_5 = self.variable_data[12]
-        self.SYS_PASSWORD_DISABLE = self.variable_data[13]
-        self.SYS_SCREEN_BRIGHTNESS = self.variable_data[14]
-        self.SYS_DIM_BACKLIGHT = self.variable_data[15]
-        self.SYS_SCREEN_OFF_DELAY = self.variable_data[16]
-        self.SYS_SHUTDOWN_DELAY = self.variable_data[17]
-        self.SYS_REVERSE_CAM_ON = self.variable_data[18]
+        self.SYS_REVERSE_CAM_ON = self.variable_data[13]
+        self.SYS_PASSWORD_DISABLE = self.variable_data[14]
+        self.SYS_SCREEN_BRIGHTNESS = self.variable_data[15]
+        self.SYS_DIM_BACKLIGHT = self.variable_data[16]
+        self.SYS_SCREEN_OFF_DELAY = self.variable_data[17]
+        self.SYS_SHUTDOWN_DELAY = self.variable_data[18]
+        self.AUTOVAR_OPERATOR_1 = self.variable_data[19]
+        self.AUTOVAR_GET_VAR_1 = self.variable_data[20]
+        self.AUTOVAR_SET_VAR_1 = self.variable_data[21]
+        self.AUTOVAR_OPERATOR_2 = self.variable_data[22]
+        self.AUTOVAR_GET_VAR_2 = self.variable_data[23]
+        self.AUTOVAR_SET_VAR_2 = self.variable_data[24]
+        self.AUTOVAR_OPERATOR_3 = self.variable_data[25]
+        self.AUTOVAR_GET_VAR_3 = self.variable_data[26]
+        self.AUTOVAR_SET_VAR_3 = self.variable_data[27]
+        self.AUTOVAR_OPERATOR_4 = self.variable_data[28]
+        self.AUTOVAR_GET_VAR_4 = self.variable_data[29]
+        self.AUTOVAR_SET_VAR_4 = self.variable_data[30]
 
         self.DI_IGNITION = '1'  # self.variable_data[6]  #need to update last due to screen initialization issue
+
+        self.scan_auto_vars()
+
+    def scan_auto_vars(self):
+        if self.data_change:
+            if self.AUTOVAR_OPERATOR_1 != '':
+                if (self.AUTOVAR_OPERATOR_1 == 'if' and self.get(self.AUTOVAR_GET_VAR_1) == '1') or (self.AUTOVAR_OPERATOR_1 == 'if not' and self.get(self.AUTOVAR_GET_VAR_1) == '0'):
+                    state = '1'
+                else:
+                    state = '0'
+                self.set(self.AUTOVAR_SET_VAR_1, state)
+            if self.AUTOVAR_OPERATOR_2 != '':
+                if (self.AUTOVAR_OPERATOR_2 == 'if' and self.get(self.AUTOVAR_GET_VAR_2) == '1') or (self.AUTOVAR_OPERATOR_2 == 'if not' and self.get(self.AUTOVAR_GET_VAR_2) == '0'):
+                    state = '1'
+                else:
+                    state = '0'
+                self.set(self.AUTOVAR_SET_VAR_2, state)
+            if self.AUTOVAR_OPERATOR_3 != '':
+                if (self.AUTOVAR_OPERATOR_3 == 'if' and self.get(self.AUTOVAR_GET_VAR_3) == '1') or (self.AUTOVAR_OPERATOR_3 == 'if not' and self.get(self.AUTOVAR_GET_VAR_3) == '0'):
+                    state = '1'
+                else:
+                    state = '0'
+                self.set(self.AUTOVAR_SET_VAR_3, state)
+            if self.AUTOVAR_OPERATOR_4 != '':
+                if (self.AUTOVAR_OPERATOR_4 == 'if' and self.get(self.AUTOVAR_GET_VAR_4) == '1') or (self.AUTOVAR_OPERATOR_4 == 'if not' and self.get(self.AUTOVAR_GET_VAR_4) == '0'):
+                    state = '1'
+                else:
+                    state = '0'
+                self.set(self.AUTOVAR_SET_VAR_4, state)
 
     def toggle_ser_read(self, state):
         if state:
@@ -403,22 +462,31 @@ class Variables(Widget):
                 pass
 
     def get(self, tag):
-        index = self.var_tags.index(tag)
-        return self.variable_data[index]
+        if tag != '':
+            try:
+                index = self.var_tags.index(tag)
+                return self.variable_data[index]
+            except:
+                print('variables.get: tag not found')
+                return ''
+        return ''
 
     def write_arduino(self, command):
         ser.write(command)
         time.sleep(.1)
 
     def set(self, tag, value):
-        index = self.var_tags.index(tag)
-        self.variable_data[index] = value
-        channel_type = self.var_tags[index].split('_')[0]
-        if channel_type == 'DO':
-            self.write_arduino('digital_output/' + tag + '/' + value + '/')
-        if channel_type == 'SYS':
-            if tag == 'SYS_DIM_BACKLIGHT':
-                self.sys_cmd(tag, int(value))
+        try:
+            index = self.var_tags.index(tag)
+            self.variable_data[index] = value
+            channel_type = self.var_tags[index].split('_')[0]
+            if channel_type == 'DO':
+                self.write_arduino('digital_output/' + tag + '/' + value + '/')
+            if channel_type == 'SYS':
+                if tag == 'SYS_DIM_BACKLIGHT':
+                    self.sys_cmd(tag, int(value))
+        except:
+            print('variable.set: tag not found')
 
     #SYSTEM COMMANDS#
 

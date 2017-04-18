@@ -195,8 +195,44 @@
                     BoxLayout:
                         orientation: 'vertical'
                         size_hint_x: 0.6
-                        padding: 10
+                        padding: 30, 10, 0, 0
                         spacing: 5
+
+                        AutoVar:
+                            operator: app.variables.AUTOVAR_OPERATOR_1
+                            operator_text: 'AUTOVAR_OPERATOR_1'
+                            get_var: app.variables.AUTOVAR_GET_VAR_1
+                            get_var_text: 'AUTOVAR_GET_VAR_1'
+                            set_var: app.variables.AUTOVAR_SET_VAR_1
+                            set_var_text: 'AUTOVAR_SET_VAR_1'
+
+                        AutoVar:
+                            operator: app.variables.AUTOVAR_OPERATOR_2
+                            operator_text: 'AUTOVAR_OPERATOR_2'
+                            get_var: app.variables.AUTOVAR_GET_VAR_2
+                            get_var_text: 'AUTOVAR_GET_VAR_2'
+                            set_var: app.variables.AUTOVAR_SET_VAR_2
+                            set_var_text: 'AUTOVAR_SET_VAR_2'
+
+                        AutoVar:
+                            operator: app.variables.AUTOVAR_OPERATOR_3
+                            operator_text: 'AUTOVAR_OPERATOR_3'
+                            get_var: app.variables.AUTOVAR_GET_VAR_3
+                            get_var_text: 'AUTOVAR_GET_VAR_3'
+                            set_var: app.variables.AUTOVAR_SET_VAR_3
+                            set_var_text: 'AUTOVAR_SET_VAR_3'
+
+                        AutoVar:
+                            operator: app.variables.AUTOVAR_OPERATOR_4
+                            operator_text: 'AUTOVAR_OPERATOR_4'
+                            get_var: app.variables.AUTOVAR_GET_VAR_4
+                            get_var_text: 'AUTOVAR_GET_VAR_4'
+                            set_var: app.variables.AUTOVAR_SET_VAR_4
+                            set_var_text: 'AUTOVAR_SET_VAR_4'
+
+                        BoxLayout:
+                            orientation: 'horizontal'
+                            size_hint_y: 0.6
 
                 #Button:
                     #id: exit_button

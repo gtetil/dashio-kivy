@@ -18,7 +18,7 @@
         "toggle": false
     }, 
     "button_3": {
-        "channel": "DO_4", 
+        "channel": "DO_3", 
         "enable": true, 
         "label": "DO_3", 
         "toggle": true
@@ -27,7 +27,7 @@
         "channel": "DO_4", 
         "enable": true, 
         "label": "DO_4", 
-        "toggle": false
+        "toggle": true
     }, 
     "button_5": {
         "channel": "DO_5", 
