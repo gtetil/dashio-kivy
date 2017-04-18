@@ -30,13 +30,13 @@
         "toggle": false
     }, 
     "button_5": {
-        "channel": "DO_5",
-        "enable": true,
-        "label": "DO_5",
+        "channel": "DO_5", 
+        "enable": true, 
+        "label": "DO_5", 
         "toggle": true
     }, 
     "indicator_0": {
-        "channel": "DI_REVERSE", 
+        "channel": "DI_0", 
         "enable": true, 
         "label": "DI_0", 
         "toggle": true
@@ -54,7 +54,7 @@
         "toggle": false
     }, 
     "indicator_3": {
-        "channel": "DI_REVERSE", 
+        "channel": "SYS_REVERSE_CAM_ON", 
         "enable": true, 
         "label": "Reverse", 
         "toggle": true
@@ -66,9 +66,9 @@
         "toggle": true
     }, 
     "indicator_5": {
-        "channel": "DI_2", 
-        "enable": false, 
-        "label": "text_5", 
+        "channel": "SYS_DIM_BACKLIGHT", 
+        "enable": true, 
+        "label": "DIM BACKLIGHT", 
         "toggle": true
     }
 }

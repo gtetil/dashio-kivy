@@ -1,20 +1,7 @@
 {
-    "DI_REVERSE": "0",
-    "DI_1": "0",
-    "DI_2": "0",
-    "DI_3": "0",
-    "DI_4": "0",
-    "DI_5": "0",
-    "DI_IGNITION": "0",
-    "DO_0": "0",
-    "DO_1": "0",
-    "DO_2": "0",
-    "DO_3": "0",
-    "DO_4": "0",
-    "DO_5": "0",
-    "SYS_DIM_BACKLIGHT": "1",
-    "SYS_PASSWORD_DISABLE": "1",
-    "SYS_SCREEN_BRIGHTNESS": "100",
-    "SYS_SCREEN_OFF_DELAY": "7",
-    "SYS_SHUTDOWN_DELAY": "60"
+    "SYS_DIM_BACKLIGHT": "1", 
+    "SYS_PASSWORD_DISABLE": "1", 
+    "SYS_SCREEN_BRIGHTNESS": "175", 
+    "SYS_SCREEN_OFF_DELAY": "7", 
+    "SYS_SHUTDOWN_DELAY": "61"
 }

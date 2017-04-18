@@ -38,76 +38,6 @@ pc_mode = True
 
 current_milli_time = lambda: int(round(time.time() * 1000))
 
-'''class SysVar(Widget):
-    var_tag = StringProperty('')
-    var_description = StringProperty('')
-    var_id = NumericProperty(0)
-    var_data_type = StringProperty('')
-    var_variable_type = StringProperty('')
-    var_writeable = BooleanProperty(False)
-    var_value = StringProperty('')
-    app_ref = ObjectProperty(None)
-
-    def on_var_tag(self, instance, value):
-        self.get_from_json()
-
-    def on_var_value(self, instance, value):
-        if self.var_data_type == 'integer':
-            self.value = int(value)
-        if self.var_data_type == 'string':
-            self.text = value
-        if self.var_data_type == 'boolean':
-            if value == 'True':
-                self.active = True
-            else:
-                self.active = False
-        self.set_to_json()
-        self.app_ref.save_sys_data()
-        self.app_ref.variables.set(self.var_tag, value)
-
-    def on_value(self, instance, value):
-        self.var_value = str(int(value))
-
-    def on_text(self, instance, value):
-        self.var_value = value
-
-    def on_active(self, instance, value):
-        self.var_value = str(value)
-
-    def get_from_json(self):
-        try:
-            self.var_tag = self.app_ref.sys_data_json[self.var_tag]['tag']
-            print(self.var_tag)
-            self.var_description = self.app_ref.sys_data_json[self.var_tag]['description']
-            self.var_id = self.app_ref.sys_data_json[self.var_tag]['id']
-            self.var_data_type = self.app_ref.sys_data_json[self.var_tag]['data_type']
-            self.var_variable_type = self.app_ref.sys_data_json[self.var_tag]['variable_type']
-            self.var_writeable = self.app_ref.sys_data_json[self.var_tag]['writeable']
-            self.var_value = self.app_ref.sys_data_json[self.var_tag]['var_value']
-            print(self.var_value)
-        except:
-            pass
-
-    def set_to_json(self):
-        variable = {}
-        variable['tag'] = str(self.var_tag)
-        variable['description'] = str(self.var_description)
-        variable['id'] = self.var_id
-        variable['data_type'] = str(self.var_data_type)
-        variable['variable_type'] = str(self.var_variable_type)
-        variable['writeable'] = self.var_writeable
-        variable['var_value'] = str(self.var_value)
-        self.app_ref.sys_data_json[str(self.var_tag)] = variable
-
-class VarSlider(SysVar, Slider):
-    pass
-
-class VarTextInput(SysVar, TextInput):
-    pass
-
-class VarSwitch(SysVar, Switch):
-    pass'''
-
 class ScreenManagement(ScreenManager):
     passcode = '1234'
     passcode_try = ''
@@ -122,16 +52,11 @@ class ScreenManagement(ScreenManager):
         super (ScreenManagement,self).__init__(**kwargs)
         self.transition = NoTransition()
         self.main_screen.dynamic_layout.build_layout()
-        self.brightness()
-
-    def brightness(self):
-        value = int(self.main_screen.screen_brightness_slider.value)
-        self.app_ref.system.backlight_brightness(value)
 
     def on_ignition_input(self, instance, state):
         if state == 1:
             if self.reverse_input == 0:
-                if self.main_screen.password_disable_switch.active:
+                if self.app_ref.variables.SYS_PASSWORD_DISABLE == '1':
                     self.current = 'main_screen'
                 else:
                     self.current = 'passcode_screen'
@@ -143,8 +68,8 @@ class ScreenManagement(ScreenManager):
             except:
                 print('event probably was not created yet')
         else:
-            self.event = Clock.schedule_once(self.delayed_screen_off, int(self.main_screen.screen_off_delay_input.text))
-            self.event = Clock.schedule_once(self.delayed_shutdown, int(self.main_screen.shutdown_delay_input.text))
+            self.event = Clock.schedule_once(self.delayed_screen_off, int(self.app_ref.variables.SYS_SCREEN_OFF_DELAY))
+            self.event = Clock.schedule_once(self.delayed_shutdown, int(self.app_ref.variables.SYS_SHUTDOWN_DELAY))
 
     def delayed_screen_off(self, dt):
         self.current = 'off_screen'
@@ -169,7 +94,7 @@ class ScreenManagement(ScreenManager):
             self.current = "camera_screen"
         else:
             if self.ignition_input == 1:
-                if self.logged_in == 1 or self.main_screen.password_disable_switch.active:
+                if self.logged_in == 1 or self.app_ref.variables.SYS_PASSWORD_DISABLE == '1':
                     self.current = "main_screen"
                 else:
                     self.current = "passcode_screen"
@@ -369,45 +294,23 @@ class CameraScreen(Screen):
 class MainApp(App):
 
     def build(self):
-        self.open_sys_data()
         self.variables = Variables()
-        self.system = System()
         self.screen_man = ScreenManagement()
         return self.screen_man
 
     def exit_app(self):
         self.stop()
 
-class System(Widget):
-    app_ref = ObjectProperty(None)
-
-    def sys_cmd(self, command, value):
-        if command == 'DIM_BACKLIGHT':
-            if value == 1:
-                self.backlight_brightness(self.app_ref.screen_man.main_screen.screen_brightness_slider.value)
-            else:
-                self.backlight_brightness(255)
-
-    def backlight_brightness(self, value):
-        print(value)
-        if not pc_mode:
-            if value > 0 and value < 256:
-                _brightness = open(os.path.join(BASE, "brightness"), "w")
-                _brightness.write(str(value))
-                _brightness.close()
-                return
-            raise TypeError("Brightness should be between 0 and 255")
-
 class Variables(Widget):
     app_ref = ObjectProperty(None)
     data_change = BooleanProperty(False)
     variables_file = 'variables.json'
-    arduino_input_tags = ['DI_REVERSE', 'DI_1', 'DI_2', 'DI_3', 'DI_4', 'DI_5', 'DI_IGNITION']
+    arduino_input_tags = ['DI_0', 'DI_1', 'DI_2', 'DI_3', 'DI_4', 'DI_5', 'DI_IGNITION']
     arduino_output_tags = ['DO_0', 'DO_1', 'DO_2', 'DO_3', 'DO_4', 'DO_5']
-    sys_var_tags = ['SYS_DIM_BACKLIGHT', 'SYS_PASSWORD_DISABLE', 'SYS_SCREEN_BRIGHTNESS', 'SYS_SCREEN_OFF_DELAY', 'SYS_SHUTDOWN_DELAY']
-    var_tags = arduino_input_tags + arduino_output_tags
-    var_tags = var_tags + sys_var_tags
-    DI_REVERSE = StringProperty('0')
+    sys_save_var_tags = ['SYS_PASSWORD_DISABLE', 'SYS_SCREEN_BRIGHTNESS', 'SYS_DIM_BACKLIGHT', 'SYS_SCREEN_OFF_DELAY', 'SYS_SHUTDOWN_DELAY']
+    sys_var_tags = ['SYS_REVERSE_CAM_ON']
+    var_tags = arduino_input_tags + arduino_output_tags + sys_save_var_tags + sys_var_tags
+    DI_0 = StringProperty('0')
     DI_1 = StringProperty('0')
     DI_2 = StringProperty('0')
     DI_3 = StringProperty('0')
@@ -425,19 +328,25 @@ class Variables(Widget):
     SYS_SCREEN_BRIGHTNESS = StringProperty('0')
     SYS_SCREEN_OFF_DELAY = StringProperty('0')
     SYS_SHUTDOWN_DELAY = StringProperty('0')
+    SYS_REVERSE_CAM_ON = StringProperty('0')
 
     def __init__(self, **kwargs):
         super(Variables, self).__init__(**kwargs)
         self.variable_data = ['0'] * len(self.var_tags)
         self.old_variable_data = ['0'] * len(self.var_tags)
+        self.open_variables()
         self.toggle_ser_read(True)
 
     def open_variables(self):
         with open(self.variables_file, 'r') as file:
             self.sys_data_json = json.load(file)
-        self.var_value = self.app_ref.sys_data_json[self.var_tag]['var_value']
+        for tag in self.sys_save_var_tags:
+            value = self.sys_data_json[tag]
+            self.set(tag, value)
 
     def save_variables(self):
+        for tag in self.sys_save_var_tags:
+            self.sys_data_json[tag] = self.get(tag)
         with open(self.variables_file, 'w') as file:
             json.dump(self.sys_data_json, file, sort_keys=True, indent=4)
 
@@ -451,31 +360,38 @@ class Variables(Widget):
                 self.data_change = False
             else:
                 self.data_change = True
+                print('variable data')
                 print(self.variable_data)
+                if self.variable_data[13:18] <> self.old_variable_data[13:18]:
+                    self.save_variables()
+                    print('saved vars')
             self.old_variable_data = list(self.variable_data)  # 'list()' must be used, otherwise it only copies a reference to the original list
             '''except:
                 print('Serial Read Failure')
                 exit()'''
         else:
             pass
-        self.DI_REVERSE = '0' #self.variable_data[0]
+        self.DI_0 = self.variable_data[0]
         self.DI_1 = self.variable_data[1]
         self.DI_2 = self.variable_data[2]
         self.DI_3 = self.variable_data[3]
         self.DI_4 = self.variable_data[4]
         self.DI_5 = self.variable_data[5]
-        self.DI_IGNITION = '1' #self.variable_data[6]
+
         self.DO_0 = self.variable_data[7]
         self.DO_1 = self.variable_data[8]
         self.DO_2 = self.variable_data[9]
         self.DO_3 = self.variable_data[10]
         self.DO_4 = self.variable_data[11]
         self.DO_5 = self.variable_data[12]
-        self.SYS_DIM_BACKLIGHT = self.variable_data[13]
-        self.SYS_PASSWORD_DISABLE = self.variable_data[14]
-        self.SYS_SCREEN_BRIGHTNESS = self.variable_data[15]
+        self.SYS_PASSWORD_DISABLE = self.variable_data[13]
+        self.SYS_SCREEN_BRIGHTNESS = self.variable_data[14]
+        self.SYS_DIM_BACKLIGHT = self.variable_data[15]
         self.SYS_SCREEN_OFF_DELAY = self.variable_data[16]
         self.SYS_SHUTDOWN_DELAY = self.variable_data[17]
+        self.SYS_REVERSE_CAM_ON = self.variable_data[18]
+
+        self.DI_IGNITION = '1'  # self.variable_data[6]  #need to update last due to screen initialization issue
 
     def toggle_ser_read(self, state):
         if state:
@@ -502,8 +418,30 @@ class Variables(Widget):
             self.write_arduino('digital_output/' + tag + '/' + value + '/')
         if channel_type == 'SYS':
             if tag == 'SYS_DIM_BACKLIGHT':
-                self.ids.SYS_DIM_BACKLIGHT.var_value = value
-                self.app_ref.system.sys_cmd('DIM_BACKLIGHT', int(value))
+                self.sys_cmd(tag, int(value))
+
+    #SYSTEM COMMANDS#
+
+    def sys_cmd(self, command, value):
+        if command == 'SYS_DIM_BACKLIGHT':
+            if value == 1:
+                self.backlight_brightness(int(self.get('SYS_SCREEN_BRIGHTNESS'))) #need to use "get" to get around initialization issue
+            else:
+                self.backlight_brightness(255)
+        if command == 'SYS_SCREEN_BRIGHTNESS':
+            if self.SYS_DIM_BACKLIGHT == "1":
+                self.backlight_brightness(value)
+
+    def backlight_brightness(self, value):
+        print('brightness cmd')
+        print(value)
+        if not pc_mode:
+            if value > 0 and value < 256:
+                _brightness = open(os.path.join(BASE, "brightness"), "w")
+                _brightness.write(str(value))
+                _brightness.close()
+                return
+            raise TypeError("Brightness should be between 0 and 255")
 
 if __name__ == '__main__':
 
