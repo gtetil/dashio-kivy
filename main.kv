@@ -28,6 +28,7 @@
     id: main_screen
     dynamic_layout: dynamic_layout
     end_modify_button: end_modify_button.__self__
+    item_edit_popup: item_edit_popup.__self__
 
     Button:
         id: end_modify_button
@@ -45,7 +46,7 @@
         app_ref: app
         indicator_layout: indicator_layout
         button_layout: button_layout
-        item_edit_popup: item_edit_popup
+        item_edit_popup: item_edit_popup.__self__
         modify_mode: False
         on_parent: if self.parent == main_screen: self.parent.remove_widget(self)
 

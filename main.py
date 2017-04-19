@@ -35,7 +35,7 @@ import time
 BASE = "/sys/class/backlight/rpi_backlight/"
 
 debug_mode = False
-pc_mode = True
+pc_mode = False
 
 current_milli_time = lambda: int(round(time.time() * 1000))
 
@@ -268,7 +268,7 @@ class DynItem(Widget):
                 else:
                     return False
             else:
-                self.app_ref.screen_man.main_screen.ids.item_edit_popup.edit_popup(self, self, False)
+                self.app_ref.screen_man.main_screen.ids.item_edit_popup.edit_popup(self.app_ref.screen_man.main_screen.ids.item_edit_popup, self, False)
                 return False
         return super(DynItem, self).on_touch_down(touch)
 
@@ -401,7 +401,6 @@ class Variables(Widget):
                     self.variable_data[i] = self.arduino_data[i]
                 if (self.variable_data != self.old_variable_data) or self.refresh_data:
                     self.data_change = True
-                    self.scan_auto_vars()
                     print('variable data')
                     print(self.variable_data)
                     if self.variable_data[14:32] <> self.old_variable_data[14:32]:
@@ -451,31 +450,35 @@ class Variables(Widget):
 
         self.DI_IGNITION = '1'  # self.variable_data[7]  #need to update last due to screen initialization issue
 
+        self.scan_auto_vars()
+
     def scan_auto_vars(self):
-        if self.AUTOVAR_OPERATOR_1 != '':
-            if (self.AUTOVAR_OPERATOR_1 == 'if' and self.get(self.AUTOVAR_GET_VAR_1) == '1') or (self.AUTOVAR_OPERATOR_1 == 'if not' and self.get(self.AUTOVAR_GET_VAR_1) == '0'):
-                state = '1'
-            else:
-                state = '0'
-            self.set(self.AUTOVAR_SET_VAR_1, state)
-        if self.AUTOVAR_OPERATOR_2 != '':
-            if (self.AUTOVAR_OPERATOR_2 == 'if' and self.get(self.AUTOVAR_GET_VAR_2) == '1') or (self.AUTOVAR_OPERATOR_2 == 'if not' and self.get(self.AUTOVAR_GET_VAR_2) == '0'):
-                state = '1'
-            else:
-                state = '0'
-            self.set(self.AUTOVAR_SET_VAR_2, state)
-        if self.AUTOVAR_OPERATOR_3 != '':
-            if (self.AUTOVAR_OPERATOR_3 == 'if' and self.get(self.AUTOVAR_GET_VAR_3) == '1') or (self.AUTOVAR_OPERATOR_3 == 'if not' and self.get(self.AUTOVAR_GET_VAR_3) == '0'):
-                state = '1'
-            else:
-                state = '0'
-            self.set(self.AUTOVAR_SET_VAR_3, state)
-        if self.AUTOVAR_OPERATOR_4 != '':
-            if (self.AUTOVAR_OPERATOR_4 == 'if' and self.get(self.AUTOVAR_GET_VAR_4) == '1') or (self.AUTOVAR_OPERATOR_4 == 'if not' and self.get(self.AUTOVAR_GET_VAR_4) == '0'):
-                state = '1'
-            else:
-                state = '0'
-            self.set(self.AUTOVAR_SET_VAR_4, state)
+        if self.data_change:
+            if self.AUTOVAR_OPERATOR_1 != '':
+                if (self.AUTOVAR_OPERATOR_1 == 'if' and self.get(self.AUTOVAR_GET_VAR_1) == '1') or (self.AUTOVAR_OPERATOR_1 == 'if not' and self.get(self.AUTOVAR_GET_VAR_1) == '0'):
+                    state = '1'
+                else:
+                    state = '0'
+                self.set(self.AUTOVAR_SET_VAR_1, state)
+            if self.AUTOVAR_OPERATOR_2 != '':
+                if (self.AUTOVAR_OPERATOR_2 == 'if' and self.get(self.AUTOVAR_GET_VAR_2) == '1') or (self.AUTOVAR_OPERATOR_2 == 'if not' and self.get(self.AUTOVAR_GET_VAR_2) == '0'):
+                    state = '1'
+                else:
+                    state = '0'
+                self.set(self.AUTOVAR_SET_VAR_2, state)
+                print('autovar')
+            if self.AUTOVAR_OPERATOR_3 != '':
+                if (self.AUTOVAR_OPERATOR_3 == 'if' and self.get(self.AUTOVAR_GET_VAR_3) == '1') or (self.AUTOVAR_OPERATOR_3 == 'if not' and self.get(self.AUTOVAR_GET_VAR_3) == '0'):
+                    state = '1'
+                else:
+                    state = '0'
+                self.set(self.AUTOVAR_SET_VAR_3, state)
+            if self.AUTOVAR_OPERATOR_4 != '':
+                if (self.AUTOVAR_OPERATOR_4 == 'if' and self.get(self.AUTOVAR_GET_VAR_4) == '1') or (self.AUTOVAR_OPERATOR_4 == 'if not' and self.get(self.AUTOVAR_GET_VAR_4) == '0'):
+                    state = '1'
+                else:
+                    state = '0'
+                self.set(self.AUTOVAR_SET_VAR_4, state)
 
     def toggle_ser_read(self, state):
         if state:
@@ -512,6 +515,7 @@ class Variables(Widget):
                     self.sys_cmd(tag, int(value))
         except:
             print('variable.set: tag not found')
+        #self.refresh_data = True
 
     #SYSTEM COMMANDS#
 
@@ -529,12 +533,13 @@ class Variables(Widget):
         print('brightness cmd')
         print(value)
         if not pc_mode:
-            if value > 0 and value < 256:
+            if int(value) > 0 and int(value) < 256:
+                print('brightness written')
                 _brightness = open(os.path.join(BASE, "brightness"), "w")
                 _brightness.write(str(value))
                 _brightness.close()
                 return
-            raise TypeError("Brightness should be between 0 and 255")
+            #raise TypeError("Brightness should be between 0 and 255")
 
 if __name__ == '__main__':
 

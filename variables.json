@@ -1,6 +1,6 @@
 {
     "AUTOVAR_GET_VAR_1": "DO_4", 
-    "AUTOVAR_GET_VAR_2": "", 
+    "AUTOVAR_GET_VAR_2": "DI_0", 
     "AUTOVAR_GET_VAR_3": "", 
     "AUTOVAR_GET_VAR_4": "", 
     "AUTOVAR_OPERATOR_1": "if", 
@@ -8,7 +8,7 @@
     "AUTOVAR_OPERATOR_3": "", 
     "AUTOVAR_OPERATOR_4": "", 
     "AUTOVAR_SET_VAR_1": "DO_5", 
-    "AUTOVAR_SET_VAR_2": "", 
+    "AUTOVAR_SET_VAR_2": "SYS_REVERSE_CAM_ON", 
     "AUTOVAR_SET_VAR_3": "", 
     "AUTOVAR_SET_VAR_4": "", 
     "SYS_DIM_BACKLIGHT": "0", 
