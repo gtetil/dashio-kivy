@@ -60,9 +60,9 @@
         "toggle": true
     }, 
     "indicator_4": {
-        "channel": "DI_2", 
-        "enable": false, 
-        "label": "tetilx", 
+        "channel": "DI_5", 
+        "enable": true, 
+        "label": "DI_5", 
         "toggle": true
     }, 
     "indicator_5": {

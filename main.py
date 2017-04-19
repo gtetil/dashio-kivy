@@ -121,6 +121,7 @@ class DynamicLayout(Widget):
     button_layout = ObjectProperty(None)
     indicator_edit_popup = ObjectProperty(None)
     button_edit_popup = ObjectProperty(None)
+    end_modify_button = ObjectProperty(None)
     modify_mode = BooleanProperty(False)
     layout_file = 'dynamic_layout.json'
 
@@ -157,7 +158,7 @@ class DynamicLayout(Widget):
                 button = DynToggleButton(text=label, id='indicator_' + str(i))
             else:
                 button = DynButton(text=label, id='indicator_' + str(i))
-            button.bind(on_press=partial(self.item_edit_popup.edit_popup, 'button_' + str(i), indicator=False))
+            #button.bind(on_press=partial(self.item_edit_popup.edit_popup, 'button_' + str(i), indicator=False))
             button.set_properties(self, channel, enable)
             self.indicator_layout.add_widget(button)
 
@@ -169,9 +170,10 @@ class DynamicLayout(Widget):
                 button = DynToggleButton(text=label, id='button_' + str(i))
             else:
                 button = DynButton(text=label, id='button_' + str(i))
-            button.bind(on_press=partial(self.item_edit_popup.edit_popup, 'button_' + str(i), indicator=False))
+            #button.bind(on_press=partial(self.item_edit_popup.edit_popup, 'button_' + str(i), indicator=False))
             button.set_properties(self, channel, enable)
             self.button_layout.add_widget(button)
+        self.app_ref.variables.refresh_data = True
         if self.modify_mode:
             self.modify_screen()
 
@@ -181,10 +183,11 @@ class DynamicLayout(Widget):
             self.animate(indicator)
         for button in self.button_layout.children:
             self.animate(button)
-            button.output_cmd()
+            #button.output_cmd()
 
     def end_modify(self):
         self.modify_mode = False
+        #self.app_ref.variables.data_change = True
         for indicator in self.indicator_layout.children:
             Animation.cancel_all(indicator)
             indicator.background_color = 1, 1, 1, 1
@@ -255,12 +258,33 @@ class DynItem(Widget):
             self.state = 'normal'
             self.output_cmd()
 
-    def on_press(self):
-        self.output_cmd()
+    def on_touch_down(self, touch):
+        if self.collide_point(*touch.pos):
+            if not self.dynamic_layout.modify_mode:
+                if self.enable:
+                    self._do_press()
+                    self.output_cmd()
+                    return True
+                else:
+                    return False
+            else:
+                self.app_ref.screen_man.main_screen.ids.item_edit_popup.edit_popup(self, self, False)
+                return False
+        return super(DynItem, self).on_touch_down(touch)
 
-    def on_release(self):
-        if not self.toggle:
-            self.output_cmd()
+    def on_touch_up(self, touch):
+        if self.collide_point(*touch.pos):
+            if not self.dynamic_layout.modify_mode and not self.toggle:
+                if self.enable:
+                    self._do_release()
+                    self.output_cmd()
+                    return True
+                else:
+                    return False
+            else:
+                self.app_ref.screen_man.main_screen.ids.item_edit_popup.edit_popup(self, self, False)
+                return False
+        return super(DynItem, self).on_touch_down(touch)
 
     def output_cmd(self):
         if not self.dynamic_layout.modify_mode and self.enable and self.app_ref.variables.DI_IGNITION:
@@ -269,8 +293,7 @@ class DynItem(Widget):
             else:
                 state = '1'
             self.app_ref.variables.set(self.channel, state)
-        else:
-            self.state = 'normal'
+            self.app_ref.variables.refresh_data = True
 
 class DynToggleButton(DynItem, ToggleButton):
     pass
@@ -305,14 +328,16 @@ class MainApp(App):
 class Variables(Widget):
     app_ref = ObjectProperty(None)
     data_change = BooleanProperty(False)
+    refresh_data = BooleanProperty(False)
     variables_file = 'variables.json'
     arduino_input_tags = ['DI_0', 'DI_1', 'DI_2', 'DI_3', 'DI_4', 'DI_5', 'DI_IGNITION']
     arduino_output_tags = ['DO_0', 'DO_1', 'DO_2', 'DO_3', 'DO_4', 'DO_5']
     sys_var_tags = ['SYS_REVERSE_CAM_ON']
     sys_save_var_tags = ['SYS_PASSWORD_DISABLE', 'SYS_SCREEN_BRIGHTNESS', 'SYS_DIM_BACKLIGHT', 'SYS_SCREEN_OFF_DELAY', 'SYS_SHUTDOWN_DELAY']
     auto_var_tags = ['AUTOVAR_OPERATOR_1', 'AUTOVAR_GET_VAR_1', 'AUTOVAR_SET_VAR_1', 'AUTOVAR_OPERATOR_2', 'AUTOVAR_GET_VAR_2', 'AUTOVAR_SET_VAR_2', 'AUTOVAR_OPERATOR_3', 'AUTOVAR_GET_VAR_3', 'AUTOVAR_SET_VAR_3', 'AUTOVAR_OPERATOR_4', 'AUTOVAR_GET_VAR_4', 'AUTOVAR_SET_VAR_4']
-    var_tags = arduino_input_tags + arduino_output_tags + sys_var_tags + sys_save_var_tags + auto_var_tags + ['']
+    var_tags = [''] + arduino_input_tags + arduino_output_tags + sys_var_tags + sys_save_var_tags + auto_var_tags
     save_var_tags = sys_save_var_tags + auto_var_tags
+    display_var_tags = [''] + arduino_input_tags + arduino_output_tags + sys_var_tags + sys_save_var_tags
     DI_0 = StringProperty('0')
     DI_1 = StringProperty('0')
     DI_2 = StringProperty('0')
@@ -370,87 +395,87 @@ class Variables(Widget):
 
     def update_data(self, dt):
         if not debug_mode:
-            #try:
-            self.arduino_data = ser.readline().rstrip().split(',')
-            for i in range(7):
-                self.variable_data[i] = self.arduino_data[i]
-            if self.variable_data == self.old_variable_data:
-                self.data_change = False
-            else:
-                self.data_change = True
-                print('variable data')
-                print(self.variable_data)
-                if self.variable_data[13:31] <> self.old_variable_data[13:31]:
-                    self.save_variables()
-                    print('saved vars')
-            self.old_variable_data = list(self.variable_data)  # 'list()' must be used, otherwise it only copies a reference to the original list
-            '''except:
-                print('Serial Read Failure')
-                exit()'''
+            try:
+                self.arduino_data = ser.readline().rstrip().split(',')
+                for i in range(1,8):
+                    self.variable_data[i] = self.arduino_data[i]
+                if (self.variable_data != self.old_variable_data) or self.refresh_data:
+                    self.data_change = True
+                    self.scan_auto_vars()
+                    print('variable data')
+                    print(self.variable_data)
+                    if self.variable_data[14:32] <> self.old_variable_data[14:32]:
+                        self.save_variables()
+                        print('saved vars')
+                    self.refresh_data = False
+                else:
+                    self.data_change = False
+                self.old_variable_data = list(self.variable_data)  # 'list()' must be used, otherwise it only copies a reference to the original list
+            except:
+                print('Serial Read Failure, or possibly some other failure')
+                exit()
         else:
             pass
-        self.DI_0 = self.variable_data[0]
-        self.DI_1 = self.variable_data[1]
-        self.DI_2 = self.variable_data[2]
-        self.DI_3 = self.variable_data[3]
-        self.DI_4 = self.variable_data[4]
-        self.DI_5 = self.variable_data[5]
+        #skip index zero for blank selection
+        self.DI_0 = self.variable_data[1]
+        self.DI_1 = self.variable_data[2]
+        self.DI_2 = self.variable_data[3]
+        self.DI_3 = self.variable_data[4]
+        self.DI_4 = self.variable_data[5]
+        self.DI_5 = self.variable_data[6]
 
-        self.DO_0 = self.variable_data[7]
-        self.DO_1 = self.variable_data[8]
-        self.DO_2 = self.variable_data[9]
-        self.DO_3 = self.variable_data[10]
-        self.DO_4 = self.variable_data[11]
-        self.DO_5 = self.variable_data[12]
-        self.SYS_REVERSE_CAM_ON = self.variable_data[13]
-        self.SYS_PASSWORD_DISABLE = self.variable_data[14]
-        self.SYS_SCREEN_BRIGHTNESS = self.variable_data[15]
-        self.SYS_DIM_BACKLIGHT = self.variable_data[16]
-        self.SYS_SCREEN_OFF_DELAY = self.variable_data[17]
-        self.SYS_SHUTDOWN_DELAY = self.variable_data[18]
-        self.AUTOVAR_OPERATOR_1 = self.variable_data[19]
-        self.AUTOVAR_GET_VAR_1 = self.variable_data[20]
-        self.AUTOVAR_SET_VAR_1 = self.variable_data[21]
-        self.AUTOVAR_OPERATOR_2 = self.variable_data[22]
-        self.AUTOVAR_GET_VAR_2 = self.variable_data[23]
-        self.AUTOVAR_SET_VAR_2 = self.variable_data[24]
-        self.AUTOVAR_OPERATOR_3 = self.variable_data[25]
-        self.AUTOVAR_GET_VAR_3 = self.variable_data[26]
-        self.AUTOVAR_SET_VAR_3 = self.variable_data[27]
-        self.AUTOVAR_OPERATOR_4 = self.variable_data[28]
-        self.AUTOVAR_GET_VAR_4 = self.variable_data[29]
-        self.AUTOVAR_SET_VAR_4 = self.variable_data[30]
+        self.DO_0 = self.variable_data[8]
+        self.DO_1 = self.variable_data[9]
+        self.DO_2 = self.variable_data[10]
+        self.DO_3 = self.variable_data[11]
+        self.DO_4 = self.variable_data[12]
+        self.DO_5 = self.variable_data[13]
+        self.SYS_REVERSE_CAM_ON = self.variable_data[14]
+        self.SYS_PASSWORD_DISABLE = self.variable_data[15]
+        self.SYS_SCREEN_BRIGHTNESS = self.variable_data[16]
+        self.SYS_DIM_BACKLIGHT = self.variable_data[17]
+        self.SYS_SCREEN_OFF_DELAY = self.variable_data[18]
+        self.SYS_SHUTDOWN_DELAY = self.variable_data[19]
+        self.AUTOVAR_OPERATOR_1 = self.variable_data[20]
+        self.AUTOVAR_GET_VAR_1 = self.variable_data[21]
+        self.AUTOVAR_SET_VAR_1 = self.variable_data[22]
+        self.AUTOVAR_OPERATOR_2 = self.variable_data[23]
+        self.AUTOVAR_GET_VAR_2 = self.variable_data[24]
+        self.AUTOVAR_SET_VAR_2 = self.variable_data[25]
+        self.AUTOVAR_OPERATOR_3 = self.variable_data[26]
+        self.AUTOVAR_GET_VAR_3 = self.variable_data[27]
+        self.AUTOVAR_SET_VAR_3 = self.variable_data[28]
+        self.AUTOVAR_OPERATOR_4 = self.variable_data[29]
+        self.AUTOVAR_GET_VAR_4 = self.variable_data[30]
+        self.AUTOVAR_SET_VAR_4 = self.variable_data[31]
 
-        self.DI_IGNITION = '1'  # self.variable_data[6]  #need to update last due to screen initialization issue
-
-        self.scan_auto_vars()
+        self.DI_IGNITION = '1'  # self.variable_data[7]  #need to update last due to screen initialization issue
 
     def scan_auto_vars(self):
-        if self.data_change:
-            if self.AUTOVAR_OPERATOR_1 != '':
-                if (self.AUTOVAR_OPERATOR_1 == 'if' and self.get(self.AUTOVAR_GET_VAR_1) == '1') or (self.AUTOVAR_OPERATOR_1 == 'if not' and self.get(self.AUTOVAR_GET_VAR_1) == '0'):
-                    state = '1'
-                else:
-                    state = '0'
-                self.set(self.AUTOVAR_SET_VAR_1, state)
-            if self.AUTOVAR_OPERATOR_2 != '':
-                if (self.AUTOVAR_OPERATOR_2 == 'if' and self.get(self.AUTOVAR_GET_VAR_2) == '1') or (self.AUTOVAR_OPERATOR_2 == 'if not' and self.get(self.AUTOVAR_GET_VAR_2) == '0'):
-                    state = '1'
-                else:
-                    state = '0'
-                self.set(self.AUTOVAR_SET_VAR_2, state)
-            if self.AUTOVAR_OPERATOR_3 != '':
-                if (self.AUTOVAR_OPERATOR_3 == 'if' and self.get(self.AUTOVAR_GET_VAR_3) == '1') or (self.AUTOVAR_OPERATOR_3 == 'if not' and self.get(self.AUTOVAR_GET_VAR_3) == '0'):
-                    state = '1'
-                else:
-                    state = '0'
-                self.set(self.AUTOVAR_SET_VAR_3, state)
-            if self.AUTOVAR_OPERATOR_4 != '':
-                if (self.AUTOVAR_OPERATOR_4 == 'if' and self.get(self.AUTOVAR_GET_VAR_4) == '1') or (self.AUTOVAR_OPERATOR_4 == 'if not' and self.get(self.AUTOVAR_GET_VAR_4) == '0'):
-                    state = '1'
-                else:
-                    state = '0'
-                self.set(self.AUTOVAR_SET_VAR_4, state)
+        if self.AUTOVAR_OPERATOR_1 != '':
+            if (self.AUTOVAR_OPERATOR_1 == 'if' and self.get(self.AUTOVAR_GET_VAR_1) == '1') or (self.AUTOVAR_OPERATOR_1 == 'if not' and self.get(self.AUTOVAR_GET_VAR_1) == '0'):
+                state = '1'
+            else:
+                state = '0'
+            self.set(self.AUTOVAR_SET_VAR_1, state)
+        if self.AUTOVAR_OPERATOR_2 != '':
+            if (self.AUTOVAR_OPERATOR_2 == 'if' and self.get(self.AUTOVAR_GET_VAR_2) == '1') or (self.AUTOVAR_OPERATOR_2 == 'if not' and self.get(self.AUTOVAR_GET_VAR_2) == '0'):
+                state = '1'
+            else:
+                state = '0'
+            self.set(self.AUTOVAR_SET_VAR_2, state)
+        if self.AUTOVAR_OPERATOR_3 != '':
+            if (self.AUTOVAR_OPERATOR_3 == 'if' and self.get(self.AUTOVAR_GET_VAR_3) == '1') or (self.AUTOVAR_OPERATOR_3 == 'if not' and self.get(self.AUTOVAR_GET_VAR_3) == '0'):
+                state = '1'
+            else:
+                state = '0'
+            self.set(self.AUTOVAR_SET_VAR_3, state)
+        if self.AUTOVAR_OPERATOR_4 != '':
+            if (self.AUTOVAR_OPERATOR_4 == 'if' and self.get(self.AUTOVAR_GET_VAR_4) == '1') or (self.AUTOVAR_OPERATOR_4 == 'if not' and self.get(self.AUTOVAR_GET_VAR_4) == '0'):
+                state = '1'
+            else:
+                state = '0'
+            self.set(self.AUTOVAR_SET_VAR_4, state)
 
     def toggle_ser_read(self, state):
         if state:

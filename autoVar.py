@@ -11,15 +11,19 @@ Builder.load_string("""
     spacing: 5
 
     Spinner:
-        size_hint: .15, 1
+        size_hint: .13, 1
         text: root.operator
+        option_cls: Factory.get("SpinnerLabel")
+        font_size: '13sp'
         values: ['', 'if', 'if not']
         on_text: app.variables.set(root.operator_text, self.text)
 
     Spinner:
-        size_hint: .37, 1
+        size_hint: .38, 1
         text: root.get_var
-        values: app.variables.var_tags
+        option_cls: Factory.get("SpinnerLabel")
+        font_size: '13sp'
+        values: app.variables.display_var_tags
         on_text: app.variables.set(root.get_var_text, self.text)
 
     Label:
@@ -27,9 +31,11 @@ Builder.load_string("""
         size_hint: .1, 1
 
     Spinner:
-        size_hint: .37, 1
+        size_hint: .38, 1
         text: root.set_var
-        values: app.variables.var_tags
+        option_cls: Factory.get("SpinnerLabel")
+        font_size: '13sp'
+        values: app.variables.display_var_tags
         on_text: app.variables.set(root.set_var_text, self.text)
 
 """)

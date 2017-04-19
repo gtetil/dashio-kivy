@@ -1,4 +1,5 @@
 #:kivy 1.9.1
+#:import Factory kivy.factory.Factory
 
 <ScreenManagement>:
     id: _sm
@@ -6,6 +7,7 @@
     reverse_input: int(app.variables.SYS_REVERSE_CAM_ON)
     app_ref: app
     main_screen: main_screen
+
     Screen:
         name: 'off_screen'
     MainScreen:
@@ -25,10 +27,7 @@
 <MainScreen>:
     id: main_screen
     dynamic_layout: dynamic_layout
-    screen_brightness_slider: screen_brightness_slider
-    screen_off_delay_input: screen_off_delay_input
-    shutdown_delay_input: shutdown_delay_input
-    password_disable_switch: password_disable_switch
+    end_modify_button: end_modify_button.__self__
 
     Button:
         id: end_modify_button
@@ -94,7 +93,7 @@
                     BoxLayout:
                         id: backlight_layout
                         orientation: 'vertical'
-                        size_hint_x: 0.2
+                        size_hint_x: 0.15
                         padding: 10
                         spacing: 5
 
@@ -118,8 +117,8 @@
 
                     BoxLayout:
                         orientation: 'vertical'
-                        size_hint_x: 0.2
-                        padding: 10
+                        size_hint_x: 0.15
+                        padding: 0, 10, 0, 0
                         spacing: 15
 
                         Button:
@@ -128,7 +127,7 @@
                             halign: 'center'
                             valign: 'middle'
                             size_hint_y: 0.15
-                            on_press: if not dynamic_layout.modify_mode: enter_modify_popup.open(); app.variables.toggle_ser_read(False)
+                            on_release: if not dynamic_layout.modify_mode: dynamic_layout.build_layout(); dynamic_layout.modify_screen(); main_tabbed_panel.switch_to(home_tab); root.add_widget(end_modify_button); app.variables.toggle_ser_read(False)
 
                         BoxLayout:
                             orientation: 'vertical'
@@ -194,7 +193,7 @@
 
                     BoxLayout:
                         orientation: 'vertical'
-                        size_hint_x: 0.6
+                        size_hint_x: 0.7
                         padding: 30, 10, 0, 0
                         spacing: 5
 
@@ -337,8 +336,10 @@
                 Spinner:
                     id: channel_spinner
                     size_hint: .7, 1
+                    option_cls: Factory.get("SpinnerLabel")
+                    font_size: '13sp'
                     text: 'DI_0'
-                    values: app.variables.var_tags
+                    values: app.variables.display_var_tags
 
             TextInput:
                 id: label_input
@@ -352,12 +353,15 @@
 
                 Button:
                     text: 'OK'
-                    on_press: item_edit_popup.save_item()
+                    on_release: item_edit_popup.save_item()
 
                 Button:
                     text: 'Cancel'
-                    on_press: item_edit_popup.dismiss()
+                    on_release: item_edit_popup.dismiss()
 
+
+<SpinnerLabel@SpinnerOption>:
+    font_size: '13sp'
 
 <DynToggleButton, DynButton>:
     text_size: self.size
