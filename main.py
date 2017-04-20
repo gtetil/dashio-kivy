@@ -374,8 +374,11 @@ class Variables(Widget):
         super(Variables, self).__init__(**kwargs)
         self.variable_data = ['0'] * len(self.var_tags)
         self.old_variable_data = ['0'] * len(self.var_tags)
+        self.arduino_data_len = (len(self.arduino_input_tags) + 1)
+        self.arduino_data = ['0'] * self.arduino_data_len
         self.open_variables()
-        self.toggle_ser_read(True)
+        self.toggle_update_clock(True)
+        Clock.schedule_interval(self.read_arduino, 0.05)
 
     def open_variables(self):
         with open(self.variables_file, 'r') as file:
@@ -393,28 +396,35 @@ class Variables(Widget):
         with open(self.variables_file, 'w') as file:
             json.dump(self.sys_data_json, file, sort_keys=True, indent=4)
 
-    def update_data(self, dt):
+    def read_arduino(self, dt):
         if not debug_mode:
             try:
-                self.arduino_data = ser.readline().rstrip().split(',')
-                for i in range(1,8):
-                    self.variable_data[i] = self.arduino_data[i]
-                if (self.variable_data != self.old_variable_data) or self.refresh_data:
-                    self.data_change = True
-                    print('variable data')
-                    print(self.variable_data)
-                    if self.variable_data[14:32] <> self.old_variable_data[14:32]:
-                        self.save_variables()
-                        print('saved vars')
-                    self.refresh_data = False
-                else:
-                    self.data_change = False
-                self.old_variable_data = list(self.variable_data)  # 'list()' must be used, otherwise it only copies a reference to the original list
+                #time = current_milli_time()
+                serial_data = ser.readline().rstrip().split(',')
+                if len(serial_data) == self.arduino_data_len:
+                    self.arduino_data = serial_data
+                #print(current_milli_time() - time)
             except:
                 print('Serial Read Failure, or possibly some other failure')
                 exit()
         else:
             pass
+
+    def update_data(self, dt):
+        for i in range(1, 8):
+            self.variable_data[i] = self.arduino_data[i]
+        if (self.variable_data != self.old_variable_data) or self.refresh_data:
+            self.data_change = True
+            print('variable data')
+            print(self.variable_data)
+            if self.variable_data[14:32] <> self.old_variable_data[14:32]:
+                self.save_variables()
+                print('saved vars')
+            self.refresh_data = False
+        else:
+            self.data_change = False
+        self.old_variable_data = list(self.variable_data)  # 'list()' must be used, otherwise it only copies a reference to the original list
+
         #skip index zero for blank selection
         self.DI_0 = self.variable_data[1]
         self.DI_1 = self.variable_data[2]
@@ -480,7 +490,7 @@ class Variables(Widget):
                     state = '0'
                 self.set(self.AUTOVAR_SET_VAR_4, state)
 
-    def toggle_ser_read(self, state):
+    def toggle_update_clock(self, state):
         if state:
             self.read_clock = Clock.schedule_interval(self.update_data, 0)
         else:
@@ -501,7 +511,7 @@ class Variables(Widget):
 
     def write_arduino(self, command):
         ser.write(command)
-        time.sleep(.1)
+        #time.sleep(.1)
 
     def set(self, tag, value):
         try:
@@ -546,9 +556,9 @@ if __name__ == '__main__':
     if not debug_mode:
         try:
             if not pc_mode:
-                ser = serial.Serial('/dev/ttyUSB0', 115200)
+                ser = serial.Serial('/dev/ttyUSB0', 115200, timeout=0)
             else:
-                ser = serial.Serial('COM6', 115200)
+                ser = serial.Serial('COM6', 115200, timeout=0)
         except:
             print "Failed to connect"
             exit()

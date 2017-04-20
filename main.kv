@@ -32,7 +32,7 @@
 
     Button:
         id: end_modify_button
-        on_press: dynamic_layout.end_modify(); self.parent.remove_widget(self); app.variables.toggle_ser_read(True)
+        on_press: dynamic_layout.end_modify(); self.parent.remove_widget(self); app.variables.toggle_update_clock(True)
         text: 'End Screen Modify'
         color: 0.88, 0.72, 0.1, 1
         size_hint: None, None
@@ -128,7 +128,7 @@
                             halign: 'center'
                             valign: 'middle'
                             size_hint_y: 0.15
-                            on_release: if not dynamic_layout.modify_mode: dynamic_layout.build_layout(); dynamic_layout.modify_screen(); main_tabbed_panel.switch_to(home_tab); root.add_widget(end_modify_button); app.variables.toggle_ser_read(False)
+                            on_release: if not dynamic_layout.modify_mode: dynamic_layout.build_layout(); dynamic_layout.modify_screen(); main_tabbed_panel.switch_to(home_tab); root.add_widget(end_modify_button); app.variables.toggle_update_clock(False)
 
                         BoxLayout:
                             orientation: 'vertical'
@@ -274,7 +274,7 @@
 
                     Button:
                         text: 'Cancel'
-                        on_release: enter_modify_popup.dismiss(); app.variables.toggle_ser_read(True)
+                        on_release: enter_modify_popup.dismiss(); app.variables.toggle_update_clock(True)
 
 
     ScreenItemEditPopup:
