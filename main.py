@@ -1,5 +1,5 @@
 import kivy
-kivy.require('1.9.1') # replace with your current kivy version !
+kivy.require('1.9.2') # replace with your current kivy version !
 
 from kivy.config import Config
 Config.set('kivy', 'keyboard_mode', 'systemanddock')
@@ -23,6 +23,9 @@ from kivy.uix.popup import Popup
 from kivy.core.window import Window
 from kivy.animation import Animation
 
+from kivymd.theming import ThemeManager
+from kivymd.navigationdrawer import NavigationLayout
+
 import json
 from functools import partial
 import autoVar
@@ -34,10 +37,13 @@ import os
 import time
 BASE = "/sys/class/backlight/rpi_backlight/"
 
-debug_mode = False
-pc_mode = False
+debug_mode = True
+pc_mode = True
 
 current_milli_time = lambda: int(round(time.time() * 1000))
+
+class NavLayout(NavigationLayout):
+    pass
 
 class ScreenManagement(ScreenManager):
     passcode = '1234'
@@ -52,7 +58,6 @@ class ScreenManagement(ScreenManager):
     def __init__(self,**kwargs):
         super (ScreenManagement,self).__init__(**kwargs)
         self.transition = NoTransition()
-        self.main_screen.dynamic_layout.build_layout()
 
     def on_ignition_input(self, instance, state):
         if state == 1:
@@ -115,15 +120,19 @@ class ScreenManagement(ScreenManager):
 class MainScreen(Screen):
     pass
 
+class SettingsScreen(Screen):
+    pass
+
 class DynamicLayout(Widget):
     app_ref = ObjectProperty(None)
-    indicator_layout = ObjectProperty(None)
-    button_layout = ObjectProperty(None)
-    indicator_edit_popup = ObjectProperty(None)
-    button_edit_popup = ObjectProperty(None)
-    end_modify_button = ObjectProperty(None)
     modify_mode = BooleanProperty(False)
     layout_file = 'dynamic_layout.json'
+
+    def main_screen_ref(self, main_screen):
+        self.indicator_layout = main_screen.ids.indicator_layout
+        self.button_layout = main_screen.ids.button_layout
+        self.item_edit_popup = main_screen.ids.item_edit_popup
+
 
     def save_layout(self):
         data = {}
@@ -145,6 +154,7 @@ class DynamicLayout(Widget):
             json.dump(data, file, sort_keys=True, indent=4)
 
     def build_layout(self):
+        print('build_layout')
         self.indicator_layout.clear_widgets()
         self.button_layout.clear_widgets()
         with open(self.layout_file, 'r') as file:
@@ -159,7 +169,7 @@ class DynamicLayout(Widget):
             else:
                 button = DynButton(text=label, id='indicator_' + str(i))
             #button.bind(on_press=partial(self.item_edit_popup.edit_popup, 'button_' + str(i), indicator=False))
-            button.set_properties(self, channel, enable)
+            button.set_properties(self, channel, enable, self.item_edit_popup)
             self.indicator_layout.add_widget(button)
 
             label = data['button_' + str(i)]['label']
@@ -171,7 +181,7 @@ class DynamicLayout(Widget):
             else:
                 button = DynButton(text=label, id='button_' + str(i))
             #button.bind(on_press=partial(self.item_edit_popup.edit_popup, 'button_' + str(i), indicator=False))
-            button.set_properties(self, channel, enable)
+            button.set_properties(self, channel, enable, self.item_edit_popup)
             self.button_layout.add_widget(button)
         self.app_ref.variables.refresh_data = True
         if self.modify_mode:
@@ -221,6 +231,7 @@ class ScreenItemEditPopup(Popup):
             self.toggle_layout.disabled = indicator
             self.open()
 
+
     def save_item(self):
         self.item.text = self.label_input.text
         self.item.toggle = self.toggle_check.active
@@ -247,10 +258,11 @@ class DynItem(Widget):
         else:
             self.state = 'normal'
 
-    def set_properties(self, ref, channel, enable):
+    def set_properties(self, ref, channel, enable, item_edit_popup):
         self.dynamic_layout = ref
         self.channel = str(channel)
         self.enable = enable
+        self.item_edit_popup = item_edit_popup
         ChangeItemBackground(self)
 
     def on_ignition_input(self, instance, state):
@@ -268,7 +280,7 @@ class DynItem(Widget):
                 else:
                     return False
             else:
-                self.app_ref.screen_man.main_screen.ids.item_edit_popup.edit_popup(self.app_ref.screen_man.main_screen.ids.item_edit_popup, self, False)
+                self.item_edit_popup.edit_popup(self.item_edit_popup, self, False)
                 return False
         return super(DynItem, self).on_touch_down(touch)
 
@@ -282,7 +294,7 @@ class DynItem(Widget):
                 else:
                     return False
             else:
-                self.app_ref.screen_man.main_screen.ids.item_edit_popup.edit_popup(self, self, False)
+                self.item_edit_popup.edit_popup(self.item_edit_popup, self, False)
                 return False
         return super(DynItem, self).on_touch_down(touch)
 
@@ -316,11 +328,17 @@ class CameraScreen(Screen):
     pass
 
 class MainApp(App):
+    theme_cls = ThemeManager()
+    previous_date = ObjectProperty()
 
     def build(self):
+        self.theme_cls.theme_style = 'Dark'
         self.variables = Variables()
+        self.dynamic_layout = DynamicLayout()
         self.screen_man = ScreenManagement()
-        return self.screen_man
+        self.nav_layout = NavLayout()
+        self.nav_layout.add_widget(self.screen_man)
+        return self.nav_layout
 
     def exit_app(self):
         self.stop()

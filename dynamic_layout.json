@@ -9,7 +9,7 @@
         "channel": "DO_1", 
         "enable": true, 
         "label": "DO_1", 
-        "toggle": false
+        "toggle": true
     }, 
     "button_2": {
         "channel": "DI_1", 

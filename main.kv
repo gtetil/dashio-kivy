@@ -1,291 +1,118 @@
-#:kivy 1.9.1
+#:kivy 1.9.2
 #:import Factory kivy.factory.Factory
+#:import Toolbar kivymd.toolbar.Toolbar
+#:import ThemeManager kivymd.theming.ThemeManager
+#:import MDNavigationDrawer kivymd.navigationdrawer.MDNavigationDrawer
+#:import NavigationLayout kivymd.navigationdrawer.NavigationLayout
+#:import NavigationDrawerDivider kivymd.navigationdrawer.NavigationDrawerDivider
+#:import NavigationDrawerToolbar kivymd.navigationdrawer.NavigationDrawerToolbar
+#:import NavigationDrawerSubheader kivymd.navigationdrawer.NavigationDrawerSubheader
+#:import MDCheckbox kivymd.selectioncontrols.MDCheckbox
+#:import MDSwitch kivymd.selectioncontrols.MDSwitch
+#:import MDList kivymd.list.MDList
+#:import OneLineListItem kivymd.list.OneLineListItem
+#:import TwoLineListItem kivymd.list.TwoLineListItem
+#:import ThreeLineListItem kivymd.list.ThreeLineListItem
+#:import OneLineAvatarListItem kivymd.list.OneLineAvatarListItem
+#:import OneLineIconListItem kivymd.list.OneLineIconListItem
+#:import OneLineAvatarIconListItem kivymd.list.OneLineAvatarIconListItem
+#:import MDTextField kivymd.textfields.MDTextField
+#:import MDSpinner kivymd.spinner.MDSpinner
+#:import MDCard kivymd.card.MDCard
+#:import MDSeparator kivymd.card.MDSeparator
+#:import MDDropdownMenu kivymd.menu.MDDropdownMenu
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+#:import colors kivymd.color_definitions.colors
+#:import SmartTile kivymd.grid.SmartTile
+#:import MDSlider kivymd.slider.MDSlider
+#:import MDTabbedPanel kivymd.tabs.MDTabbedPanel
+#:import MDTab kivymd.tabs.MDTab
+#:import MDProgressBar kivymd.progressbar.MDProgressBar
+#:import MDAccordion kivymd.accordion.MDAccordion
+#:import MDAccordionItem kivymd.accordion.MDAccordionItem
+#:import MDAccordionSubItem kivymd.accordion.MDAccordionSubItem
+#:import MDThemePicker kivymd.theme_picker.MDThemePicker
+#:import MDBottomNavigation kivymd.tabs.MDBottomNavigation
+#:import MDBottomNavigationItem kivymd.tabs.MDBottomNavigationItem
+
+<NavLayout>:
+    id: nav_layout
+    MDNavigationDrawer:
+        id: nav_drawer
+        NavigationDrawerToolbar:
+            title: "Menu"
+        NavigationDrawerIconButton:
+            icon: 'checkbox-blank-circle'
+            text: "Main"
+            on_release: app.screen_man.current = 'main_screen'
+            on_release: if app.dynamic_layout.modify_mode: app.dynamic_layout.end_modify(); app.variables.toggle_update_clock(True)
+        NavigationDrawerIconButton:
+            icon: 'checkbox-blank-circle'
+            text: "Modify Main Screen"
+            on_release: app.screen_man.current = 'main_screen'
+            on_release: if not app.dynamic_layout.modify_mode: app.dynamic_layout.build_layout(); app.dynamic_layout.modify_screen(); app.variables.toggle_update_clock(False)
+        NavigationDrawerIconButton:
+            icon: 'checkbox-blank-circle'
+            text: "Settings"
+            on_release: app.screen_man.current = 'settings_screen'
 
 <ScreenManagement>:
-    id: _sm
     ignition_input: int(app.variables.DI_IGNITION)
     reverse_input: int(app.variables.SYS_REVERSE_CAM_ON)
     app_ref: app
-    main_screen: main_screen
 
     Screen:
         name: 'off_screen'
     MainScreen:
         name: 'main_screen'
-        id: main_screen
-        sm: _sm
+    SettingsScreen:
+        name: 'settings_screen'
     CameraScreen:
         name: 'camera_screen'
-        sm: _sm
     PasscodeScreen:
         name: 'passcode_screen'
-        sm: _sm
 
 <Variables>:
     app_ref: app
 
+<DynamicLayout>:
+    app_ref: app
+
 <MainScreen>:
     id: main_screen
-    dynamic_layout: dynamic_layout
-    end_modify_button: end_modify_button.__self__
+    app_ref: app
     item_edit_popup: item_edit_popup.__self__
+    on_parent: app.dynamic_layout.main_screen_ref(self); app.dynamic_layout.build_layout()
 
-    Button:
-        id: end_modify_button
-        on_press: dynamic_layout.end_modify(); self.parent.remove_widget(self); app.variables.toggle_update_clock(True)
-        text: 'End Screen Modify'
-        color: 0.88, 0.72, 0.1, 1
-        size_hint: None, None
-        size: 150, 42
-        right: root.right - 226
-        top: root.top - 2
-        on_parent: if self.parent == main_screen: self.parent.remove_widget(self)
+    BoxLayout:
+        id: main_layout
+        orientation: 'horizontal'
+        padding: 10
 
-    DynamicLayout:
-        id: dynamic_layout
-        app_ref: app
-        indicator_layout: indicator_layout
-        button_layout: button_layout
-        item_edit_popup: item_edit_popup.__self__
-        modify_mode: False
-        on_parent: if self.parent == main_screen: self.parent.remove_widget(self)
+        GridLayout:
+            id: indicator_layout
+            cols: 1
+            spacing: 5
+            padding: 5
+            size_hint_x: 0.25
 
-    TabbedPanel:
-        id: main_tabbed_panel
-        do_default_tab: False
-
-        TabbedPanelItem:
-            text: 'Home'
-            id: home_tab
-
-            BoxLayout:
-                id: main_layout
-                orientation: 'horizontal'
-                padding: 10
-
-                GridLayout:
-                    id: indicator_layout
-                    cols: 1
-                    spacing: 5
-                    padding: 5
-                    size_hint_x: 0.25
-
-                GridLayout:
-                    id: button_layout
-                    cols: 3
-                    rows: 2
-                    spacing: 5
-                    padding: 5
-                    size_hint_x: 0.75
-
-        TabbedPanelItem:
-            text: 'Settings'
-            id: settings_tab
-
-            RelativeLayout:
-                id: settings_layout
-
-                BoxLayout:
-                    id: settings_box_layout
-                    orientation: 'horizontal'
-                    padding: 10
-                    spacing: 5
-
-                    BoxLayout:
-                        id: backlight_layout
-                        orientation: 'vertical'
-                        size_hint_x: 0.15
-                        padding: 10
-                        spacing: 5
-
-                        Label:
-                            text: 'Screen Dim\nBrightness'
-                            markup: True
-                            size_hint_y: 0.1
-                            text_size: self.size
-                            halign: 'center'
-                            valign: 'middle'
-
-                        Slider:
-                            id: screen_brightness_slider
-                            on_touch_move: app.variables.sys_cmd('SYS_SCREEN_BRIGHTNESS', str(int(self.value)))
-                            on_touch_up: app.variables.set('SYS_SCREEN_BRIGHTNESS', str(int(self.value)))
-                            orientation: 'vertical'
-                            min: 20
-                            max: 200
-                            value: int(app.variables.SYS_SCREEN_BRIGHTNESS)
-                            size_hint_y: 0.9
-
-                    BoxLayout:
-                        orientation: 'vertical'
-                        size_hint_x: 0.15
-                        padding: 0, 10, 0, 0
-                        spacing: 15
-
-                        Button:
-                            id: modify_screen
-                            text: 'Modify\n Main Screen'
-                            halign: 'center'
-                            valign: 'middle'
-                            size_hint_y: 0.15
-                            on_release: if not dynamic_layout.modify_mode: dynamic_layout.build_layout(); dynamic_layout.modify_screen(); main_tabbed_panel.switch_to(home_tab); root.add_widget(end_modify_button); app.variables.toggle_update_clock(False)
-
-                        BoxLayout:
-                            orientation: 'vertical'
-                            size_hint_y: 0.17
-                            padding: 5, 0, 0, 0
-
-                            Label:
-                                text: 'Screen Off Delay:'
-
-                            BoxLayout:
-                                orientation: 'horizontal'
-
-                                TextInput:
-                                    id: screen_off_delay_input
-                                    on_text: app.variables.set('SYS_SCREEN_OFF_DELAY', self.text)
-                                    text: app.variables.SYS_SCREEN_OFF_DELAY
-                                    size_hint_x: 0.4
-                                    multiline: False
-
-                                Label:
-                                    text: 'seconds'
-                                    size_hint_x: 0.6
-
-                        BoxLayout:
-                            orientation: 'vertical'
-                            size_hint_y: 0.17
-                            padding: 5, 0, 0, 0
-
-                            Label:
-                                text: 'Shutdown Delay:'
-
-                            BoxLayout:
-                                orientation: 'horizontal'
-
-                                TextInput:
-                                    id: shutdown_delay_input
-                                    on_text: app.variables.set('SYS_SHUTDOWN_DELAY', self.text)
-                                    text: app.variables.SYS_SHUTDOWN_DELAY
-                                    size_hint_x: 0.4
-                                    multiline: False
-
-                                Label:
-                                    text: 'seconds'
-                                    size_hint_x: 0.6
-
-                        BoxLayout:
-                            orientation: 'vertical'
-                            size_hint_y: 0.17
-                            padding: 5, 0, 0, 0
-
-                            Label:
-                                text: 'Password Disable:'
-
-                            Switch:
-                                id: password_disable_switch
-                                active: True if app.variables.SYS_PASSWORD_DISABLE == '1' else False
-                                var_state: '1' if self.active else '0'
-                                on_active: app.variables.set('SYS_PASSWORD_DISABLE', self.var_state)
-
-                        BoxLayout:
-                            orientation: 'vertical'
-                            size_hint_y: 0.36
-
-                    BoxLayout:
-                        orientation: 'vertical'
-                        size_hint_x: 0.7
-                        padding: 30, 10, 0, 0
-                        spacing: 5
-
-                        AutoVar:
-                            operator: app.variables.AUTOVAR_OPERATOR_1
-                            operator_text: 'AUTOVAR_OPERATOR_1'
-                            get_var: app.variables.AUTOVAR_GET_VAR_1
-                            get_var_text: 'AUTOVAR_GET_VAR_1'
-                            set_var: app.variables.AUTOVAR_SET_VAR_1
-                            set_var_text: 'AUTOVAR_SET_VAR_1'
-
-                        AutoVar:
-                            operator: app.variables.AUTOVAR_OPERATOR_2
-                            operator_text: 'AUTOVAR_OPERATOR_2'
-                            get_var: app.variables.AUTOVAR_GET_VAR_2
-                            get_var_text: 'AUTOVAR_GET_VAR_2'
-                            set_var: app.variables.AUTOVAR_SET_VAR_2
-                            set_var_text: 'AUTOVAR_SET_VAR_2'
-
-                        AutoVar:
-                            operator: app.variables.AUTOVAR_OPERATOR_3
-                            operator_text: 'AUTOVAR_OPERATOR_3'
-                            get_var: app.variables.AUTOVAR_GET_VAR_3
-                            get_var_text: 'AUTOVAR_GET_VAR_3'
-                            set_var: app.variables.AUTOVAR_SET_VAR_3
-                            set_var_text: 'AUTOVAR_SET_VAR_3'
-
-                        AutoVar:
-                            operator: app.variables.AUTOVAR_OPERATOR_4
-                            operator_text: 'AUTOVAR_OPERATOR_4'
-                            get_var: app.variables.AUTOVAR_GET_VAR_4
-                            get_var_text: 'AUTOVAR_GET_VAR_4'
-                            set_var: app.variables.AUTOVAR_SET_VAR_4
-                            set_var_text: 'AUTOVAR_SET_VAR_4'
-
-                        BoxLayout:
-                            orientation: 'horizontal'
-                            size_hint_y: 0.6
-
-                #Button:
-                    #id: exit_button
-                    #on_press: app.exit_app()
-                    #text: 'X'
-                    #size_hint: None, None
-                    #size: 20, 20
-                    #right: root.right
-
-        Popup:
-            id: enter_modify_popup
-            title: "Modify Main Screen"
-            size_hint: None, None
-            size: 275, 250
-            pos_hint: {'middle': 1, 'center': 1}
-            on_parent:
-                if self.parent == settings_tab: self.parent.remove_widget(self)
-
-            BoxLayout:
-                orientation: 'vertical'
-
-                Label:
-                    text: 'Entering Modify Main Screen will turn off all outputs.  Proceed?'
-                    size_hint: 1, .7
-                    height: self.texture_size[1]
-                    font_size: '18sp'
-                    text_size: self.size
-                    halign: 'center'
-                    valign: 'middle'
-
-                GridLayout:
-                    rows: 1
-                    cols: 2
-                    size_hint: 1, .3
-
-                    Button:
-                        text: 'Yes'
-                        on_release: enter_modify_popup.dismiss(); dynamic_layout.modify_screen(); main_tabbed_panel.switch_to(home_tab); root.add_widget(end_modify_button)
-
-                    Button:
-                        text: 'Cancel'
-                        on_release: enter_modify_popup.dismiss(); app.variables.toggle_update_clock(True)
-
+        GridLayout:
+            id: button_layout
+            cols: 3
+            rows: 2
+            spacing: 5
+            padding: 5
+            size_hint_x: 0.75
 
     ScreenItemEditPopup:
         id: item_edit_popup
+        modify_mode: app.dynamic_layout.modify_mode
+        dynamic_layout: app.dynamic_layout
         label_input: label_input
         toggle_check: toggle_check
         enable_check: enable_check
         channel_spinner: channel_spinner
         toggle_layout: toggle_layout
-        dynamic_layout: dynamic_layout
-        modify_mode: dynamic_layout.modify_mode
         title: "Modify"
         size_hint: None, None
         size: 300, 250
@@ -360,6 +187,148 @@
                     text: 'Cancel'
                     on_release: item_edit_popup.dismiss()
 
+<SettingsScreen>:
+    BoxLayout:
+        id: settings_box_layout
+        orientation: 'horizontal'
+        padding: 10
+        spacing: 5
+
+        BoxLayout:
+            id: backlight_layout
+            orientation: 'vertical'
+            size_hint_x: 0.15
+            padding: 10
+            spacing: 5
+
+            Label:
+                text: 'Screen Dim\nBrightness'
+                markup: True
+                size_hint_y: 0.1
+                text_size: self.size
+                halign: 'center'
+                valign: 'middle'
+
+            Slider:
+                id: screen_brightness_slider
+                on_touch_move: app.variables.sys_cmd('SYS_SCREEN_BRIGHTNESS', str(int(self.value)))
+                on_touch_up: app.variables.set('SYS_SCREEN_BRIGHTNESS', str(int(self.value)))
+                orientation: 'vertical'
+                min: 20
+                max: 200
+                value: int(app.variables.SYS_SCREEN_BRIGHTNESS)
+                size_hint_y: 0.9
+
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_x: 0.15
+            padding: 0, 4, 0, 0
+            spacing: 15
+
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: 0.22
+                padding: 5, 0, 0, 0
+
+                Label:
+                    text: 'Screen Off Delay:'
+
+                BoxLayout:
+                    orientation: 'horizontal'
+
+                    TextInput:
+                        id: screen_off_delay_input
+                        on_text: app.variables.set('SYS_SCREEN_OFF_DELAY', self.text)
+                        text: app.variables.SYS_SCREEN_OFF_DELAY
+                        size_hint_x: 0.4
+                        multiline: False
+
+                    Label:
+                        text: 'seconds'
+                        size_hint_x: 0.6
+
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: 0.22
+                padding: 5, 0, 0, 0
+
+                Label:
+                    text: 'Shutdown Delay:'
+
+                BoxLayout:
+                    orientation: 'horizontal'
+
+                    TextInput:
+                        id: shutdown_delay_input
+                        on_text: app.variables.set('SYS_SHUTDOWN_DELAY', self.text)
+                        text: app.variables.SYS_SHUTDOWN_DELAY
+                        size_hint_x: 0.4
+                        multiline: False
+
+                    Label:
+                        text: 'seconds'
+                        size_hint_x: 0.6
+
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: 0.22
+                padding: 5, 0, 0, 0
+
+                Label:
+                    text: 'Password Disable:'
+
+                Switch:
+                    id: password_disable_switch
+                    active: True if app.variables.SYS_PASSWORD_DISABLE == '1' else False
+                    var_state: '1' if self.active else '0'
+                    on_active: app.variables.set('SYS_PASSWORD_DISABLE', self.var_state)
+
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: 0.7
+
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_x: 0.7
+            padding: 30, 15, 0, 0
+            spacing: 5
+
+            AutoVar:
+                operator: app.variables.AUTOVAR_OPERATOR_1
+                operator_text: 'AUTOVAR_OPERATOR_1'
+                get_var: app.variables.AUTOVAR_GET_VAR_1
+                get_var_text: 'AUTOVAR_GET_VAR_1'
+                set_var: app.variables.AUTOVAR_SET_VAR_1
+                set_var_text: 'AUTOVAR_SET_VAR_1'
+
+            AutoVar:
+                operator: app.variables.AUTOVAR_OPERATOR_2
+                operator_text: 'AUTOVAR_OPERATOR_2'
+                get_var: app.variables.AUTOVAR_GET_VAR_2
+                get_var_text: 'AUTOVAR_GET_VAR_2'
+                set_var: app.variables.AUTOVAR_SET_VAR_2
+                set_var_text: 'AUTOVAR_SET_VAR_2'
+
+            AutoVar:
+                operator: app.variables.AUTOVAR_OPERATOR_3
+                operator_text: 'AUTOVAR_OPERATOR_3'
+                get_var: app.variables.AUTOVAR_GET_VAR_3
+                get_var_text: 'AUTOVAR_GET_VAR_3'
+                set_var: app.variables.AUTOVAR_SET_VAR_3
+                set_var_text: 'AUTOVAR_SET_VAR_3'
+
+            AutoVar:
+                operator: app.variables.AUTOVAR_OPERATOR_4
+                operator_text: 'AUTOVAR_OPERATOR_4'
+                get_var: app.variables.AUTOVAR_GET_VAR_4
+                get_var_text: 'AUTOVAR_GET_VAR_4'
+                set_var: app.variables.AUTOVAR_SET_VAR_4
+                set_var_text: 'AUTOVAR_SET_VAR_4'
+
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint_y: 0.6
+
 
 <SpinnerLabel@SpinnerOption>:
     font_size: '13sp'
@@ -392,34 +361,34 @@
 
         Button:
             text: '7'
-            on_release: root.sm.try_passcode(self.text)
+            on_release: app.screen_man.try_passcode(self.text)
         Button:
             text: '8'
-            on_release: root.sm.try_passcode(self.text)
+            on_release: app.screen_man.try_passcode(self.text)
         Button:
             text: '9'
-            on_release: root.sm.try_passcode(self.text)
+            on_release: app.screen_man.try_passcode(self.text)
         Button:
             text: '4'
-            on_release: root.sm.try_passcode(self.text)
+            on_release: app.screen_man.try_passcode(self.text)
         Button:
             text: '5'
-            on_release: root.sm.try_passcode(self.text)
+            on_release: app.screen_man.try_passcode(self.text)
         Button:
             text: '6'
-            on_release: root.sm.try_passcode(self.text)
+            on_release: app.screen_man.try_passcode(self.text)
         Button:
             text: '1'
-            on_release: root.sm.try_passcode(self.text)
+            on_release: app.screen_man.try_passcode(self.text)
         Button:
             text: '2'
-            on_release: root.sm.try_passcode(self.text)
+            on_release: app.screen_man.try_passcode(self.text)
         Button:
             text: '3'
-            on_release: root.sm.try_passcode(self.text)
+            on_release: app.screen_man.try_passcode(self.text)
         Button:
             text: '0'
-            on_release: root.sm.try_passcode(self.text)
+            on_release: app.screen_man.try_passcode(self.text)
 
     Popup:
         id: fail_popup
