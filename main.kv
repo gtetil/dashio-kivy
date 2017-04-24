@@ -1,65 +1,35 @@
-#:kivy 1.9.2
+#:kivy 1.9.1
 #:import Factory kivy.factory.Factory
-#:import Toolbar kivymd.toolbar.Toolbar
-#:import ThemeManager kivymd.theming.ThemeManager
-#:import MDNavigationDrawer kivymd.navigationdrawer.MDNavigationDrawer
-#:import NavigationLayout kivymd.navigationdrawer.NavigationLayout
-#:import NavigationDrawerDivider kivymd.navigationdrawer.NavigationDrawerDivider
-#:import NavigationDrawerToolbar kivymd.navigationdrawer.NavigationDrawerToolbar
-#:import NavigationDrawerSubheader kivymd.navigationdrawer.NavigationDrawerSubheader
-#:import MDCheckbox kivymd.selectioncontrols.MDCheckbox
-#:import MDSwitch kivymd.selectioncontrols.MDSwitch
-#:import MDList kivymd.list.MDList
-#:import OneLineListItem kivymd.list.OneLineListItem
-#:import TwoLineListItem kivymd.list.TwoLineListItem
-#:import ThreeLineListItem kivymd.list.ThreeLineListItem
-#:import OneLineAvatarListItem kivymd.list.OneLineAvatarListItem
-#:import OneLineIconListItem kivymd.list.OneLineIconListItem
-#:import OneLineAvatarIconListItem kivymd.list.OneLineAvatarIconListItem
-#:import MDTextField kivymd.textfields.MDTextField
-#:import MDSpinner kivymd.spinner.MDSpinner
-#:import MDCard kivymd.card.MDCard
-#:import MDSeparator kivymd.card.MDSeparator
-#:import MDDropdownMenu kivymd.menu.MDDropdownMenu
-#:import get_color_from_hex kivy.utils.get_color_from_hex
-#:import colors kivymd.color_definitions.colors
-#:import SmartTile kivymd.grid.SmartTile
-#:import MDSlider kivymd.slider.MDSlider
-#:import MDTabbedPanel kivymd.tabs.MDTabbedPanel
-#:import MDTab kivymd.tabs.MDTab
-#:import MDProgressBar kivymd.progressbar.MDProgressBar
-#:import MDAccordion kivymd.accordion.MDAccordion
-#:import MDAccordionItem kivymd.accordion.MDAccordionItem
-#:import MDAccordionSubItem kivymd.accordion.MDAccordionSubItem
-#:import MDThemePicker kivymd.theme_picker.MDThemePicker
-#:import MDBottomNavigation kivymd.tabs.MDBottomNavigation
-#:import MDBottomNavigationItem kivymd.tabs.MDBottomNavigationItem
 
-<NavLayout>:
-    id: nav_layout
-    MDNavigationDrawer:
-        id: nav_drawer
-        NavigationDrawerToolbar:
-            title: "Menu"
-        NavigationDrawerIconButton:
-            icon: 'checkbox-blank-circle'
-            text: "Main"
-            on_release: app.screen_man.current = 'main_screen'
-            on_release: if app.dynamic_layout.modify_mode: app.dynamic_layout.end_modify(); app.variables.toggle_update_clock(True)
-        NavigationDrawerIconButton:
-            icon: 'checkbox-blank-circle'
-            text: "Modify Main Screen"
-            on_release: app.screen_man.current = 'main_screen'
-            on_release: if not app.dynamic_layout.modify_mode: app.dynamic_layout.build_layout(); app.dynamic_layout.modify_screen(); app.variables.toggle_update_clock(False)
-        NavigationDrawerIconButton:
-            icon: 'checkbox-blank-circle'
-            text: "Settings"
-            on_release: app.screen_man.current = 'settings_screen'
+<SlideLayout>:
+    anim_type: 'slide_above_anim'
+
+<SlideMenu>:
+    orientation: 'vertical'
+
+    Button:
+        text: 'Main'
+        on_release: app.screen_man.current = 'main_screen'; app.slide_layout.toggle_state()
+        on_release: if app.dynamic_layout.modify_mode: app.dynamic_layout.end_modify(); app.variables.toggle_update_clock(True)
+    Button:
+        text: 'Modify Main Screen'
+        on_release: app.screen_man.current = 'main_screen'; app.slide_layout.toggle_state()
+        on_release: if not app.dynamic_layout.modify_mode: app.dynamic_layout.build_layout(); app.dynamic_layout.modify_screen(); app.variables.toggle_update_clock(False)
+    Button:
+        text: 'Settings'
+        on_release: app.screen_man.current = 'settings_screen'; app.slide_layout.toggle_state()
 
 <ScreenManagement>:
     ignition_input: int(app.variables.DI_IGNITION)
     reverse_input: int(app.variables.SYS_REVERSE_CAM_ON)
     app_ref: app
+
+    canvas.before:
+        Color:
+            rgba: 0.2, 0.2, 0.2, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
 
     Screen:
         name: 'off_screen'
@@ -411,7 +381,7 @@
 
     Camera:
         id: cam
-        resolution: 800, 480
+        #resolution: 800, 480
         play: True
 
 

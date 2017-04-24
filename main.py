@@ -1,5 +1,5 @@
 import kivy
-kivy.require('1.9.2') # replace with your current kivy version !
+kivy.require('1.9.1') # replace with your current kivy version !
 
 from kivy.config import Config
 Config.set('kivy', 'keyboard_mode', 'systemanddock')
@@ -22,9 +22,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen, NoTransition
 from kivy.uix.popup import Popup
 from kivy.core.window import Window
 from kivy.animation import Animation
-
-from kivymd.theming import ThemeManager
-from kivymd.navigationdrawer import NavigationLayout
+from navigationdrawer import NavigationDrawer
 
 import json
 from functools import partial
@@ -37,13 +35,16 @@ import os
 import time
 BASE = "/sys/class/backlight/rpi_backlight/"
 
-debug_mode = True
-pc_mode = True
-win_mode = True
+debug_mode = False
+pc_mode = False
+win_mode = False
 
 current_milli_time = lambda: int(round(time.time() * 1000))
 
-class NavLayout(NavigationLayout):
+class SlideLayout(NavigationDrawer):
+    pass
+
+class SlideMenu(BoxLayout):
     pass
 
 class ScreenManagement(ScreenManager):
@@ -275,30 +276,34 @@ class DynItem(Widget):
 
     def on_touch_down(self, touch):
         if self.collide_point(*touch.pos):
-            if not self.dynamic_layout.modify_mode:
-                if self.enable:
-                    self._do_press()
-                    self.output_cmd()
-                    return True
+            if self.app_ref.slide_layout.state != 'open':
+                if not self.dynamic_layout.modify_mode:
+                    if self.enable:
+                        self._do_press()
+                        self.output_cmd()
+                        return True
+                    else:
+                        return False
                 else:
+                    self.item_edit_popup.edit_popup(self.item_edit_popup, self, False)
                     return False
-            else:
-                self.item_edit_popup.edit_popup(self.item_edit_popup, self, False)
-                return False
+            return False
         return super(DynItem, self).on_touch_down(touch)
 
     def on_touch_up(self, touch):
         if self.collide_point(*touch.pos):
-            if not self.dynamic_layout.modify_mode and not self.toggle:
-                if self.enable:
-                    self._do_release()
-                    self.output_cmd()
-                    return True
+            if self.app_ref.slide_layout.state != 'open':
+                if not self.dynamic_layout.modify_mode and not self.toggle:
+                    if self.enable:
+                        self._do_release()
+                        self.output_cmd()
+                        return True
+                    else:
+                        return False
                 else:
+                    self.item_edit_popup.edit_popup(self.item_edit_popup, self, False)
                     return False
-            else:
-                self.item_edit_popup.edit_popup(self.item_edit_popup, self, False)
-                return False
+            return False
         return super(DynItem, self).on_touch_down(touch)
 
     def output_cmd(self):
@@ -331,17 +336,16 @@ class CameraScreen(Screen):
     pass
 
 class MainApp(App):
-    theme_cls = ThemeManager()
-    previous_date = ObjectProperty()
 
     def build(self):
-        self.theme_cls.theme_style = 'Dark'
         self.variables = Variables()
         self.dynamic_layout = DynamicLayout()
         self.screen_man = ScreenManagement()
-        self.nav_layout = NavLayout()
-        self.nav_layout.add_widget(self.screen_man)
-        return self.nav_layout
+        self.slide_layout = SlideLayout()
+        self.slide_menu = SlideMenu()
+        self.slide_layout.add_widget(self.slide_menu)
+        self.slide_layout.add_widget(self.screen_man)
+        return self.slide_layout
 
     def exit_app(self):
         self.stop()
