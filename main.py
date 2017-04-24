@@ -39,6 +39,7 @@ BASE = "/sys/class/backlight/rpi_backlight/"
 
 debug_mode = True
 pc_mode = True
+win_mode = True
 
 current_milli_time = lambda: int(round(time.time() * 1000))
 
@@ -60,6 +61,7 @@ class ScreenManagement(ScreenManager):
         self.transition = NoTransition()
 
     def on_ignition_input(self, instance, state):
+        print('ign state, ' + str(state))
         if state == 1:
             if self.reverse_input == 0:
                 if self.app_ref.variables.SYS_PASSWORD_DISABLE == '1':
@@ -96,6 +98,7 @@ class ScreenManagement(ScreenManager):
             _power.close()
 
     def on_reverse_input(self, instance, state):
+        print('rev state, ' + str(state))
         if state == 1:
             self.current = "camera_screen"
         else:
@@ -429,8 +432,8 @@ class Variables(Widget):
             pass
 
     def update_data(self, dt):
-        for i in range(1, 8):
-            self.variable_data[i] = self.arduino_data[i]
+        for i in range(0, 7):
+            self.variable_data[i+1] = self.arduino_data[i]
         if (self.variable_data != self.old_variable_data) or self.refresh_data:
             self.data_change = True
             print('variable data')
@@ -476,7 +479,10 @@ class Variables(Widget):
         self.AUTOVAR_GET_VAR_4 = self.variable_data[30]
         self.AUTOVAR_SET_VAR_4 = self.variable_data[31]
 
-        self.DI_IGNITION = '1'  # self.variable_data[7]  #need to update last due to screen initialization issue
+        if not debug_mode:
+            self.DI_IGNITION = self.variable_data[7]  #need to update last due to screen initialization issue
+        else:
+            self.DI_IGNITION = '1'
 
         self.scan_auto_vars()
 
@@ -573,7 +579,7 @@ if __name__ == '__main__':
 
     if not debug_mode:
         try:
-            if not pc_mode:
+            if not win_mode:
                 ser = serial.Serial('/dev/ttyUSB0', 115200, timeout=0)
             else:
                 ser = serial.Serial('COM6', 115200, timeout=0)
