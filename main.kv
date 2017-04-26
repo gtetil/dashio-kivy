@@ -381,8 +381,8 @@
 
     Camera:
         id: cam
-        #resolution: 800, 480
-        play: True
+        resolution: 800, 480
+        play: True if app.variables.SYS_REVERSE_CAM_ON == "1" else False
 
 
 

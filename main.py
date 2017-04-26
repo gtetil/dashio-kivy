@@ -60,6 +60,8 @@ class ScreenManagement(ScreenManager):
     def __init__(self,**kwargs):
         super (ScreenManagement,self).__init__(**kwargs)
         self.transition = NoTransition()
+        if self.ignition_input == 0: #this will shut down RPi if ignition was switch off before program is loaded
+            self.shutdown_event = Clock.schedule_once(self.delayed_shutdown, 40)
 
     def on_ignition_input(self, instance, state):
         print('ign state, ' + str(state))
@@ -73,12 +75,15 @@ class ScreenManagement(ScreenManager):
                 self.current = 'camera_screen'
             self.backlight_on(True)
             try:
-                self.event.cancel()
+                print('cancel event')
+                self.screen_off_event.cancel()
+                self.shutdown_event.cancel()
             except:
                 print('event probably was not created yet')
         else:
-            self.event = Clock.schedule_once(self.delayed_screen_off, int(self.app_ref.variables.SYS_SCREEN_OFF_DELAY))
-            self.event = Clock.schedule_once(self.delayed_shutdown, int(self.app_ref.variables.SYS_SHUTDOWN_DELAY))
+            print('trigger event')
+            self.screen_off_event = Clock.schedule_once(self.delayed_screen_off, int(self.app_ref.variables.SYS_SCREEN_OFF_DELAY))
+            self.shutdown_event = Clock.schedule_once(self.delayed_shutdown, int(self.app_ref.variables.SYS_SHUTDOWN_DELAY))
 
     def delayed_screen_off(self, dt):
         self.current = 'off_screen'
