@@ -35,8 +35,8 @@ import os
 import time
 BASE = "/sys/class/backlight/rpi_backlight/"
 
-debug_mode = False
-pc_mode = False
+debug_mode = True
+pc_mode = True
 win_mode = False
 
 current_milli_time = lambda: int(round(time.time() * 1000))
@@ -60,8 +60,9 @@ class ScreenManagement(ScreenManager):
     def __init__(self,**kwargs):
         super (ScreenManagement,self).__init__(**kwargs)
         self.transition = NoTransition()
-        if self.ignition_input == 0: #this will shut down RPi if ignition was switch off before program is loaded
-            self.shutdown_event = Clock.schedule_once(self.delayed_shutdown, 40)
+        #if self.ignition_input == 0: #this will shut down RPi if ignition was switch off before program is loaded
+            #self.init_shutdown_event = Clock.schedule_once(self.delayed_shutdown, 60)
+            #print('trigger init shutdown')
 
     def on_ignition_input(self, instance, state):
         print('ign state, ' + str(state))
@@ -77,13 +78,14 @@ class ScreenManagement(ScreenManager):
             try:
                 print('cancel event')
                 self.screen_off_event.cancel()
-                self.shutdown_event.cancel()
+                #self.shutdown_event.cancel()
+                #self.init_shutdown_event.cancel()
             except:
                 print('event probably was not created yet')
         else:
             print('trigger event')
             self.screen_off_event = Clock.schedule_once(self.delayed_screen_off, int(self.app_ref.variables.SYS_SCREEN_OFF_DELAY))
-            self.shutdown_event = Clock.schedule_once(self.delayed_shutdown, int(self.app_ref.variables.SYS_SHUTDOWN_DELAY))
+            #self.shutdown_event = Clock.schedule_once(self.delayed_shutdown, int(self.app_ref.variables.SYS_SHUTDOWN_DELAY))
 
     def delayed_screen_off(self, dt):
         self.current = 'off_screen'
