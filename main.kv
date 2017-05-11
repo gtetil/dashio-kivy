@@ -81,6 +81,7 @@
         label_input: label_input
         toggle_check: toggle_check
         enable_check: enable_check
+        invert_check: invert_check
         channel_spinner: channel_spinner
         toggle_layout: toggle_layout
         title: "Modify"
@@ -96,7 +97,7 @@
 
             GridLayout:
                 rows: 1
-                cols: 2
+                cols: 3
                 size_hint: 1, 0.22
                 spacing: 5
 
@@ -104,7 +105,7 @@
                     orientation: 'horizontal'
 
                     Label:
-                        text: 'Enable?:'
+                        text: 'Enable:'
                         size_hint: .6, 1
 
                     CheckBox:
@@ -116,24 +117,39 @@
                     orientation: 'horizontal'
 
                     Label:
-                        text: 'Toggle?:'
+                        text: 'Toggle:'
                         size_hint: .6, 1
 
                     CheckBox:
                         id: toggle_check
                         size_hint: .4, 1
 
+                BoxLayout:
+                    orientation: 'horizontal'
+
+                    Label:
+                        text: 'Invert:'
+                        size_hint: .6, 1
+
+                    CheckBox:
+                        id: invert_check
+                        size_hint: .4, 1
+
             BoxLayout:
                 orientation: 'horizontal'
                 size_hint: 1, 0.21
+                padding: 1
 
                 Label:
                     text: 'Channel:'
-                    size_hint: .3, 1
+                    size_hint: .25, 1
+                    text_size: self.size
+                    halign: 'left'
+                    valign: 'middle'
 
                 Spinner:
                     id: channel_spinner
-                    size_hint: .7, 1
+                    size_hint: .75, 1
                     option_cls: Factory.get("SpinnerLabel")
                     font_size: '13sp'
                     text: 'DI_0'
@@ -381,7 +397,7 @@
 
     Camera:
         id: cam
-        resolution: 800, 480
+        #resolution: 800, 480
         play: True if app.variables.SYS_REVERSE_CAM_ON == "1" else False
 
 

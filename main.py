@@ -33,11 +33,12 @@ Window.size = (800,480)
 import serial
 import os
 import time
+from operator import xor
 BASE = "/sys/class/backlight/rpi_backlight/"
 
-debug_mode = False
-pc_mode = False
-win_mode = False
+debug_mode = True
+pc_mode = True
+win_mode = True
 
 current_milli_time = lambda: int(round(time.time() * 1000))
 
@@ -64,7 +65,6 @@ class ScreenManagement(ScreenManager):
             self.shutdown_event = Clock.schedule_once(self.delayed_shutdown, 40)
 
     def on_ignition_input(self, instance, state):
-        print('ign state, ' + str(state))
         if state == 1:
             if self.reverse_input == 0:
                 if self.app_ref.variables.SYS_PASSWORD_DISABLE == '1':
@@ -75,13 +75,11 @@ class ScreenManagement(ScreenManager):
                 self.current = 'camera_screen'
             self.backlight_on(True)
             try:
-                print('cancel event')
                 self.screen_off_event.cancel()
                 self.shutdown_event.cancel()
             except:
                 print('event probably was not created yet')
         else:
-            print('trigger event')
             self.screen_off_event = Clock.schedule_once(self.delayed_screen_off, int(self.app_ref.variables.SYS_SCREEN_OFF_DELAY))
             self.shutdown_event = Clock.schedule_once(self.delayed_shutdown, int(self.app_ref.variables.SYS_SHUTDOWN_DELAY))
 
@@ -142,7 +140,6 @@ class DynamicLayout(Widget):
         self.button_layout = main_screen.ids.button_layout
         self.item_edit_popup = main_screen.ids.item_edit_popup
 
-
     def save_layout(self):
         data = {}
         for indicator in self.indicator_layout.children:
@@ -151,6 +148,7 @@ class DynamicLayout(Widget):
             config['toggle'] = indicator.toggle
             config['channel'] = indicator.channel
             config['enable'] = indicator.enable
+            config['invert'] = indicator.invert
             data[indicator.id] = config
         for button in self.button_layout.children:
             config = {}
@@ -158,6 +156,7 @@ class DynamicLayout(Widget):
             config['toggle'] = button.toggle
             config['channel'] = button.channel
             config['enable'] = button.enable
+            config['invert'] = button.invert
             data[button.id] = config
         with open(self.layout_file, 'w') as file:
             json.dump(data, file, sort_keys=True, indent=4)
@@ -173,24 +172,24 @@ class DynamicLayout(Widget):
             toggle = data['indicator_' + str(i)]['toggle']
             channel = data['indicator_' + str(i)]['channel']
             enable = data['indicator_' + str(i)]['enable']
+            invert = data['indicator_' + str(i)]['invert']
             if toggle:
                 button = DynToggleButton(text=label, id='indicator_' + str(i))
             else:
                 button = DynButton(text=label, id='indicator_' + str(i))
-            #button.bind(on_press=partial(self.item_edit_popup.edit_popup, 'button_' + str(i), indicator=False))
-            button.set_properties(self, channel, enable, self.item_edit_popup)
+            button.set_properties(self, channel, enable, self.item_edit_popup, invert)
             self.indicator_layout.add_widget(button)
 
             label = data['button_' + str(i)]['label']
             toggle = data['button_' + str(i)]['toggle']
-            enable = data['button_' + str(i)]['enable']
             channel = data['button_' + str(i)]['channel']
+            enable = data['button_' + str(i)]['enable']
+            invert = data['button_' + str(i)]['invert']
             if toggle:
                 button = DynToggleButton(text=label, id='button_' + str(i))
             else:
                 button = DynButton(text=label, id='button_' + str(i))
-            #button.bind(on_press=partial(self.item_edit_popup.edit_popup, 'button_' + str(i), indicator=False))
-            button.set_properties(self, channel, enable, self.item_edit_popup)
+            button.set_properties(self, channel, enable, self.item_edit_popup, invert)
             self.button_layout.add_widget(button)
         self.app_ref.variables.refresh_data = True
         if self.modify_mode:
@@ -202,11 +201,9 @@ class DynamicLayout(Widget):
             self.animate(indicator)
         for button in self.button_layout.children:
             self.animate(button)
-            #button.output_cmd()
 
     def end_modify(self):
         self.modify_mode = False
-        #self.app_ref.variables.data_change = True
         for indicator in self.indicator_layout.children:
             Animation.cancel_all(indicator)
             indicator.background_color = 1, 1, 1, 1
@@ -224,6 +221,7 @@ class ScreenItemEditPopup(Popup):
     label_input = ObjectProperty(None)
     toggle_check = ObjectProperty(None)
     enable_check = ObjectProperty(None)
+    invert_check = ObjectProperty(None)
     channel_spinner = ObjectProperty(None)
     toggle_layout = ObjectProperty(None)
     item = ObjectProperty(None)
@@ -236,15 +234,16 @@ class ScreenItemEditPopup(Popup):
             self.label_input.text = self.item.text
             self.toggle_check.active = self.item.toggle
             self.enable_check.active = self.item.enable
+            self.invert_check.active = self.item.invert
             self.channel_spinner.text = self.item.channel
             self.toggle_layout.disabled = indicator
             self.open()
-
 
     def save_item(self):
         self.item.text = self.label_input.text
         self.item.toggle = self.toggle_check.active
         self.item.enable = self.enable_check.active
+        self.item.invert = self.invert_check.active
         self.item.channel = self.channel_spinner.text
         self.dynamic_layout.save_layout()
         self.dynamic_layout.build_layout()
@@ -254,6 +253,7 @@ class DynItem(Widget):
     dynamic_layout = ObjectProperty(None)
     toggle = BooleanProperty(True)
     enable = BooleanProperty(True)
+    invert = BooleanProperty(True)
     channel = StringProperty("")
     ignition_input = NumericProperty(0)
     digital_inputs = NumericProperty(0)
@@ -263,14 +263,20 @@ class DynItem(Widget):
     def on_data_change(self, instance, value):
         state = self.app_ref.variables.get(self.channel)
         if state == '1':
+            bool_state = True
+        else:
+            bool_state = False
+        bool_state = xor(bool_state, self.invert)
+        if bool_state:
             self.state = 'down'
         else:
             self.state = 'normal'
 
-    def set_properties(self, ref, channel, enable, item_edit_popup):
+    def set_properties(self, ref, channel, enable, item_edit_popup, invert):
         self.dynamic_layout = ref
         self.channel = str(channel)
         self.enable = enable
+        self.invert = invert
         self.item_edit_popup = item_edit_popup
         ChangeItemBackground(self)
 
@@ -280,15 +286,17 @@ class DynItem(Widget):
             self.output_cmd()
 
     def on_touch_down(self, touch):
+        print(self.channel)
+        print(self.pos)
         if self.collide_point(*touch.pos):
             if self.app_ref.slide_layout.state != 'open':
                 if not self.dynamic_layout.modify_mode:
                     if self.enable:
                         self._do_press()
                         self.output_cmd()
-                        return True
+                        return xor(True, self.invert)
                     else:
-                        return False
+                        return xor(False, self.invert)
                 else:
                     self.item_edit_popup.edit_popup(self.item_edit_popup, self, False)
                     return False
@@ -314,6 +322,11 @@ class DynItem(Widget):
     def output_cmd(self):
         if not self.dynamic_layout.modify_mode and self.enable and self.app_ref.variables.DI_IGNITION:
             if self.state == 'normal':
+                bool_state = True
+            else:
+                bool_state = False
+            bool_state = xor(bool_state, self.invert)
+            if bool_state:
                 state = '0'
             else:
                 state = '1'
@@ -343,8 +356,8 @@ class CameraScreen(Screen):
 class MainApp(App):
 
     def build(self):
-        self.variables = Variables()
         self.dynamic_layout = DynamicLayout()
+        self.variables = Variables()
         self.screen_man = ScreenManagement()
         self.slide_layout = SlideLayout()
         self.slide_menu = SlideMenu()

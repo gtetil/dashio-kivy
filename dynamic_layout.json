@@ -2,72 +2,84 @@
     "button_0": {
         "channel": "DO_0", 
         "enable": true, 
+        "invert": true, 
         "label": "DO_0", 
         "toggle": true
     }, 
     "button_1": {
         "channel": "DO_1", 
         "enable": true, 
+        "invert": true, 
         "label": "DO_1", 
-        "toggle": true
+        "toggle": false
     }, 
     "button_2": {
         "channel": "DI_1", 
         "enable": true, 
+        "invert": false, 
         "label": "DI_1", 
         "toggle": false
     }, 
     "button_3": {
         "channel": "DO_3", 
         "enable": true, 
+        "invert": false, 
         "label": "DO_3", 
         "toggle": true
     }, 
     "button_4": {
         "channel": "DO_4", 
         "enable": true, 
+        "invert": false, 
         "label": "DO_4", 
         "toggle": true
     }, 
     "button_5": {
         "channel": "DO_5", 
         "enable": true, 
+        "invert": false, 
         "label": "DO_5", 
         "toggle": true
     }, 
     "indicator_0": {
         "channel": "DI_0", 
         "enable": true, 
+        "invert": false, 
         "label": "DI_0", 
         "toggle": true
     }, 
     "indicator_1": {
         "channel": "DI_1", 
         "enable": true, 
+        "invert": false, 
         "label": "DI_1", 
         "toggle": true
     }, 
     "indicator_2": {
         "channel": "DO_0", 
         "enable": true, 
+        "invert": false, 
         "label": "DO_0", 
-        "toggle": false
+        "toggle": true
     }, 
     "indicator_3": {
         "channel": "SYS_REVERSE_CAM_ON", 
         "enable": true, 
+        "invert": false, 
         "label": "Reverse", 
         "toggle": true
     }, 
     "indicator_4": {
         "channel": "DI_5", 
         "enable": true, 
+        "invert": false, 
         "label": "DI_5", 
         "toggle": true
     }, 
     "indicator_5": {
         "channel": "SYS_DIM_BACKLIGHT", 
         "enable": true, 
+        "invert": false, 
         "label": "DIM BACKLIGHT", 
         "toggle": true
     }
