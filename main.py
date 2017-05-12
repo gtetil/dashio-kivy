@@ -36,13 +36,14 @@ import time
 from operator import xor
 BASE = "/sys/class/backlight/rpi_backlight/"
 
-debug_mode = True
-pc_mode = True
-<<<<<<< HEAD
-win_mode = True
-=======
+debug_mode = False
+pc_mode = False
 win_mode = False
->>>>>>> 1b879a43b0a08e67c1bc1bb11d1407c0583fae2a
+
+try:
+    import RPi.GPIO as GPIO
+except:
+    pass
 
 current_milli_time = lambda: int(round(time.time() * 1000))
 
@@ -614,6 +615,11 @@ if __name__ == '__main__':
         except:
             print "Failed to connect"
             exit()
+
+        #turn on status output for shutdown circuit
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(17, GPIO.OUT)
+        GPIO.output(17, 1)
 
     MainApp().run()
 
