@@ -26,6 +26,22 @@ Builder.load_string("""
         values: app.variables.display_var_tags
         on_text: app.variables.set(root.get_var_text, self.text)
 
+    Spinner:
+        size_hint: .13, 1
+        text: root.operator_2
+        option_cls: Factory.get("SpinnerLabel")
+        font_size: '13sp'
+        values: ['', 'and', 'and not', 'or', 'or not']
+        on_text: app.variables.set(root.operator_text_2, self.text)
+
+    Spinner:
+        size_hint: .38, 1
+        text: root.get_var_2
+        option_cls: Factory.get("SpinnerLabel")
+        font_size: '13sp'
+        values: app.variables.display_var_tags
+        on_text: app.variables.set(root.get_var_text_2, self.text)
+
     Label:
         text: 'then,'
         size_hint: .1, 1
@@ -43,8 +59,12 @@ Builder.load_string("""
 class AutoVar(BoxLayout):
     operator = StringProperty('')
     operator_text = StringProperty('')
+    operator_2 = StringProperty('')
+    operator_text_2 = StringProperty('')
     get_var = StringProperty('')
     get_var_text = StringProperty('')
+    get_var_2 = StringProperty('')
+    get_var_text_2 = StringProperty('')
     set_var = StringProperty('')
     set_var_text = StringProperty('')
 

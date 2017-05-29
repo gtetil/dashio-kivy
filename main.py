@@ -33,12 +33,14 @@ Window.size = (800,480)
 import serial
 import os
 import time
+import re
 from operator import xor
 BASE = "/sys/class/backlight/rpi_backlight/"
 
 debug_mode = False
 pc_mode = False
 win_mode = False
+#!!!CHECK CAMERA RESOLUTION BEOFRE UPLOADING TO PI!!!!
 
 try:
     import RPi.GPIO as GPIO
@@ -66,33 +68,25 @@ class ScreenManagement(ScreenManager):
     def __init__(self,**kwargs):
         super (ScreenManagement,self).__init__(**kwargs)
         self.transition = NoTransition()
-        #if self.ignition_input == 0: #this will shut down RPi if ignition was switch off before program is loaded
-            #self.init_shutdown_event = Clock.schedule_once(self.delayed_shutdown, 60)
-            #print('trigger init shutdown')
 
     def on_ignition_input(self, instance, state):
         if state == 1:
             if self.reverse_input == 0:
-                if self.app_ref.variables.SYS_PASSWORD_DISABLE == '1':
-                    self.current = 'main_screen'
-                else:
-                    self.current = 'passcode_screen'
+                self.current = 'main_screen'
             else:
                 self.current = 'camera_screen'
             self.backlight_on(True)
             try:
                 self.screen_off_event.cancel()
-                #self.shutdown_event.cancel()
-                #self.init_shutdown_event.cancel()
+                self.shutdown_event.cancel()
             except:
                 print('event probably was not created yet')
         else:
             self.screen_off_event = Clock.schedule_once(self.delayed_screen_off, int(self.app_ref.variables.SYS_SCREEN_OFF_DELAY))
-            #self.shutdown_event = Clock.schedule_once(self.delayed_shutdown, int(self.app_ref.variables.SYS_SHUTDOWN_DELAY))
+            self.shutdown_event = Clock.schedule_once(self.delayed_shutdown, float(self.app_ref.variables.SYS_SHUTDOWN_DELAY)*60)
 
     def delayed_screen_off(self, dt):
         self.current = 'off_screen'
-        self.logged_in = 0
         self.backlight_on(False)
 
     def delayed_shutdown(self, dt):
@@ -114,10 +108,7 @@ class ScreenManagement(ScreenManager):
             self.current = "camera_screen"
         else:
             if self.ignition_input == 1:
-                if self.logged_in == 1 or self.app_ref.variables.SYS_PASSWORD_DISABLE == '1':
-                    self.current = "main_screen"
-                else:
-                    self.current = "passcode_screen"
+                self.current = "main_screen"
             else:
                 self.current = 'off_screen'
 
@@ -126,7 +117,7 @@ class ScreenManagement(ScreenManager):
         if len(self.passcode_try) == len(self.passcode):
             if self.passcode_try == self.passcode:
                 self.current = 'main_screen'
-                self.logged_in = 1
+                self.app_ref.variables.set('SYS_LOGGED_IN', '1')
             else:
                 self.current_screen.ids.fail_popup.open()
             self.passcode_try = ''
@@ -136,6 +127,16 @@ class MainScreen(Screen):
 
 class SettingsScreen(Screen):
     pass
+
+class FloatInput(TextInput):
+    pat = re.compile('[^0-9]')
+    def insert_text(self, substring, from_undo=False):
+        pat = self.pat
+        if '.' in self.text:
+            s = re.sub(pat, '', substring)
+        else:
+            s = '.'.join([re.sub(pat, '', s) for s in substring.split('.', 1)])
+        return super(FloatInput, self).insert_text(s, from_undo=from_undo)
 
 class DynamicLayout(Widget):
     app_ref = ObjectProperty(None)
@@ -293,12 +294,12 @@ class DynItem(Widget):
             self.output_cmd()
 
     def on_touch_down(self, touch):
-        print(self.channel)
-        print(self.pos)
+        #print(self.channel)
+        #print(self.pos)
         if self.collide_point(*touch.pos):
             if self.app_ref.slide_layout.state != 'open':
                 if not self.dynamic_layout.modify_mode:
-                    if self.enable:
+                    if self.enable and self.channel != 'SYS_LOGGED_IN': #don't allow SYS_LOGGED_IN to be change by a button
                         self._do_press()
                         self.output_cmd()
                         return xor(True, self.invert)
@@ -314,7 +315,7 @@ class DynItem(Widget):
         if self.collide_point(*touch.pos):
             if self.app_ref.slide_layout.state != 'open':
                 if not self.dynamic_layout.modify_mode and not self.toggle:
-                    if self.enable:
+                    if self.enable and self.channel != 'SYS_LOGGED_IN': #don't allow SYS_LOGGED_IN to be change by a button
                         self._do_release()
                         self.output_cmd()
                         return True
@@ -332,7 +333,7 @@ class DynItem(Widget):
                 bool_state = True
             else:
                 bool_state = False
-            bool_state = xor(bool_state, self.invert)
+            #bool_state = xor(bool_state, self.invert)
             if bool_state:
                 state = '0'
             else:
@@ -382,12 +383,16 @@ class Variables(Widget):
     variables_file = 'variables.json'
     arduino_input_tags = ['DI_0', 'DI_1', 'DI_2', 'DI_3', 'DI_4', 'DI_5', 'DI_IGNITION']
     arduino_output_tags = ['DO_0', 'DO_1', 'DO_2', 'DO_3', 'DO_4', 'DO_5']
-    sys_var_tags = ['SYS_REVERSE_CAM_ON']
-    sys_save_var_tags = ['SYS_PASSWORD_DISABLE', 'SYS_SCREEN_BRIGHTNESS', 'SYS_DIM_BACKLIGHT', 'SYS_SCREEN_OFF_DELAY', 'SYS_SHUTDOWN_DELAY']
-    auto_var_tags = ['AUTOVAR_OPERATOR_1', 'AUTOVAR_GET_VAR_1', 'AUTOVAR_SET_VAR_1', 'AUTOVAR_OPERATOR_2', 'AUTOVAR_GET_VAR_2', 'AUTOVAR_SET_VAR_2', 'AUTOVAR_OPERATOR_3', 'AUTOVAR_GET_VAR_3', 'AUTOVAR_SET_VAR_3', 'AUTOVAR_OPERATOR_4', 'AUTOVAR_GET_VAR_4', 'AUTOVAR_SET_VAR_4']
+    sys_var_tags = ['SYS_LOGGED_IN', 'SYS_PASSCODE_PROMPT', 'SYS_REVERSE_CAM_ON']
+    sys_save_var_tags = ['SYS_SCREEN_BRIGHTNESS', 'SYS_DIM_BACKLIGHT', 'SYS_SCREEN_OFF_DELAY', 'SYS_SHUTDOWN_DELAY']
+    auto_var_tags = ['AUTOVAR_OPERATOR_1','AUTOVAR_OPERATOR_2_1', 'AUTOVAR_GET_VAR_1','AUTOVAR_GET_VAR_2_1', 'AUTOVAR_SET_VAR_1', 'AUTOVAR_OPERATOR_2', 'AUTOVAR_OPERATOR_2_2', 'AUTOVAR_GET_VAR_2', 'AUTOVAR_GET_VAR_2_2', 'AUTOVAR_SET_VAR_2', 'AUTOVAR_OPERATOR_3', 'AUTOVAR_OPERATOR_2_3', 'AUTOVAR_GET_VAR_3', 'AUTOVAR_GET_VAR_2_3', 'AUTOVAR_SET_VAR_3', 'AUTOVAR_OPERATOR_4', 'AUTOVAR_OPERATOR_2_4', 'AUTOVAR_GET_VAR_4', 'AUTOVAR_GET_VAR_2_4', 'AUTOVAR_SET_VAR_4']
     var_tags = [''] + arduino_input_tags + arduino_output_tags + sys_var_tags + sys_save_var_tags + auto_var_tags
     save_var_tags = sys_save_var_tags + auto_var_tags
     display_var_tags = [''] + arduino_input_tags + arduino_output_tags + sys_var_tags + sys_save_var_tags
+    prev_autovar_state_1 = '0'
+    prev_autovar_state_2 = '0'
+    prev_autovar_state_3 = '0'
+    prev_autovar_state_4 = '0'
     DI_0 = StringProperty('0')
     DI_1 = StringProperty('0')
     DI_2 = StringProperty('0')
@@ -401,23 +406,32 @@ class Variables(Widget):
     DO_3 = StringProperty('0')
     DO_4 = StringProperty('0')
     DO_5 = StringProperty('0')
+    SYS_LOGGED_IN = StringProperty('0')
+    SYS_PASSCODE_PROMPT = StringProperty('0')
     SYS_REVERSE_CAM_ON = StringProperty('0')
     SYS_DIM_BACKLIGHT = StringProperty('0')
-    SYS_PASSWORD_DISABLE = StringProperty('0')
     SYS_SCREEN_BRIGHTNESS = StringProperty('0')
     SYS_SCREEN_OFF_DELAY = StringProperty('0')
     SYS_SHUTDOWN_DELAY = StringProperty('0')
     AUTOVAR_OPERATOR_1 = StringProperty('')
+    AUTOVAR_OPERATOR_2_1 = StringProperty('')
     AUTOVAR_GET_VAR_1 = StringProperty('')
+    AUTOVAR_GET_VAR_2_1 = StringProperty('')
     AUTOVAR_SET_VAR_1 = StringProperty('')
     AUTOVAR_OPERATOR_2 = StringProperty('')
+    AUTOVAR_OPERATOR_2_2 = StringProperty('')
     AUTOVAR_GET_VAR_2 = StringProperty('')
+    AUTOVAR_GET_VAR_2_2 = StringProperty('')
     AUTOVAR_SET_VAR_2 = StringProperty('')
     AUTOVAR_OPERATOR_3 = StringProperty('')
+    AUTOVAR_OPERATOR_2_3 = StringProperty('')
     AUTOVAR_GET_VAR_3 = StringProperty('')
+    AUTOVAR_GET_VAR_2_3 = StringProperty('')
     AUTOVAR_SET_VAR_3 = StringProperty('')
     AUTOVAR_OPERATOR_4 = StringProperty('')
+    AUTOVAR_OPERATOR_2_4 = StringProperty('')
     AUTOVAR_GET_VAR_4 = StringProperty('')
+    AUTOVAR_GET_VAR_2_4 = StringProperty('')
     AUTOVAR_SET_VAR_4 = StringProperty('')
 
     def __init__(self, **kwargs):
@@ -467,7 +481,7 @@ class Variables(Widget):
             self.data_change = True
             print('variable data')
             print(self.variable_data)
-            if self.variable_data[14:32] <> self.old_variable_data[14:32]:
+            if self.variable_data[14:41] <> self.old_variable_data[14:41]:
                 self.save_variables()
                 print('saved vars')
             self.refresh_data = False
@@ -489,24 +503,33 @@ class Variables(Widget):
         self.DO_3 = self.variable_data[11]
         self.DO_4 = self.variable_data[12]
         self.DO_5 = self.variable_data[13]
-        self.SYS_REVERSE_CAM_ON = self.variable_data[14]
-        self.SYS_PASSWORD_DISABLE = self.variable_data[15]
-        self.SYS_SCREEN_BRIGHTNESS = self.variable_data[16]
-        self.SYS_DIM_BACKLIGHT = self.variable_data[17]
-        self.SYS_SCREEN_OFF_DELAY = self.variable_data[18]
-        self.SYS_SHUTDOWN_DELAY = self.variable_data[19]
-        self.AUTOVAR_OPERATOR_1 = self.variable_data[20]
-        self.AUTOVAR_GET_VAR_1 = self.variable_data[21]
-        self.AUTOVAR_SET_VAR_1 = self.variable_data[22]
-        self.AUTOVAR_OPERATOR_2 = self.variable_data[23]
-        self.AUTOVAR_GET_VAR_2 = self.variable_data[24]
-        self.AUTOVAR_SET_VAR_2 = self.variable_data[25]
-        self.AUTOVAR_OPERATOR_3 = self.variable_data[26]
-        self.AUTOVAR_GET_VAR_3 = self.variable_data[27]
-        self.AUTOVAR_SET_VAR_3 = self.variable_data[28]
-        self.AUTOVAR_OPERATOR_4 = self.variable_data[29]
-        self.AUTOVAR_GET_VAR_4 = self.variable_data[30]
-        self.AUTOVAR_SET_VAR_4 = self.variable_data[31]
+        self.SYS_LOGGED_IN = self.variable_data[14]
+        self.SYS_PASSCODE_PROMPT = self.variable_data[15]
+        self.SYS_REVERSE_CAM_ON = self.variable_data[16]
+        self.SYS_SCREEN_BRIGHTNESS = self.variable_data[17]
+        self.SYS_DIM_BACKLIGHT = self.variable_data[18]
+        self.SYS_SCREEN_OFF_DELAY = self.variable_data[19]
+        self.SYS_SHUTDOWN_DELAY = self.variable_data[20]
+        self.AUTOVAR_OPERATOR_1 = self.variable_data[21]
+        self.AUTOVAR_OPERATOR_2_1 = self.variable_data[22]
+        self.AUTOVAR_GET_VAR_1 = self.variable_data[23]
+        self.AUTOVAR_GET_VAR_2_1 = self.variable_data[24]
+        self.AUTOVAR_SET_VAR_1 = self.variable_data[25]
+        self.AUTOVAR_OPERATOR_2 = self.variable_data[26]
+        self.AUTOVAR_OPERATOR_2_2 = self.variable_data[27]
+        self.AUTOVAR_GET_VAR_2 = self.variable_data[28]
+        self.AUTOVAR_GET_VAR_2_2 = self.variable_data[29]
+        self.AUTOVAR_SET_VAR_2 = self.variable_data[30]
+        self.AUTOVAR_OPERATOR_3 = self.variable_data[31]
+        self.AUTOVAR_OPERATOR_2_3 = self.variable_data[32]
+        self.AUTOVAR_GET_VAR_3 = self.variable_data[33]
+        self.AUTOVAR_GET_VAR_2_3 = self.variable_data[34]
+        self.AUTOVAR_SET_VAR_3 = self.variable_data[35]
+        self.AUTOVAR_OPERATOR_4 = self.variable_data[36]
+        self.AUTOVAR_OPERATOR_2_4 = self.variable_data[37]
+        self.AUTOVAR_GET_VAR_4 = self.variable_data[38]
+        self.AUTOVAR_GET_VAR_2_4 = self.variable_data[39]
+        self.AUTOVAR_SET_VAR_4 = self.variable_data[40]
 
         if not debug_mode:
             self.DI_IGNITION = self.variable_data[7]  #need to update last due to screen initialization issue
@@ -515,33 +538,32 @@ class Variables(Widget):
 
         self.scan_auto_vars()
 
+    def eval_auto_var(self, op, op2, get, get2, set, prev_state):
+        if op != '':
+            if (op == 'if' and self.get(get) == '1') or (op == 'if not' and self.get(get) == '0'):
+                if op2 == '' or op2 == 'or' or op2 == 'or not':
+                    state = '1'
+                elif (op2 == 'and' and self.get(get2) == '1') or (op2 == 'and not' and self.get(get2) == '0'):
+                    state = '1'
+                else:
+                    state = '0'
+            else:
+                if op2 == '':
+                    state = '0'
+                elif (op2 == 'or' and self.get(get2) == '1') or (op2 == 'or not' and self.get(get2) == '0'):
+                    state = '1'
+                else:
+                    state = '0'
+            if prev_state != state:
+                self.set(set, state)
+            return state
+    
     def scan_auto_vars(self):
         if self.data_change:
-            if self.AUTOVAR_OPERATOR_1 != '':
-                if (self.AUTOVAR_OPERATOR_1 == 'if' and self.get(self.AUTOVAR_GET_VAR_1) == '1') or (self.AUTOVAR_OPERATOR_1 == 'if not' and self.get(self.AUTOVAR_GET_VAR_1) == '0'):
-                    state = '1'
-                else:
-                    state = '0'
-                self.set(self.AUTOVAR_SET_VAR_1, state)
-            if self.AUTOVAR_OPERATOR_2 != '':
-                if (self.AUTOVAR_OPERATOR_2 == 'if' and self.get(self.AUTOVAR_GET_VAR_2) == '1') or (self.AUTOVAR_OPERATOR_2 == 'if not' and self.get(self.AUTOVAR_GET_VAR_2) == '0'):
-                    state = '1'
-                else:
-                    state = '0'
-                self.set(self.AUTOVAR_SET_VAR_2, state)
-                print('autovar')
-            if self.AUTOVAR_OPERATOR_3 != '':
-                if (self.AUTOVAR_OPERATOR_3 == 'if' and self.get(self.AUTOVAR_GET_VAR_3) == '1') or (self.AUTOVAR_OPERATOR_3 == 'if not' and self.get(self.AUTOVAR_GET_VAR_3) == '0'):
-                    state = '1'
-                else:
-                    state = '0'
-                self.set(self.AUTOVAR_SET_VAR_3, state)
-            if self.AUTOVAR_OPERATOR_4 != '':
-                if (self.AUTOVAR_OPERATOR_4 == 'if' and self.get(self.AUTOVAR_GET_VAR_4) == '1') or (self.AUTOVAR_OPERATOR_4 == 'if not' and self.get(self.AUTOVAR_GET_VAR_4) == '0'):
-                    state = '1'
-                else:
-                    state = '0'
-                self.set(self.AUTOVAR_SET_VAR_4, state)
+            self.prev_autovar_state_1 = self.eval_auto_var(self.AUTOVAR_OPERATOR_1, self.AUTOVAR_OPERATOR_2_1, self.AUTOVAR_GET_VAR_1, self.AUTOVAR_GET_VAR_2_1, self.AUTOVAR_SET_VAR_1, self.prev_autovar_state_1)
+            self.prev_autovar_state_2 = self.eval_auto_var(self.AUTOVAR_OPERATOR_2, self.AUTOVAR_OPERATOR_2_2, self.AUTOVAR_GET_VAR_2, self.AUTOVAR_GET_VAR_2_2, self.AUTOVAR_SET_VAR_2, self.prev_autovar_state_2)
+            self.prev_autovar_state_3 = self.eval_auto_var(self.AUTOVAR_OPERATOR_3, self.AUTOVAR_OPERATOR_2_3, self.AUTOVAR_GET_VAR_3, self.AUTOVAR_GET_VAR_2_3, self.AUTOVAR_SET_VAR_3, self.prev_autovar_state_3)
+            self.prev_autovar_state_4 = self.eval_auto_var(self.AUTOVAR_OPERATOR_4, self.AUTOVAR_OPERATOR_2_4, self.AUTOVAR_GET_VAR_4, self.AUTOVAR_GET_VAR_2_4, self.AUTOVAR_SET_VAR_4, self.prev_autovar_state_4)
 
     def toggle_update_clock(self, state):
         if state:
@@ -574,8 +596,8 @@ class Variables(Widget):
             if channel_type == 'DO':
                 self.write_arduino('digital_output/' + tag + '/' + value + '/')
             if channel_type == 'SYS':
-                if tag == 'SYS_DIM_BACKLIGHT':
-                    self.sys_cmd(tag, int(value))
+                #if tag == 'SYS_DIM_BACKLIGHT':
+                self.sys_cmd(tag, int(value))
         except:
             print('variable.set: tag not found')
         #self.refresh_data = True
@@ -591,6 +613,10 @@ class Variables(Widget):
         if command == 'SYS_SCREEN_BRIGHTNESS':
             if self.SYS_DIM_BACKLIGHT == "1":
                 self.backlight_brightness(value)
+        if command == 'SYS_PASSCODE_PROMPT':
+            if value == 1:
+                self.app_ref.screen_man.current = "passcode_screen"
+                self.set(command, '0')
 
     def backlight_brightness(self, value):
         print('brightness cmd')

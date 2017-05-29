@@ -2,16 +2,16 @@
     "button_0": {
         "channel": "DO_0", 
         "enable": true, 
-        "invert": true, 
+        "invert": false, 
         "label": "DO_0", 
         "toggle": true
     }, 
     "button_1": {
-        "channel": "DO_1", 
+        "channel": "DO_3", 
         "enable": true, 
-        "invert": true, 
-        "label": "DO_1", 
-        "toggle": false
+        "invert": false, 
+        "label": "DO_3", 
+        "toggle": true
     }, 
     "button_2": {
         "channel": "DI_1", 
@@ -21,10 +21,10 @@
         "toggle": false
     }, 
     "button_3": {
-        "channel": "DO_3", 
+        "channel": "SYS_PASSCODE_PROMPT", 
         "enable": true, 
         "invert": false, 
-        "label": "DO_3", 
+        "label": "PASSCODE\nPROMPT", 
         "toggle": true
     }, 
     "button_4": {
@@ -63,17 +63,17 @@
         "toggle": true
     }, 
     "indicator_3": {
-        "channel": "SYS_REVERSE_CAM_ON", 
+        "channel": "DI_2", 
         "enable": true, 
         "invert": false, 
-        "label": "Reverse", 
+        "label": "DI_2", 
         "toggle": true
     }, 
     "indicator_4": {
-        "channel": "DI_5", 
+        "channel": "SYS_LOGGED_IN", 
         "enable": true, 
         "invert": false, 
-        "label": "DI_5", 
+        "label": "LOGGED IN", 
         "toggle": true
     }, 
     "indicator_5": {
