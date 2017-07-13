@@ -2,5 +2,5 @@
 
 cd /
 cd home/pi/dashio-kivy
-sudo python main.py
+sudo python main.py > dashio.log 2> dashio.err &
 cd /

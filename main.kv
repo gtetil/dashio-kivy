@@ -18,6 +18,9 @@
     Button:
         text: 'Settings'
         on_release: app.screen_man.current = 'settings_screen'; app.slide_layout.toggle_state()
+    Button:
+        text: 'Settings2'
+        on_release: app.open_settings(); app.slide_layout.toggle_state()
 
 <ScreenManagement>:
     ignition_input: int(app.variables.DI_IGNITION)
@@ -322,6 +325,42 @@
                 set_var_text: 'AUTOVAR_SET_VAR_4'
 
 
+<-SettingAlias>:
+    size_hint: .25, None
+    height: labellayout.texture_size[1] + dp(10)
+    content: content
+    canvas:
+        Color:
+            rgba: 47 / 255., 167 / 255., 212 / 255., self.selected_alpha
+        Rectangle:
+            pos: self.x, self.y + 1
+            size: self.size
+        Color:
+            rgb: .2, .2, .2
+        Rectangle:
+            pos: self.x, self.y - 2
+            size: self.width, 1
+
+    BoxLayout:
+        pos: root.pos
+
+        Label:
+            size_hint_x: .66
+            id: labellayout
+            markup: True
+            text: root.title or ''
+            font_size: '15sp'
+            text_size: self.width - 32, None
+
+        BoxLayout:
+            id: content
+            size_hint_x: .33
+
+            Label:
+                text: root.value or ''
+                pos: root.pos
+                font_size: '15sp'
+
 <SpinnerLabel@SpinnerOption>:
     font_size: '13sp'
 
@@ -402,7 +441,7 @@
 
     Camera:
         id: cam
-        resolution: (800, 480)
+        #resolution: (800, 480)
         play: True if app.variables.SYS_REVERSE_CAM_ON == "1" else False
 
 

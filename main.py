@@ -16,13 +16,15 @@ from kivy.uix.slider import Slider
 from kivy.uix.textinput import TextInput
 from kivy.uix.switch import Switch
 from kivy.clock import Clock
-from kivy.properties import StringProperty, NumericProperty, ObjectProperty, BooleanProperty
+from kivy.properties import StringProperty, NumericProperty, ObjectProperty, BooleanProperty, ListProperty
 from kivy.uix.camera import Camera
 from kivy.uix.screenmanager import ScreenManager, Screen, NoTransition
 from kivy.uix.popup import Popup
 from kivy.core.window import Window
 from kivy.animation import Animation
 from navigationdrawer import NavigationDrawer
+from kivy.uix.settings import SettingsWithSidebar, SettingString
+import app_settings
 
 import json
 from functools import partial
@@ -37,10 +39,10 @@ import re
 from operator import xor
 BASE = "/sys/class/backlight/rpi_backlight/"
 
-debug_mode = False
-pc_mode = False
+debug_mode = True
+pc_mode = True
 win_mode = False
-#!!!CHECK CAMERA RESOLUTION BEOFRE UPLOADING TO PI!!!!
+#!!!CHECK CAMERA RESOLUTION BEFORE UPLOADING TO PI!!!!
 
 try:
     import RPi.GPIO as GPIO
@@ -364,6 +366,9 @@ class CameraScreen(Screen):
 class MainApp(App):
 
     def build(self):
+        self.settings_cls = SettingsWithSidebar
+        self.use_kivy_settings = False
+
         self.dynamic_layout = DynamicLayout()
         self.variables = Variables()
         self.screen_man = ScreenManagement()
@@ -373,22 +378,41 @@ class MainApp(App):
         self.slide_layout.add_widget(self.screen_man)
         return self.slide_layout
 
+    def build_config(self, config):
+        config.setdefaults('Settings', {
+            'SYS_SCREEN_BRIGHTNESS': 255,
+            'SYS_SCREEN_OFF_DELAY': 1,
+            'SYS_SHUTDOWN_DELAY': 60})
+        for key in app_settings.auto_var_tags:
+            config.setdefaults('AutoVars', {key: ''})
+        for key in app_settings.arduino_input_tags:
+            config.setdefaults('InputAliases', {key: key})
+        for key in app_settings.arduino_output_tags:
+            config.setdefaults('OutputAliases', {key: key})
+
+    def build_settings(self, settings):
+        settings.register_type('alias', SettingAlias)
+        settings.add_json_panel('Settings', self.config, data=app_settings.settings_json)
+        settings.add_json_panel('Aliases', self.config, data=app_settings.aliases_json)
+        settings.add_json_panel('AutoVars', self.config, data=app_settings.autovars_json)
+
+    def on_config_change(self, config, section,
+                         key, value):
+        print config, section, key, value
+        self.variables.get_aliases()
+
     def exit_app(self):
         self.stop()
+
+class SettingAlias(SettingString):
+    pass
 
 class Variables(Widget):
     app_ref = ObjectProperty(None)
     data_change = BooleanProperty(False)
     refresh_data = BooleanProperty(False)
+    display_var_tags = ListProperty()
     variables_file = 'variables.json'
-    arduino_input_tags = ['DI_0', 'DI_1', 'DI_2', 'DI_3', 'DI_4', 'DI_5', 'DI_IGNITION']
-    arduino_output_tags = ['DO_0', 'DO_1', 'DO_2', 'DO_3', 'DO_4', 'DO_5']
-    sys_var_tags = ['SYS_LOGGED_IN', 'SYS_PASSCODE_PROMPT', 'SYS_REVERSE_CAM_ON']
-    sys_save_var_tags = ['SYS_SCREEN_BRIGHTNESS', 'SYS_DIM_BACKLIGHT', 'SYS_SCREEN_OFF_DELAY', 'SYS_SHUTDOWN_DELAY']
-    auto_var_tags = ['AUTOVAR_OPERATOR_1','AUTOVAR_OPERATOR_2_1', 'AUTOVAR_GET_VAR_1','AUTOVAR_GET_VAR_2_1', 'AUTOVAR_SET_VAR_1', 'AUTOVAR_OPERATOR_2', 'AUTOVAR_OPERATOR_2_2', 'AUTOVAR_GET_VAR_2', 'AUTOVAR_GET_VAR_2_2', 'AUTOVAR_SET_VAR_2', 'AUTOVAR_OPERATOR_3', 'AUTOVAR_OPERATOR_2_3', 'AUTOVAR_GET_VAR_3', 'AUTOVAR_GET_VAR_2_3', 'AUTOVAR_SET_VAR_3', 'AUTOVAR_OPERATOR_4', 'AUTOVAR_OPERATOR_2_4', 'AUTOVAR_GET_VAR_4', 'AUTOVAR_GET_VAR_2_4', 'AUTOVAR_SET_VAR_4']
-    var_tags = [''] + arduino_input_tags + arduino_output_tags + sys_var_tags + sys_save_var_tags + auto_var_tags
-    save_var_tags = sys_save_var_tags + auto_var_tags
-    display_var_tags = [''] + arduino_input_tags + arduino_output_tags + sys_var_tags + sys_save_var_tags
     prev_autovar_state_1 = '0'
     prev_autovar_state_2 = '0'
     prev_autovar_state_3 = '0'
@@ -436,13 +460,25 @@ class Variables(Widget):
 
     def __init__(self, **kwargs):
         super(Variables, self).__init__(**kwargs)
+        self.aliases = self.get_aliases()
         self.variable_data = ['0'] * len(self.var_tags)
         self.old_variable_data = ['0'] * len(self.var_tags)
-        self.arduino_data_len = (len(self.arduino_input_tags) + 1)
+        self.arduino_data_len = (len(app_settings.arduino_input_tags) + 1)
         self.arduino_data = ['0'] * self.arduino_data_len
         self.open_variables()
         self.toggle_update_clock(True)
         Clock.schedule_interval(self.read_arduino, 0.05)
+
+    def get_aliases(self):
+        self.aliases = []
+        for key in app_settings.arduino_input_tags:
+            self.aliases.append(str(self.app_ref.config.get('InputAliases', key)))
+        for key in app_settings.arduino_output_tags:
+            self.aliases.append(str(self.app_ref.config.get('OutputAliases', key)))
+        self.var_tags = [''] + app_settings.arduino_input_tags + app_settings.arduino_output_tags + app_settings.sys_var_tags + app_settings.sys_save_var_tags + app_settings.auto_var_tags
+        self.alias_var_tags = [''] + self.aliases + app_settings.sys_var_tags + app_settings.sys_save_var_tags + app_settings.auto_var_tags
+        self.save_var_tags = app_settings.sys_save_var_tags + app_settings.auto_var_tags
+        self.display_var_tags = [''] + self.aliases + app_settings.sys_var_tags + app_settings.sys_save_var_tags
 
     def open_variables(self):
         with open(self.variables_file, 'r') as file:
@@ -577,7 +613,7 @@ class Variables(Widget):
     def get(self, tag):
         if tag != '':
             try:
-                index = self.var_tags.index(tag)
+                index = self.alias_var_tags.index(tag)
                 return self.variable_data[index]
             except:
                 print('variables.get: tag not found')
@@ -590,7 +626,7 @@ class Variables(Widget):
 
     def set(self, tag, value):
         try:
-            index = self.var_tags.index(tag)
+            index = self.alias_var_tags.index(tag)
             self.variable_data[index] = value
             channel_type = self.var_tags[index].split('_')[0]
             if channel_type == 'DO':

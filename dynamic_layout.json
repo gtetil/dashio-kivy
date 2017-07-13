@@ -1,9 +1,9 @@
 {
     "button_0": {
-        "channel": "DO_0", 
+        "channel": "blah", 
         "enable": true, 
         "invert": false, 
-        "label": "DO_0", 
+        "label": "blah", 
         "toggle": true
     }, 
     "button_1": {
@@ -14,11 +14,11 @@
         "toggle": true
     }, 
     "button_2": {
-        "channel": "DI_1", 
+        "channel": "DO_1_alias", 
         "enable": true, 
         "invert": false, 
-        "label": "DI_1", 
-        "toggle": false
+        "label": "DO_1", 
+        "toggle": true
     }, 
     "button_3": {
         "channel": "SYS_PASSCODE_PROMPT", 
@@ -56,10 +56,10 @@
         "toggle": true
     }, 
     "indicator_2": {
-        "channel": "DO_0", 
+        "channel": "blah", 
         "enable": true, 
         "invert": false, 
-        "label": "DO_0", 
+        "label": "blah", 
         "toggle": true
     }, 
     "indicator_3": {
