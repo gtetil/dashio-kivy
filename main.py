@@ -477,24 +477,38 @@ class Variables(Widget):
             self.aliases.append(str(self.app_ref.config.get('OutputAliases', key)))
         self.var_tags = [''] + app_settings.arduino_input_tags + app_settings.arduino_output_tags + app_settings.sys_var_tags + app_settings.sys_save_var_tags + app_settings.auto_var_tags
         self.alias_var_tags = [''] + self.aliases + app_settings.sys_var_tags + app_settings.sys_save_var_tags + app_settings.auto_var_tags
-        self.save_var_tags = app_settings.sys_save_var_tags + app_settings.auto_var_tags
+        #self.save_var_tags = app_settings.sys_save_var_tags + app_settings.auto_var_tags
         self.display_var_tags = [''] + self.aliases + app_settings.sys_var_tags + app_settings.sys_save_var_tags
+
+    json_test = json.loads(app_settings.settings_json)
+    print json_test[1]['title']
 
     def open_variables(self):
         with open(self.variables_file, 'r') as file:
-            self.sys_data_json = json.load(file)
-        try:
-            for tag in self.save_var_tags:
-                value = str(self.sys_data_json[tag])
-                self.set(tag, value)
-        except:
-            print('error: maybe tag did not exist yet?')
+            self.variables_json = json.load(file)
+        print('dict')
+        self.var_ids_dict = {}
+        self.save_var_indexes = [] #indexes of variables that need to be saved
+        #try:
+        j = 0
+        for i in range(len(self.variables_json)):
+            print i
+            self.var_ids_dict[self.variables_json[i]['id']] = self.variables_json[i]['data_index']  #dictionary to find data_index by id
+            '''if self.variables_json[i]['save']:
+                value = self.variables_json[i]['value']
+                self.set(i, value) #set 'saved' variables
+                self.save_var_indexes[j] = i
+                j =+ 1'''
+        print(self.var_ids_dict)
+        print(self.var_ids_dict[2001])
+        #except:
+            #print('error: maybe tag did not exist yet?')
 
     def save_variables(self):
-        for tag in self.save_var_tags:
-            self.sys_data_json[tag] = self.get(tag)
+        '''for i in self.save_var_indexes:
+            self.variables_json[i]['value'] = self.variable_data[i]
         with open(self.variables_file, 'w') as file:
-            json.dump(self.sys_data_json, file, sort_keys=True, indent=4)
+            json.dump(self.sys_data_json, file, sort_keys=True, indent=4)'''
 
     def read_arduino(self, dt):
         if not debug_mode:
@@ -624,11 +638,11 @@ class Variables(Widget):
         ser.write(command)
         #time.sleep(.1)
 
-    def set(self, tag, value):
+    def set(self, index, value):
         try:
-            index = self.alias_var_tags.index(tag)
             self.variable_data[index] = value
-            channel_type = self.var_tags[index].split('_')[0]
+            channel_type = self.variables_json[index]['type']
+            tag = self.variables_json[index]['tag']
             if channel_type == 'DO':
                 self.write_arduino('digital_output/' + tag + '/' + value + '/')
             if channel_type == 'SYS':
