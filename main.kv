@@ -79,13 +79,14 @@
 
     ScreenItemEditPopup:
         id: item_edit_popup
+        app_ref: app
         modify_mode: app.dynamic_layout.modify_mode
         dynamic_layout: app.dynamic_layout
         label_input: label_input
         toggle_check: toggle_check
         enable_check: enable_check
         invert_check: invert_check
-        channel_spinner: channel_spinner
+        variable_spinner: variable_spinner
         toggle_layout: toggle_layout
         title: "Modify"
         size_hint: None, None
@@ -151,7 +152,7 @@
                     valign: 'middle'
 
                 Spinner:
-                    id: channel_spinner
+                    id: variable_spinner
                     size_hint: .75, 1
                     option_cls: Factory.get("SpinnerLabel")
                     font_size: '13sp'
@@ -206,7 +207,7 @@
                 Slider:
                     id: screen_brightness_slider
                     on_touch_move: app.variables.sys_cmd('SYS_SCREEN_BRIGHTNESS', str(int(self.value)))
-                    on_touch_up: app.variables.set('SYS_SCREEN_BRIGHTNESS', str(int(self.value)))
+                    on_touch_up: app.variables.set_by_alias('SYS_SCREEN_BRIGHTNESS', str(int(self.value)))
                     orientation: 'vertical'
                     min: 20
                     max: 200
@@ -232,7 +233,7 @@
 
                         FloatInput:
                             id: screen_off_delay_input
-                            on_text: app.variables.set('SYS_SCREEN_OFF_DELAY', self.text)
+                            on_text: app.variables.set_by_alias('SYS_SCREEN_OFF_DELAY', self.text)
                             text: app.variables.SYS_SCREEN_OFF_DELAY
                             size_hint_x: 0.4
                             multiline: False
@@ -434,7 +435,7 @@
 
             Button:
                 text: 'OK'
-                on_release: fail_popup.dismiss(); app.screen_man.current = 'main_screen'; app.variables.set('SYS_LOGGED_IN', '0')
+                on_release: fail_popup.dismiss(); app.screen_man.current = 'main_screen'; app.variables.set_by_alias('SYS_LOGGED_IN', '0')
 
 <CameraScreen>:
     id: camera_screen

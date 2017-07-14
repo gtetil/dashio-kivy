@@ -1,11 +1,5 @@
 import json
 
-arduino_input_tags = ['DI_0', 'DI_1', 'DI_2', 'DI_3', 'DI_4', 'DI_5', 'DI_IGNITION']
-arduino_output_tags = ['DO_0', 'DO_1', 'DO_2', 'DO_3', 'DO_4', 'DO_5']
-sys_var_tags = ['SYS_LOGGED_IN', 'SYS_PASSCODE_PROMPT', 'SYS_REVERSE_CAM_ON']
-sys_save_var_tags = ['SYS_SCREEN_BRIGHTNESS', 'SYS_DIM_BACKLIGHT', 'SYS_SCREEN_OFF_DELAY', 'SYS_SHUTDOWN_DELAY']
-auto_var_tags = ['AUTOVAR_OPERATOR_1','AUTOVAR_OPERATOR_2_1', 'AUTOVAR_GET_VAR_1','AUTOVAR_GET_VAR_2_1', 'AUTOVAR_SET_VAR_1', 'AUTOVAR_OPERATOR_2', 'AUTOVAR_OPERATOR_2_2', 'AUTOVAR_GET_VAR_2', 'AUTOVAR_GET_VAR_2_2', 'AUTOVAR_SET_VAR_2', 'AUTOVAR_OPERATOR_3', 'AUTOVAR_OPERATOR_2_3', 'AUTOVAR_GET_VAR_3', 'AUTOVAR_GET_VAR_2_3', 'AUTOVAR_SET_VAR_3', 'AUTOVAR_OPERATOR_4', 'AUTOVAR_OPERATOR_2_4', 'AUTOVAR_GET_VAR_4', 'AUTOVAR_GET_VAR_2_4', 'AUTOVAR_SET_VAR_4']
-
 settings_json = json.dumps([
     {'type': 'numeric',
      'title': 'Screen Dim Brightness',

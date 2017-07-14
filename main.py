@@ -23,7 +23,7 @@ from kivy.uix.popup import Popup
 from kivy.core.window import Window
 from kivy.animation import Animation
 from navigationdrawer import NavigationDrawer
-from kivy.uix.settings import SettingsWithSidebar, SettingString
+from kivy.uix.settings import SettingsWithSidebar, SettingString, Settings, InterfaceWithSidebar
 import app_settings
 
 import json
@@ -119,7 +119,7 @@ class ScreenManagement(ScreenManager):
         if len(self.passcode_try) == len(self.passcode):
             if self.passcode_try == self.passcode:
                 self.current = 'main_screen'
-                self.app_ref.variables.set('SYS_LOGGED_IN', '1')
+                self.app_ref.variables.set_by_alias('SYS_LOGGED_IN', '1')
             else:
                 self.current_screen.ids.fail_popup.open()
             self.passcode_try = ''
@@ -156,7 +156,9 @@ class DynamicLayout(Widget):
             config = {}
             config['label'] = indicator.text
             config['toggle'] = indicator.toggle
-            config['channel'] = indicator.channel
+            config['var_tag'] = indicator.var_tag
+            config['var_alias'] = indicator.var_alias
+            #config['var_id'] = indicator.var_id
             config['enable'] = indicator.enable
             config['invert'] = indicator.invert
             data[indicator.id] = config
@@ -164,7 +166,9 @@ class DynamicLayout(Widget):
             config = {}
             config['label'] = button.text
             config['toggle'] = button.toggle
-            config['channel'] = button.channel
+            config['var_tag'] = button.var_tag
+            config['var_alias'] = button.var_alias
+            #config['var_id'] = button.var_id
             config['enable'] = button.enable
             config['invert'] = button.invert
             data[button.id] = config
@@ -180,26 +184,58 @@ class DynamicLayout(Widget):
         for i in range(6):
             label = data['indicator_'+str(i)]['label']
             toggle = data['indicator_' + str(i)]['toggle']
-            channel = data['indicator_' + str(i)]['channel']
+            self.var_tag = data['indicator_' + str(i)]['var_tag']
+            self.var_alias = data['indicator_' + str(i)]['var_alias']
+            #var_id = data['indicator_' + str(i)]['var_id']
             enable = data['indicator_' + str(i)]['enable']
             invert = data['indicator_' + str(i)]['invert']
+
+            try:
+                alias = self.app_ref.variables.alias_by_tag_dict[self.var_tag]
+                tag = self.app_ref.variables.tag_by_alias_dict[alias]
+            except:
+                pass
+            if self.var_alias in self.app_ref.variables.var_aliases:
+                self.var_tag = tag  # get tag just in case the alias moved to another variable
+            else:
+                if tag != self.var_tag:
+                    self.var_alias = self.var_tag  #the tag has changed, and the alias doesn't exist anymore, so default back to tag
+                else:
+                    self.var_alias = self.app_ref.variables.alias_by_tag_dict[self.var_tag]  #tag is the same, so update with new alias
+
             if toggle:
                 button = DynToggleButton(text=label, id='indicator_' + str(i))
             else:
                 button = DynButton(text=label, id='indicator_' + str(i))
-            button.set_properties(self, channel, enable, self.item_edit_popup, invert)
+            button.set_properties(self, self.var_alias, self.var_tag, enable, self.item_edit_popup, invert)
             self.indicator_layout.add_widget(button)
 
             label = data['button_' + str(i)]['label']
             toggle = data['button_' + str(i)]['toggle']
-            channel = data['button_' + str(i)]['channel']
+            self.var_tag = data['button_' + str(i)]['var_tag']
+            self.var_alias = data['button_' + str(i)]['var_alias']
+            #var_id = data['button_' + str(i)]['var_id']
             enable = data['button_' + str(i)]['enable']
             invert = data['button_' + str(i)]['invert']
+
+            try:
+                alias = self.app_ref.variables.alias_by_tag_dict[self.var_tag]
+                tag = self.app_ref.variables.tag_by_alias_dict[alias]
+            except:
+                pass
+            if self.var_alias in self.app_ref.variables.var_aliases:
+                self.var_tag = tag  # get tag just in case the alias moved to another variable
+            else:
+                if tag != self.var_tag:
+                    self.var_alias = self.var_tag  #the tag has changed, and the alias doesn't exist anymore, so default back to tag
+                else:
+                    self.var_alias = self.app_ref.variables.alias_by_tag_dict[self.var_tag]  #tag is the same, so update with new alias
+
             if toggle:
                 button = DynToggleButton(text=label, id='button_' + str(i))
             else:
                 button = DynButton(text=label, id='button_' + str(i))
-            button.set_properties(self, channel, enable, self.item_edit_popup, invert)
+            button.set_properties(self, self.var_alias, self.var_tag, enable, self.item_edit_popup, invert)
             self.button_layout.add_widget(button)
         self.app_ref.variables.refresh_data = True
         if self.modify_mode:
@@ -228,11 +264,12 @@ class DynamicLayout(Widget):
         anim.start(widget)
 
 class ScreenItemEditPopup(Popup):
+    app_ref = ObjectProperty(None)
     label_input = ObjectProperty(None)
     toggle_check = ObjectProperty(None)
     enable_check = ObjectProperty(None)
     invert_check = ObjectProperty(None)
-    channel_spinner = ObjectProperty(None)
+    variable_spinner = ObjectProperty(None)
     toggle_layout = ObjectProperty(None)
     item = ObjectProperty(None)
     dynamic_layout = ObjectProperty(None)
@@ -245,7 +282,7 @@ class ScreenItemEditPopup(Popup):
             self.toggle_check.active = self.item.toggle
             self.enable_check.active = self.item.enable
             self.invert_check.active = self.item.invert
-            self.channel_spinner.text = self.item.channel
+            self.variable_spinner.text = self.item.var_alias
             self.toggle_layout.disabled = indicator
             self.open()
 
@@ -254,7 +291,8 @@ class ScreenItemEditPopup(Popup):
         self.item.toggle = self.toggle_check.active
         self.item.enable = self.enable_check.active
         self.item.invert = self.invert_check.active
-        self.item.channel = self.channel_spinner.text
+        self.item.var_alias = self.variable_spinner.text
+        self.item.var_tag = self.app_ref.variables.tag_by_alias_dict[self.item.var_alias]  #save tag of associated alias, in case alias is changed/deleted
         self.dynamic_layout.save_layout()
         self.dynamic_layout.build_layout()
         self.dismiss()
@@ -264,14 +302,15 @@ class DynItem(Widget):
     toggle = BooleanProperty(True)
     enable = BooleanProperty(True)
     invert = BooleanProperty(True)
-    channel = StringProperty("")
+    var_alias = StringProperty("")
+    var_tag = StringProperty("")
     ignition_input = NumericProperty(0)
     digital_inputs = NumericProperty(0)
     app_ref = ObjectProperty(None)
     data_change = BooleanProperty(False)
 
     def on_data_change(self, instance, value):
-        state = self.app_ref.variables.get(self.channel)
+        state = self.app_ref.variables.get(self.var_alias)
         if state == '1':
             bool_state = True
         else:
@@ -282,9 +321,10 @@ class DynItem(Widget):
         else:
             self.state = 'normal'
 
-    def set_properties(self, ref, channel, enable, item_edit_popup, invert):
+    def set_properties(self, ref, var_alias, var_tag, enable, item_edit_popup, invert):
         self.dynamic_layout = ref
-        self.channel = str(channel)
+        self.var_alias = str(var_alias)
+        self.var_tag = str(var_tag)
         self.enable = enable
         self.invert = invert
         self.item_edit_popup = item_edit_popup
@@ -296,12 +336,10 @@ class DynItem(Widget):
             self.output_cmd()
 
     def on_touch_down(self, touch):
-        #print(self.channel)
-        #print(self.pos)
         if self.collide_point(*touch.pos):
             if self.app_ref.slide_layout.state != 'open':
                 if not self.dynamic_layout.modify_mode:
-                    if self.enable and self.channel != 'SYS_LOGGED_IN': #don't allow SYS_LOGGED_IN to be change by a button
+                    if self.enable and self.var_alias != 'SYS_LOGGED_IN': #don't allow SYS_LOGGED_IN to be change by a button
                         self._do_press()
                         self.output_cmd()
                         return xor(True, self.invert)
@@ -317,7 +355,7 @@ class DynItem(Widget):
         if self.collide_point(*touch.pos):
             if self.app_ref.slide_layout.state != 'open':
                 if not self.dynamic_layout.modify_mode and not self.toggle:
-                    if self.enable and self.channel != 'SYS_LOGGED_IN': #don't allow SYS_LOGGED_IN to be change by a button
+                    if self.enable and self.var_alias != 'SYS_LOGGED_IN': #don't allow SYS_LOGGED_IN to be change by a button
                         self._do_release()
                         self.output_cmd()
                         return True
@@ -340,7 +378,7 @@ class DynItem(Widget):
                 state = '0'
             else:
                 state = '1'
-            self.app_ref.variables.set(self.channel, state)
+            self.app_ref.variables.set_by_alias(self.var_alias, state)
             self.app_ref.variables.refresh_data = True
 
 class DynToggleButton(DynItem, ToggleButton):
@@ -363,9 +401,16 @@ class PasscodeScreen(Screen):
 class CameraScreen(Screen):
     pass
 
+class MyInterface(InterfaceWithSidebar):
+    def on_close(self, *args):
+        print('settings close')
+
 class MainApp(App):
 
     def build(self):
+        self.mysettings = Settings()
+        self.mysettings.interface_cls = MyInterface
+        #self.mysettings.add_interface()
         self.settings_cls = SettingsWithSidebar
         self.use_kivy_settings = False
 
@@ -376,6 +421,7 @@ class MainApp(App):
         self.slide_menu = SlideMenu()
         self.slide_layout.add_widget(self.slide_menu)
         self.slide_layout.add_widget(self.screen_man)
+        self.get_aliases()
         return self.slide_layout
 
     def build_config(self, config):
@@ -383,12 +429,12 @@ class MainApp(App):
             'SYS_SCREEN_BRIGHTNESS': 255,
             'SYS_SCREEN_OFF_DELAY': 1,
             'SYS_SHUTDOWN_DELAY': 60})
-        for key in app_settings.auto_var_tags:
+        '''for key in app_settings.auto_var_tags:
             config.setdefaults('AutoVars', {key: ''})
         for key in app_settings.arduino_input_tags:
             config.setdefaults('InputAliases', {key: key})
         for key in app_settings.arduino_output_tags:
-            config.setdefaults('OutputAliases', {key: key})
+            config.setdefaults('OutputAliases', {key: key})'''
 
     def build_settings(self, settings):
         settings.register_type('alias', SettingAlias)
@@ -396,10 +442,23 @@ class MainApp(App):
         settings.add_json_panel('Aliases', self.config, data=app_settings.aliases_json)
         settings.add_json_panel('AutoVars', self.config, data=app_settings.autovars_json)
 
-    def on_config_change(self, config, section,
-                         key, value):
-        print config, section, key, value
-        self.variables.get_aliases()
+    def on_config_change(self, config, section, key, value):
+        print('config change')
+        self.get_aliases()
+
+    #get aliases from config file, right them to variables.json, update lists, then rebuild dynamic layout in case there were any alias changes that would effect a screen item
+    def get_aliases(self):
+        self.config_aliases = [''] #start with one item, for the first blank variable
+        for (key, value) in self.config.items('InputAliases'):
+            self.config_aliases.append(value)
+        for (key, value) in self.config.items('OutputAliases'):
+            self.config_aliases.append(value)
+        for i in range(len(self.config_aliases)):
+            self.variables.variables_json[i]['alias'] = self.config_aliases[i]
+        self.variables.set_var_lists()
+        self.variables.save_variables()
+        self.dynamic_layout.build_layout()
+        self.dynamic_layout.save_layout()
 
     def exit_app(self):
         self.stop()
@@ -460,55 +519,65 @@ class Variables(Widget):
 
     def __init__(self, **kwargs):
         super(Variables, self).__init__(**kwargs)
-        self.aliases = self.get_aliases()
-        self.variable_data = ['0'] * len(self.var_tags)
-        self.old_variable_data = ['0'] * len(self.var_tags)
-        self.arduino_data_len = (len(app_settings.arduino_input_tags) + 1)
-        self.arduino_data = ['0'] * self.arduino_data_len
         self.open_variables()
+        self.set_var_lists()
+        self.variable_data = ['0'] * len(self.var_aliases)
+        self.old_variable_data = ['0'] * len(self.var_aliases)
+        self.arduino_data_len = 7 + 1
+        self.arduino_data = ['0'] * self.arduino_data_len
+        self.set_saved_vars()
         self.toggle_update_clock(True)
         Clock.schedule_interval(self.read_arduino, 0.05)
 
-    def get_aliases(self):
-        self.aliases = []
-        for key in app_settings.arduino_input_tags:
-            self.aliases.append(str(self.app_ref.config.get('InputAliases', key)))
-        for key in app_settings.arduino_output_tags:
-            self.aliases.append(str(self.app_ref.config.get('OutputAliases', key)))
-        self.var_tags = [''] + app_settings.arduino_input_tags + app_settings.arduino_output_tags + app_settings.sys_var_tags + app_settings.sys_save_var_tags + app_settings.auto_var_tags
-        self.alias_var_tags = [''] + self.aliases + app_settings.sys_var_tags + app_settings.sys_save_var_tags + app_settings.auto_var_tags
-        #self.save_var_tags = app_settings.sys_save_var_tags + app_settings.auto_var_tags
-        self.display_var_tags = [''] + self.aliases + app_settings.sys_var_tags + app_settings.sys_save_var_tags
+    def set_var_lists(self):
+        self.var_aliases = []
+        self.var_save = []
+        self.var_save_values = []
+        self.var_display = []
+        self.display_var_tags = [] #this is a kivy property
+        self.var_ids_dict = {}
+        self.var_aliases_dict = {}
+        self.var_tag_dict = {}
+        self.tag_by_alias_dict = {}
+        self.alias_by_tag_dict = {}
+        for i in range(len(self.variables_json)):
+            #create variable lists
+            hidden = self.variables_json[i]['hidden']
+            save = self.variables_json[i]['save']
+            value = self.variables_json[i]['value']
+            if self.variables_json[i]['type'] == "SYS":  #if system variable, then use tag for alias
+                alias = self.variables_json[i]['tag']
+            else:
+                alias = self.variables_json[i]['alias']
+            self.var_aliases.append(alias)
+            if not hidden: self.var_display.append(alias)
+            if save:
+                self.var_save.append(alias)
+                self.var_save_values.append(value)
 
-    json_test = json.loads(app_settings.settings_json)
-    print json_test[1]['title']
+            # create variable dictionaries to easily find data indexes, or to reconcile variable_json
+            self.var_ids_dict[self.variables_json[i]['id']] = self.variables_json[i]['data_index']  # dictionary to find data_index by id
+            self.var_aliases_dict[alias] = self.variables_json[i]['data_index']  # dictionary to find data_index by alias
+            self.var_tag_dict[self.variables_json[i]['tag']] = self.variables_json[i]['data_index']  # dictionary to find data_index by tag
+            self.tag_by_alias_dict[self.variables_json[i]['alias']] = self.variables_json[i]['tag']  # dictionary to find tag by alias
+            self.alias_by_tag_dict[self.variables_json[i]['tag']] = self.variables_json[i]['alias']  # dictionary to find alias by tag
+        self.display_var_tags = self.var_display  #this is to defer kivy property updates until the end, otherwise it slows down program for every append
 
     def open_variables(self):
         with open(self.variables_file, 'r') as file:
             self.variables_json = json.load(file)
-        print('dict')
-        self.var_ids_dict = {}
-        self.save_var_indexes = [] #indexes of variables that need to be saved
-        #try:
-        j = 0
-        for i in range(len(self.variables_json)):
-            print i
-            self.var_ids_dict[self.variables_json[i]['id']] = self.variables_json[i]['data_index']  #dictionary to find data_index by id
-            '''if self.variables_json[i]['save']:
-                value = self.variables_json[i]['value']
-                self.set(i, value) #set 'saved' variables
-                self.save_var_indexes[j] = i
-                j =+ 1'''
-        print(self.var_ids_dict)
-        print(self.var_ids_dict[2001])
-        #except:
-            #print('error: maybe tag did not exist yet?')
+
+    def set_saved_vars(self):
+        # set variables that were saved
+        for i in range(len(self.var_save)):
+            self.set_by_alias(self.var_save[i], self.var_save_values[i])
 
     def save_variables(self):
-        '''for i in self.save_var_indexes:
-            self.variables_json[i]['value'] = self.variable_data[i]
+        for alias in self.var_save:
+            data_index = self.var_aliases_dict[alias]
+            self.variables_json[data_index]['value'] = self.variable_data[data_index]
         with open(self.variables_file, 'w') as file:
-            json.dump(self.sys_data_json, file, sort_keys=True, indent=4)'''
+            json.dump(self.variables_json, file, sort_keys=True, indent=4)
 
     def read_arduino(self, dt):
         if not debug_mode:
@@ -560,7 +629,7 @@ class Variables(Widget):
         self.SYS_DIM_BACKLIGHT = self.variable_data[18]
         self.SYS_SCREEN_OFF_DELAY = self.variable_data[19]
         self.SYS_SHUTDOWN_DELAY = self.variable_data[20]
-        self.AUTOVAR_OPERATOR_1 = self.variable_data[21]
+        '''self.AUTOVAR_OPERATOR_1 = self.variable_data[21]
         self.AUTOVAR_OPERATOR_2_1 = self.variable_data[22]
         self.AUTOVAR_GET_VAR_1 = self.variable_data[23]
         self.AUTOVAR_GET_VAR_2_1 = self.variable_data[24]
@@ -579,7 +648,7 @@ class Variables(Widget):
         self.AUTOVAR_OPERATOR_2_4 = self.variable_data[37]
         self.AUTOVAR_GET_VAR_4 = self.variable_data[38]
         self.AUTOVAR_GET_VAR_2_4 = self.variable_data[39]
-        self.AUTOVAR_SET_VAR_4 = self.variable_data[40]
+        self.AUTOVAR_SET_VAR_4 = self.variable_data[40]'''
 
         if not debug_mode:
             self.DI_IGNITION = self.variable_data[7]  #need to update last due to screen initialization issue
@@ -605,7 +674,7 @@ class Variables(Widget):
                 else:
                     state = '0'
             if prev_state != state:
-                self.set(set, state)
+                self.set_by_alias(set, state)
             return state
     
     def scan_auto_vars(self):
@@ -624,11 +693,11 @@ class Variables(Widget):
             except:
                 pass
 
-    def get(self, tag):
-        if tag != '':
+    def get(self, alias):
+        if alias != '':
             try:
-                index = self.alias_var_tags.index(tag)
-                return self.variable_data[index]
+                data_index = self.var_aliases_dict[alias]
+                return self.variable_data[data_index]
             except:
                 print('variables.get: tag not found')
                 return ''
@@ -637,6 +706,14 @@ class Variables(Widget):
     def write_arduino(self, command):
         ser.write(command)
         #time.sleep(.1)
+
+    def set_by_alias(self, alias, value):
+        data_index = self.var_aliases_dict[alias]
+        self.set(data_index, value)
+
+    '''def set_by_tag(self, tag, value):
+        data_index = self.var_tag_dict[tag]
+        self.set(data_index, value)'''
 
     def set(self, index, value):
         try:
@@ -654,19 +731,19 @@ class Variables(Widget):
 
     #SYSTEM COMMANDS#
 
-    def sys_cmd(self, command, value):
-        if command == 'SYS_DIM_BACKLIGHT':
+    def sys_cmd(self, tag, value):
+        if tag == 'SYS_DIM_BACKLIGHT':
             if value == 1:
                 self.backlight_brightness(int(self.get('SYS_SCREEN_BRIGHTNESS'))) #need to use "get" to get around initialization issue
             else:
                 self.backlight_brightness(255)
-        if command == 'SYS_SCREEN_BRIGHTNESS':
+        if tag == 'SYS_SCREEN_BRIGHTNESS':
             if self.SYS_DIM_BACKLIGHT == "1":
                 self.backlight_brightness(value)
-        if command == 'SYS_PASSCODE_PROMPT':
+        if tag == 'SYS_PASSCODE_PROMPT':
             if value == 1:
                 self.app_ref.screen_man.current = "passcode_screen"
-                self.set(command, '0')
+                self.set_by_alias(tag, '0')
 
     def backlight_brightness(self, value):
         print('brightness cmd')

@@ -1,86 +1,98 @@
 {
     "button_0": {
-        "channel": "blah", 
         "enable": true, 
         "invert": false, 
-        "label": "blah", 
-        "toggle": true
+        "label": "DO_0", 
+        "toggle": true, 
+        "var_alias": "blah8", 
+        "var_tag": "DO_0"
     }, 
     "button_1": {
-        "channel": "DO_3", 
         "enable": true, 
         "invert": false, 
         "label": "DO_3", 
-        "toggle": true
+        "toggle": true, 
+        "var_alias": "blah6", 
+        "var_tag": "DO_1"
     }, 
     "button_2": {
-        "channel": "DO_1_alias", 
         "enable": true, 
         "invert": false, 
         "label": "DO_1", 
-        "toggle": true
+        "toggle": true, 
+        "var_alias": "DO_2", 
+        "var_tag": "DO_2"
     }, 
     "button_3": {
-        "channel": "SYS_PASSCODE_PROMPT", 
         "enable": true, 
         "invert": false, 
         "label": "PASSCODE\nPROMPT", 
-        "toggle": true
+        "toggle": true, 
+        "var_alias": "DO_3", 
+        "var_tag": "DO_3"
     }, 
     "button_4": {
-        "channel": "DO_4", 
         "enable": true, 
         "invert": false, 
         "label": "DO_4", 
-        "toggle": true
+        "toggle": true, 
+        "var_alias": "DO_4", 
+        "var_tag": "DO_4"
     }, 
     "button_5": {
-        "channel": "DO_5", 
         "enable": true, 
         "invert": false, 
         "label": "DO_5", 
-        "toggle": true
+        "toggle": true, 
+        "var_alias": "DO_5", 
+        "var_tag": "DO_5"
     }, 
     "indicator_0": {
-        "channel": "DI_0", 
         "enable": true, 
         "invert": false, 
         "label": "DI_0", 
-        "toggle": true
+        "toggle": true, 
+        "var_alias": "DI_0", 
+        "var_tag": "DI_0"
     }, 
     "indicator_1": {
-        "channel": "DI_1", 
         "enable": true, 
         "invert": false, 
-        "label": "DI_1", 
-        "toggle": true
+        "label": "DO_1", 
+        "toggle": true, 
+        "var_alias": "blah6", 
+        "var_tag": "DO_1"
     }, 
     "indicator_2": {
-        "channel": "blah", 
         "enable": true, 
         "invert": false, 
-        "label": "blah", 
-        "toggle": true
+        "label": "DO_0", 
+        "toggle": true, 
+        "var_alias": "blah8", 
+        "var_tag": "DO_0"
     }, 
     "indicator_3": {
-        "channel": "DI_2", 
         "enable": true, 
         "invert": false, 
-        "label": "DI_2", 
-        "toggle": true
+        "label": "DI_3", 
+        "toggle": true, 
+        "var_alias": "DI_3", 
+        "var_tag": "DI_3"
     }, 
     "indicator_4": {
-        "channel": "SYS_LOGGED_IN", 
         "enable": true, 
         "invert": false, 
         "label": "LOGGED IN", 
-        "toggle": true
+        "toggle": true, 
+        "var_alias": "DI_4", 
+        "var_tag": "DI_4"
     }, 
     "indicator_5": {
-        "channel": "SYS_DIM_BACKLIGHT", 
         "enable": true, 
         "invert": false, 
         "label": "DIM BACKLIGHT", 
-        "toggle": true
+        "toggle": true, 
+        "var_alias": "DI_5", 
+        "var_tag": "DI_5"
     }
 }
