@@ -10,7 +10,7 @@
         "value": ""
     }, 
     {
-        "alias": "DI_0", 
+        "alias": "Reverse", 
         "data_index": 1, 
         "hidden": false, 
         "id": 1, 
@@ -80,7 +80,7 @@
         "value": ""
     }, 
     {
-        "alias": "blah8", 
+        "alias": "Rear Lights", 
         "data_index": 8, 
         "hidden": false, 
         "id": 100, 
@@ -90,7 +90,7 @@
         "value": ""
     }, 
     {
-        "alias": "blah6", 
+        "alias": "DO_1", 
         "data_index": 9, 
         "hidden": false, 
         "id": 101, 
@@ -110,7 +110,7 @@
         "value": ""
     }, 
     {
-        "alias": "DO_3", 
+        "alias": "test3", 
         "data_index": 11, 
         "hidden": false, 
         "id": 103, 
@@ -140,7 +140,7 @@
         "value": ""
     }, 
     {
-        "alias": "null", 
+        "alias": "SYS_LOGGED_IN", 
         "data_index": 14, 
         "hidden": false, 
         "id": 1000, 
@@ -150,7 +150,7 @@
         "value": "0"
     }, 
     {
-        "alias": "null", 
+        "alias": "SYS_PASSCODE_PROMPT", 
         "data_index": 15, 
         "hidden": false, 
         "id": 1001, 
@@ -160,7 +160,7 @@
         "value": "0"
     }, 
     {
-        "alias": "null", 
+        "alias": "SYS_REVERSE_CAM_ON", 
         "data_index": 16, 
         "hidden": false, 
         "id": 1002, 
@@ -170,7 +170,7 @@
         "value": "0"
     }, 
     {
-        "alias": "null", 
+        "alias": "SYS_SCREEN_BRIGHTNESS", 
         "data_index": 17, 
         "hidden": false, 
         "id": 2000, 
@@ -180,7 +180,7 @@
         "value": "255"
     }, 
     {
-        "alias": "null", 
+        "alias": "SYS_DIM_BACKLIGHT", 
         "data_index": 18, 
         "hidden": false, 
         "id": 2001, 
@@ -190,7 +190,7 @@
         "value": "0"
     }, 
     {
-        "alias": "null", 
+        "alias": "SYS_SCREEN_OFF_DELAY", 
         "data_index": 19, 
         "hidden": false, 
         "id": 2002, 
@@ -200,7 +200,7 @@
         "value": "1"
     }, 
     {
-        "alias": "null", 
+        "alias": "SYS_SHUTDOWN_DELAY", 
         "data_index": 20, 
         "hidden": false, 
         "id": 2003, 

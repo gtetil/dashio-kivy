@@ -20,7 +20,8 @@
         on_release: app.screen_man.current = 'settings_screen'; app.slide_layout.toggle_state()
     Button:
         text: 'Settings2'
-        on_release: app.open_settings(); app.slide_layout.toggle_state()
+        on_release: app.open_settings(); app.screen_man.current = 'main_screen'; app.slide_layout.toggle_state()
+        on_release: if app.dynamic_layout.modify_mode: app.dynamic_layout.end_modify(); app.variables.toggle_update_clock(True)
 
 <ScreenManagement>:
     ignition_input: int(app.variables.DI_IGNITION)
@@ -57,25 +58,10 @@
     item_edit_popup: item_edit_popup.__self__
     on_parent: app.dynamic_layout.main_screen_ref(self); app.dynamic_layout.build_layout()
 
-    BoxLayout:
+    FloatLayout:
         id: main_layout
         orientation: 'horizontal'
         padding: 10
-
-        GridLayout:
-            id: indicator_layout
-            cols: 1
-            spacing: 5
-            padding: 5
-            size_hint_x: 0.25
-
-        GridLayout:
-            id: button_layout
-            cols: 3
-            rows: 2
-            spacing: 5
-            padding: 5
-            size_hint_x: 0.75
 
     ScreenItemEditPopup:
         id: item_edit_popup

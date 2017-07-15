@@ -23,7 +23,8 @@ from kivy.uix.popup import Popup
 from kivy.core.window import Window
 from kivy.animation import Animation
 from navigationdrawer import NavigationDrawer
-from kivy.uix.settings import SettingsWithSidebar, SettingString, Settings, InterfaceWithSidebar
+from kivy.uix.settings import SettingsWithSidebar, SettingString, Settings, SettingsWithTabbedPanel, SettingItem, SettingSpacer
+from kivy.metrics import dp
 import app_settings
 
 import json
@@ -146,49 +147,40 @@ class DynamicLayout(Widget):
     layout_file = 'dynamic_layout.json'
 
     def main_screen_ref(self, main_screen):
-        self.indicator_layout = main_screen.ids.indicator_layout
-        self.button_layout = main_screen.ids.button_layout
+        self.main_layout = main_screen.ids.main_layout
         self.item_edit_popup = main_screen.ids.item_edit_popup
 
     def save_layout(self):
         data = {}
-        for indicator in self.indicator_layout.children:
+        for dyn_widget in self.main_layout.children:
             config = {}
-            config['label'] = indicator.text
-            config['toggle'] = indicator.toggle
-            config['var_tag'] = indicator.var_tag
-            config['var_alias'] = indicator.var_alias
-            #config['var_id'] = indicator.var_id
-            config['enable'] = indicator.enable
-            config['invert'] = indicator.invert
-            data[indicator.id] = config
-        for button in self.button_layout.children:
-            config = {}
-            config['label'] = button.text
-            config['toggle'] = button.toggle
-            config['var_tag'] = button.var_tag
-            config['var_alias'] = button.var_alias
-            #config['var_id'] = button.var_id
-            config['enable'] = button.enable
-            config['invert'] = button.invert
-            data[button.id] = config
+            config['id'] = dyn_widget.id
+            config['label'] = dyn_widget.label
+            config['toggle'] = dyn_widget.toggle
+            config['var_tag'] = dyn_widget.var_tag
+            config['var_alias'] = dyn_widget.var_alias
+            config['enable'] = dyn_widget.enable
+            config['invert'] = dyn_widget.invert
+            #config['pos'] = dyn_widget.pos
+            #config['size'] = dyn_widget.size
+            data[dyn_widget.id] = config
         with open(self.layout_file, 'w') as file:
             json.dump(data, file, sort_keys=True, indent=4)
 
     def build_layout(self):
-        print('build_layout')
-        self.indicator_layout.clear_widgets()
-        self.button_layout.clear_widgets()
+        self.main_layout.clear_widgets()
         with open(self.layout_file, 'r') as file:
-            data = json.load(file)
-        for i in range(6):
-            label = data['indicator_'+str(i)]['label']
-            toggle = data['indicator_' + str(i)]['toggle']
-            self.var_tag = data['indicator_' + str(i)]['var_tag']
-            self.var_alias = data['indicator_' + str(i)]['var_alias']
-            #var_id = data['indicator_' + str(i)]['var_id']
-            enable = data['indicator_' + str(i)]['enable']
-            invert = data['indicator_' + str(i)]['invert']
+            self.dyn_layout_json = json.load(file)
+        for i in range(len(self.dyn_layout_json)):
+            id = self.dyn_layout_json[i]['id']
+            size = self.dyn_layout_json[i]['size']
+            pos = self.dyn_layout_json[i]['pos']
+            label = self.dyn_layout_json[i]['label']
+            toggle = self.dyn_layout_json[i]['toggle']
+            self.var_tag = self.dyn_layout_json[i]['var_tag']
+            self.var_alias = self.dyn_layout_json[i]['var_alias']
+            enable = self.dyn_layout_json[i]['enable']
+            invert = self.dyn_layout_json[i]['invert']
 
             try:
                 alias = self.app_ref.variables.alias_by_tag_dict[self.var_tag]
@@ -203,59 +195,30 @@ class DynamicLayout(Widget):
                 else:
                     self.var_alias = self.app_ref.variables.alias_by_tag_dict[self.var_tag]  #tag is the same, so update with new alias
 
+            if label == '':
+                item_label = self.var_alias
+            else:
+                item_label = label
             if toggle:
-                button = DynToggleButton(text=label, id='indicator_' + str(i))
+                dyn_widget = DynToggleButton(text=item_label, id=str(id), pos=pos, size_hint=(None, None), height=size[1], width=size[0])
             else:
-                button = DynButton(text=label, id='indicator_' + str(i))
-            button.set_properties(self, self.var_alias, self.var_tag, enable, self.item_edit_popup, invert)
-            self.indicator_layout.add_widget(button)
-
-            label = data['button_' + str(i)]['label']
-            toggle = data['button_' + str(i)]['toggle']
-            self.var_tag = data['button_' + str(i)]['var_tag']
-            self.var_alias = data['button_' + str(i)]['var_alias']
-            #var_id = data['button_' + str(i)]['var_id']
-            enable = data['button_' + str(i)]['enable']
-            invert = data['button_' + str(i)]['invert']
-
-            try:
-                alias = self.app_ref.variables.alias_by_tag_dict[self.var_tag]
-                tag = self.app_ref.variables.tag_by_alias_dict[alias]
-            except:
-                pass
-            if self.var_alias in self.app_ref.variables.var_aliases:
-                self.var_tag = tag  # get tag just in case the alias moved to another variable
-            else:
-                if tag != self.var_tag:
-                    self.var_alias = self.var_tag  #the tag has changed, and the alias doesn't exist anymore, so default back to tag
-                else:
-                    self.var_alias = self.app_ref.variables.alias_by_tag_dict[self.var_tag]  #tag is the same, so update with new alias
-
-            if toggle:
-                button = DynToggleButton(text=label, id='button_' + str(i))
-            else:
-                button = DynButton(text=label, id='button_' + str(i))
-            button.set_properties(self, self.var_alias, self.var_tag, enable, self.item_edit_popup, invert)
-            self.button_layout.add_widget(button)
+                dyn_widget = DynButton(text=item_label, id=str(id), pos=pos, size_hint=(None, None), height=size[1], width=size[0])
+            dyn_widget.set_properties(self, self.var_alias, self.var_tag, enable, self.item_edit_popup, invert, label)
+            self.main_layout.add_widget(dyn_widget)
         self.app_ref.variables.refresh_data = True
         if self.modify_mode:
             self.modify_screen()
 
     def modify_screen(self):
         self.modify_mode = True
-        for indicator in self.indicator_layout.children:
-            self.animate(indicator)
-        for button in self.button_layout.children:
-            self.animate(button)
+        for dyn_widget in self.main_layout.children:
+            self.animate(dyn_widget)
 
     def end_modify(self):
         self.modify_mode = False
-        for indicator in self.indicator_layout.children:
-            Animation.cancel_all(indicator)
-            indicator.background_color = 1, 1, 1, 1
-        for button in self.button_layout.children:
-            Animation.cancel_all(button)
-            button.background_color = 1, 1, 1, 1
+        for dyn_widget in self.main_layout.children:
+            Animation.cancel_all(dyn_widget)
+            dyn_widget.background_color = 1, 1, 1, 1
 
     def animate(self, widget):
         anim = Animation(background_color=[1, 1, 0, 0.75], duration=0.5, t='linear') + Animation(
@@ -275,19 +238,19 @@ class ScreenItemEditPopup(Popup):
     dynamic_layout = ObjectProperty(None)
     modify_mode = BooleanProperty(False)
 
-    def edit_popup(self, instance, item, indicator):
+    def edit_popup(self, instance, item, dyn_widget):
         if self.modify_mode:
             self.item = item
-            self.label_input.text = self.item.text
+            self.label_input.text = self.item.label
             self.toggle_check.active = self.item.toggle
             self.enable_check.active = self.item.enable
             self.invert_check.active = self.item.invert
             self.variable_spinner.text = self.item.var_alias
-            self.toggle_layout.disabled = indicator
+            self.toggle_layout.disabled = dyn_widget
             self.open()
 
     def save_item(self):
-        self.item.text = self.label_input.text
+        self.item.label = self.label_input.text
         self.item.toggle = self.toggle_check.active
         self.item.enable = self.enable_check.active
         self.item.invert = self.invert_check.active
@@ -304,6 +267,7 @@ class DynItem(Widget):
     invert = BooleanProperty(True)
     var_alias = StringProperty("")
     var_tag = StringProperty("")
+    label = StringProperty("")
     ignition_input = NumericProperty(0)
     digital_inputs = NumericProperty(0)
     app_ref = ObjectProperty(None)
@@ -321,10 +285,11 @@ class DynItem(Widget):
         else:
             self.state = 'normal'
 
-    def set_properties(self, ref, var_alias, var_tag, enable, item_edit_popup, invert):
+    def set_properties(self, ref, var_alias, var_tag, enable, item_edit_popup, invert, label):
         self.dynamic_layout = ref
         self.var_alias = str(var_alias)
         self.var_tag = str(var_tag)
+        self.label = str(label)
         self.enable = enable
         self.invert = invert
         self.item_edit_popup = item_edit_popup
@@ -401,16 +366,9 @@ class PasscodeScreen(Screen):
 class CameraScreen(Screen):
     pass
 
-class MyInterface(InterfaceWithSidebar):
-    def on_close(self, *args):
-        print('settings close')
-
 class MainApp(App):
 
     def build(self):
-        self.mysettings = Settings()
-        self.mysettings.interface_cls = MyInterface
-        #self.mysettings.add_interface()
         self.settings_cls = SettingsWithSidebar
         self.use_kivy_settings = False
 
@@ -444,7 +402,6 @@ class MainApp(App):
 
     def on_config_change(self, config, section, key, value):
         print('config change')
-        self.get_aliases()
 
     #get aliases from config file, right them to variables.json, update lists, then rebuild dynamic layout in case there were any alias changes that would effect a screen item
     def get_aliases(self):
@@ -460,11 +417,47 @@ class MainApp(App):
         self.dynamic_layout.build_layout()
         self.dynamic_layout.save_layout()
 
+    def close_settings(self, settings=None):
+        print('settings closed')
+        self.get_aliases()
+        super(MainApp, self).close_settings(settings)
+
     def exit_app(self):
         self.stop()
 
 class SettingAlias(SettingString):
-    pass
+    def _create_popup(self, instance):
+        # create popup layout
+        content = BoxLayout(orientation='vertical', spacing='5dp')
+        popup_width = min(0.95 * Window.width, dp(500))
+        self.popup = popup = Popup(
+            title=self.title, content=content, size_hint=(None, None),
+            size=(popup_width, '250dp'), pos_hint={'middle': 1, 'top': 1})
+        # create the textinput used for numeric input
+        self.textinput = textinput = TextInput(
+            text=self.value, font_size='24sp', multiline=False,
+            size_hint_y=None, height='42sp')
+        textinput.bind(on_text_validate=self._validate)
+        self.textinput = textinput
+
+        # construct the content, widget are used as a spacer
+        content.add_widget(Widget())
+        content.add_widget(textinput)
+        content.add_widget(Widget())
+        content.add_widget(SettingSpacer())
+
+        # 2 buttons are created for accept or cancel the current value
+        btnlayout = BoxLayout(size_hint_y=None, height='50dp', spacing='5dp')
+        btn = Button(text='Ok')
+        btn.bind(on_release=self._validate)
+        btnlayout.add_widget(btn)
+        btn = Button(text='Cancel')
+        btn.bind(on_release=self._dismiss)
+        btnlayout.add_widget(btn)
+        content.add_widget(btnlayout)
+
+        # all done, open the popup !
+        popup.open()
 
 class Variables(Widget):
     app_ref = ObjectProperty(None)
