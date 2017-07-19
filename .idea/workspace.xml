@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="27b3c643-4da9-4ab8-8fac-19f30f795262" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/myscatter.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app_settings.py" afterPath="$PROJECT_DIR$/app_settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dynamic_layout.json" afterPath="$PROJECT_DIR$/dynamic_layout.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.ini" afterPath="$PROJECT_DIR$/main.ini" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.kv" afterPath="$PROJECT_DIR$/main.kv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/variables.json" afterPath="$PROJECT_DIR$/variables.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myscatter.py" afterPath="$PROJECT_DIR$/myscatter.py" />
     </list>
     <ignored path="dashio-kivy.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -42,41 +36,11 @@
       <file leaf-file-name="myscatter.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/myscatter.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="698">
-              <caret line="155" column="47" lean-forward="false" selection-start-line="155" selection-start-column="47" selection-end-line="155" selection-end-column="47" />
+            <state relative-caret-position="376">
+              <caret line="68" column="25" lean-forward="true" selection-start-line="68" selection-start-column="25" selection-end-line="68" selection-end-column="25" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="scatter.py" pinned="false" current-in-tab="false">
-        <entry file="file:///usr/lib/python2.7/dist-packages/kivy/uix/scatter.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-767">
-              <caret line="103" column="18" lean-forward="false" selection-start-line="273" selection-start-column="13" selection-end-line="273" selection-end-column="42" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="widget.py" pinned="false" current-in-tab="false">
-        <entry file="file:///usr/lib/python2.7/dist-packages/kivy/uix/widget.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="243" column="0" lean-forward="false" selection-start-line="243" selection-start-column="0" selection-end-line="244" selection-end-column="60" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
-        <entry file="file:///usr/lib/python2.7/dist-packages/kivy/uix/settings.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2409">
-              <caret line="348" column="6" lean-forward="false" selection-start-line="348" selection-start-column="6" selection-end-line="348" selection-end-column="6" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -693,7 +657,14 @@
       <option name="project" value="LOCAL" />
       <updated>1500143924235</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="- created myscatter for testing scaling buttons.">
+      <created>1500424014931</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1500424014931</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -769,7 +740,8 @@
     <MESSAGE value="-added compound variables to autovars.&#10;-added 'logged-in' and 'passcode prompt' SYS variables.&#10;-added 'invert' widget, only for inputs.&#10;-changed autovars to be event driven." />
     <MESSAGE value="-started working on new variables.json structure" />
     <MESSAGE value="- finished alias debug.&#10;- added pos and size based dyn_widgets.&#10;- still debugging &quot;save&quot; of dyanamic_layout.json" />
-    <option name="LAST_COMMIT_MESSAGE" value="- finished alias debug.&#10;- added pos and size based dyn_widgets.&#10;- still debugging &quot;save&quot; of dyanamic_layout.json" />
+    <MESSAGE value="- created myscatter for testing scaling buttons." />
+    <option name="LAST_COMMIT_MESSAGE" value="- created myscatter for testing scaling buttons." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1014,8 +986,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/myscatter.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="698">
-          <caret line="155" column="47" lean-forward="false" selection-start-line="155" selection-start-column="47" selection-end-line="155" selection-end-column="47" />
+        <state relative-caret-position="376">
+          <caret line="68" column="25" lean-forward="true" selection-start-line="68" selection-start-column="25" selection-end-line="68" selection-end-column="25" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
           </folding>

@@ -6,7 +6,7 @@ from kivy.uix.scatterlayout import ScatterLayout
 from kivy.graphics.transformation import Matrix
 
 
-class MyScatterLayout(ScatterLayout):
+class MyScatterLayout(Scatter):
     move_lock = False
     scale_lock_left = False
     scale_lock_right = False
@@ -66,16 +66,22 @@ class MyScatterLayout(ScatterLayout):
         anchor_sign = 1
         sign = 1
         if abs(change_x) >= 10 and not self.move_lock and not self.scale_lock_top and not self.scale_lock_bottom:
-            if (touch.x > right or self.scale_lock_left) and not self.scale_lock_right:
-                self.scale_lock_left = True
-            elif (touch.x < left or self.scale_lock_right) and not self.scale_lock_left:
-                self.scale_lock_right = True
-                scale_anchor_x = x + width
-                anchor_sign = -1
             if change_x < 0:
                 sign = -1
-            scaleX = (self.prev_width + (sign * anchor_sign * 10)) / self.prev_width
-            self.apply_transform(Matrix().scale(scaleX, 1, 1), anchor=(scale_anchor_x, scale_anchor_y))
+            if (touch.x < left or self.scale_lock_left) and not self.scale_lock_right:
+                self.scale_lock_left = True
+                anchor_sign = -1
+                self.children[0].pos[0] = self.children[0].pos[0] - (sign * anchor_sign * 10)
+            elif (touch.x > right or self.scale_lock_right) and not self.scale_lock_left:
+                self.scale_lock_right = True
+                scale_anchor_x = x + width
+
+
+            self.size[0] = self.size[0] + (sign * anchor_sign * 10)
+            self.children[0].width = self.children[0].width + (sign * anchor_sign * 10)
+
+            #scaleX = (self.prev_width + (sign * anchor_sign * 10)) / self.prev_width
+            #self.apply_transform(Matrix().scale(scaleX, 1, 1), anchor=(scale_anchor_x, scale_anchor_y))
             self.prev_x = touch.x
             self.prev_width = self.bbox[1][0]
             changed = True
@@ -153,7 +159,7 @@ class ScatterApp(App):
     def build(self):
         f = MyFloatLayout()
         s = MyScatterLayout(do_rotation=False, size=(150, 100), size_hint=(None, None), pos=(10, 10))
-        s.add_widget(MyButton(text='Button Test'))
+        s.add_widget(MyButton(id='mybutton', text='Test Button'))
         f.add_widget(s)
         s2 = MyScatterLayout(do_rotation=False, size=(150, 100), size_hint=(None, None), pos=(10, 120))
         s2.add_widget(MyButton())
