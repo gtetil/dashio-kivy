@@ -30,8 +30,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="320" column="54" lean-forward="true" selection-start-line="320" selection-start-column="54" selection-end-line="320" selection-end-column="54" />
+            <state relative-caret-position="2642">
+              <caret line="654" column="17" lean-forward="false" selection-start-line="654" selection-start-column="17" selection-end-line="654" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -50,8 +50,8 @@
       <file leaf-file-name="main.kv" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.kv">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="62" column="33" lean-forward="false" selection-start-line="62" selection-start-column="33" selection-end-line="62" selection-end-column="33" />
+            <state relative-caret-position="-5508">
+              <caret line="42" column="9" lean-forward="false" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -60,12 +60,9 @@
       <file leaf-file-name="dynamic_layout.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dynamic_layout.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="199" column="14" lean-forward="false" selection-start-line="199" selection-start-column="14" selection-end-line="199" selection-end-column="14" />
-              <folding>
-                <marker date="1500482304354" expanded="true" signature="6:48" ph="{&quot;id&quot;: &quot;5&quot;...}" />
-                <marker date="1500482304354" expanded="true" signature="3922:3929" ph="{&quot;id&quot;: &quot;1&quot;...}" />
-              </folding>
+            <state relative-caret-position="238">
+              <caret line="182" column="14" lean-forward="false" selection-start-line="182" selection-start-column="14" selection-end-line="182" selection-end-column="14" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -73,13 +70,9 @@
       <file leaf-file-name="variables.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/variables.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="578">
+            <state relative-caret-position="1464">
               <caret line="88" column="19" lean-forward="false" selection-start-line="88" selection-start-column="19" selection-end-line="88" selection-end-column="19" />
-              <folding>
-                <marker date="1500482311032" expanded="true" signature="0:4490" ph="[...]" />
-                <marker date="1500482311032" expanded="true" signature="197:217" ph="{&quot;id&quot;: 1...}" />
-                <marker date="1500482311032" expanded="true" signature="4481:4488" ph="{&quot;id&quot;: 2003...}" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -161,8 +154,8 @@
         <option value="$PROJECT_DIR$/app_settings.py" />
         <option value="$PROJECT_DIR$/draggable.py" />
         <option value="$PROJECT_DIR$/myscatter.py" />
-        <option value="$PROJECT_DIR$/main.kv" />
         <option value="$PROJECT_DIR$/dynamic_layout.json" />
+        <option value="$PROJECT_DIR$/main.kv" />
         <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
@@ -687,7 +680,14 @@
       <option name="project" value="LOCAL" />
       <updated>1500466643999</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="- integrated scatter widgets into main application, and debugged.">
+      <created>1500482341533</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1500482341533</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -697,8 +697,8 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18177083" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21436115" sideWeight="0.50208336" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3284055" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20485744" sideWeight="0.49791667" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3284055" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20485744" sideWeight="0.49791667" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3284055" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -777,7 +777,8 @@
     <MESSAGE value="- finished alias debug.&#10;- added pos and size based dyn_widgets.&#10;- still debugging &quot;save&quot; of dyanamic_layout.json" />
     <MESSAGE value="- created myscatter for testing scaling buttons." />
     <MESSAGE value="- finished scatter widget proof of concept." />
-    <option name="LAST_COMMIT_MESSAGE" value="- finished scatter widget proof of concept." />
+    <MESSAGE value="- integrated scatter widgets into main application, and debugged." />
+    <option name="LAST_COMMIT_MESSAGE" value="- integrated scatter widgets into main application, and debugged." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -900,18 +901,6 @@
     <entry file="file://C:/Python27/Lib/site-packages/kivy/base.py" />
     <entry file="file://C:/Python27/Lib/site-packages/kivy/clock.py" />
     <entry file="file://C:/Python27/Lib/site-packages/kivy/uix/settings.py" />
-    <entry file="file://$PROJECT_DIR$/variables.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="88" column="19" lean-forward="false" selection-start-line="88" selection-start-column="19" selection-end-line="88" selection-end-column="19" />
-          <folding>
-            <marker date="1500482311032" expanded="true" signature="0:4490" ph="[...]" />
-            <marker date="1500482311032" expanded="true" signature="197:217" ph="{&quot;id&quot;: 1...}" />
-            <marker date="1500482311032" expanded="true" signature="4481:4488" ph="{&quot;id&quot;: 2003...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/lib/python2.7/dist-packages/kivy/data/style.kv" />
     <entry file="file:///usr/lib/python2.7/dist-packages/kivy/uix/settings.py" />
     <entry file="file://$PROJECT_DIR$/main.ini">
@@ -980,29 +969,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.kv">
+    <entry file="file://$PROJECT_DIR$/variables.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="62" column="33" lean-forward="false" selection-start-line="62" selection-start-column="33" selection-end-line="62" selection-end-column="33" />
+        <state relative-caret-position="1464">
+          <caret line="88" column="19" lean-forward="false" selection-start-line="88" selection-start-column="19" selection-end-line="88" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dynamic_layout.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="199" column="14" lean-forward="false" selection-start-line="199" selection-start-column="14" selection-end-line="199" selection-end-column="14" />
-          <folding>
-            <marker date="1500482304354" expanded="true" signature="6:48" ph="{&quot;id&quot;: &quot;5&quot;...}" />
-            <marker date="1500482304354" expanded="true" signature="3922:3929" ph="{&quot;id&quot;: &quot;1&quot;...}" />
-          </folding>
+        <state relative-caret-position="238">
+          <caret line="182" column="14" lean-forward="false" selection-start-line="182" selection-start-column="14" selection-end-line="182" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.kv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-5508">
+          <caret line="42" column="9" lean-forward="false" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="320" column="54" lean-forward="true" selection-start-line="320" selection-start-column="54" selection-end-line="320" selection-end-column="54" />
+        <state relative-caret-position="2642">
+          <caret line="654" column="17" lean-forward="false" selection-start-line="654" selection-start-column="17" selection-end-line="654" selection-end-column="17" />
           <folding />
         </state>
       </provider>

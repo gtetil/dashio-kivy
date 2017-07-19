@@ -131,8 +131,8 @@ class ScreenManagement(ScreenManager):
 class MainScreen(Screen):
     pass
 
-class SettingsScreen(Screen):
-    pass
+#class SettingsScreen(Screen):
+    #pass
 
 class FloatInput(TextInput):
     pat = re.compile('[^0-9]')
@@ -744,12 +744,12 @@ class Variables(Widget):
 
     def get(self, alias):
         if alias != '':
-            try:
-                data_index = self.var_aliases_dict[alias]
-                return self.variable_data[data_index]
-            except:
-                print('variables.get: tag not found')
-                return ''
+            #try:
+            data_index = self.var_aliases_dict[alias]
+            return self.variable_data[data_index]
+            #except:
+                #print('variables.get: tag not found')
+                #return ''
         return ''
 
     def write_arduino(self, command):
@@ -770,13 +770,13 @@ class Variables(Widget):
             channel_type = self.variables_json[index]['type']
             tag = self.variables_json[index]['tag']
             if channel_type == 'DO':
-                self.write_arduino('digital_output/' + tag + '/' + value + '/')
+                if not debug_mode:
+                    self.write_arduino('digital_output/' + tag + '/' + value + '/')
             if channel_type == 'SYS':
                 #if tag == 'SYS_DIM_BACKLIGHT':
                 self.sys_cmd(tag, int(value))
         except:
             print('variable.set: tag not found')
-        #self.refresh_data = True
 
     #SYSTEM COMMANDS#
 

@@ -15,11 +15,11 @@
         text: 'Modify Main Screen'
         on_release: app.screen_man.current = 'main_screen'; app.slide_layout.toggle_state()
         on_release: if not app.dynamic_layout.modify_mode: app.dynamic_layout.build_layout(); app.dynamic_layout.modify_screen(); app.variables.toggle_update_clock(False)
+    #Button:
+        #text: 'Settings'
+        #on_release: app.screen_man.current = 'settings_screen'; app.slide_layout.toggle_state()
     Button:
         text: 'Settings'
-        on_release: app.screen_man.current = 'settings_screen'; app.slide_layout.toggle_state()
-    Button:
-        text: 'Settings2'
         on_release: app.open_settings(); app.screen_man.current = 'main_screen'; app.slide_layout.toggle_state()
         on_release: if app.dynamic_layout.modify_mode: app.dynamic_layout.end_modify(); app.variables.toggle_update_clock(True)
 
@@ -39,8 +39,8 @@
         name: 'off_screen'
     MainScreen:
         name: 'main_screen'
-    SettingsScreen:
-        name: 'settings_screen'
+    #SettingsScreen:
+        #name: 'settings_screen'
     CameraScreen:
         name: 'camera_screen'
     PasscodeScreen:
