@@ -6,7 +6,7 @@ from kivy.uix.scatterlayout import ScatterLayout
 from kivy.graphics.transformation import Matrix
 
 
-class MyScatterLayout(Scatter):
+class MyScatterLayout(ScatterLayout):
     move_lock = False
     scale_lock_left = False
     scale_lock_right = False
@@ -61,43 +61,31 @@ class MyScatterLayout(Scatter):
 
         change_x = touch.x - self.prev_x
         change_y = touch.y - self.prev_y
-        scale_anchor_x = x
-        scale_anchor_y = y
         anchor_sign = 1
         sign = 1
-        if abs(change_x) >= 10 and not self.move_lock and not self.scale_lock_top and not self.scale_lock_bottom:
+        if abs(change_x) >= 9 and not self.move_lock and not self.scale_lock_top and not self.scale_lock_bottom:
             if change_x < 0:
                 sign = -1
             if (touch.x < left or self.scale_lock_left) and not self.scale_lock_right:
                 self.scale_lock_left = True
+                self.pos = (self.pos[0] + (sign * 10), self.pos[1])
                 anchor_sign = -1
-                self.children[0].pos[0] = self.children[0].pos[0] - (sign * anchor_sign * 10)
             elif (touch.x > right or self.scale_lock_right) and not self.scale_lock_left:
                 self.scale_lock_right = True
-                scale_anchor_x = x + width
-
-
             self.size[0] = self.size[0] + (sign * anchor_sign * 10)
-            self.children[0].width = self.children[0].width + (sign * anchor_sign * 10)
-
-            #scaleX = (self.prev_width + (sign * anchor_sign * 10)) / self.prev_width
-            #self.apply_transform(Matrix().scale(scaleX, 1, 1), anchor=(scale_anchor_x, scale_anchor_y))
             self.prev_x = touch.x
-            self.prev_width = self.bbox[1][0]
             changed = True
-        if abs(change_y) >= 10 and not self.move_lock and not self.scale_lock_left and not self.scale_lock_right:
+        if abs(change_y) >= 9 and not self.move_lock and not self.scale_lock_left and not self.scale_lock_right:
+            if change_y < 0:
+                sign = -1
             if (touch.y > top or self.scale_lock_top) and not self.scale_lock_bottom:
                 self.scale_lock_top = True
             elif (touch.y < bottom or self.scale_lock_bottom) and not self.scale_lock_top:
                 self.scale_lock_bottom = True
-                scale_anchor_y = y + height
+                self.pos = (self.pos[0], self.pos[1] + (sign * 10))
                 anchor_sign = -1
-            if change_y < 0:
-                sign = -1
-            scaleY = (self.prev_height + (sign * anchor_sign * 10)) / self.prev_height
-            self.apply_transform(Matrix().scale(1, scaleY, 1), anchor=(scale_anchor_x, scale_anchor_y))
+            self.size[1] = self.size[1] + (sign * anchor_sign * 10)
             self.prev_y = touch.y
-            self.prev_height = self.bbox[1][1]
             changed = True
         return changed
 
@@ -105,8 +93,6 @@ class MyScatterLayout(Scatter):
         x, y = touch.x, touch.y
         self.prev_x = touch.x
         self.prev_y = touch.y
-        self.prev_width = self.bbox[1][0]
-        self.prev_height = self.bbox[1][1]
         # if the touch isnt on the widget we do nothing
         if not self.do_collide_after_children:
             if not self.collide_point(x, y):
