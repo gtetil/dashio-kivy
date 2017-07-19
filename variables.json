@@ -177,7 +177,7 @@
         "save": true, 
         "tag": "SYS_SCREEN_BRIGHTNESS", 
         "type": "SYS", 
-        "value": "255"
+        "value": "201"
     }, 
     {
         "alias": "SYS_DIM_BACKLIGHT", 
@@ -197,7 +197,7 @@
         "save": true, 
         "tag": "SYS_SCREEN_OFF_DELAY", 
         "type": "SYS", 
-        "value": "1"
+        "value": "2"
     }, 
     {
         "alias": "SYS_SHUTDOWN_DELAY", 
@@ -207,6 +207,6 @@
         "save": true, 
         "tag": "SYS_SHUTDOWN_DELAY", 
         "type": "SYS", 
-        "value": "3600"
+        "value": "61"
     }
 ]

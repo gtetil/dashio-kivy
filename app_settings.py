@@ -1,34 +1,34 @@
 import json
 
 settings_json = json.dumps([
-    {'type': 'numeric',
+    {'type': 'mynumeric',
      'title': 'Screen Dim Brightness',
      'desc': 'Screen brightness setting when "Dim Backlight" is active".',
      'section': 'Settings',
      'key': 'SYS_SCREEN_BRIGHTNESS'},
-    {'type': 'numeric',
+    {'type': 'mynumeric',
      'title': 'Screen Off Delay',
      'desc': 'When ignition is turned off, this is the delay in seconds before the screen turns off.',
      'section': 'Settings',
      'key': 'SYS_SCREEN_OFF_DELAY'},
-    {'type': 'numeric',
+    {'type': 'mynumeric',
      'title': 'Shutdown Delay',
      'desc': 'When ignition is turned off, this is the delay in minutes before the system shuts down',
      'section': 'Settings',
      'key': 'SYS_SHUTdoWN_DELAY'}])
 
-autovars_json = json.dumps([
-    {'type': 'string',
+calcvars_json = json.dumps([
+    {'type': 'calc',
      'title': 'Get Var 1',
      'desc': '',
      'section': 'AutoVars',
      'key': 'AUTOVAR_GET_VAR_1'},
-    {'type': 'string',
+    {'type': 'calc',
      'title': 'Operator 1',
      'desc': '',
      'section': 'AutoVars',
      'key': 'AUTOVAR_OPERATOR_1'},
-    {'type': 'string',
+    {'type': 'calc',
      'title': 'Set Var 1',
      'desc': '',
      'section': 'AutoVars',

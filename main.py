@@ -23,7 +23,7 @@ from kivy.uix.popup import Popup
 from kivy.core.window import Window
 from kivy.animation import Animation
 from navigationdrawer import NavigationDrawer
-from kivy.uix.settings import SettingsWithSidebar, SettingString, Settings, SettingsWithTabbedPanel, SettingItem, SettingSpacer
+from kivy.uix.settings import SettingsWithSidebar, SettingString, SettingNumeric, SettingSpacer
 from kivy.metrics import dp
 import app_settings
 
@@ -151,21 +151,21 @@ class DynamicLayout(Widget):
         self.item_edit_popup = main_screen.ids.item_edit_popup
 
     def save_layout(self):
-        data = {}
+        json_data = []
         for dyn_widget in self.main_layout.children:
-            config = {}
-            config['id'] = dyn_widget.id
-            config['label'] = dyn_widget.label
-            config['toggle'] = dyn_widget.toggle
-            config['var_tag'] = dyn_widget.var_tag
-            config['var_alias'] = dyn_widget.var_alias
-            config['enable'] = dyn_widget.enable
-            config['invert'] = dyn_widget.invert
-            #config['pos'] = dyn_widget.pos
-            #config['size'] = dyn_widget.size
-            data[dyn_widget.id] = config
+            data = {}
+            data['id'] = dyn_widget.id
+            data['label'] = dyn_widget.label
+            data['toggle'] = dyn_widget.toggle
+            data['var_tag'] = dyn_widget.var_tag
+            data['var_alias'] = dyn_widget.var_alias
+            data['enable'] = dyn_widget.enable
+            data['invert'] = dyn_widget.invert
+            data['pos'] = dyn_widget.pos
+            data['size'] = dyn_widget.size
+            json_data.append(data)
         with open(self.layout_file, 'w') as file:
-            json.dump(data, file, sort_keys=True, indent=4)
+            json.dump(json_data, file, sort_keys=True, indent=4)
 
     def build_layout(self):
         self.main_layout.clear_widgets()
@@ -396,12 +396,19 @@ class MainApp(App):
 
     def build_settings(self, settings):
         settings.register_type('alias', SettingAlias)
+        settings.register_type('mynumeric', MySettingNumeric)
+        settings.register_type('calc', SettingCalc)
         settings.add_json_panel('Settings', self.config, data=app_settings.settings_json)
         settings.add_json_panel('Aliases', self.config, data=app_settings.aliases_json)
-        settings.add_json_panel('AutoVars', self.config, data=app_settings.autovars_json)
+        settings.add_json_panel('CalcVars', self.config, data=app_settings.calcvars_json)
 
     def on_config_change(self, config, section, key, value):
-        print('config change')
+        self.get_saved_vars()
+        self.variables.save_variables()
+
+    def get_saved_vars(self):
+        for (key, value) in self.config.items('Settings'):
+            self.variables.set(self.variables.var_aliases_dict[key.upper()], value)
 
     #get aliases from config file, right them to variables.json, update lists, then rebuild dynamic layout in case there were any alias changes that would effect a screen item
     def get_aliases(self):
@@ -426,6 +433,43 @@ class MainApp(App):
         self.stop()
 
 class SettingAlias(SettingString):
+    def _create_popup(self, instance):
+        # create popup layout
+        content = BoxLayout(orientation='vertical', spacing='5dp')
+        popup_width = min(0.95 * Window.width, dp(500))
+        self.popup = popup = Popup(
+            title=self.title, content=content, size_hint=(None, None),
+            size=(popup_width, '250dp'), pos_hint={'middle': 1, 'top': 1})
+        # create the textinput used for numeric input
+        self.textinput = textinput = TextInput(
+            text=self.value, font_size='24sp', multiline=False,
+            size_hint_y=None, height='42sp')
+        textinput.bind(on_text_validate=self._validate)
+        self.textinput = textinput
+
+        # construct the content, widget are used as a spacer
+        content.add_widget(Widget())
+        content.add_widget(textinput)
+        content.add_widget(Widget())
+        content.add_widget(SettingSpacer())
+
+        # 2 buttons are created for accept or cancel the current value
+        btnlayout = BoxLayout(size_hint_y=None, height='50dp', spacing='5dp')
+        btn = Button(text='Ok')
+        btn.bind(on_release=self._validate)
+        btnlayout.add_widget(btn)
+        btn = Button(text='Cancel')
+        btn.bind(on_release=self._dismiss)
+        btnlayout.add_widget(btn)
+        content.add_widget(btnlayout)
+
+        # all done, open the popup !
+        popup.open()
+
+class SettingCalc(SettingAlias):
+    pass
+
+class MySettingNumeric(SettingNumeric):
     def _create_popup(self, instance):
         # create popup layout
         content = BoxLayout(orientation='vertical', spacing='5dp')
