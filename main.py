@@ -155,6 +155,13 @@ class DynamicLayout(Widget):
 
     def save_layout(self):
         json_data = []
+        print self.main_layout.children
+        for scatter_layout in self.main_layout.children:
+            print scatter_layout
+            for float in scatter_layout.children:
+                print float
+                for dyn in float.children:
+                    print dyn
         for scatter_layout in self.main_layout.children:
             dyn_widget = scatter_layout.children[0].children[0]
             data = {}
@@ -172,6 +179,12 @@ class DynamicLayout(Widget):
             json.dump(json_data, file, sort_keys=True, indent=4)
 
     def build_layout(self):
+        '''try:
+            for scatter_layout in self.main_layout.children:
+                scatter_layout.children[0].clear_widgets()
+                scatter_layout.clear_widgets()
+        except:
+            print('no widgets to clear')'''
         self.main_layout.clear_widgets()
         with open(self.layout_file, 'r') as file:
             self.dyn_layout_json = json.load(file)
@@ -204,14 +217,16 @@ class DynamicLayout(Widget):
             else:
                 item_label = label
             if toggle:
-                dyn_widget = DynToggleButton(text=item_label, id=str(id))
+                dyn_widget = DynToggleButton(text=item_label, id=str(id), var_alias= self.var_alias, var_tag = self.var_tag)
             else:
-                dyn_widget = DynButton(text=item_label, id=str(id))
+                dyn_widget = DynButton(text=item_label, id=str(id), var_alias= self.var_alias, var_tag = self.var_tag)
             scatter_layout = MyScatterLayout(id=str(id) + '_scatter', do_rotation=False, size=(size[0], size[1]), size_hint=(None, None), pos=pos)
             dyn_widget.set_properties(self, self.var_alias, self.var_tag, enable, self.item_edit_popup, invert, label)
             scatter_layout.add_widget(dyn_widget)
             self.main_layout.add_widget(scatter_layout)
-        self.app_ref.variables.refresh_data = True
+            #print dyn_widget
+            #print dyn_widget.var_alias
+        #self.app_ref.variables.refresh_data = True
         if self.modify_mode:
             self.modify_screen()
 
@@ -282,6 +297,9 @@ class DynItem(Widget):
     data_change = BooleanProperty(False)
 
     def on_data_change(self, instance, value):
+        #print 'on data change'
+        #print self
+        #print self.var_alias
         state = self.app_ref.variables.get(self.var_alias)
         if state == '1':
             bool_state = True
@@ -295,8 +313,11 @@ class DynItem(Widget):
 
     def set_properties(self, ref, var_alias, var_tag, enable, item_edit_popup, invert, label):
         self.dynamic_layout = ref
-        self.var_alias = str(var_alias)
-        self.var_tag = str(var_tag)
+        #self.var_alias = str(var_alias)
+        #print 'set props'
+        #print self
+        #print self.var_alias
+        #self.var_tag = str(var_tag)
         self.label = str(label)
         self.enable = enable
         self.invert = invert
@@ -391,6 +412,7 @@ class MainApp(App):
         self.slide_menu = SlideMenu()
         self.slide_layout.add_widget(self.slide_menu)
         self.slide_layout.add_widget(self.screen_man)
+        self.dynamic_layout.build_layout()
         self.get_aliases()
         return self.slide_layout
 
