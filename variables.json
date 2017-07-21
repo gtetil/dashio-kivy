@@ -10,7 +10,7 @@
         "value": ""
     }, 
     {
-        "alias": "Reverse4", 
+        "alias": "Reverse5", 
         "data_index": 1, 
         "hidden": false, 
         "id": 1, 
@@ -80,7 +80,7 @@
         "value": ""
     }, 
     {
-        "alias": "Rear Lights", 
+        "alias": "DO_0", 
         "data_index": 8, 
         "hidden": false, 
         "id": 100, 
@@ -110,7 +110,7 @@
         "value": ""
     }, 
     {
-        "alias": "test3", 
+        "alias": "Rear Lights", 
         "data_index": 11, 
         "hidden": false, 
         "id": 103, 

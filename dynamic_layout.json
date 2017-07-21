@@ -5,31 +5,15 @@
         "label": "", 
         "pos": [
             210.0, 
-            320.0
-        ], 
-        "size": [
-            180, 
-            150
-        ], 
-        "toggle": true, 
-        "var_alias": "Rear Lights", 
-        "var_tag": "DO_0"
-    }, 
-    "1": {
-        "enable": true, 
-        "invert": false, 
-        "label": "", 
-        "pos": [
-            400.0, 
             240.0
         ], 
         "size": [
-            190, 
+            180, 
             230
         ], 
-        "toggle": false, 
-        "var_alias": "DO_1", 
-        "var_tag": "DO_1"
+        "var_alias": "Rear Lights", 
+        "var_tag": "DO_3", 
+        "widget": "Toggle Button"
     }, 
     "10": {
         "enable": true, 
@@ -43,9 +27,9 @@
             190, 
             70
         ], 
-        "toggle": true, 
         "var_alias": "SYS_DIM_BACKLIGHT", 
-        "var_tag": "SYS_DIM_BACKLIGHT"
+        "var_tag": "SYS_DIM_BACKLIGHT", 
+        "widget": "Toggle Button"
     }, 
     "11": {
         "enable": true, 
@@ -59,9 +43,25 @@
             190, 
             30
         ], 
-        "toggle": true, 
         "var_alias": "SYS_LOGGED_IN", 
-        "var_tag": "SYS_LOGGED_IN"
+        "var_tag": "SYS_LOGGED_IN", 
+        "widget": "Toggle Button"
+    }, 
+    "12": {
+        "enable": true, 
+        "invert": false, 
+        "label": "", 
+        "pos": [
+            400.0, 
+            240.0
+        ], 
+        "size": [
+            190, 
+            230
+        ], 
+        "var_alias": "DO_1", 
+        "var_tag": "DO_1", 
+        "widget": "Button"
     }, 
     "2": {
         "enable": true, 
@@ -75,9 +75,9 @@
             190, 
             230
         ], 
-        "toggle": true, 
         "var_alias": "DO_2", 
-        "var_tag": "DO_2"
+        "var_tag": "DO_2", 
+        "widget": "Toggle Button"
     }, 
     "3": {
         "enable": true, 
@@ -89,11 +89,11 @@
         ], 
         "size": [
             180, 
-            300
+            220
         ], 
-        "toggle": true, 
         "var_alias": "SYS_PASSCODE_PROMPT", 
-        "var_tag": "SYS_PASSCODE_PROMPT"
+        "var_tag": "SYS_PASSCODE_PROMPT", 
+        "widget": "Toggle Button"
     }, 
     "4": {
         "enable": true, 
@@ -107,9 +107,9 @@
             190, 
             220
         ], 
-        "toggle": true, 
         "var_alias": "DO_4", 
-        "var_tag": "DO_4"
+        "var_tag": "DO_4", 
+        "widget": "Toggle Button"
     }, 
     "5": {
         "enable": true, 
@@ -123,9 +123,9 @@
             190, 
             220
         ], 
-        "toggle": true, 
         "var_alias": "DO_5", 
-        "var_tag": "DO_5"
+        "var_tag": "DO_5", 
+        "widget": "Toggle Button"
     }, 
     "6": {
         "enable": true, 
@@ -139,9 +139,9 @@
             190, 
             70
         ], 
-        "toggle": true, 
-        "var_alias": "Reverse4", 
-        "var_tag": "DI_0"
+        "var_alias": "Reverse5", 
+        "var_tag": "DI_0", 
+        "widget": "Toggle Button"
     }, 
     "7": {
         "enable": true, 
@@ -155,9 +155,9 @@
             190, 
             70
         ], 
-        "toggle": true, 
         "var_alias": "DI_1", 
-        "var_tag": "DI_1"
+        "var_tag": "DI_1", 
+        "widget": "Toggle Button"
     }, 
     "8": {
         "enable": true, 
@@ -171,9 +171,9 @@
             190, 
             70
         ], 
-        "toggle": true, 
         "var_alias": "Rear Lights", 
-        "var_tag": "DO_0"
+        "var_tag": "DO_0", 
+        "widget": "Toggle Button"
     }, 
     "9": {
         "enable": true, 
@@ -187,8 +187,8 @@
             190, 
             70
         ], 
-        "toggle": true, 
         "var_alias": "DI_3", 
-        "var_tag": "DI_3"
+        "var_tag": "DI_3", 
+        "widget": "Toggle Button"
     }
 }

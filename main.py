@@ -160,17 +160,18 @@ class DynamicLayout(Widget):
 
     def reconcile_layout(self):
         for id, dyn_widget in self.dyn_widget_dict.items():
-            self.update_widget(dyn_widget)
-            self.edit_widget_json(dyn_widget)
+            self.update_widget(id)
+            self.edit_widget_json(id)
         self.save_layout()
 
     def create_dyn_widget(self, id):
-        if self.dyn_layout_json[id]['toggle']:
+        if self.dyn_layout_json[id]['widget'] == 'Toggle Button':
             dyn_widget = DynToggleButton(text='',
                                          id=str(id),
                                          label = self.dyn_layout_json[id]['label'],
                                          var_tag=self.dyn_layout_json[id]['var_tag'],
                                          var_alias=self.dyn_layout_json[id]['var_alias'],
+                                         widget=self.dyn_layout_json[id]['widget'],
                                          enable=self.dyn_layout_json[id]['enable'],
                                          invert=self.dyn_layout_json[id]['invert'])
         else:
@@ -179,6 +180,7 @@ class DynamicLayout(Widget):
                                    label = self.dyn_layout_json[id]['label'],
                                    var_tag=self.dyn_layout_json[id]['var_tag'],
                                    var_alias=self.dyn_layout_json[id]['var_alias'],
+                                   widget=self.dyn_layout_json[id]['widget'],
                                    enable=self.dyn_layout_json[id]['enable'],
                                    invert=self.dyn_layout_json[id]['invert'])
         scatter_layout = MyScatterLayout(id=str(id) + '_scatter',
@@ -211,16 +213,60 @@ class DynamicLayout(Widget):
             dyn_widget_ref.text = dyn_widget_ref.label
         ChangeItemBackground(dyn_widget_ref)
 
+    def add_widget_json(self):
+        id_list = []
+        new_json = {}
+        for id, dyn_widget in self.dyn_widget_dict.items():
+            id_list.append(int(id))
+        new_id = str(max(id_list) + 1)  #make new id one greater than largest id
+        #create default widget parameters
+        new_json['label'] = ''
+        new_json['var_tag'] = ''
+        new_json['var_alias'] = ''
+        new_json['widget'] = 'Toggle Button'
+        new_json['enable'] = True
+        new_json['invert'] = False
+        new_json['size'] = (170, 160)
+        new_json['pos'] = (320, 160)
+        self.dyn_layout_json.update({new_id: new_json})
+        self.create_dyn_widget(new_id)
+        self.update_widget(new_id)
+        self.save_layout()
+        self.end_modify()
+        self.modify_screen()
+        self.app_ref.main_screen_ref.item_edit_popup.edit_popup(self.dyn_widget_dict[new_id])
+
     def edit_widget_json(self, id):
         dyn_widget_ref = self.dyn_widget_dict[id]
         scatter_ref = self.scatter_dict[id]
         self.dyn_layout_json[id]['label'] = dyn_widget_ref.label
         self.dyn_layout_json[id]['var_tag'] = dyn_widget_ref.var_tag
         self.dyn_layout_json[id]['var_alias'] = dyn_widget_ref.var_alias
+        self.dyn_layout_json[id]['widget'] = dyn_widget_ref.widget
         self.dyn_layout_json[id]['enable'] = dyn_widget_ref.enable
         self.dyn_layout_json[id]['invert'] = dyn_widget_ref.invert
         self.dyn_layout_json[id]['size'] = scatter_ref.size
         self.dyn_layout_json[id]['pos'] = scatter_ref.pos
+
+    def exchange_widget(self, id):
+        self.remove_dyn_widget(id)
+        self.create_dyn_widget(id)
+        self.update_widget(id)
+        self.edit_widget_json(id)
+        self.end_modify()
+        self.modify_screen()
+
+    def delete_widget(self, id):
+        self.remove_dyn_widget(id)
+        del self.dyn_layout_json[id]
+        del self.dyn_widget_dict[id]
+        self.save_layout()
+
+    def remove_dyn_widget(self, id):
+        dyn_widget_ref = self.dyn_widget_dict[id]
+        scatter_ref = self.scatter_dict[id]
+        scatter_ref.remove_widget(dyn_widget_ref)
+        self.app_ref.main_screen_ref.ids.main_layout.remove_widget(scatter_ref)
 
     def save_layout(self):
         with open(self.layout_file, 'w') as file:
@@ -247,44 +293,52 @@ class DynamicLayout(Widget):
 class ScreenItemEditPopup(Popup):
     app_ref = ObjectProperty(None)
     label_input = ObjectProperty(None)
-    toggle_check = ObjectProperty(None)
     enable_check = ObjectProperty(None)
     invert_check = ObjectProperty(None)
     variable_spinner = ObjectProperty(None)
-    toggle_layout = ObjectProperty(None)
+    widget_spinner = ObjectProperty(None)
     item = ObjectProperty(None)
     dynamic_layout = ObjectProperty(None)
     modify_mode = BooleanProperty(False)
 
-    def edit_popup(self, item, toggle):
+    def edit_popup(self, item):
         if self.modify_mode:
             self.item = item
             self.label_input.text = self.item.label
-            self.toggle_check.active = self.item.toggle
             self.enable_check.active = self.item.enable
             self.invert_check.active = self.item.invert
             self.variable_spinner.text = self.item.var_alias
-            self.toggle_layout.disabled = toggle
+            self.widget_spinner.text = self.item.widget
             self.open()
 
     def save_item(self):
         self.item.label = self.label_input.text
-        self.item.toggle = self.toggle_check.active
         self.item.enable = self.enable_check.active
         self.item.invert = self.invert_check.active
         self.item.var_alias = self.variable_spinner.text
         self.item.var_tag = self.app_ref.variables.tag_by_alias_dict[self.item.var_alias]  #save tag of associated alias, in case alias is changed/deleted
+        if self.item.widget != self.widget_spinner.text:
+            exchange = True
+        else:
+            exchange = False
+        self.item.widget = self.widget_spinner.text
         self.dynamic_layout.update_widget(self.item.id)
         self.dynamic_layout.edit_widget_json(self.item.id)
+        if exchange:  #a new type of widget has been selected, so exchange it
+            self.dynamic_layout.exchange_widget(self.item.id)
         self.dynamic_layout.save_layout()
         self.dismiss()
 
+    def delete_item(self):
+        self.dynamic_layout.delete_widget(self.item.id)
+        self.dismiss()
+
 class DynItem(Widget):
-    toggle = BooleanProperty(True)
     enable = BooleanProperty(True)
     invert = BooleanProperty(True)
     var_alias = StringProperty("")
     var_tag = StringProperty("")
+    widget = StringProperty("")
     label = StringProperty("")
     ignition_input = NumericProperty(0)
     digital_inputs = NumericProperty(0)
@@ -321,7 +375,7 @@ class DynItem(Widget):
                         return xor(False, self.invert)
                 else:
                     if touch.is_double_tap:
-                        self.app_ref.main_screen_ref.item_edit_popup.edit_popup(self, False)
+                        self.app_ref.main_screen_ref.item_edit_popup.edit_popup(self)
                         return False
                     else:
                         self.app_ref.dynamic_layout.edit_widget_json(self.id)  #update widget size/pos in json as it may have been moved
@@ -331,7 +385,7 @@ class DynItem(Widget):
     def on_touch_up(self, touch):
         if self.collide_point(*touch.pos):
             if self.app_ref.slide_layout.state != 'open':
-                if not self.app_ref.dynamic_layout.modify_mode and not self.toggle:
+                if not self.app_ref.dynamic_layout.modify_mode and self.widget == 'Button':
                     if self.enable:
                         if self.var_alias != 'SYS_LOGGED_IN':  # don't allow SYS_LOGGED_IN to be change by a button
                             self._do_release()
@@ -341,7 +395,7 @@ class DynItem(Widget):
                         return False
                 else:
                     if touch.is_double_tap:
-                        self.app_ref.main_screen_ref.item_edit_popup.edit_popup(self, True)
+                        self.app_ref.main_screen_ref.item_edit_popup.edit_popup(self)
                         return False
                     else:
                         self.app_ref.dynamic_layout.edit_widget_json(self.id)  #update widget size/pos in json as it may have been moved
@@ -366,7 +420,7 @@ class DynToggleButton(DynItem, ToggleButton):
     pass
 
 class DynButton(DynItem, Button):
-    toggle = BooleanProperty(False)
+    pass
 
 def ChangeItemBackground(item):
     if item.enable:

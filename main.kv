@@ -15,13 +15,13 @@
         text: 'Modify Main Screen'
         on_release: app.screen_man.current = 'main_screen'; app.slide_layout.toggle_state()
         on_release: if not app.dynamic_layout.modify_mode: app.dynamic_layout.modify_screen(); app.variables.toggle_update_clock(False)
-    #Button:
-        #text: 'Settings'
-        #on_release: app.screen_man.current = 'settings_screen'; app.slide_layout.toggle_state()
     Button:
         text: 'Settings'
         on_release: app.open_settings(); app.screen_man.current = 'main_screen'; app.slide_layout.toggle_state()
         on_release: if app.dynamic_layout.modify_mode: app.dynamic_layout.end_modify(); app.variables.toggle_update_clock(True)
+    Button:
+        text: 'Add Widget'
+        on_release: app.dynamic_layout.add_widget_json(); app.slide_layout.toggle_state()
 
 <ScreenManagement>:
     ignition_input: int(app.variables.DI_IGNITION)
@@ -39,8 +39,6 @@
         name: 'off_screen'
     MainScreen:
         name: 'main_screen'
-    #SettingsScreen:
-        #name: 'settings_screen'
     CameraScreen:
         name: 'camera_screen'
     PasscodeScreen:
@@ -56,7 +54,7 @@
     id: main_screen
     app_ref: app
     item_edit_popup: item_edit_popup.__self__
-    on_parent: app.main_screen_ref = self; #app.dynamic_layout.build_layout()
+    on_parent: app.main_screen_ref = self
 
     FloatLayout:
         id: main_layout
@@ -68,14 +66,13 @@
         modify_mode: app.dynamic_layout.modify_mode
         dynamic_layout: app.dynamic_layout
         label_input: label_input
-        toggle_check: toggle_check
         enable_check: enable_check
         invert_check: invert_check
         variable_spinner: variable_spinner
-        toggle_layout: toggle_layout
+        widget_spinner: widget_spinner
         title: "Modify"
         size_hint: None, None
-        size: 300, 250
+        size: 300, 265
         pos_hint: {'middle': 1, 'top': 1}
         on_parent: if self.parent == main_screen: self.parent.remove_widget(self)
 
@@ -84,53 +81,52 @@
             spacing: 5
             padding: 5
 
-            GridLayout:
-                rows: 1
-                cols: 3
-                size_hint: 1, 0.22
-                spacing: 5
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint: 1, 0.16
+                padding: 1
 
                 BoxLayout:
                     orientation: 'horizontal'
+                    size_hint: 0.47, 1
 
                     Label:
                         text: 'Enable:'
-                        size_hint: .6, 1
+                        size_hint: .4, 1
+                        text_size: self.size
+                        halign: 'left'
+                        valign: 'middle'
 
                     CheckBox:
                         id: enable_check
-                        size_hint: .4, 1
-
-                BoxLayout:
-                    id: toggle_layout
-                    orientation: 'horizontal'
-
-                    Label:
-                        text: 'Toggle:'
                         size_hint: .6, 1
 
-                    CheckBox:
-                        id: toggle_check
-                        size_hint: .4, 1
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint: 0.13, 1
 
                 BoxLayout:
                     orientation: 'horizontal'
+                    size_hint: 0.4, 1
 
                     Label:
                         text: 'Invert:'
-                        size_hint: .6, 1
+                        size_hint: .4, 1
+                        text_size: self.size
+                        halign: 'left'
+                        valign: 'middle'
 
                     CheckBox:
                         id: invert_check
-                        size_hint: .4, 1
+                        size_hint: .6, 1
 
             BoxLayout:
                 orientation: 'horizontal'
-                size_hint: 1, 0.21
+                size_hint: 1, 0.2
                 padding: 1
 
                 Label:
-                    text: 'Channel:'
+                    text: 'Variable:'
                     size_hint: .25, 1
                     text_size: self.size
                     halign: 'left'
@@ -144,22 +140,60 @@
                     text: 'DI_0'
                     values: app.variables.display_var_tags
 
-            TextInput:
-                id: label_input
-                size_hint: 1, 0.27
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint: 1, 0.2
+                padding: 1
 
-            GridLayout:
-                rows: 1
-                cols: 2
-                size_hint: 1, 0.3
+                Label:
+                    text: 'Widget:'
+                    size_hint: .25, 1
+                    text_size: self.size
+                    halign: 'left'
+                    valign: 'middle'
+
+                Spinner:
+                    id: widget_spinner
+                    size_hint: .75, 1
+                    option_cls: Factory.get("SpinnerLabel")
+                    font_size: '13sp'
+                    text: 'Toggle Button'
+                    values: ['Button', 'Toggle Button']
+
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint: 1, 0.19
+                padding: 1
+
+                Label:
+                    text: 'Label:'
+                    size_hint: .25, 1
+                    text_size: self.size
+                    halign: 'left'
+                    valign: 'middle'
+
+                TextInput:
+                    id: label_input
+                    size_hint: .75, 1
+
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint: 1, 0.25
                 spacing: 5
 
                 Button:
                     text: 'OK'
+                    size_hint: .4, 1
                     on_release: item_edit_popup.save_item()
 
                 Button:
+                    text: 'Del'
+                    size_hint: .2, 1
+                    on_release: item_edit_popup.delete_item()
+
+                Button:
                     text: 'Cancel'
+                    size_hint: .4, 1
                     on_release: item_edit_popup.dismiss()
 
 <-SettingAlias>:
@@ -251,6 +285,7 @@
     data_change: app.variables.data_change
     var_tag: ''
     var_alias: ''
+    widget: ''
     enable: True
     invert: False
 
