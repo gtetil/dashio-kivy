@@ -1,177 +1,22 @@
-[
-    {
+{
+    "0": {
         "enable": true, 
-        "id": "6", 
-        "invert": false, 
-        "label": "", 
-        "pos": [
-            10.0, 
-            400.0
-        ], 
-        "size": [
-            190, 
-            70
-        ], 
-        "toggle": true, 
-        "var_alias": "Reverse4", 
-        "var_tag": "DI_0"
-    }, 
-    {
-        "enable": true, 
-        "id": "0", 
         "invert": false, 
         "label": "", 
         "pos": [
             210.0, 
-            240.0
-        ], 
-        "size": [
-            180, 
-            230
-        ], 
-        "toggle": true, 
-        "var_alias": "Rear Lights", 
-        "var_tag": "DO_0"
-    }, 
-    {
-        "enable": true, 
-        "id": "3", 
-        "invert": false, 
-        "label": "Passcode\nPrompt", 
-        "pos": [
-            210.0, 
-            10.0
-        ], 
-        "size": [
-            180, 
-            220
-        ], 
-        "toggle": true, 
-        "var_alias": "SYS_PASSCODE_PROMPT", 
-        "var_tag": "SYS_PASSCODE_PROMPT"
-    }, 
-    {
-        "enable": true, 
-        "id": "5", 
-        "invert": false, 
-        "label": "", 
-        "pos": [
-            600.0, 
-            10.0
-        ], 
-        "size": [
-            190, 
-            220
-        ], 
-        "toggle": true, 
-        "var_alias": "DO_5", 
-        "var_tag": "DO_5"
-    }, 
-    {
-        "enable": true, 
-        "id": "2", 
-        "invert": false, 
-        "label": "", 
-        "pos": [
-            600.0, 
-            240.0
-        ], 
-        "size": [
-            190, 
-            230
-        ], 
-        "toggle": true, 
-        "var_alias": "DO_2", 
-        "var_tag": "DO_2"
-    }, 
-    {
-        "enable": true, 
-        "id": "4", 
-        "invert": false, 
-        "label": "", 
-        "pos": [
-            400.0, 
-            10.0
-        ], 
-        "size": [
-            190, 
-            220
-        ], 
-        "toggle": true, 
-        "var_alias": "DO_4", 
-        "var_tag": "DO_4"
-    }, 
-    {
-        "enable": true, 
-        "id": "8", 
-        "invert": false, 
-        "label": "", 
-        "pos": [
-            10.0, 
-            240.0
-        ], 
-        "size": [
-            190, 
-            70
-        ], 
-        "toggle": true, 
-        "var_alias": "Rear Lights", 
-        "var_tag": "DO_0"
-    }, 
-    {
-        "enable": true, 
-        "id": "9", 
-        "invert": false, 
-        "label": "", 
-        "pos": [
-            10.0, 
-            160.0
-        ], 
-        "size": [
-            190, 
-            70
-        ], 
-        "toggle": true, 
-        "var_alias": "DI_3", 
-        "var_tag": "DI_3"
-    }, 
-    {
-        "enable": true, 
-        "id": "10", 
-        "invert": false, 
-        "label": "", 
-        "pos": [
-            10.0, 
-            80.0
-        ], 
-        "size": [
-            190, 
-            70
-        ], 
-        "toggle": true, 
-        "var_alias": "SYS_DIM_BACKLIGHT", 
-        "var_tag": "SYS_DIM_BACKLIGHT"
-    }, 
-    {
-        "enable": true, 
-        "id": "7", 
-        "invert": false, 
-        "label": "", 
-        "pos": [
-            10.0, 
             320.0
         ], 
         "size": [
-            190, 
-            70
+            180, 
+            150
         ], 
         "toggle": true, 
-        "var_alias": "DI_1", 
-        "var_tag": "DI_1"
+        "var_alias": "Rear Lights", 
+        "var_tag": "DO_0"
     }, 
-    {
+    "1": {
         "enable": true, 
-        "id": "1", 
         "invert": false, 
         "label": "", 
         "pos": [
@@ -186,9 +31,24 @@
         "var_alias": "DO_1", 
         "var_tag": "DO_1"
     }, 
-    {
+    "10": {
         "enable": true, 
-        "id": "11", 
+        "invert": false, 
+        "label": "", 
+        "pos": [
+            10.0, 
+            80.0
+        ], 
+        "size": [
+            190, 
+            70
+        ], 
+        "toggle": true, 
+        "var_alias": "SYS_DIM_BACKLIGHT", 
+        "var_tag": "SYS_DIM_BACKLIGHT"
+    }, 
+    "11": {
+        "enable": true, 
         "invert": false, 
         "label": "Logged In", 
         "pos": [
@@ -202,5 +62,133 @@
         "toggle": true, 
         "var_alias": "SYS_LOGGED_IN", 
         "var_tag": "SYS_LOGGED_IN"
+    }, 
+    "2": {
+        "enable": true, 
+        "invert": false, 
+        "label": "", 
+        "pos": [
+            600.0, 
+            240.0
+        ], 
+        "size": [
+            190, 
+            230
+        ], 
+        "toggle": true, 
+        "var_alias": "DO_2", 
+        "var_tag": "DO_2"
+    }, 
+    "3": {
+        "enable": true, 
+        "invert": false, 
+        "label": "Passcode\nPrompt", 
+        "pos": [
+            210.0, 
+            10.0
+        ], 
+        "size": [
+            180, 
+            300
+        ], 
+        "toggle": true, 
+        "var_alias": "SYS_PASSCODE_PROMPT", 
+        "var_tag": "SYS_PASSCODE_PROMPT"
+    }, 
+    "4": {
+        "enable": true, 
+        "invert": false, 
+        "label": "", 
+        "pos": [
+            400.0, 
+            10.0
+        ], 
+        "size": [
+            190, 
+            220
+        ], 
+        "toggle": true, 
+        "var_alias": "DO_4", 
+        "var_tag": "DO_4"
+    }, 
+    "5": {
+        "enable": true, 
+        "invert": false, 
+        "label": "", 
+        "pos": [
+            600.0, 
+            10.0
+        ], 
+        "size": [
+            190, 
+            220
+        ], 
+        "toggle": true, 
+        "var_alias": "DO_5", 
+        "var_tag": "DO_5"
+    }, 
+    "6": {
+        "enable": true, 
+        "invert": false, 
+        "label": "", 
+        "pos": [
+            10.0, 
+            400.0
+        ], 
+        "size": [
+            190, 
+            70
+        ], 
+        "toggle": true, 
+        "var_alias": "Reverse4", 
+        "var_tag": "DI_0"
+    }, 
+    "7": {
+        "enable": true, 
+        "invert": false, 
+        "label": "", 
+        "pos": [
+            10.0, 
+            320.0
+        ], 
+        "size": [
+            190, 
+            70
+        ], 
+        "toggle": true, 
+        "var_alias": "DI_1", 
+        "var_tag": "DI_1"
+    }, 
+    "8": {
+        "enable": true, 
+        "invert": false, 
+        "label": "", 
+        "pos": [
+            10.0, 
+            240.0
+        ], 
+        "size": [
+            190, 
+            70
+        ], 
+        "toggle": true, 
+        "var_alias": "Rear Lights", 
+        "var_tag": "DO_0"
+    }, 
+    "9": {
+        "enable": true, 
+        "invert": false, 
+        "label": "", 
+        "pos": [
+            10.0, 
+            160.0
+        ], 
+        "size": [
+            190, 
+            70
+        ], 
+        "toggle": true, 
+        "var_alias": "DI_3", 
+        "var_tag": "DI_3"
     }
-]
+}

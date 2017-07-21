@@ -14,7 +14,7 @@
     Button:
         text: 'Modify Main Screen'
         on_release: app.screen_man.current = 'main_screen'; app.slide_layout.toggle_state()
-        on_release: if not app.dynamic_layout.modify_mode: app.dynamic_layout.build_layout(); app.dynamic_layout.modify_screen(); app.variables.toggle_update_clock(False)
+        on_release: if not app.dynamic_layout.modify_mode: app.dynamic_layout.modify_screen(); app.variables.toggle_update_clock(False)
     #Button:
         #text: 'Settings'
         #on_release: app.screen_man.current = 'settings_screen'; app.slide_layout.toggle_state()
@@ -56,7 +56,7 @@
     id: main_screen
     app_ref: app
     item_edit_popup: item_edit_popup.__self__
-    on_parent: app.dynamic_layout.main_screen_ref(self); #app.dynamic_layout.build_layout()
+    on_parent: app.main_screen_ref = self; #app.dynamic_layout.build_layout()
 
     FloatLayout:
         id: main_layout
@@ -162,155 +162,6 @@
                     text: 'Cancel'
                     on_release: item_edit_popup.dismiss()
 
-<SettingsScreen>:
-    BoxLayout:
-        id: settings_layout
-        orientation: 'vertical'
-        padding: 10
-
-        BoxLayout:
-            id: upper_settings_layout
-            orientation: 'horizontal'
-            size_hint_y: 0.6
-            spacing: 5
-
-            BoxLayout:
-                id: backlight_layout
-                orientation: 'vertical'
-                size_hint_x: 0.15
-                padding: 10
-                spacing: 5
-
-                Label:
-                    text: 'Screen Dim\nBrightness'
-                    markup: True
-                    size_hint_y: 0.15
-                    text_size: self.size
-                    halign: 'center'
-                    valign: 'middle'
-
-                Slider:
-                    id: screen_brightness_slider
-                    on_touch_move: app.variables.sys_cmd('SYS_SCREEN_BRIGHTNESS', str(int(self.value)))
-                    on_touch_up: app.variables.set_by_alias('SYS_SCREEN_BRIGHTNESS', str(int(self.value)))
-                    orientation: 'vertical'
-                    min: 20
-                    max: 200
-                    value: int(app.variables.SYS_SCREEN_BRIGHTNESS)
-                    size_hint_y: 0.85
-
-            BoxLayout:
-                orientation: 'vertical'
-                size_hint_x: 0.15
-                padding: 0, 4, 0, 0
-                spacing: 15
-
-                BoxLayout:
-                    orientation: 'vertical'
-                    size_hint_y: 0.25
-                    padding: 5, 0, 0, 0
-
-                    Label:
-                        text: 'Screen Off Delay:'
-
-                    BoxLayout:
-                        orientation: 'horizontal'
-
-                        FloatInput:
-                            id: screen_off_delay_input
-                            on_text: app.variables.set_by_alias('SYS_SCREEN_OFF_DELAY', self.text)
-                            text: app.variables.SYS_SCREEN_OFF_DELAY
-                            size_hint_x: 0.4
-                            multiline: False
-
-                        Label:
-                            text: 'seconds'
-                            size_hint_x: 0.6
-
-                BoxLayout:
-                    orientation: 'vertical'
-                    size_hint_y: 0.25
-                    padding: 5, 0, 0, 0
-
-                    Label:
-                        text: 'Shutdown Delay:'
-
-                    BoxLayout:
-                        orientation: 'horizontal'
-
-                        FloatInput:
-                            id: shutdown_delay_input
-                            on_text: app.variables.set('SYS_SHUTDOWN_DELAY', self.text)
-                            text: app.variables.SYS_SHUTDOWN_DELAY
-                            size_hint_x: 0.4
-                            multiline: False
-
-                        Label:
-                            text: 'minutes'
-                            size_hint_x: 0.6
-
-                BoxLayout:
-                    orientation: 'vertical'
-                    size_hint_y: 0.5
-
-            BoxLayout:
-                orientation: 'vertical'
-                size_hint_x: 0.7
-
-        BoxLayout:
-            orientation: 'vertical'
-            size_hint_y: 0.4
-            spacing: 5
-
-            AutoVar:
-                operator: app.variables.AUTOVAR_OPERATOR_1
-                operator_text: 'AUTOVAR_OPERATOR_1'
-                operator_2: app.variables.AUTOVAR_OPERATOR_2_1
-                operator_text_2: 'AUTOVAR_OPERATOR_2_1'
-                get_var: app.variables.AUTOVAR_GET_VAR_1
-                get_var_text: 'AUTOVAR_GET_VAR_1'
-                get_var_2: app.variables.AUTOVAR_GET_VAR_2_1
-                get_var_text_2: 'AUTOVAR_GET_VAR_2_1'
-                set_var: app.variables.AUTOVAR_SET_VAR_1
-                set_var_text: 'AUTOVAR_SET_VAR_1'
-
-            AutoVar:
-                operator: app.variables.AUTOVAR_OPERATOR_2
-                operator_text: 'AUTOVAR_OPERATOR_2'
-                operator_2: app.variables.AUTOVAR_OPERATOR_2_2
-                operator_text_2: 'AUTOVAR_OPERATOR_2_2'
-                get_var: app.variables.AUTOVAR_GET_VAR_2
-                get_var_text: 'AUTOVAR_GET_VAR_2'
-                get_var_2: app.variables.AUTOVAR_GET_VAR_2_2
-                get_var_text_2: 'AUTOVAR_GET_VAR_2_2'
-                set_var: app.variables.AUTOVAR_SET_VAR_2
-                set_var_text: 'AUTOVAR_SET_VAR_2'
-
-            AutoVar:
-                operator: app.variables.AUTOVAR_OPERATOR_3
-                operator_text: 'AUTOVAR_OPERATOR_3'
-                operator_2: app.variables.AUTOVAR_OPERATOR_2_3
-                operator_text_2: 'AUTOVAR_OPERATOR_2_3'
-                get_var: app.variables.AUTOVAR_GET_VAR_3
-                get_var_text: 'AUTOVAR_GET_VAR_3'
-                get_var_2: app.variables.AUTOVAR_GET_VAR_2_3
-                get_var_text_2: 'AUTOVAR_GET_VAR_2_3'
-                set_var: app.variables.AUTOVAR_SET_VAR_3
-                set_var_text: 'AUTOVAR_SET_VAR_3'
-
-            AutoVar:
-                operator: app.variables.AUTOVAR_OPERATOR_4
-                operator_text: 'AUTOVAR_OPERATOR_4'
-                operator_2: app.variables.AUTOVAR_OPERATOR_2_4
-                operator_text_2: 'AUTOVAR_OPERATOR_2_4'
-                get_var: app.variables.AUTOVAR_GET_VAR_4
-                get_var_text: 'AUTOVAR_GET_VAR_4'
-                get_var_2: app.variables.AUTOVAR_GET_VAR_2_4
-                get_var_text_2: 'AUTOVAR_GET_VAR_2_4'
-                set_var: app.variables.AUTOVAR_SET_VAR_4
-                set_var_text: 'AUTOVAR_SET_VAR_4'
-
-
 <-SettingAlias>:
     size_hint: .25, None
     height: labellayout.texture_size[1] + dp(10)
@@ -398,8 +249,10 @@
 <DynItem>:
     app_ref: app
     data_change: app.variables.data_change
-    var_alias: ''
     var_tag: ''
+    var_alias: ''
+    enable: True
+    invert: False
 
 <PasscodeScreen>:
     id: passcode_screen
