@@ -14,6 +14,7 @@ from kivy.uix.button import Button
 from kivy.uix.togglebutton import ToggleButton
 from kivy.uix.slider import Slider
 from kivy.uix.textinput import TextInput
+from kivy.uix.label import Label
 from kivy.uix.switch import Switch
 from kivy.clock import Clock
 from kivy.properties import StringProperty, NumericProperty, ObjectProperty, BooleanProperty, ListProperty
@@ -165,22 +166,32 @@ class DynamicLayout(Widget):
         self.save_layout()
 
     def create_dyn_widget(self, id):
-        if self.dyn_layout_json[id]['widget'] == 'Toggle Button':
+        widget = self.dyn_layout_json[id]['widget']
+        if widget == 'Toggle Button':
             dyn_widget = DynToggleButton(text='',
                                          id=str(id),
                                          label = self.dyn_layout_json[id]['label'],
                                          var_tag=self.dyn_layout_json[id]['var_tag'],
                                          var_alias=self.dyn_layout_json[id]['var_alias'],
-                                         widget=self.dyn_layout_json[id]['widget'],
+                                         widget=widget,
                                          enable=self.dyn_layout_json[id]['enable'],
                                          invert=self.dyn_layout_json[id]['invert'])
-        else:
+        elif widget == 'Button':
             dyn_widget = DynButton(text='',
                                    id=str(id),
                                    label = self.dyn_layout_json[id]['label'],
                                    var_tag=self.dyn_layout_json[id]['var_tag'],
                                    var_alias=self.dyn_layout_json[id]['var_alias'],
-                                   widget=self.dyn_layout_json[id]['widget'],
+                                   widget=widget,
+                                   enable=self.dyn_layout_json[id]['enable'],
+                                   invert=self.dyn_layout_json[id]['invert'])
+        else:
+            dyn_widget = DynLabel(text='',
+                                   id=str(id),
+                                   label = self.dyn_layout_json[id]['label'],
+                                   var_tag=self.dyn_layout_json[id]['var_tag'],
+                                   var_alias=self.dyn_layout_json[id]['var_alias'],
+                                   widget=widget,
                                    enable=self.dyn_layout_json[id]['enable'],
                                    invert=self.dyn_layout_json[id]['invert'])
         scatter_layout = MyScatterLayout(id=str(id) + '_scatter',
@@ -420,6 +431,9 @@ class DynToggleButton(DynItem, ToggleButton):
     pass
 
 class DynButton(DynItem, Button):
+    pass
+
+class DynLabel(DynItem, Label):
     pass
 
 def ChangeItemBackground(item):
