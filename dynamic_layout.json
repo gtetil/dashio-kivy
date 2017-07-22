@@ -9,7 +9,7 @@
         ], 
         "size": [
             180, 
-            80
+            60
         ], 
         "var_alias": "Rear Lights", 
         "var_tag": "DO_3", 
@@ -57,11 +57,43 @@
         ], 
         "size": [
             190, 
-            230
+            130
         ], 
         "var_alias": "DO_1", 
         "var_tag": "DO_1", 
         "widget": "Button"
+    }, 
+    "13": {
+        "enable": true, 
+        "invert": false, 
+        "label": "Propane Truck", 
+        "pos": [
+            210.0, 
+            400.0
+        ], 
+        "size": [
+            380, 
+            70
+        ], 
+        "var_alias": "", 
+        "var_tag": "", 
+        "widget": "Label"
+    }, 
+    "14": {
+        "enable": true, 
+        "invert": false, 
+        "label": "Outputs", 
+        "pos": [
+            600.0, 
+            420.0
+        ], 
+        "size": [
+            190, 
+            50
+        ], 
+        "var_alias": "", 
+        "var_tag": "", 
+        "widget": "Label"
     }, 
     "2": {
         "enable": true, 
@@ -73,7 +105,7 @@
         ], 
         "size": [
             190, 
-            230
+            180
         ], 
         "var_alias": "DO_2", 
         "var_tag": "DO_2", 

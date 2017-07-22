@@ -50,6 +50,9 @@
 <DynamicLayout>:
     app_ref: app
 
+<MyScatterLayout>:
+    app_ref: app
+
 <MainScreen>:
     id: main_screen
     app_ref: app
@@ -271,9 +274,15 @@
 <SpinnerLabel@SpinnerOption>:
     font_size: '13sp'
 
-<DynToggleButton, DynButton, DynLabel>:
+<DynToggleButton, DynButton>:
     text_size: self.size
     font_size: '18sp'
+    halign: 'center'
+    valign: 'middle'
+
+<DynLabel>:
+    text_size: self.size
+    font_size: self.size[1] / 2
     halign: 'center'
     valign: 'middle'
 

@@ -29,6 +29,7 @@ from kivy.metrics import dp
 from kivy.uix.scatterlayout import ScatterLayout
 from kivy.uix.scatter import Scatter
 from kivy.graphics.transformation import Matrix
+from kivy.graphics import Color, Rectangle
 import app_settings
 
 import json
@@ -286,18 +287,24 @@ class DynamicLayout(Widget):
     def modify_screen(self):
         self.modify_mode = True
         for id, dyn_widget in self.dyn_widget_dict.items():
-            self.animate(dyn_widget)
+            if dyn_widget.widget == 'Label':
+                dyn_widget.dyn_label_background()
+            else:
+                self.animate(dyn_widget)
 
     def end_modify(self):
         self.modify_mode = False
         for id, dyn_widget in self.dyn_widget_dict.items():
             Animation.cancel_all(dyn_widget)
-            dyn_widget.background_color = 1, 1, 1, 1
+            if dyn_widget.widget == 'Label':
+                dyn_widget.dyn_label_background()
+            else:
+                dyn_widget.background_color = 1, 1, 1, 1
         self.save_layout() #save for size and position changes
 
     def animate(self, widget):
         anim = Animation(background_color=[1, 1, 0, 0.75], duration=1, t='linear') + Animation(
-            background_color=[1, 1, 1, 1], duration=1, t='linear')
+            background_color=[1, 1, 0, 1], duration=1, t='linear')
         anim.repeat = True
         anim.start(widget)
 
@@ -376,7 +383,7 @@ class DynItem(Widget):
     def on_touch_down(self, touch):
         if self.collide_point(*touch.pos):
             if self.app_ref.slide_layout.state != 'open':
-                if not self.app_ref.dynamic_layout.modify_mode:
+                if not self.app_ref.dynamic_layout.modify_mode and self.widget != 'Label':
                     if self.enable:
                         if self.var_alias != 'SYS_LOGGED_IN': #don't allow SYS_LOGGED_IN to be change by a button
                             self._do_press()
@@ -434,7 +441,21 @@ class DynButton(DynItem, Button):
     pass
 
 class DynLabel(DynItem, Label):
-    pass
+    def __init__(self,**kwargs):
+        super (DynLabel,self).__init__(**kwargs)
+        self.dyn_label_background()
+
+    def on_size(self, *args):
+        self.dyn_label_background()
+
+    def dyn_label_background(self):
+        self.canvas.before.clear()
+        with self.canvas.before:
+            if self.app_ref.dynamic_layout.modify_mode:
+                Color(.298, .298, .047, .3)
+            else:
+                Color(0, 0, 0, 0)
+            Rectangle(pos=self.pos, size=self.size)
 
 def ChangeItemBackground(item):
     if item.enable:
@@ -880,6 +901,7 @@ class Variables(Widget):
             #raise TypeError("Brightness should be between 0 and 255")
 
 class MyScatterLayout(ScatterLayout):
+    app_ref = ObjectProperty(None)
     move_lock = False
     scale_lock_left = False
     scale_lock_right = False
@@ -904,64 +926,66 @@ class MyScatterLayout(ScatterLayout):
         return super(MyScatterLayout, self).on_touch_up(touch)
 
     def transform_with_touch(self, touch):
-        changed = False
-        x = self.bbox[0][0]
-        y = self.bbox[0][1]
-        width = self.bbox[1][0]
-        height = self.bbox[1][1]
-        mid_x = x + width / 2
-        mid_y = y + height / 2
-        inner_width = width * 0.5
-        inner_height = height * 0.5
-        left = mid_x - (inner_width / 2)
-        right = mid_x + (inner_width / 2)
-        top = mid_y + (inner_height / 2)
-        bottom = mid_y - (inner_height / 2)
+        if self.app_ref.dynamic_layout.modify_mode:
+            changed = False
+            x = self.bbox[0][0]
+            y = self.bbox[0][1]
+            width = self.bbox[1][0]
+            height = self.bbox[1][1]
+            mid_x = x + width / 2
+            mid_y = y + height / 2
+            inner_width = width * 0.5
+            inner_height = height * 0.5
+            left = mid_x - (inner_width / 2)
+            right = mid_x + (inner_width / 2)
+            top = mid_y + (inner_height / 2)
+            bottom = mid_y - (inner_height / 2)
 
-            # just do a simple one finger drag
-        if len(self._touches) == self.translation_touches:
-            # _last_touch_pos has last pos in correct parent space,
-            # just like incoming touch
-            dx = (touch.x - self._last_touch_pos[touch][0]) \
-                 * self.do_translation_x
-            dy = (touch.y - self._last_touch_pos[touch][1]) \
-                 * self.do_translation_y
-            dx = dx / self.translation_touches
-            dy = dy / self.translation_touches
-            if (touch.x > left and touch.x < right and touch.y < top and touch.y > bottom or self.move_lock) and not self.scale_lock_left and not self.scale_lock_right and not self.scale_lock_top and not self.scale_lock_bottom:
-                self.move_lock = True
-                self.apply_transform(Matrix().translate(dx, dy, 0))
+                # just do a simple one finger drag
+            if len(self._touches) == self.translation_touches:
+                # _last_touch_pos has last pos in correct parent space,
+                # just like incoming touch
+                dx = (touch.x - self._last_touch_pos[touch][0]) \
+                     * self.do_translation_x
+                dy = (touch.y - self._last_touch_pos[touch][1]) \
+                     * self.do_translation_y
+                dx = dx / self.translation_touches
+                dy = dy / self.translation_touches
+                if (touch.x > left and touch.x < right and touch.y < top and touch.y > bottom or self.move_lock)\
+                        and not self.scale_lock_left and not self.scale_lock_right and not self.scale_lock_top and not self.scale_lock_bottom:
+                    self.move_lock = True
+                    self.apply_transform(Matrix().translate(dx, dy, 0))
+                    changed = True
+
+            change_x = touch.x - self.prev_x
+            change_y = touch.y - self.prev_y
+            anchor_sign = 1
+            sign = 1
+            if abs(change_x) >= 9 and not self.move_lock and not self.scale_lock_top and not self.scale_lock_bottom:
+                if change_x < 0:
+                    sign = -1
+                if (touch.x < left or self.scale_lock_left) and not self.scale_lock_right:
+                    self.scale_lock_left = True
+                    self.pos = (self.pos[0] + (sign * 10), self.pos[1])
+                    anchor_sign = -1
+                elif (touch.x > right or self.scale_lock_right) and not self.scale_lock_left:
+                    self.scale_lock_right = True
+                self.size[0] = self.size[0] + (sign * anchor_sign * 10)
+                self.prev_x = touch.x
                 changed = True
-
-        change_x = touch.x - self.prev_x
-        change_y = touch.y - self.prev_y
-        anchor_sign = 1
-        sign = 1
-        if abs(change_x) >= 9 and not self.move_lock and not self.scale_lock_top and not self.scale_lock_bottom:
-            if change_x < 0:
-                sign = -1
-            if (touch.x < left or self.scale_lock_left) and not self.scale_lock_right:
-                self.scale_lock_left = True
-                self.pos = (self.pos[0] + (sign * 10), self.pos[1])
-                anchor_sign = -1
-            elif (touch.x > right or self.scale_lock_right) and not self.scale_lock_left:
-                self.scale_lock_right = True
-            self.size[0] = self.size[0] + (sign * anchor_sign * 10)
-            self.prev_x = touch.x
-            changed = True
-        if abs(change_y) >= 9 and not self.move_lock and not self.scale_lock_left and not self.scale_lock_right:
-            if change_y < 0:
-                sign = -1
-            if (touch.y > top or self.scale_lock_top) and not self.scale_lock_bottom:
-                self.scale_lock_top = True
-            elif (touch.y < bottom or self.scale_lock_bottom) and not self.scale_lock_top:
-                self.scale_lock_bottom = True
-                self.pos = (self.pos[0], self.pos[1] + (sign * 10))
-                anchor_sign = -1
-            self.size[1] = self.size[1] + (sign * anchor_sign * 10)
-            self.prev_y = touch.y
-            changed = True
-        return changed
+            if abs(change_y) >= 9 and not self.move_lock and not self.scale_lock_left and not self.scale_lock_right:
+                if change_y < 0:
+                    sign = -1
+                if (touch.y > top or self.scale_lock_top) and not self.scale_lock_bottom:
+                    self.scale_lock_top = True
+                elif (touch.y < bottom or self.scale_lock_bottom) and not self.scale_lock_top:
+                    self.scale_lock_bottom = True
+                    self.pos = (self.pos[0], self.pos[1] + (sign * 10))
+                    anchor_sign = -1
+                self.size[1] = self.size[1] + (sign * anchor_sign * 10)
+                self.prev_y = touch.y
+                changed = True
+            return changed
 
     def on_touch_down(self, touch):
         x, y = touch.x, touch.y
