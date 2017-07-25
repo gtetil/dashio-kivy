@@ -473,6 +473,7 @@ class CameraScreen(Screen):
 
 class MainApp(App):
     main_screen_ref = ObjectProperty(None)
+    scripts = []
 
     def build(self):
         self.settings_cls = SettingsWithSidebar
@@ -487,6 +488,7 @@ class MainApp(App):
         self.slide_layout.add_widget(self.screen_man)
         self.dynamic_layout.build_layout()
         self.get_aliases()
+        self.get_scripts()
         return self.slide_layout
 
     def build_config(self, config):
@@ -504,14 +506,20 @@ class MainApp(App):
     def build_settings(self, settings):
         settings.register_type('alias', SettingAlias)
         settings.register_type('mynumeric', MySettingNumeric)
-        settings.register_type('calc', SettingCalc)
+        settings.register_type('script', SettingScript)
         settings.add_json_panel('Settings', self.config, data=app_settings.settings_json)
         settings.add_json_panel('Aliases', self.config, data=app_settings.aliases_json)
-        settings.add_json_panel('CalcVars', self.config, data=app_settings.calcvars_json)
+        settings.add_json_panel('Scripts', self.config, data=app_settings.scripts_json)
 
     def on_config_change(self, config, section, key, value):
         self.get_saved_vars()
         self.variables.save_variables()
+        self.get_scripts()
+
+    def get_scripts(self):
+        self.scripts = []
+        for (key, value) in self.config.items('Scripts'):
+            self.scripts.append(value)
 
     def get_saved_vars(self):
         for (key, value) in self.config.items('Settings'):
@@ -523,6 +531,10 @@ class MainApp(App):
         for (key, value) in self.config.items('InputAliases'):
             self.config_aliases.append(value)
         for (key, value) in self.config.items('OutputAliases'):
+            self.config_aliases.append(value)
+        for (key, value) in self.config.items('UserVarAliases'):
+            self.config_aliases.append(value)
+        for (key, value) in self.config.items('TimerAliases'):
             self.config_aliases.append(value)
         for i in range(len(self.config_aliases)):
             self.variables.variables_json[i]['alias'] = self.config_aliases[i]
@@ -572,8 +584,45 @@ class SettingAlias(SettingString):
         # all done, open the popup !
         popup.open()
 
-class SettingCalc(SettingAlias):
-    pass
+class SettingScript(SettingString):
+    def _create_popup(self, instance):
+        # create popup layout
+        content = BoxLayout(orientation='vertical', spacing='5dp')
+        popup_width = min(0.95 * Window.width, dp(500))
+        self.popup = popup = Popup(
+            title=self.title, content=content, size_hint=(None, None),
+            size=(popup_width, '250dp'), pos_hint={'middle': 1, 'top': 1})
+        # create the textinput used for numeric input
+        self.textinput = textinput = TextInput(
+            text=self.value.replace("[tab]", '\t'), font_size='18sp', multiline=True,
+            size_hint_y=None, height='110sp')
+        textinput.bind(on_text_validate=self._validate)
+        self.textinput = textinput
+
+        # construct the content, widget are used as a spacer
+        content.add_widget(Widget())
+        content.add_widget(textinput)
+        content.add_widget(Widget())
+        content.add_widget(SettingSpacer())
+
+        # 2 buttons are created for accept or cancel the current value
+        btnlayout = BoxLayout(size_hint_y=None, height='50dp', spacing='5dp')
+        btn = Button(text='Ok')
+        btn.bind(on_release=self._validate)
+        btnlayout.add_widget(btn)
+        btn = Button(text='Cancel')
+        btn.bind(on_release=self._dismiss)
+        btnlayout.add_widget(btn)
+        content.add_widget(btnlayout)
+
+        # all done, open the popup !
+        popup.open()
+
+    def _validate(self, instance):
+        self._dismiss()
+        value = self.textinput.text.strip()
+        self.value = value
+        self.value = self.value.replace('\t', "[tab]")
 
 class MySettingNumeric(SettingNumeric):
     def _create_popup(self, instance):
@@ -632,6 +681,12 @@ class Variables(Widget):
     DO_3 = StringProperty('0')
     DO_4 = StringProperty('0')
     DO_5 = StringProperty('0')
+    USER_VAR_0 = StringProperty('0')
+    USER_VAR_1 = StringProperty('0')
+    USER_VAR_2 = StringProperty('0')
+    USER_VAR_3 = StringProperty('0')
+    TMR_0 = StringProperty('0')
+    TMR_1 = StringProperty('0')
     SYS_LOGGED_IN = StringProperty('0')
     SYS_PASSCODE_PROMPT = StringProperty('0')
     SYS_REVERSE_CAM_ON = StringProperty('0')
@@ -639,26 +694,6 @@ class Variables(Widget):
     SYS_SCREEN_BRIGHTNESS = StringProperty('0')
     SYS_SCREEN_OFF_DELAY = StringProperty('0')
     SYS_SHUTDOWN_DELAY = StringProperty('0')
-    AUTOVAR_OPERATOR_1 = StringProperty('')
-    AUTOVAR_OPERATOR_2_1 = StringProperty('')
-    AUTOVAR_GET_VAR_1 = StringProperty('')
-    AUTOVAR_GET_VAR_2_1 = StringProperty('')
-    AUTOVAR_SET_VAR_1 = StringProperty('')
-    AUTOVAR_OPERATOR_2 = StringProperty('')
-    AUTOVAR_OPERATOR_2_2 = StringProperty('')
-    AUTOVAR_GET_VAR_2 = StringProperty('')
-    AUTOVAR_GET_VAR_2_2 = StringProperty('')
-    AUTOVAR_SET_VAR_2 = StringProperty('')
-    AUTOVAR_OPERATOR_3 = StringProperty('')
-    AUTOVAR_OPERATOR_2_3 = StringProperty('')
-    AUTOVAR_GET_VAR_3 = StringProperty('')
-    AUTOVAR_GET_VAR_2_3 = StringProperty('')
-    AUTOVAR_SET_VAR_3 = StringProperty('')
-    AUTOVAR_OPERATOR_4 = StringProperty('')
-    AUTOVAR_OPERATOR_2_4 = StringProperty('')
-    AUTOVAR_GET_VAR_4 = StringProperty('')
-    AUTOVAR_GET_VAR_2_4 = StringProperty('')
-    AUTOVAR_SET_VAR_4 = StringProperty('')
 
     def __init__(self, **kwargs):
         super(Variables, self).__init__(**kwargs)
@@ -765,67 +800,36 @@ class Variables(Widget):
         self.DO_3 = self.variable_data[11]
         self.DO_4 = self.variable_data[12]
         self.DO_5 = self.variable_data[13]
-        self.SYS_LOGGED_IN = self.variable_data[14]
-        self.SYS_PASSCODE_PROMPT = self.variable_data[15]
-        self.SYS_REVERSE_CAM_ON = self.variable_data[16]
-        self.SYS_SCREEN_BRIGHTNESS = self.variable_data[17]
-        self.SYS_DIM_BACKLIGHT = self.variable_data[18]
-        self.SYS_SCREEN_OFF_DELAY = self.variable_data[19]
-        self.SYS_SHUTDOWN_DELAY = self.variable_data[20]
-        '''self.AUTOVAR_OPERATOR_1 = self.variable_data[21]
-        self.AUTOVAR_OPERATOR_2_1 = self.variable_data[22]
-        self.AUTOVAR_GET_VAR_1 = self.variable_data[23]
-        self.AUTOVAR_GET_VAR_2_1 = self.variable_data[24]
-        self.AUTOVAR_SET_VAR_1 = self.variable_data[25]
-        self.AUTOVAR_OPERATOR_2 = self.variable_data[26]
-        self.AUTOVAR_OPERATOR_2_2 = self.variable_data[27]
-        self.AUTOVAR_GET_VAR_2 = self.variable_data[28]
-        self.AUTOVAR_GET_VAR_2_2 = self.variable_data[29]
-        self.AUTOVAR_SET_VAR_2 = self.variable_data[30]
-        self.AUTOVAR_OPERATOR_3 = self.variable_data[31]
-        self.AUTOVAR_OPERATOR_2_3 = self.variable_data[32]
-        self.AUTOVAR_GET_VAR_3 = self.variable_data[33]
-        self.AUTOVAR_GET_VAR_2_3 = self.variable_data[34]
-        self.AUTOVAR_SET_VAR_3 = self.variable_data[35]
-        self.AUTOVAR_OPERATOR_4 = self.variable_data[36]
-        self.AUTOVAR_OPERATOR_2_4 = self.variable_data[37]
-        self.AUTOVAR_GET_VAR_4 = self.variable_data[38]
-        self.AUTOVAR_GET_VAR_2_4 = self.variable_data[39]
-        self.AUTOVAR_SET_VAR_4 = self.variable_data[40]'''
+        self.USER_VAR_0 = self.variable_data[14]
+        self.USER_VAR_1 = self.variable_data[15]
+        self.USER_VAR_2 = self.variable_data[16]
+        self.USER_VAR_3 = self.variable_data[17]
+        self.TMR_0 = self.variable_data[18]
+        self.TMR_1 = self.variable_data[19]
+        self.SYS_LOGGED_IN = self.variable_data[20]
+        self.SYS_PASSCODE_PROMPT = self.variable_data[21]
+        self.SYS_REVERSE_CAM_ON = self.variable_data[22]
+        self.SYS_SCREEN_BRIGHTNESS = self.variable_data[23]
+        self.SYS_DIM_BACKLIGHT = self.variable_data[24]
+        self.SYS_SCREEN_OFF_DELAY = self.variable_data[25]
+        self.SYS_SHUTDOWN_DELAY = self.variable_data[26]
 
         if not debug_mode:
             self.DI_IGNITION = self.variable_data[7]  #need to update last due to screen initialization issue
         else:
             self.DI_IGNITION = '1'
 
-        self.scan_auto_vars()
+        self.exec_scripts()
 
-    def eval_auto_var(self, op, op2, get, get2, set, prev_state):
-        if op != '':
-            if (op == 'if' and self.get(get) == '1') or (op == 'if not' and self.get(get) == '0'):
-                if op2 == '' or op2 == 'or' or op2 == 'or not':
-                    state = '1'
-                elif (op2 == 'and' and self.get(get2) == '1') or (op2 == 'and not' and self.get(get2) == '0'):
-                    state = '1'
-                else:
-                    state = '0'
-            else:
-                if op2 == '':
-                    state = '0'
-                elif (op2 == 'or' and self.get(get2) == '1') or (op2 == 'or not' and self.get(get2) == '0'):
-                    state = '1'
-                else:
-                    state = '0'
-            if prev_state != state:
-                self.set_by_alias(set, state)
-            return state
-    
-    def scan_auto_vars(self):
+    def exec_scripts(self):
         if self.data_change:
-            self.prev_autovar_state_1 = self.eval_auto_var(self.AUTOVAR_OPERATOR_1, self.AUTOVAR_OPERATOR_2_1, self.AUTOVAR_GET_VAR_1, self.AUTOVAR_GET_VAR_2_1, self.AUTOVAR_SET_VAR_1, self.prev_autovar_state_1)
-            self.prev_autovar_state_2 = self.eval_auto_var(self.AUTOVAR_OPERATOR_2, self.AUTOVAR_OPERATOR_2_2, self.AUTOVAR_GET_VAR_2, self.AUTOVAR_GET_VAR_2_2, self.AUTOVAR_SET_VAR_2, self.prev_autovar_state_2)
-            self.prev_autovar_state_3 = self.eval_auto_var(self.AUTOVAR_OPERATOR_3, self.AUTOVAR_OPERATOR_2_3, self.AUTOVAR_GET_VAR_3, self.AUTOVAR_GET_VAR_2_3, self.AUTOVAR_SET_VAR_3, self.prev_autovar_state_3)
-            self.prev_autovar_state_4 = self.eval_auto_var(self.AUTOVAR_OPERATOR_4, self.AUTOVAR_OPERATOR_2_4, self.AUTOVAR_GET_VAR_4, self.AUTOVAR_GET_VAR_2_4, self.AUTOVAR_SET_VAR_4, self.prev_autovar_state_4)
+            for script in self.app_ref.scripts:
+                if script != '':
+                    try:
+                        script = script.replace("[tab]", '\t')
+                        exec(script)
+                    except:
+                        print('Script error')
 
     def toggle_update_clock(self, state):
         if state:

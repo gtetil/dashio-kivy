@@ -11,8 +11,8 @@
             180, 
             60
         ], 
-        "var_alias": "Rear Lights", 
-        "var_tag": "DO_3", 
+        "var_alias": "USER_VAR_0", 
+        "var_tag": "USER_VAR_0", 
         "widget": "Toggle Button"
     }, 
     "10": {
@@ -57,7 +57,7 @@
         ], 
         "size": [
             190, 
-            130
+            140
         ], 
         "var_alias": "DO_1", 
         "var_tag": "DO_1", 
@@ -68,12 +68,12 @@
         "invert": false, 
         "label": "Propane Truck", 
         "pos": [
-            210.0, 
-            400.0
+            220.0, 
+            430.0
         ], 
         "size": [
             380, 
-            70
+            40
         ], 
         "var_alias": "", 
         "var_tag": "", 
@@ -95,6 +95,22 @@
         "var_tag": "", 
         "widget": "Label"
     }, 
+    "15": {
+        "enable": true, 
+        "invert": false, 
+        "label": "", 
+        "pos": [
+            210.0, 
+            310.0
+        ], 
+        "size": [
+            180, 
+            80
+        ], 
+        "var_alias": "Reverse5", 
+        "var_tag": "DI_0", 
+        "widget": "Toggle Button"
+    }, 
     "2": {
         "enable": true, 
         "invert": false, 
@@ -107,7 +123,7 @@
             190, 
             180
         ], 
-        "var_alias": "DO_2", 
+        "var_alias": "Park", 
         "var_tag": "DO_2", 
         "widget": "Toggle Button"
     }, 
@@ -203,8 +219,8 @@
             190, 
             70
         ], 
-        "var_alias": "Rear Lights", 
-        "var_tag": "DO_0", 
+        "var_alias": "USER_VAR_0", 
+        "var_tag": "USER_VAR_0", 
         "widget": "Toggle Button"
     }, 
     "9": {

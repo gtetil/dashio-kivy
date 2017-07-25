@@ -100,7 +100,7 @@
         "value": ""
     }, 
     {
-        "alias": "DO_2", 
+        "alias": "Park", 
         "data_index": 10, 
         "hidden": false, 
         "id": 102, 
@@ -140,8 +140,68 @@
         "value": ""
     }, 
     {
-        "alias": "SYS_LOGGED_IN", 
+        "alias": "USER_VAR_0", 
         "data_index": 14, 
+        "hidden": false, 
+        "id": 500, 
+        "save": false, 
+        "tag": "USER_VAR_0", 
+        "type": "USER", 
+        "value": "0"
+    }, 
+    {
+        "alias": "USER_VAR_1", 
+        "data_index": 15, 
+        "hidden": false, 
+        "id": 501, 
+        "save": false, 
+        "tag": "USER_VAR_1", 
+        "type": "USER", 
+        "value": "0"
+    }, 
+    {
+        "alias": "USER_VAR_2", 
+        "data_index": 16, 
+        "hidden": false, 
+        "id": 502, 
+        "save": false, 
+        "tag": "USER_VAR_2", 
+        "type": "USER", 
+        "value": "0"
+    }, 
+    {
+        "alias": "USER_VAR_3", 
+        "data_index": 17, 
+        "hidden": false, 
+        "id": 503, 
+        "save": false, 
+        "tag": "USER_VAR_3", 
+        "type": "USER", 
+        "value": "0"
+    }, 
+    {
+        "alias": "TMR_0", 
+        "data_index": 18, 
+        "hidden": false, 
+        "id": 504, 
+        "save": false, 
+        "tag": "TMR_0", 
+        "type": "USER", 
+        "value": "0"
+    }, 
+    {
+        "alias": "TMR_1", 
+        "data_index": 19, 
+        "hidden": false, 
+        "id": 505, 
+        "save": false, 
+        "tag": "TMR_1", 
+        "type": "USER", 
+        "value": "0"
+    }, 
+    {
+        "alias": "SYS_LOGGED_IN", 
+        "data_index": 20, 
         "hidden": false, 
         "id": 1000, 
         "save": false, 
@@ -151,7 +211,7 @@
     }, 
     {
         "alias": "SYS_PASSCODE_PROMPT", 
-        "data_index": 15, 
+        "data_index": 21, 
         "hidden": false, 
         "id": 1001, 
         "save": false, 
@@ -161,7 +221,7 @@
     }, 
     {
         "alias": "SYS_REVERSE_CAM_ON", 
-        "data_index": 16, 
+        "data_index": 22, 
         "hidden": false, 
         "id": 1002, 
         "save": false, 
@@ -171,7 +231,7 @@
     }, 
     {
         "alias": "SYS_SCREEN_BRIGHTNESS", 
-        "data_index": 17, 
+        "data_index": 23, 
         "hidden": false, 
         "id": 2000, 
         "save": true, 
@@ -181,7 +241,7 @@
     }, 
     {
         "alias": "SYS_DIM_BACKLIGHT", 
-        "data_index": 18, 
+        "data_index": 24, 
         "hidden": false, 
         "id": 2001, 
         "save": true, 
@@ -191,7 +251,7 @@
     }, 
     {
         "alias": "SYS_SCREEN_OFF_DELAY", 
-        "data_index": 19, 
+        "data_index": 25, 
         "hidden": false, 
         "id": 2002, 
         "save": true, 
@@ -201,7 +261,7 @@
     }, 
     {
         "alias": "SYS_SHUTDOWN_DELAY", 
-        "data_index": 20, 
+        "data_index": 26, 
         "hidden": false, 
         "id": 2003, 
         "save": true, 

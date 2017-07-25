@@ -235,7 +235,7 @@
                 pos: root.pos
                 font_size: '15sp'
 
-<-SettingCalc>:
+<-SettingScript>:
     size_hint: .25, None
     height: labellayout.texture_size[1] + dp(10)
     #content: content
@@ -258,7 +258,8 @@
             #size_hint_x: .66
             id: labellayout
             markup: True
-            text: root.value or ''
+            multiline: True
+            text: (root.value or '').replace("[tab]", '    ')
             font_size: '15sp'
             text_size: self.width - 32, None
 
