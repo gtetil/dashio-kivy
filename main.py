@@ -15,6 +15,7 @@ from kivy.uix.togglebutton import ToggleButton
 from kivy.uix.slider import Slider
 from kivy.uix.textinput import TextInput
 from kivy.uix.label import Label
+from kivy.uix.spinner import Spinner
 from kivy.uix.switch import Switch
 from kivy.clock import Clock
 from kivy.properties import StringProperty, NumericProperty, ObjectProperty, BooleanProperty, ListProperty
@@ -30,6 +31,7 @@ from kivy.uix.scatterlayout import ScatterLayout
 from kivy.uix.scatter import Scatter
 from kivy.graphics.transformation import Matrix
 from kivy.graphics import Color, Rectangle
+from kivy.factory import Factory
 import app_settings
 
 import json
@@ -519,7 +521,12 @@ class MainApp(App):
     def get_scripts(self):
         self.scripts = []
         for (key, value) in self.config.items('Scripts'):
-            self.scripts.append(value)
+            script = value.replace("[tab]", '\t')
+            script = script.replace('get([', 'self.get(("')
+            script = script.replace(']', '")')
+            script = script.replace('set([', 'self.set_by_alias(("')
+            self.scripts.append(script)
+            print script
 
     def get_saved_vars(self):
         for (key, value) in self.config.items('Settings'):
@@ -585,25 +592,39 @@ class SettingAlias(SettingString):
         popup.open()
 
 class SettingScript(SettingString):
+    app_ref = ObjectProperty(None)
+
     def _create_popup(self, instance):
         # create popup layout
         content = BoxLayout(orientation='vertical', spacing='5dp')
         popup_width = min(0.95 * Window.width, dp(500))
         self.popup = popup = Popup(
             title=self.title, content=content, size_hint=(None, None),
-            size=(popup_width, '250dp'), pos_hint={'middle': 1, 'top': 1})
+            size=(popup_width, '275dp'), pos_hint={'middle': 1, 'top': 1})
         # create the textinput used for numeric input
         self.textinput = textinput = TextInput(
             text=self.value.replace("[tab]", '\t'), font_size='18sp', multiline=True,
             size_hint_y=None, height='110sp')
         textinput.bind(on_text_validate=self._validate)
         self.textinput = textinput
+        self.spinner = Spinner(id='script_var_spinner',
+                    size_hint=(.75, 1),
+                    option_cls=Factory.get("SpinnerLabel"),
+                    font_size='13sp',
+                    text='DI_0',
+                    values=self.app_ref.variables.display_var_tags,
+                    size_hint_y=None, height='30sp',
+                    size_hint_x=0.5)
+        self.insert_button = Button(text='Insert', size_hint_x=0.5)
+        self.insert_button.bind(on_release=self.insert_var)
+        self.box_layout = BoxLayout(orientation='horizontal', size_hint_y=None, height='35dp', spacing='5dp')
+        self.box_layout.add_widget(self.spinner)
+        self.box_layout.add_widget(self.insert_button)
 
         # construct the content, widget are used as a spacer
-        content.add_widget(Widget())
+        content.add_widget(self.box_layout)
         content.add_widget(textinput)
-        content.add_widget(Widget())
-        content.add_widget(SettingSpacer())
+        #content.add_widget(SettingSpacer())
 
         # 2 buttons are created for accept or cancel the current value
         btnlayout = BoxLayout(size_hint_y=None, height='50dp', spacing='5dp')
@@ -617,6 +638,11 @@ class SettingScript(SettingString):
 
         # all done, open the popup !
         popup.open()
+
+    def insert_var(self, instance):
+        alias = '[' + self.spinner.text + ']'
+        self.textinput.insert_text(alias)
+        self.textinput.focus = True
 
     def _validate(self, instance):
         self._dismiss()
@@ -826,7 +852,6 @@ class Variables(Widget):
             for script in self.app_ref.scripts:
                 if script != '':
                     try:
-                        script = script.replace("[tab]", '\t')
                         exec(script)
                     except:
                         print('Script error')
