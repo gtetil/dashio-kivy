@@ -3,12 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="27b3c643-4da9-4ab8-8fac-19f30f795262" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app_settings.py" afterPath="$PROJECT_DIR$/app_settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dynamic_layout.json" afterPath="$PROJECT_DIR$/dynamic_layout.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.ini" afterPath="$PROJECT_DIR$/main.ini" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.kv" afterPath="$PROJECT_DIR$/main.kv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/variables.json" afterPath="$PROJECT_DIR$/variables.json" />
     </list>
     <list id="1e95b302-9845-4a63-bdc7-46bebc48f801" name="Revert: " comment="" />
     <list id="9acf94dc-4ce7-4798-ab9b-5692da952639" name="Revert:" comment="" />
@@ -653,12 +647,19 @@
       <option name="project" value="LOCAL" />
       <updated>1500943189761</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="- debugged latest release (aliases, moveable widgets, add/delete widgets, new settings screen)">
+      <created>1501455639596</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1501455639596</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18113208" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -711,7 +712,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="more work on Variable widget" />
     <MESSAGE value="mostly finished Variable widget" />
     <MESSAGE value="started integrating variable widgets into dynamic layout widgets" />
     <MESSAGE value="stopped working on variable widget.  looking to do something simpler." />
@@ -736,7 +736,8 @@
     <MESSAGE value="- finished architecture change to keep track of all widgets and not use the mass &quot;clear_widgets&quot;.&#10;- able to add and delete widgets&#10;- start scheme in edit popup to allow for new types of widgets." />
     <MESSAGE value="- finished adding and debugging 'label' widget" />
     <MESSAGE value="- finished initial 'scripts' implementation.  need to add ability to insert aliases." />
-    <option name="LAST_COMMIT_MESSAGE" value="- finished initial 'scripts' implementation.  need to add ability to insert aliases." />
+    <MESSAGE value="- debugged latest release (aliases, moveable widgets, add/delete widgets, new settings screen)" />
+    <option name="LAST_COMMIT_MESSAGE" value="- debugged latest release (aliases, moveable widgets, add/delete widgets, new settings screen)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
