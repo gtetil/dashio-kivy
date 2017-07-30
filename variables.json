@@ -10,7 +10,7 @@
         "value": ""
     }, 
     {
-        "alias": "Reverse5", 
+        "alias": "Reverse", 
         "data_index": 1, 
         "hidden": false, 
         "id": 1, 
@@ -80,7 +80,7 @@
         "value": ""
     }, 
     {
-        "alias": "DO_0", 
+        "alias": "Engine Kill", 
         "data_index": 8, 
         "hidden": false, 
         "id": 100, 
@@ -237,7 +237,7 @@
         "save": true, 
         "tag": "SYS_SCREEN_BRIGHTNESS", 
         "type": "SYS", 
-        "value": "201"
+        "value": "200"
     }, 
     {
         "alias": "SYS_DIM_BACKLIGHT", 
@@ -268,5 +268,35 @@
         "tag": "SYS_SHUTDOWN_DELAY", 
         "type": "SYS", 
         "value": "61"
+    }, 
+    {
+        "alias": "SYS_INACTIVE_TIME", 
+        "data_index": 27, 
+        "hidden": false, 
+        "id": 2004, 
+        "save": true, 
+        "tag": "SYS_INACTIVE_TIME", 
+        "type": "SYS", 
+        "value": "60"
+    }, 
+    {
+        "alias": "SYS_INACTIVE", 
+        "data_index": 28, 
+        "hidden": false, 
+        "id": 1003, 
+        "save": false, 
+        "tag": "SYS_INACTIVE", 
+        "type": "SYS", 
+        "value": "0"
+    }, 
+    {
+        "alias": "SYS_INIT", 
+        "data_index": 29, 
+        "hidden": false, 
+        "id": 1004, 
+        "save": false, 
+        "tag": "SYS_INIT", 
+        "type": "SYS", 
+        "value": "0"
     }
 ]

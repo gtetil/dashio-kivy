@@ -260,7 +260,7 @@
             id: labellayout
             markup: True
             multiline: True
-            text: (root.value or '').replace("[tab]", '    ')
+            text: (root.value or 'new script').replace("[tab]", '    ')
             font_size: '15sp'
             text_size: self.width - 32, None
 
@@ -364,7 +364,7 @@
 
     Camera:
         id: cam
-        #resolution: (800, 480)
+        resolution: (800, 480)
         play: True if app.variables.SYS_REVERSE_CAM_ON == "1" else False
 
 

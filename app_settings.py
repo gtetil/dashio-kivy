@@ -3,7 +3,7 @@ import json
 settings_json = json.dumps([
     {'type': 'mynumeric',
      'title': 'Screen Dim Brightness',
-     'desc': 'Screen brightness setting when "Dim Backlight" is active".',
+     'desc': 'Screen brightness setting when "Dim Backlight" is active".  Maximum value is 255.',
      'section': 'Settings',
      'key': 'SYS_SCREEN_BRIGHTNESS'},
     {'type': 'mynumeric',
@@ -15,7 +15,12 @@ settings_json = json.dumps([
      'title': 'Shutdown Delay',
      'desc': 'When ignition is turned off, this is the delay in minutes before the system shuts down',
      'section': 'Settings',
-     'key': 'SYS_SHUTdoWN_DELAY'}])
+     'key': 'SYS_SHUTDOWN_DELAY'},
+    {'type': 'mynumeric',
+     'title': 'Screen Inactivity Time',
+     'desc': 'When the screen has not been touched for this many seconds, the SYS_INACTIVE variable will be set',
+     'section': 'Settings',
+     'key': 'SYS_INACTIVE_TIME'}])
 
 scripts_json = json.dumps([
     {'type': 'script',

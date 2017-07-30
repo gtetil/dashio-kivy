@@ -25,7 +25,7 @@ from kivy.uix.popup import Popup
 from kivy.core.window import Window
 from kivy.animation import Animation
 from navigationdrawer import NavigationDrawer
-from kivy.uix.settings import SettingsWithSidebar, SettingString, SettingNumeric, SettingSpacer
+from kivy.uix.settings import SettingsWithSidebar, SettingString, SettingNumeric, SettingSpacer, Settings
 from kivy.metrics import dp
 from kivy.uix.scatterlayout import ScatterLayout
 from kivy.uix.scatter import Scatter
@@ -47,8 +47,8 @@ import re
 from operator import xor
 BASE = "/sys/class/backlight/rpi_backlight/"
 
-debug_mode = True
-pc_mode = True
+debug_mode = False
+pc_mode = False
 win_mode = False
 #!!!CHECK CAMERA RESOLUTION BEFORE UPLOADING TO PI!!!!
 
@@ -78,6 +78,22 @@ class ScreenManagement(ScreenManager):
     def __init__(self,**kwargs):
         super (ScreenManagement,self).__init__(**kwargs)
         self.transition = NoTransition()
+        self.start_inactivity_clock()
+
+    def on_touch_down(self, touch):
+        self.start_inactivity_clock()
+        return super(ScreenManagement, self).on_touch_down(touch)
+
+    def start_inactivity_clock(self):
+        self.app_ref.variables.set_by_alias('SYS_INACTIVE', '0')
+        try:
+            self.screen_inactive_event.cancel()
+        except:
+            pass
+        self.screen_inactive_event = Clock.schedule_once(self.sys_inactive, int(self.app_ref.variables.SYS_INACTIVE_TIME))
+
+    def sys_inactive(self, dt):
+        self.app_ref.variables.set_by_alias('SYS_INACTIVE', '1')
 
     def on_ignition_input(self, instance, state):
         if state == 1:
@@ -491,13 +507,15 @@ class MainApp(App):
         self.dynamic_layout.build_layout()
         self.get_aliases()
         self.get_scripts()
+        self.get_saved_vars()
         return self.slide_layout
 
     def build_config(self, config):
         config.setdefaults('Settings', {
             'SYS_SCREEN_BRIGHTNESS': 255,
             'SYS_SCREEN_OFF_DELAY': 1,
-            'SYS_SHUTDOWN_DELAY': 60})
+            'SYS_SHUTDOWN_DELAY': 60,
+            'SYS_INACTIVE_TIME': 5})
         '''for key in app_settings.auto_var_tags:
             config.setdefaults('AutoVars', {key: ''})
         for key in app_settings.arduino_input_tags:
@@ -514,6 +532,7 @@ class MainApp(App):
         settings.add_json_panel('Scripts', self.config, data=app_settings.scripts_json)
 
     def on_config_change(self, config, section, key, value):
+        self.get_aliases()
         self.get_saved_vars()
         self.variables.save_variables()
         self.get_scripts()
@@ -523,6 +542,7 @@ class MainApp(App):
         for (key, value) in self.config.items('Scripts'):
             script = value.replace("[tab]", '\t')
             script = script.replace('get([', 'self.get(("')
+            script = script.replace('event([', 'self.get_event(("')
             script = script.replace(']', '")')
             script = script.replace('set([', 'self.set_by_alias(("')
             self.scripts.append(script)
@@ -547,11 +567,10 @@ class MainApp(App):
             self.variables.variables_json[i]['alias'] = self.config_aliases[i]
         self.variables.set_var_lists()
         self.variables.save_variables()
-        self.dynamic_layout.reconcile_layout()
 
     def close_settings(self, settings=None):
-        print('settings closed')
         self.get_aliases()
+        self.dynamic_layout.reconcile_layout()
         super(MainApp, self).close_settings(settings)
 
     def exit_app(self):
@@ -590,6 +609,15 @@ class SettingAlias(SettingString):
 
         # all done, open the popup !
         popup.open()
+
+    def _validate(self, instance):
+        self._dismiss()
+        value = self.textinput.text.strip()
+        # if text input (alias) is left blank, use tag
+        if value == '':
+            self.value = self.title
+        else:
+            self.value = value
 
 class SettingScript(SettingString):
     app_ref = ObjectProperty(None)
@@ -720,6 +748,9 @@ class Variables(Widget):
     SYS_SCREEN_BRIGHTNESS = StringProperty('0')
     SYS_SCREEN_OFF_DELAY = StringProperty('0')
     SYS_SHUTDOWN_DELAY = StringProperty('0')
+    SYS_INACTIVE_TIME = StringProperty('0')
+    SYS_INACTIVE = StringProperty('0')
+    SYS_INIT = StringProperty('0')
 
     def __init__(self, **kwargs):
         super(Variables, self).__init__(**kwargs)
@@ -727,10 +758,12 @@ class Variables(Widget):
         self.set_var_lists()
         self.variable_data = ['0'] * len(self.var_aliases)
         self.old_variable_data = ['0'] * len(self.var_aliases)
+        self.var_events = [False] * len(self.var_aliases)
         self.arduino_data_len = 7 + 1
         self.arduino_data = ['0'] * self.arduino_data_len
         self.set_saved_vars()
         self.toggle_update_clock(True)
+        self.set_by_alias('SYS_INIT', '1')
         Clock.schedule_interval(self.read_arduino, 0.05)
 
     def set_var_lists(self):
@@ -785,15 +818,15 @@ class Variables(Widget):
 
     def read_arduino(self, dt):
         if not debug_mode:
-            try:
-                #time = current_milli_time()
-                serial_data = ser.readline().rstrip().split(',')
-                if len(serial_data) == self.arduino_data_len:
-                    self.arduino_data = serial_data
-                #print(current_milli_time() - time)
-            except:
-                print('Serial Read Failure, or possibly some other failure')
-                exit()
+            #try:
+            #time = current_milli_time()
+            serial_data = ser.readline().rstrip().split(',')
+            if len(serial_data) == self.arduino_data_len:
+                self.arduino_data = serial_data
+            #print(current_milli_time() - time)
+            #except:
+            #    print('Serial Read Failure, or possibly some other failure')
+            #    exit()
         else:
             pass
 
@@ -810,7 +843,15 @@ class Variables(Widget):
             self.refresh_data = False
         else:
             self.data_change = False
+
+        for i in range(len(self.variable_data)):
+            if self.variable_data[i] != self.old_variable_data[i]:
+                self.var_events[i] = True
+            else:
+                self.var_events[i] = False
+
         self.old_variable_data = list(self.variable_data)  # 'list()' must be used, otherwise it only copies a reference to the original list
+
 
         #skip index zero for blank selection
         self.DI_0 = self.variable_data[1]
@@ -839,6 +880,9 @@ class Variables(Widget):
         self.SYS_DIM_BACKLIGHT = self.variable_data[24]
         self.SYS_SCREEN_OFF_DELAY = self.variable_data[25]
         self.SYS_SHUTDOWN_DELAY = self.variable_data[26]
+        self.SYS_INACTIVE_TIME = self.variable_data[27]
+        self.SYS_INACTIVE = self.variable_data[28]
+        self.SYS_INIT = self.variable_data[29]
 
         if not debug_mode:
             self.DI_IGNITION = self.variable_data[7]  #need to update last due to screen initialization issue
@@ -846,6 +890,10 @@ class Variables(Widget):
             self.DI_IGNITION = '1'
 
         self.exec_scripts()
+
+        if self.SYS_INIT == '1':  #turn SYS_INIT right back off, so it should only have been on for for loop cycle
+            print 'init off'
+            self.set_by_alias('SYS_INIT', '0')
 
     def exec_scripts(self):
         if self.data_change:
@@ -875,6 +923,16 @@ class Variables(Widget):
                 return ''
         return ''
 
+    def get_event(self, alias):
+        if alias != '':
+            try:
+                data_index = self.var_aliases_dict[alias]
+                return self.var_events[data_index]
+            except:
+                print('variables.get_event: tag not found')
+                return ''
+        return ''
+
     def write_arduino(self, command):
         ser.write(command)
         #time.sleep(.1)
@@ -894,7 +952,7 @@ class Variables(Widget):
             tag = self.variables_json[index]['tag']
             if channel_type == 'DO':
                 if not debug_mode:
-                    self.write_arduino('digital_output/' + tag + '/' + value + '/')
+                    self.write_arduino('digital_output/' + str(tag) + '/' + str(value) + '/')
             if channel_type == 'SYS':
                 #if tag == 'SYS_DIM_BACKLIGHT':
                 self.sys_cmd(tag, int(value))
