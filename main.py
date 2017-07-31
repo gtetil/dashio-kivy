@@ -47,8 +47,8 @@ import re
 from operator import xor
 BASE = "/sys/class/backlight/rpi_backlight/"
 
-debug_mode = False
-pc_mode = False
+debug_mode = True
+pc_mode = True
 win_mode = False
 #!!!CHECK CAMERA RESOLUTION BEFORE UPLOADING TO PI!!!!
 
@@ -151,9 +151,6 @@ class ScreenManagement(ScreenManager):
 class MainScreen(Screen):
     pass
 
-#class SettingsScreen(Screen):
-    #pass
-
 class FloatInput(TextInput):
     pat = re.compile('[^0-9]')
     def insert_text(self, substring, from_undo=False):
@@ -193,7 +190,6 @@ class DynamicLayout(Widget):
                                          var_tag=self.dyn_layout_json[id]['var_tag'],
                                          var_alias=self.dyn_layout_json[id]['var_alias'],
                                          widget=widget,
-                                         enable=self.dyn_layout_json[id]['enable'],
                                          invert=self.dyn_layout_json[id]['invert'])
         elif widget == 'Button':
             dyn_widget = DynButton(text='',
@@ -202,7 +198,6 @@ class DynamicLayout(Widget):
                                    var_tag=self.dyn_layout_json[id]['var_tag'],
                                    var_alias=self.dyn_layout_json[id]['var_alias'],
                                    widget=widget,
-                                   enable=self.dyn_layout_json[id]['enable'],
                                    invert=self.dyn_layout_json[id]['invert'])
         else:
             dyn_widget = DynLabel(text='',
@@ -211,7 +206,6 @@ class DynamicLayout(Widget):
                                    var_tag=self.dyn_layout_json[id]['var_tag'],
                                    var_alias=self.dyn_layout_json[id]['var_alias'],
                                    widget=widget,
-                                   enable=self.dyn_layout_json[id]['enable'],
                                    invert=self.dyn_layout_json[id]['invert'])
         scatter_layout = MyScatterLayout(id=str(id) + '_scatter',
                                          do_rotation=False,
@@ -241,7 +235,6 @@ class DynamicLayout(Widget):
             dyn_widget_ref.text = dyn_widget_ref.var_alias
         else:
             dyn_widget_ref.text = dyn_widget_ref.label
-        ChangeItemBackground(dyn_widget_ref)
 
     def add_widget_json(self):
         id_list = []
@@ -254,7 +247,6 @@ class DynamicLayout(Widget):
         new_json['var_tag'] = ''
         new_json['var_alias'] = ''
         new_json['widget'] = 'Toggle Button'
-        new_json['enable'] = True
         new_json['invert'] = False
         new_json['size'] = (170, 160)
         new_json['pos'] = (320, 160)
@@ -273,7 +265,6 @@ class DynamicLayout(Widget):
         self.dyn_layout_json[id]['var_tag'] = dyn_widget_ref.var_tag
         self.dyn_layout_json[id]['var_alias'] = dyn_widget_ref.var_alias
         self.dyn_layout_json[id]['widget'] = dyn_widget_ref.widget
-        self.dyn_layout_json[id]['enable'] = dyn_widget_ref.enable
         self.dyn_layout_json[id]['invert'] = dyn_widget_ref.invert
         self.dyn_layout_json[id]['size'] = scatter_ref.size
         self.dyn_layout_json[id]['pos'] = scatter_ref.pos
@@ -321,7 +312,7 @@ class DynamicLayout(Widget):
         self.save_layout() #save for size and position changes
 
     def animate(self, widget):
-        anim = Animation(background_color=[1, 1, 0, 0.75], duration=1, t='linear') + Animation(
+        anim = Animation(background_color=[1, 1, 0, 0.6], duration=1, t='linear') + Animation(
             background_color=[1, 1, 0, 1], duration=1, t='linear')
         anim.repeat = True
         anim.start(widget)
@@ -341,7 +332,6 @@ class ScreenItemEditPopup(Popup):
         if self.modify_mode:
             self.item = item
             self.label_input.text = self.item.label
-            self.enable_check.active = self.item.enable
             self.invert_check.active = self.item.invert
             self.variable_spinner.text = self.item.var_alias
             self.widget_spinner.text = self.item.widget
@@ -349,7 +339,6 @@ class ScreenItemEditPopup(Popup):
 
     def save_item(self):
         self.item.label = self.label_input.text
-        self.item.enable = self.enable_check.active
         self.item.invert = self.invert_check.active
         self.item.var_alias = self.variable_spinner.text
         self.item.var_tag = self.app_ref.variables.tag_by_alias_dict[self.item.var_alias]  #save tag of associated alias, in case alias is changed/deleted
@@ -474,14 +463,6 @@ class DynLabel(DynItem, Label):
             else:
                 Color(0, 0, 0, 0)
             Rectangle(pos=self.pos, size=self.size)
-
-def ChangeItemBackground(item):
-    if item.enable:
-        item.background_normal = 'atlas://data/images/defaulttheme/button'
-        item.color = 1, 1, 1, 1
-    else:
-        item.background_normal = 'atlas://data/images/defaulttheme/button_disabled'
-        item.color = 0, 0, 0, 0
 
 class PasscodeScreen(Screen):
     pass

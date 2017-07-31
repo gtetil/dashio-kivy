@@ -2,14 +2,14 @@
     "0": {
         "enable": true, 
         "invert": false, 
-        "label": "", 
+        "label": "ENGINE KILL", 
         "pos": [
-            210.0, 
-            240.0
+            220.0, 
+            230.0
         ], 
         "size": [
             180, 
-            60
+            80
         ], 
         "var_alias": "Engine Kill", 
         "var_tag": "DO_0", 
@@ -18,13 +18,13 @@
     "10": {
         "enable": true, 
         "invert": false, 
-        "label": "", 
+        "label": "DIM BACKLIGHT", 
         "pos": [
             10.0, 
             80.0
         ], 
         "size": [
-            190, 
+            200, 
             70
         ], 
         "var_alias": "SYS_DIM_BACKLIGHT", 
@@ -34,14 +34,14 @@
     "11": {
         "enable": true, 
         "invert": false, 
-        "label": "Logged In", 
+        "label": "LOGGED IN", 
         "pos": [
             10.0, 
             10.0
         ], 
         "size": [
-            190, 
-            30
+            200, 
+            70
         ], 
         "var_alias": "SYS_LOGGED_IN", 
         "var_tag": "SYS_LOGGED_IN", 
@@ -53,11 +53,11 @@
         "label": "", 
         "pos": [
             400.0, 
-            240.0
+            230.0
         ], 
         "size": [
-            190, 
-            140
+            200, 
+            160
         ], 
         "var_alias": "DO_1", 
         "var_tag": "DO_1", 
@@ -66,30 +66,14 @@
     "13": {
         "enable": true, 
         "invert": false, 
-        "label": "Propane Truck", 
+        "label": "PROPANE TRUCK", 
         "pos": [
             220.0, 
-            430.0
+            400.0
         ], 
         "size": [
-            380, 
-            40
-        ], 
-        "var_alias": "", 
-        "var_tag": "", 
-        "widget": "Label"
-    }, 
-    "14": {
-        "enable": true, 
-        "invert": false, 
-        "label": "Outputs", 
-        "pos": [
-            600.0, 
-            420.0
-        ], 
-        "size": [
-            190, 
-            50
+            570, 
+            70
         ], 
         "var_alias": "", 
         "var_tag": "", 
@@ -98,9 +82,9 @@
     "15": {
         "enable": true, 
         "invert": false, 
-        "label": "", 
+        "label": "REVERSE", 
         "pos": [
-            210.0, 
+            220.0, 
             310.0
         ], 
         "size": [
@@ -111,17 +95,32 @@
         "var_tag": "DI_0", 
         "widget": "Toggle Button"
     }, 
-    "2": {
-        "enable": true, 
+    "16": {
         "invert": false, 
         "label": "", 
         "pos": [
             600.0, 
-            240.0
+            10.0
         ], 
         "size": [
             190, 
-            180
+            220
+        ], 
+        "var_alias": "DO_5", 
+        "var_tag": "DO_5", 
+        "widget": "Toggle Button"
+    }, 
+    "2": {
+        "enable": true, 
+        "invert": false, 
+        "label": "PARK", 
+        "pos": [
+            600.0, 
+            230.0
+        ], 
+        "size": [
+            190, 
+            160
         ], 
         "var_alias": "Park", 
         "var_tag": "DO_2", 
@@ -130,9 +129,9 @@
     "3": {
         "enable": true, 
         "invert": false, 
-        "label": "Passcode\nPrompt", 
+        "label": "PASSCODE\nPROMPT", 
         "pos": [
-            210.0, 
+            220.0, 
             10.0
         ], 
         "size": [
@@ -152,43 +151,27 @@
             10.0
         ], 
         "size": [
-            190, 
+            200, 
             220
         ], 
         "var_alias": "DO_4", 
         "var_tag": "DO_4", 
         "widget": "Toggle Button"
     }, 
-    "5": {
-        "enable": true, 
-        "invert": false, 
-        "label": "", 
-        "pos": [
-            600.0, 
-            10.0
-        ], 
-        "size": [
-            190, 
-            220
-        ], 
-        "var_alias": "DO_5", 
-        "var_tag": "DO_5", 
-        "widget": "Toggle Button"
-    }, 
     "6": {
         "enable": true, 
         "invert": false, 
-        "label": "", 
+        "label": "IGNITION", 
         "pos": [
             10.0, 
-            400.0
+            390.0
         ], 
         "size": [
-            190, 
-            70
+            200, 
+            80
         ], 
-        "var_alias": "Reverse", 
-        "var_tag": "DI_0", 
+        "var_alias": "DI_IGNITION", 
+        "var_tag": "DI_IGNITION", 
         "widget": "Toggle Button"
     }, 
     "7": {
@@ -197,11 +180,11 @@
         "label": "", 
         "pos": [
             10.0, 
-            320.0
+            310.0
         ], 
         "size": [
-            190, 
-            70
+            200, 
+            80
         ], 
         "var_alias": "DI_1", 
         "var_tag": "DI_1", 
@@ -210,14 +193,14 @@
     "8": {
         "enable": true, 
         "invert": false, 
-        "label": "", 
+        "label": "REAR LIGHTS", 
         "pos": [
             10.0, 
-            240.0
+            230.0
         ], 
         "size": [
-            190, 
-            70
+            200, 
+            80
         ], 
         "var_alias": "Rear Lights", 
         "var_tag": "DO_3", 
@@ -226,14 +209,14 @@
     "9": {
         "enable": true, 
         "invert": false, 
-        "label": "", 
+        "label": "SYSTEM INACTIVE", 
         "pos": [
             10.0, 
-            160.0
+            150.0
         ], 
         "size": [
-            190, 
-            70
+            200, 
+            80
         ], 
         "var_alias": "SYS_INACTIVE", 
         "var_tag": "SYS_INACTIVE", 
