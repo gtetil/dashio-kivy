@@ -183,10 +183,11 @@ class DynamicLayout(Widget):
 
     def create_dyn_widget(self, id):
         widget = self.dyn_layout_json[id]['widget']
-        if widget == 'Toggle Button':
+        if widget == 'Toggle Button' or 'Indicator':
             dyn_widget = DynToggleButton(text='',
                                          id=str(id),
-                                         label = self.dyn_layout_json[id]['label'],
+                                         button_on_text=self.dyn_layout_json[id]['on_text'],
+                                         button_off_text=self.dyn_layout_json[id]['off_text'],
                                          var_tag=self.dyn_layout_json[id]['var_tag'],
                                          var_alias=self.dyn_layout_json[id]['var_alias'],
                                          widget=widget,
@@ -194,7 +195,8 @@ class DynamicLayout(Widget):
         elif widget == 'Button':
             dyn_widget = DynButton(text='',
                                    id=str(id),
-                                   label = self.dyn_layout_json[id]['label'],
+                                   button_on_text=self.dyn_layout_json[id]['on_text'],
+                                   button_off_text=self.dyn_layout_json[id]['off_text'],
                                    var_tag=self.dyn_layout_json[id]['var_tag'],
                                    var_alias=self.dyn_layout_json[id]['var_alias'],
                                    widget=widget,
@@ -202,7 +204,7 @@ class DynamicLayout(Widget):
         else:
             dyn_widget = DynLabel(text='',
                                    id=str(id),
-                                   label = self.dyn_layout_json[id]['label'],
+                                   button_on_text=self.dyn_layout_json[id]['on_text'],
                                    var_tag=self.dyn_layout_json[id]['var_tag'],
                                    var_alias=self.dyn_layout_json[id]['var_alias'],
                                    widget=widget,
@@ -231,10 +233,16 @@ class DynamicLayout(Widget):
                 dyn_widget_ref.var_alias = dyn_widget_ref.var_tag  # the tag has changed, and the alias doesn't exist anymore, so default back to tag
             else:
                 dyn_widget_ref.var_alias = dyn_widget_ref.app_ref.variables.alias_by_tag_dict[dyn_widget_ref.var_tag]  # tag is the same, so update with new alias
-        if dyn_widget_ref.label == '':
-            dyn_widget_ref.text = dyn_widget_ref.var_alias
-        else:
-            dyn_widget_ref.text = dyn_widget_ref.label
+        if dyn_widget_ref.state == 'normal':
+            if dyn_widget_ref.button_off_text == '':
+                dyn_widget_ref.text = dyn_widget_ref.var_alias
+            else:
+                dyn_widget_ref.text = dyn_widget_ref.button_off_text
+        if dyn_widget_ref.state == 'down':
+            if dyn_widget_ref.button_on_text == '':
+                dyn_widget_ref.text = dyn_widget_ref.var_alias
+            else:
+                dyn_widget_ref.text = dyn_widget_ref.button_on_text
 
     def add_widget_json(self):
         id_list = []
@@ -243,7 +251,8 @@ class DynamicLayout(Widget):
             id_list.append(int(id))
         new_id = str(max(id_list) + 1)  #make new id one greater than largest id
         #create default widget parameters
-        new_json['label'] = ''
+        new_json['on_text'] = ''
+        new_json['off_text'] = ''
         new_json['var_tag'] = ''
         new_json['var_alias'] = ''
         new_json['widget'] = 'Toggle Button'
@@ -261,7 +270,8 @@ class DynamicLayout(Widget):
     def edit_widget_json(self, id):
         dyn_widget_ref = self.dyn_widget_dict[id]
         scatter_ref = self.scatter_dict[id]
-        self.dyn_layout_json[id]['label'] = dyn_widget_ref.label
+        self.dyn_layout_json[id]['on_text'] = dyn_widget_ref.button_on_text
+        self.dyn_layout_json[id]['off_text'] = dyn_widget_ref.button_off_text
         self.dyn_layout_json[id]['var_tag'] = dyn_widget_ref.var_tag
         self.dyn_layout_json[id]['var_alias'] = dyn_widget_ref.var_alias
         self.dyn_layout_json[id]['widget'] = dyn_widget_ref.widget
@@ -308,19 +318,19 @@ class DynamicLayout(Widget):
             if dyn_widget.widget == 'Label':
                 dyn_widget.dyn_label_background()
             else:
-                dyn_widget.background_color = 1, 1, 1, 1
+                dyn_widget.color = 1, 1, 1, 1
         self.save_layout() #save for size and position changes
 
     def animate(self, widget):
-        anim = Animation(background_color=[1, 1, 0, 0.6], duration=1, t='linear') + Animation(
-            background_color=[1, 1, 0, 1], duration=1, t='linear')
+        anim = Animation(color=[1, 1, 1, 0.6], duration=1, t='linear') + Animation(
+            color=[.9, .9, 0, 1], duration=1, t='linear')
         anim.repeat = True
         anim.start(widget)
 
 class ScreenItemEditPopup(Popup):
     app_ref = ObjectProperty(None)
-    label_input = ObjectProperty(None)
-    enable_check = ObjectProperty(None)
+    button_on_text = ObjectProperty(None)
+    button_off_text = ObjectProperty(None)
     invert_check = ObjectProperty(None)
     variable_spinner = ObjectProperty(None)
     widget_spinner = ObjectProperty(None)
@@ -331,14 +341,16 @@ class ScreenItemEditPopup(Popup):
     def edit_popup(self, item):
         if self.modify_mode:
             self.item = item
-            self.label_input.text = self.item.label
+            self.button_on_text.text = self.item.button_on_text
+            self.button_off_text.text = self.item.button_off_text
             self.invert_check.active = self.item.invert
             self.variable_spinner.text = self.item.var_alias
             self.widget_spinner.text = self.item.widget
             self.open()
 
     def save_item(self):
-        self.item.label = self.label_input.text
+        self.item.button_on_text = self.button_on_text.text
+        self.item.button_off_text = self.button_off_text.text
         self.item.invert = self.invert_check.active
         self.item.var_alias = self.variable_spinner.text
         self.item.var_tag = self.app_ref.variables.tag_by_alias_dict[self.item.var_alias]  #save tag of associated alias, in case alias is changed/deleted
@@ -359,12 +371,12 @@ class ScreenItemEditPopup(Popup):
         self.dismiss()
 
 class DynItem(Widget):
-    enable = BooleanProperty(True)
     invert = BooleanProperty(True)
     var_alias = StringProperty("")
     var_tag = StringProperty("")
     widget = StringProperty("")
-    label = StringProperty("")
+    button_on_text = StringProperty("")
+    button_off_text = StringProperty("")
     ignition_input = NumericProperty(0)
     digital_inputs = NumericProperty(0)
     app_ref = ObjectProperty(None)
@@ -379,25 +391,37 @@ class DynItem(Widget):
         bool_state = xor(bool_state, self.invert)
         if bool_state:
             self.state = 'down'
+            if self.button_on_text != '':
+                self.text = self.button_on_text
+            else:
+                self.text = self.var_alias
         else:
             self.state = 'normal'
+            if self.button_off_text != '':
+                self.text = self.button_off_text
+            else:
+                self.text = self.var_alias
 
     def on_ignition_input(self, instance, state):
         if state == 0:
             self.state = 'normal'
+            if self.button_off_text != '':
+                self.text = self.button_off_text
+            else:
+                self.text = self.var_alias
             self.output_cmd()
 
     def on_touch_down(self, touch):
         if self.collide_point(*touch.pos):
             if self.app_ref.slide_layout.state != 'open':
                 if not self.app_ref.dynamic_layout.modify_mode and self.widget != 'Label':
-                    if self.enable:
+                    if self.widget != 'Indicator':
                         if self.var_alias != 'SYS_LOGGED_IN': #don't allow SYS_LOGGED_IN to be change by a button
                             self._do_press()
                             self.output_cmd()
                         return xor(True, self.invert)
                     else:
-                        return xor(False, self.invert)
+                        return xor(True, self.invert)
                 else:
                     if touch.is_double_tap:
                         self.app_ref.main_screen_ref.item_edit_popup.edit_popup(self)
@@ -411,13 +435,10 @@ class DynItem(Widget):
         if self.collide_point(*touch.pos):
             if self.app_ref.slide_layout.state != 'open':
                 if not self.app_ref.dynamic_layout.modify_mode and self.widget == 'Button':
-                    if self.enable:
-                        if self.var_alias != 'SYS_LOGGED_IN':  # don't allow SYS_LOGGED_IN to be change by a button
-                            self._do_release()
-                            self.output_cmd()
-                        return True
-                    else:
-                        return False
+                    if self.var_alias != 'SYS_LOGGED_IN':  # don't allow SYS_LOGGED_IN to be change by a button
+                        self._do_release()
+                        self.output_cmd()
+                    return True
                 else:
                     if touch.is_double_tap:
                         self.app_ref.main_screen_ref.item_edit_popup.edit_popup(self)
@@ -428,7 +449,7 @@ class DynItem(Widget):
         return super(DynItem, self).on_touch_down(touch)
 
     def output_cmd(self):
-        if not self.app_ref.dynamic_layout.modify_mode and self.enable and self.app_ref.variables.DI_IGNITION:
+        if not self.app_ref.dynamic_layout.modify_mode and self.app_ref.variables.DI_IGNITION:
             if self.state == 'normal':
                 bool_state = True
             else:
@@ -882,8 +903,9 @@ class Variables(Widget):
                 if script != '':
                     try:
                         exec(script)
-                    except:
-                        print('Script error')
+                    except Exception as e:
+                        print('script error:')
+                        print(e)
 
     def toggle_update_clock(self, state):
         if state:
@@ -899,8 +921,9 @@ class Variables(Widget):
             try:
                 data_index = self.var_aliases_dict[alias]
                 return self.variable_data[data_index]
-            except:
-                print('variables.get: tag not found')
+            except Exception as e:
+                print('variables.get error:')
+                print(e)
                 return ''
         return ''
 

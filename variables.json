@@ -10,7 +10,7 @@
         "value": ""
     }, 
     {
-        "alias": "Reverse", 
+        "alias": "REVERSE", 
         "data_index": 1, 
         "hidden": false, 
         "id": 1, 
@@ -80,7 +80,7 @@
         "value": ""
     }, 
     {
-        "alias": "Engine Kill", 
+        "alias": "ENGINE KILL", 
         "data_index": 8, 
         "hidden": false, 
         "id": 100, 
@@ -90,7 +90,7 @@
         "value": ""
     }, 
     {
-        "alias": "DO_1", 
+        "alias": "FRONT LIGHTS", 
         "data_index": 9, 
         "hidden": false, 
         "id": 101, 
@@ -100,7 +100,7 @@
         "value": ""
     }, 
     {
-        "alias": "Park", 
+        "alias": "PARK", 
         "data_index": 10, 
         "hidden": false, 
         "id": 102, 
@@ -110,7 +110,7 @@
         "value": ""
     }, 
     {
-        "alias": "Rear Lights", 
+        "alias": "REAR LIGHTS", 
         "data_index": 11, 
         "hidden": false, 
         "id": 103, 
@@ -237,7 +237,7 @@
         "save": true, 
         "tag": "SYS_SCREEN_BRIGHTNESS", 
         "type": "SYS", 
-        "value": "200"
+        "value": "100"
     }, 
     {
         "alias": "SYS_DIM_BACKLIGHT", 
