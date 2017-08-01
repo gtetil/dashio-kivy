@@ -183,7 +183,7 @@ class DynamicLayout(Widget):
 
     def create_dyn_widget(self, id):
         widget = self.dyn_layout_json[id]['widget']
-        if widget == 'Toggle Button' or 'Indicator':
+        if widget in ['Toggle Button', 'Indicator']:
             dyn_widget = DynToggleButton(text='',
                                          id=str(id),
                                          button_on_text=self.dyn_layout_json[id]['on_text'],
@@ -205,6 +205,7 @@ class DynamicLayout(Widget):
             dyn_widget = DynLabel(text='',
                                    id=str(id),
                                    button_on_text=self.dyn_layout_json[id]['on_text'],
+                                   button_off_text=self.dyn_layout_json[id]['off_text'],
                                    var_tag=self.dyn_layout_json[id]['var_tag'],
                                    var_alias=self.dyn_layout_json[id]['var_alias'],
                                    widget=widget,
@@ -233,16 +234,19 @@ class DynamicLayout(Widget):
                 dyn_widget_ref.var_alias = dyn_widget_ref.var_tag  # the tag has changed, and the alias doesn't exist anymore, so default back to tag
             else:
                 dyn_widget_ref.var_alias = dyn_widget_ref.app_ref.variables.alias_by_tag_dict[dyn_widget_ref.var_tag]  # tag is the same, so update with new alias
-        if dyn_widget_ref.state == 'normal':
-            if dyn_widget_ref.button_off_text == '':
-                dyn_widget_ref.text = dyn_widget_ref.var_alias
-            else:
-                dyn_widget_ref.text = dyn_widget_ref.button_off_text
-        if dyn_widget_ref.state == 'down':
-            if dyn_widget_ref.button_on_text == '':
-                dyn_widget_ref.text = dyn_widget_ref.var_alias
-            else:
-                dyn_widget_ref.text = dyn_widget_ref.button_on_text
+        if dyn_widget_ref.widget != 'Label':
+            if dyn_widget_ref.state == 'normal':
+                if dyn_widget_ref.button_off_text == '':
+                    dyn_widget_ref.text = dyn_widget_ref.var_alias
+                else:
+                    dyn_widget_ref.text = dyn_widget_ref.button_off_text
+            if dyn_widget_ref.state == 'down':
+                if dyn_widget_ref.button_on_text == '':
+                    dyn_widget_ref.text = dyn_widget_ref.var_alias
+                else:
+                    dyn_widget_ref.text = dyn_widget_ref.button_on_text
+        else:
+            dyn_widget_ref.text = dyn_widget_ref.button_off_text
 
     def add_widget_json(self):
         id_list = []

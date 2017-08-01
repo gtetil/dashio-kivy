@@ -104,16 +104,16 @@
         "off_text": "", 
         "on_text": "", 
         "pos": [
-            320.0, 
-            160.0
+            410.0, 
+            10.0
         ], 
         "size": [
-            170, 
-            160
+            190, 
+            230
         ], 
         "var_alias": "", 
         "var_tag": "", 
-        "widget": "Indicator"
+        "widget": "Toggle Button"
     }, 
     "2": {
         "enable": true, 
@@ -148,23 +148,6 @@
         "var_alias": "SYS_PASSCODE_PROMPT", 
         "var_tag": "SYS_PASSCODE_PROMPT", 
         "widget": "Toggle Button"
-    }, 
-    "4": {
-        "enable": true, 
-        "invert": false, 
-        "off_text": "", 
-        "on_text": "", 
-        "pos": [
-            410.0, 
-            10.0
-        ], 
-        "size": [
-            190, 
-            230
-        ], 
-        "var_alias": "", 
-        "var_tag": "", 
-        "widget": "Indicator"
     }, 
     "6": {
         "enable": true, 
