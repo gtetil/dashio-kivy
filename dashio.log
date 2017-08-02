@@ -1,0 +1,10 @@
+brightness cmd
+30
+build_layout
+variable data
+['0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '30', '1', '1', '60', 'if', 'and not', 'DO_3', 'SYS_LOGGED_IN', 'DO_5', 'if', '', 'DI_0', '', 'SYS_REVERSE_CAM_ON', '', '', '', '', '', '', '', '', '', '']
+saved vars
+build_layout
+event probably was not created yet
+variable data
+['0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '30', '1', u'1', u'60', 'if', 'and not', 'DO_3', 'SYS_LOGGED_IN', 'DO_5', 'if', '', 'DI_0', '', 'SYS_REVERSE_CAM_ON', '', '', '', '', '', '', '', '', '', '']

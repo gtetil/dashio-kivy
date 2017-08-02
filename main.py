@@ -324,6 +324,7 @@ class DynamicLayout(Widget):
             else:
                 dyn_widget.color = 1, 1, 1, 1
         self.save_layout() #save for size and position changes
+        self.app_ref.variables.refresh_data = True
 
     def animate(self, widget):
         anim = Animation(color=[1, 1, 1, 0.6], duration=1, t='linear') + Animation(
@@ -420,9 +421,11 @@ class DynItem(Widget):
             if self.app_ref.slide_layout.state != 'open':
                 if not self.app_ref.dynamic_layout.modify_mode and self.widget != 'Label':
                     if self.widget != 'Indicator':
-                        if self.var_alias != 'SYS_LOGGED_IN': #don't allow SYS_LOGGED_IN to be change by a button
+                        if self.var_alias != 'SYS_LOGGED_IN': #don't allow SYS_LOGGED_IN to be changed by a button
                             self._do_press()
                             self.output_cmd()
+                        else:
+                            self.app_ref.screen_man.current = "passcode_screen"  #open passcode screen with SYS_LOGGED_IN
                         return xor(True, self.invert)
                     else:
                         return xor(True, self.invert)
@@ -439,9 +442,8 @@ class DynItem(Widget):
         if self.collide_point(*touch.pos):
             if self.app_ref.slide_layout.state != 'open':
                 if not self.app_ref.dynamic_layout.modify_mode and self.widget == 'Button':
-                    if self.var_alias != 'SYS_LOGGED_IN':  # don't allow SYS_LOGGED_IN to be change by a button
-                        self._do_release()
-                        self.output_cmd()
+                    self._do_release()
+                    self.output_cmd()
                     return True
                 else:
                     if touch.is_double_tap:
@@ -748,7 +750,7 @@ class Variables(Widget):
     TMR_0 = StringProperty('0')
     TMR_1 = StringProperty('0')
     SYS_LOGGED_IN = StringProperty('0')
-    SYS_PASSCODE_PROMPT = StringProperty('0')
+    SYS_ENG_KILL_POPUP = StringProperty('0')
     SYS_REVERSE_CAM_ON = StringProperty('0')
     SYS_DIM_BACKLIGHT = StringProperty('0')
     SYS_SCREEN_BRIGHTNESS = StringProperty('0')
@@ -880,7 +882,7 @@ class Variables(Widget):
         self.TMR_0 = self.variable_data[18]
         self.TMR_1 = self.variable_data[19]
         self.SYS_LOGGED_IN = self.variable_data[20]
-        self.SYS_PASSCODE_PROMPT = self.variable_data[21]
+        self.SYS_ENG_KILL_POPUP = self.variable_data[21]
         self.SYS_REVERSE_CAM_ON = self.variable_data[22]
         self.SYS_SCREEN_BRIGHTNESS = self.variable_data[23]
         self.SYS_DIM_BACKLIGHT = self.variable_data[24]
@@ -962,10 +964,10 @@ class Variables(Widget):
                 if not debug_mode:
                     self.write_arduino('digital_output/' + str(tag) + '/' + str(value) + '/')
             if channel_type == 'SYS':
-                #if tag == 'SYS_DIM_BACKLIGHT':
                 self.sys_cmd(tag, int(value))
-        except:
-            print('variable.set: tag not found')
+        except Exception as e:
+            print('variables.set error:')
+            print(e)
 
     #SYSTEM COMMANDS#
 
@@ -978,9 +980,9 @@ class Variables(Widget):
         if tag == 'SYS_SCREEN_BRIGHTNESS':
             if self.SYS_DIM_BACKLIGHT == "1":
                 self.backlight_brightness(value)
-        if tag == 'SYS_PASSCODE_PROMPT':
+        if tag == 'SYS_ENG_KILL_POPUP':
             if value == 1:
-                self.app_ref.screen_man.current = "passcode_screen"
+                self.app_ref.main_screen_ref.engine_kill_popup.open()
                 self.set_by_alias(tag, '0')
 
     def backlight_brightness(self, value):

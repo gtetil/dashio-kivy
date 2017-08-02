@@ -60,6 +60,7 @@
     id: main_screen
     app_ref: app
     item_edit_popup: item_edit_popup.__self__
+    engine_kill_popup: engine_kill_popup.__self__
     on_parent: app.main_screen_ref = self
 
     FloatLayout:
@@ -219,6 +220,27 @@
                     text: 'Cancel'
                     size_hint: .2, 1
                     on_release: item_edit_popup.dismiss()
+
+    Popup:
+        id: engine_kill_popup
+        title: "Engine Kill"
+        size_hint: None, None
+        size: 300, 200
+        on_parent: if self.parent == main_screen: self.parent.remove_widget(self)
+
+        BoxLayout:
+            orientation: 'vertical'
+            padding: 5
+
+            Label:
+                text: 'Out of PARK without LOGIN, engine has been killed.'
+                text_size: self.size
+                halign: 'center'
+                valign: 'middle'
+
+            ModernButton:
+                text: 'OK'
+                on_release: engine_kill_popup.dismiss()
 
 <-SettingAlias>:
     size_hint: .25, None

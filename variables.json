@@ -210,12 +210,12 @@
         "value": "0"
     }, 
     {
-        "alias": "SYS_PASSCODE_PROMPT", 
+        "alias": "SYS_ENG_KILL_POPUP", 
         "data_index": 21, 
         "hidden": false, 
         "id": 1001, 
         "save": false, 
-        "tag": "SYS_PASSCODE_PROMPT", 
+        "tag": "SYS_ENG_KILL_POPUP", 
         "type": "SYS", 
         "value": "0"
     }, 

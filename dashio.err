@@ -1,0 +1,96 @@
+[INFO   ] [Logger      ] Record log in /root/.kivy/logs/kivy_17-07-30_11.txt
+[INFO   ] [Kivy        ] v1.9.2-dev0
+[INFO   ] [Python      ] v2.7.9 (default, Sep 17 2016, 20:26:04) 
+[GCC 4.9.2]
+[INFO   ] [Factory     ] 193 symbols loaded
+[INFO   ] [Image       ] Providers: img_tex, img_dds, img_gif, img_sdl2, img_pil (img_ffpyplayer ignored)
+[INFO   ] [Text        ] Provider: sdl2
+[INFO   ] [Window      ] Provider: egl_rpi
+[INFO   ] [GL          ] OpenGL version <OpenGL ES 2.0>
+[INFO   ] [GL          ] OpenGL vendor <Broadcom>
+[INFO   ] [GL          ] OpenGL renderer <VideoCore IV HW>
+[INFO   ] [GL          ] OpenGL parsed version: 2, 0
+[INFO   ] [GL          ] Shading version <OpenGL ES GLSL ES 1.00>
+[INFO   ] [GL          ] Texture max size <2048>
+[INFO   ] [GL          ] Texture max units <8>
+[INFO   ] [Shader      ] fragment shader: <Compiled>
+[INFO   ] [Shader      ] vertex shader: <Compiled>
+[INFO   ] [Window      ] virtual keyboard allowed, single mode, docked
+[INFO   ] [Camera      ] Provider: pygst
+[INFO   ] [Clipboard   ] Provider: sdl2(['clipboard_dbusklipper', 'clipboard_gtk3', 'clipboard_xclip', 'clipboard_xsel'] ignored)
+[CRITICAL] [Cutbuffer   ] Unable to find any valuable Cutbuffer provider.
+xclip - OSError: [Errno 2] No such file or directory
+  File "/usr/local/lib/python2.7/dist-packages/kivy/core/__init__.py", line 59, in core_select_lib
+    fromlist=[modulename], level=0)
+  File "/usr/local/lib/python2.7/dist-packages/kivy/core/clipboard/clipboard_xclip.py", line 17, in <module>
+    p = subprocess.Popen(['xclip', '-version'], stdout=subprocess.PIPE)
+  File "/usr/lib/python2.7/subprocess.py", line 710, in __init__
+    errread, errwrite)
+  File "/usr/lib/python2.7/subprocess.py", line 1335, in _execute_child
+    raise child_exception
+
+xsel - OSError: [Errno 2] No such file or directory
+  File "/usr/local/lib/python2.7/dist-packages/kivy/core/__init__.py", line 59, in core_select_lib
+    fromlist=[modulename], level=0)
+  File "/usr/local/lib/python2.7/dist-packages/kivy/core/clipboard/clipboard_xsel.py", line 15, in <module>
+    p = subprocess.Popen(['xsel'], stdout=subprocess.PIPE)
+  File "/usr/lib/python2.7/subprocess.py", line 710, in __init__
+    errread, errwrite)
+  File "/usr/lib/python2.7/subprocess.py", line 1335, in _execute_child
+    raise child_exception
+
+[INFO   ] [GL          ] NPOT texture support is available
+[INFO   ] [OSC         ] using <multiprocessing> for socket
+[INFO   ] [ProbeSysfs  ] device match: /dev/input/event0
+[INFO   ] [MTD         ] Read event from </dev/input/event0>
+[INFO   ] [ProbeSysfs  ] device match: /dev/input/event1
+[INFO   ] [MTD         ] Read event from </dev/input/event1>
+[INFO   ] [ProbeSysfs  ] device match: /dev/input/event0
+[INFO   ] [HIDInput    ] Read event from </dev/input/event0>
+[INFO   ] [ProbeSysfs  ] device match: /dev/input/event1
+[INFO   ] [HIDInput    ] Read event from </dev/input/event1>
+[INFO   ] [Base        ] Start application main loop
+[INFO   ] [MTD         ] </dev/input/event0> range position X is 0 - 800
+[INFO   ] [MTD         ] </dev/input/event0> range position Y is 0 - 480
+[INFO   ] [MTD         ] </dev/input/event0> range touch major is 0 - 0
+[INFO   ] [MTD         ] </dev/input/event0> range touch minor is 0 - 0
+[INFO   ] [MTD         ] </dev/input/event0> range pressure is 0 - 255
+[INFO   ] [MTD         ] </dev/input/event0> axes invertion: X is 0, Y is 0
+[INFO   ] [MTD         ] </dev/input/event0> rotation set to 0
+[INFO   ] [MTD         ] </dev/input/event1> range position X is 0 - 0
+[INFO   ] [MTD         ] </dev/input/event1> range position Y is 0 - 0
+[INFO   ] [MTD         ] </dev/input/event1> range touch major is 0 - 0
+[INFO   ] [MTD         ] </dev/input/event1> range touch minor is 0 - 0
+[INFO   ] [MTD         ] </dev/input/event1> range pressure is 0 - 255
+[INFO   ] [MTD         ] </dev/input/event1> axes invertion: X is 0, Y is 0
+[INFO   ] [MTD         ] </dev/input/event1> rotation set to 0
+[INFO   ] [HIDMotionEvent] using <FT5406 memory based driver>
+[INFO   ] [HIDMotionEvent] <FT5406 memory based driver> range ABS X position is 0 - 800
+[INFO   ] [HIDMotionEvent] <FT5406 memory based driver> range ABS Y position is 0 - 480
+[INFO   ] [HIDMotionEvent] <FT5406 memory based driver> range position X is 0 - 800
+[INFO   ] [HIDMotionEvent] <FT5406 memory based driver> range position Y is 0 - 480
+[INFO   ] [HIDMotionEvent] using <USB 2.0 Camera>
+[INFO   ] [Base        ] Leaving application in progress...
+ Traceback (most recent call last):
+   File "main.py", line 1138, in <module>
+     MainApp().run()
+   File "/usr/local/lib/python2.7/dist-packages/kivy/app.py", line 828, in run
+     runTouchApp()
+   File "/usr/local/lib/python2.7/dist-packages/kivy/base.py", line 487, in runTouchApp
+     EventLoop.window.mainloop()
+   File "/usr/local/lib/python2.7/dist-packages/kivy/core/window/window_egl_rpi.py", line 90, in mainloop
+     self._mainloop()
+   File "/usr/local/lib/python2.7/dist-packages/kivy/core/window/window_egl_rpi.py", line 85, in _mainloop
+     EventLoop.idle()
+   File "/usr/local/lib/python2.7/dist-packages/kivy/base.py", line 327, in idle
+     Clock.tick()
+   File "/usr/local/lib/python2.7/dist-packages/kivy/clock.py", line 581, in tick
+     self._process_events()
+   File "kivy/_clock.pyx", line 368, in kivy._clock.CyClockBase._process_events (kivy/_clock.c:7450)
+   File "kivy/_clock.pyx", line 398, in kivy._clock.CyClockBase._process_events (kivy/_clock.c:7325)
+   File "kivy/_clock.pyx", line 396, in kivy._clock.CyClockBase._process_events (kivy/_clock.c:7247)
+   File "kivy/_clock.pyx", line 168, in kivy._clock.ClockEvent.tick (kivy/_clock.c:3251)
+   File "main.py", line 823, in read_arduino
+     serial_data = ser.readline().rstrip().split(',')
+   File "build/bdist.linux-armv7l/egg/serial/serialposix.py", line 490, in read
+ serial.serialutil.SerialException: device reports readiness to read but returned no data (device disconnected or multiple access on port?)

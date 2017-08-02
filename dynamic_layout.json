@@ -19,7 +19,7 @@
     "11": {
         "enable": true, 
         "invert": false, 
-        "off_text": "LOGGED OUT", 
+        "off_text": "LOG IN", 
         "on_text": "LOGGED IN", 
         "pos": [
             10.0, 
@@ -31,7 +31,7 @@
         ], 
         "var_alias": "SYS_LOGGED_IN", 
         "var_tag": "SYS_LOGGED_IN", 
-        "widget": "Indicator"
+        "widget": "Button"
     }, 
     "12": {
         "enable": true, 
@@ -135,8 +135,8 @@
     "3": {
         "enable": true, 
         "invert": false, 
-        "off_text": "ENTER\nPASSCODE", 
-        "on_text": "ENTER\nPASSCODE", 
+        "off_text": "DIGITAL\nOUTPUT 4", 
+        "on_text": "DIGITAL\nOUTPUT 4", 
         "pos": [
             220.0, 
             10.0
@@ -145,8 +145,8 @@
             190, 
             230
         ], 
-        "var_alias": "SYS_PASSCODE_PROMPT", 
-        "var_tag": "SYS_PASSCODE_PROMPT", 
+        "var_alias": "DO_4", 
+        "var_tag": "DO_4", 
         "widget": "Toggle Button"
     }, 
     "6": {
@@ -181,7 +181,7 @@
         ], 
         "var_alias": "REAR LIGHTS", 
         "var_tag": "DO_3", 
-        "widget": "Button"
+        "widget": "Toggle Button"
     }, 
     "9": {
         "enable": true, 
