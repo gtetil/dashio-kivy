@@ -433,8 +433,6 @@ class DynItem(Widget):
                     if touch.is_double_tap:
                         self.app_ref.main_screen_ref.item_edit_popup.edit_popup(self)
                         return False
-                    else:
-                        self.app_ref.dynamic_layout.edit_widget_json(self.id)  #update widget size/pos in json as it may have been moved
             return False
         return super(DynItem, self).on_touch_down(touch)
 
@@ -449,8 +447,6 @@ class DynItem(Widget):
                     if touch.is_double_tap:
                         self.app_ref.main_screen_ref.item_edit_popup.edit_popup(self)
                         return False
-                    else:
-                        self.app_ref.dynamic_layout.edit_widget_json(self.id)  #update widget size/pos in json as it may have been moved
             return False
         return super(DynItem, self).on_touch_down(touch)
 
@@ -1020,6 +1016,7 @@ class MyScatterLayout(ScatterLayout):
             y = round(y, 0)
             y = y * 10
             self.pos = x, y
+            self.app_ref.dynamic_layout.edit_widget_json(self.id.split('_')[0])  # update widget size/pos in json
         return super(MyScatterLayout, self).on_touch_up(touch)
 
     def transform_with_touch(self, touch):
@@ -1052,6 +1049,8 @@ class MyScatterLayout(ScatterLayout):
                         and not self.scale_lock_left and not self.scale_lock_right and not self.scale_lock_top and not self.scale_lock_bottom:
                     self.move_lock = True
                     self.apply_transform(Matrix().translate(dx, dy, 0))
+                    print 'after transform'
+                    print self.pos
                     changed = True
 
             change_x = touch.x - self.prev_x

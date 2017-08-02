@@ -85,34 +85,34 @@
     }, 
     "18": {
         "invert": false, 
-        "off_text": "", 
-        "on_text": "", 
+        "off_text": " ", 
+        "on_text": " ", 
         "pos": [
-            600.0, 
-            10.0
+            690.0, 
+            90.0
         ], 
         "size": [
-            190, 
-            230
+            40, 
+            40
         ], 
-        "var_alias": "", 
-        "var_tag": "", 
+        "var_alias": "FRONT LIGHTS", 
+        "var_tag": "DO_1", 
         "widget": "Toggle Button"
     }, 
     "19": {
         "invert": false, 
-        "off_text": "", 
-        "on_text": "", 
+        "off_text": " ", 
+        "on_text": " ", 
         "pos": [
-            410.0, 
-            10.0
+            690.0, 
+            140.0
         ], 
         "size": [
-            190, 
-            230
+            40, 
+            40
         ], 
-        "var_alias": "", 
-        "var_tag": "", 
+        "var_alias": "REAR LIGHTS", 
+        "var_tag": "DO_3", 
         "widget": "Toggle Button"
     }, 
     "2": {
@@ -131,6 +131,38 @@
         "var_alias": "PARK", 
         "var_tag": "DO_2", 
         "widget": "Toggle Button"
+    }, 
+    "20": {
+        "invert": false, 
+        "off_text": "REAR LIGHTS", 
+        "on_text": "REAR LIGHTS", 
+        "pos": [
+            560.0, 
+            140.0
+        ], 
+        "size": [
+            130, 
+            40
+        ], 
+        "var_alias": "", 
+        "var_tag": "", 
+        "widget": "Label"
+    }, 
+    "21": {
+        "invert": false, 
+        "off_text": "FRONT LIGHTS", 
+        "on_text": "FRONT LIGHTS", 
+        "pos": [
+            540.0, 
+            90.0
+        ], 
+        "size": [
+            150, 
+            40
+        ], 
+        "var_alias": "FRONT LIGHTS", 
+        "var_tag": "DO_1", 
+        "widget": "Label"
     }, 
     "3": {
         "enable": true, 
