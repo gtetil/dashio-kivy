@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="27b3c643-4da9-4ab8-8fac-19f30f795262" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dashio-kivy.iml" afterPath="$PROJECT_DIR$/.idea/dashio-kivy.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dynamic_layout.json" afterPath="$PROJECT_DIR$/dynamic_layout.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
@@ -31,8 +29,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="339">
-              <caret line="434" column="36" lean-forward="false" selection-start-line="434" selection-start-column="36" selection-end-line="434" selection-end-column="36" />
+            <state relative-caret-position="354">
+              <caret line="322" column="59" lean-forward="true" selection-start-line="322" selection-start-column="59" selection-end-line="322" selection-end-column="59" />
               <folding />
             </state>
           </provider>
@@ -51,8 +49,8 @@
       <file leaf-file-name="main.kv" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.kv">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="464">
-              <caret line="122" column="41" lean-forward="false" selection-start-line="122" selection-start-column="41" selection-end-line="122" selection-end-column="41" />
+            <state relative-caret-position="304">
+              <caret line="327" column="4" lean-forward="false" selection-start-line="327" selection-start-column="4" selection-end-line="328" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -63,7 +61,24 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-516">
               <caret line="91" column="16" lean-forward="true" selection-start-line="91" selection-start-column="16" selection-end-line="91" selection-end-column="16" />
-              <folding />
+              <folding>
+                <marker date="1501692154287" expanded="true" signature="0:4900" ph="{...}" />
+                <marker date="1501692154287" expanded="true" signature="3099:3428" ph="{&quot;invert&quot;: false...}" />
+                <marker date="1501692154287" expanded="true" signature="3217:3265" ph="[...]" />
+                <marker date="1501692154287" expanded="true" signature="3284:3328" ph="[...]" />
+                <marker date="1501692154287" expanded="true" signature="3440:3803" ph="{&quot;enable&quot;: true...}" />
+                <marker date="1501692154287" expanded="true" signature="3591:3639" ph="[...]" />
+                <marker date="1501692154287" expanded="true" signature="3658:3703" ph="[...]" />
+                <marker date="1501692154287" expanded="true" signature="3815:4169" ph="{&quot;enable&quot;: true...}" />
+                <marker date="1501692154287" expanded="true" signature="3948:3996" ph="[...]" />
+                <marker date="1501692154287" expanded="true" signature="4015:4059" ph="[...]" />
+                <marker date="1501692154287" expanded="true" signature="4181:4518" ph="{&quot;enable&quot;: true...}" />
+                <marker date="1501692154287" expanded="true" signature="4298:4347" ph="[...]" />
+                <marker date="1501692154287" expanded="true" signature="4366:4411" ph="[...]" />
+                <marker date="1501692154287" expanded="true" signature="4530:4898" ph="{&quot;enable&quot;: true...}" />
+                <marker date="1501692154287" expanded="true" signature="4675:4723" ph="[...]" />
+                <marker date="1501692154287" expanded="true" signature="4742:4786" ph="[...]" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -74,14 +89,14 @@
             <state relative-caret-position="657">
               <caret line="88" column="19" lean-forward="false" selection-start-line="88" selection-start-column="19" selection-end-line="88" selection-end-column="19" />
               <folding>
-                <marker date="1501679920550" expanded="true" signature="0:6467" ph="[...]" />
-                <marker date="1501679920550" expanded="true" signature="5080:5089" ph="{&quot;id&quot;: 2000...}" />
-                <marker date="1501679920550" expanded="true" signature="5096:5321" ph="{&quot;id&quot;: 2001...}" />
-                <marker date="1501679920550" expanded="true" signature="5328:5559" ph="{&quot;id&quot;: 2002...}" />
-                <marker date="1501679920550" expanded="true" signature="5566:5794" ph="{&quot;id&quot;: 2003...}" />
-                <marker date="1501679920550" expanded="true" signature="5801:6027" ph="{&quot;id&quot;: 2004...}" />
-                <marker date="1501679920550" expanded="true" signature="6034:6250" ph="{&quot;id&quot;: 1003...}" />
-                <marker date="1501679920550" expanded="true" signature="6257:6465" ph="{&quot;id&quot;: 1004...}" />
+                <marker date="1501692132864" expanded="true" signature="0:6467" ph="[...]" />
+                <marker date="1501692132864" expanded="true" signature="5080:5089" ph="{&quot;id&quot;: 2000...}" />
+                <marker date="1501692132864" expanded="true" signature="5096:5321" ph="{&quot;id&quot;: 2001...}" />
+                <marker date="1501692132864" expanded="true" signature="5328:5559" ph="{&quot;id&quot;: 2002...}" />
+                <marker date="1501692132864" expanded="true" signature="5566:5794" ph="{&quot;id&quot;: 2003...}" />
+                <marker date="1501692132864" expanded="true" signature="5801:6027" ph="{&quot;id&quot;: 2004...}" />
+                <marker date="1501692132864" expanded="true" signature="6034:6250" ph="{&quot;id&quot;: 1003...}" />
+                <marker date="1501692132864" expanded="true" signature="6257:6465" ph="{&quot;id&quot;: 1004...}" />
               </folding>
             </state>
           </provider>
@@ -98,7 +113,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>refre</find>
       <find>event pr</find>
       <find>744</find>
       <find>build_l</find>
@@ -128,6 +142,7 @@
       <find>SettingSt</find>
       <find>serial read</find>
       <find>.text</find>
+      <find>after</find>
     </findStrings>
     <replaceStrings>
       <replace>_4</replace>
@@ -764,7 +779,14 @@
       <option name="project" value="LOCAL" />
       <updated>1501589784733</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="- fixed issue where widgets were getting saved with the wrong position">
+      <created>1501680262716</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1501680262716</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -833,7 +855,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="stopped working on variable widget.  looking to do something simpler." />
     <MESSAGE value="switched over to data driven architecture for all variables.  also, dynamic widgets can now be either inputs or outputs" />
     <MESSAGE value="started integrating json code into new architecture." />
     <MESSAGE value="finished and debugged new variables architecture." />
@@ -858,7 +879,8 @@
     <MESSAGE value="- debugged latest release (aliases, moveable widgets, add/delete widgets, new settings screen)" />
     <MESSAGE value="- starting making screen look more modern.&#10;- removed &quot;enable&quot; checkbox on widget popup." />
     <MESSAGE value="- fixed bug in label widget." />
-    <option name="LAST_COMMIT_MESSAGE" value="- fixed bug in label widget." />
+    <MESSAGE value="- fixed issue where widgets were getting saved with the wrong position" />
+    <option name="LAST_COMMIT_MESSAGE" value="- fixed issue where widgets were getting saved with the wrong position" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1023,23 +1045,15 @@
         <state relative-caret-position="657">
           <caret line="88" column="19" lean-forward="false" selection-start-line="88" selection-start-column="19" selection-end-line="88" selection-end-column="19" />
           <folding>
-            <marker date="1501679920550" expanded="true" signature="0:6467" ph="[...]" />
-            <marker date="1501679920550" expanded="true" signature="5080:5089" ph="{&quot;id&quot;: 2000...}" />
-            <marker date="1501679920550" expanded="true" signature="5096:5321" ph="{&quot;id&quot;: 2001...}" />
-            <marker date="1501679920550" expanded="true" signature="5328:5559" ph="{&quot;id&quot;: 2002...}" />
-            <marker date="1501679920550" expanded="true" signature="5566:5794" ph="{&quot;id&quot;: 2003...}" />
-            <marker date="1501679920550" expanded="true" signature="5801:6027" ph="{&quot;id&quot;: 2004...}" />
-            <marker date="1501679920550" expanded="true" signature="6034:6250" ph="{&quot;id&quot;: 1003...}" />
-            <marker date="1501679920550" expanded="true" signature="6257:6465" ph="{&quot;id&quot;: 1004...}" />
+            <marker date="1501692132864" expanded="true" signature="0:6467" ph="[...]" />
+            <marker date="1501692132864" expanded="true" signature="5080:5089" ph="{&quot;id&quot;: 2000...}" />
+            <marker date="1501692132864" expanded="true" signature="5096:5321" ph="{&quot;id&quot;: 2001...}" />
+            <marker date="1501692132864" expanded="true" signature="5328:5559" ph="{&quot;id&quot;: 2002...}" />
+            <marker date="1501692132864" expanded="true" signature="5566:5794" ph="{&quot;id&quot;: 2003...}" />
+            <marker date="1501692132864" expanded="true" signature="5801:6027" ph="{&quot;id&quot;: 2004...}" />
+            <marker date="1501692132864" expanded="true" signature="6034:6250" ph="{&quot;id&quot;: 1003...}" />
+            <marker date="1501692132864" expanded="true" signature="6257:6465" ph="{&quot;id&quot;: 1004...}" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.kv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="464">
-          <caret line="122" column="41" lean-forward="false" selection-start-line="122" selection-start-column="41" selection-end-line="122" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1047,14 +1061,39 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-516">
           <caret line="91" column="16" lean-forward="true" selection-start-line="91" selection-start-column="16" selection-end-line="91" selection-end-column="16" />
+          <folding>
+            <marker date="1501692154287" expanded="true" signature="0:4900" ph="{...}" />
+            <marker date="1501692154287" expanded="true" signature="3099:3428" ph="{&quot;invert&quot;: false...}" />
+            <marker date="1501692154287" expanded="true" signature="3217:3265" ph="[...]" />
+            <marker date="1501692154287" expanded="true" signature="3284:3328" ph="[...]" />
+            <marker date="1501692154287" expanded="true" signature="3440:3803" ph="{&quot;enable&quot;: true...}" />
+            <marker date="1501692154287" expanded="true" signature="3591:3639" ph="[...]" />
+            <marker date="1501692154287" expanded="true" signature="3658:3703" ph="[...]" />
+            <marker date="1501692154287" expanded="true" signature="3815:4169" ph="{&quot;enable&quot;: true...}" />
+            <marker date="1501692154287" expanded="true" signature="3948:3996" ph="[...]" />
+            <marker date="1501692154287" expanded="true" signature="4015:4059" ph="[...]" />
+            <marker date="1501692154287" expanded="true" signature="4181:4518" ph="{&quot;enable&quot;: true...}" />
+            <marker date="1501692154287" expanded="true" signature="4298:4347" ph="[...]" />
+            <marker date="1501692154287" expanded="true" signature="4366:4411" ph="[...]" />
+            <marker date="1501692154287" expanded="true" signature="4530:4898" ph="{&quot;enable&quot;: true...}" />
+            <marker date="1501692154287" expanded="true" signature="4675:4723" ph="[...]" />
+            <marker date="1501692154287" expanded="true" signature="4742:4786" ph="[...]" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.kv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="327" column="4" lean-forward="false" selection-start-line="327" selection-start-column="4" selection-end-line="328" selection-end-column="41" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="434" column="36" lean-forward="false" selection-start-line="434" selection-start-column="36" selection-end-line="434" selection-end-column="36" />
+        <state relative-caret-position="354">
+          <caret line="322" column="59" lean-forward="true" selection-start-line="322" selection-start-column="59" selection-end-line="322" selection-end-column="59" />
           <folding />
         </state>
       </provider>

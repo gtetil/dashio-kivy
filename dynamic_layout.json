@@ -150,8 +150,8 @@
     }, 
     "21": {
         "invert": false, 
-        "off_text": "FRONT LIGHTS", 
-        "on_text": "FRONT LIGHTS", 
+        "off_text": " FRONT LIGHTS", 
+        "on_text": " FRONT LIGHTS", 
         "pos": [
             540.0, 
             90.0

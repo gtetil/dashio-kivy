@@ -313,6 +313,9 @@ class DynamicLayout(Widget):
             if dyn_widget.widget == 'Label':
                 dyn_widget.dyn_label_background()
             else:
+                dyn_widget.background_color = 1, 1, 1, .3
+                dyn_widget.background_normal = 'button_pressed.png'
+                dyn_widget.background_down = 'button_pressed.png'
                 self.animate(dyn_widget)
 
     def end_modify(self):
@@ -323,12 +326,15 @@ class DynamicLayout(Widget):
                 dyn_widget.dyn_label_background()
             else:
                 dyn_widget.color = 1, 1, 1, 1
+                dyn_widget.background_color = 1, 1, 1, 1
+                dyn_widget.background_normal = 'button.png'
+                dyn_widget.background_down = 'button_pressed.png'
         self.save_layout() #save for size and position changes
         self.app_ref.variables.refresh_data = True
 
     def animate(self, widget):
-        anim = Animation(color=[1, 1, 1, 0.6], duration=1, t='linear') + Animation(
-            color=[.9, .9, 0, 1], duration=1, t='linear')
+        anim = Animation(background_color=[1, 1, 1, 0.3],  duration=1, t='linear') + Animation(
+            background_color=[1, 1, 1, .5], duration=1, t='linear')
         anim.repeat = True
         anim.start(widget)
 
@@ -1049,8 +1055,6 @@ class MyScatterLayout(ScatterLayout):
                         and not self.scale_lock_left and not self.scale_lock_right and not self.scale_lock_top and not self.scale_lock_bottom:
                     self.move_lock = True
                     self.apply_transform(Matrix().translate(dx, dy, 0))
-                    print 'after transform'
-                    print self.pos
                     changed = True
 
             change_x = touch.x - self.prev_x
