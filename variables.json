@@ -10,7 +10,7 @@
         "value": ""
     }, 
     {
-        "alias": "REVERSE", 
+        "alias": "DI_0", 
         "data_index": 1, 
         "hidden": false, 
         "id": 1, 
@@ -120,7 +120,7 @@
         "value": ""
     }, 
     {
-        "alias": "DO_4", 
+        "alias": "REVERSE", 
         "data_index": 12, 
         "hidden": false, 
         "id": 104, 
@@ -296,6 +296,36 @@
         "id": 1004, 
         "save": false, 
         "tag": "SYS_INIT", 
+        "type": "SYS", 
+        "value": "0"
+    }, 
+    {
+        "alias": "SYS_TIME", 
+        "data_index": 30, 
+        "hidden": false, 
+        "id": 1005, 
+        "save": false, 
+        "tag": "SYS_TIME", 
+        "type": "SYS", 
+        "value": "0"
+    }, 
+    {
+        "alias": "SYS_CPU_TEMP", 
+        "data_index": 31, 
+        "hidden": false, 
+        "id": 1006, 
+        "save": false, 
+        "tag": "SYS_CPU_TEMP", 
+        "type": "SYS", 
+        "value": "0"
+    }, 
+    {
+        "alias": "SYS_CPU_USAGE", 
+        "data_index": 32, 
+        "hidden": false, 
+        "id": 1007, 
+        "save": false, 
+        "tag": "SYS_CPU_USAGE", 
         "type": "SYS", 
         "value": "0"
     }

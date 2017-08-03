@@ -4,7 +4,10 @@
     <list default="true" id="27b3c643-4da9-4ab8-8fac-19f30f795262" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dynamic_layout.json" afterPath="$PROJECT_DIR$/dynamic_layout.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.ini" afterPath="$PROJECT_DIR$/main.ini" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.kv" afterPath="$PROJECT_DIR$/main.kv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/variables.json" afterPath="$PROJECT_DIR$/variables.json" />
     </list>
     <list id="1e95b302-9845-4a63-bdc7-46bebc48f801" name="Revert: " comment="" />
     <list id="9acf94dc-4ce7-4798-ab9b-5692da952639" name="Revert:" comment="" />
@@ -29,8 +32,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="354">
-              <caret line="322" column="59" lean-forward="true" selection-start-line="322" selection-start-column="59" selection-end-line="322" selection-end-column="59" />
+            <state relative-caret-position="420">
+              <caret line="691" column="34" lean-forward="true" selection-start-line="691" selection-start-column="34" selection-end-line="691" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -49,8 +52,8 @@
       <file leaf-file-name="main.kv" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.kv">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="327" column="4" lean-forward="false" selection-start-line="327" selection-start-column="4" selection-end-line="328" selection-end-column="41" />
+            <state relative-caret-position="340">
+              <caret line="20" column="76" lean-forward="false" selection-start-line="20" selection-start-column="76" selection-end-line="20" selection-end-column="76" />
               <folding />
             </state>
           </provider>
@@ -59,25 +62,20 @@
       <file leaf-file-name="dynamic_layout.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dynamic_layout.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-516">
-              <caret line="91" column="16" lean-forward="true" selection-start-line="91" selection-start-column="16" selection-end-line="91" selection-end-column="16" />
+            <state relative-caret-position="1547">
+              <caret line="91" column="16" lean-forward="false" selection-start-line="91" selection-start-column="16" selection-end-line="91" selection-end-column="16" />
               <folding>
-                <marker date="1501692154287" expanded="true" signature="0:4900" ph="{...}" />
-                <marker date="1501692154287" expanded="true" signature="3099:3428" ph="{&quot;invert&quot;: false...}" />
-                <marker date="1501692154287" expanded="true" signature="3217:3265" ph="[...]" />
-                <marker date="1501692154287" expanded="true" signature="3284:3328" ph="[...]" />
-                <marker date="1501692154287" expanded="true" signature="3440:3803" ph="{&quot;enable&quot;: true...}" />
-                <marker date="1501692154287" expanded="true" signature="3591:3639" ph="[...]" />
-                <marker date="1501692154287" expanded="true" signature="3658:3703" ph="[...]" />
-                <marker date="1501692154287" expanded="true" signature="3815:4169" ph="{&quot;enable&quot;: true...}" />
-                <marker date="1501692154287" expanded="true" signature="3948:3996" ph="[...]" />
-                <marker date="1501692154287" expanded="true" signature="4015:4059" ph="[...]" />
-                <marker date="1501692154287" expanded="true" signature="4181:4518" ph="{&quot;enable&quot;: true...}" />
-                <marker date="1501692154287" expanded="true" signature="4298:4347" ph="[...]" />
-                <marker date="1501692154287" expanded="true" signature="4366:4411" ph="[...]" />
-                <marker date="1501692154287" expanded="true" signature="4530:4898" ph="{&quot;enable&quot;: true...}" />
-                <marker date="1501692154287" expanded="true" signature="4675:4723" ph="[...]" />
-                <marker date="1501692154287" expanded="true" signature="4742:4786" ph="[...]" />
+                <marker date="1501783503388" expanded="true" signature="0:5844" ph="{...}" />
+                <marker date="1501783503388" expanded="true" signature="4676:4747" ph="{&quot;enable&quot;: true...}" />
+                <marker date="1501783503388" expanded="true" signature="4759:5113" ph="{&quot;enable&quot;: true...}" />
+                <marker date="1501783503388" expanded="true" signature="4892:4940" ph="[...]" />
+                <marker date="1501783503388" expanded="true" signature="4959:5003" ph="[...]" />
+                <marker date="1501783503388" expanded="true" signature="5125:5462" ph="{&quot;enable&quot;: true...}" />
+                <marker date="1501783503388" expanded="true" signature="5242:5291" ph="[...]" />
+                <marker date="1501783503388" expanded="true" signature="5310:5355" ph="[...]" />
+                <marker date="1501783503388" expanded="true" signature="5474:5842" ph="{&quot;enable&quot;: true...}" />
+                <marker date="1501783503388" expanded="true" signature="5619:5667" ph="[...]" />
+                <marker date="1501783503388" expanded="true" signature="5686:5730" ph="[...]" />
               </folding>
             </state>
           </provider>
@@ -86,17 +84,12 @@
       <file leaf-file-name="variables.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/variables.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="657">
-              <caret line="88" column="19" lean-forward="false" selection-start-line="88" selection-start-column="19" selection-end-line="88" selection-end-column="19" />
+            <state relative-caret-position="471">
+              <caret line="319" column="20" lean-forward="false" selection-start-line="319" selection-start-column="20" selection-end-line="319" selection-end-column="20" />
               <folding>
-                <marker date="1501692132864" expanded="true" signature="0:6467" ph="[...]" />
-                <marker date="1501692132864" expanded="true" signature="5080:5089" ph="{&quot;id&quot;: 2000...}" />
-                <marker date="1501692132864" expanded="true" signature="5096:5321" ph="{&quot;id&quot;: 2001...}" />
-                <marker date="1501692132864" expanded="true" signature="5328:5559" ph="{&quot;id&quot;: 2002...}" />
-                <marker date="1501692132864" expanded="true" signature="5566:5794" ph="{&quot;id&quot;: 2003...}" />
-                <marker date="1501692132864" expanded="true" signature="5801:6027" ph="{&quot;id&quot;: 2004...}" />
-                <marker date="1501692132864" expanded="true" signature="6034:6250" ph="{&quot;id&quot;: 1003...}" />
-                <marker date="1501692132864" expanded="true" signature="6257:6465" ph="{&quot;id&quot;: 1004...}" />
+                <marker date="1501783872074" expanded="true" signature="0:7130" ph="[...]" />
+                <marker date="1501783872074" expanded="true" signature="5080:5089" ph="{&quot;id&quot;: 2000...}" />
+                <marker date="1501783872074" expanded="true" signature="7101:7128" ph="{&quot;id&quot;: 1007...}" />
               </folding>
             </state>
           </provider>
@@ -113,11 +106,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>event pr</find>
-      <find>744</find>
-      <find>build_l</find>
-      <find>build_lay</find>
-      <find>save_lay</find>
       <find>get_al</find>
       <find>000000000B1F39A0</find>
       <find>0000000007957A70</find>
@@ -143,6 +131,11 @@
       <find>serial read</find>
       <find>.text</find>
       <find>after</find>
+      <find>variables.</find>
+      <find>SYS_DI</find>
+      <find>variables</find>
+      <find>update_cl</find>
+      <find>read_cl</find>
     </findStrings>
     <replaceStrings>
       <replace>_4</replace>
@@ -179,10 +172,10 @@
         <option value="$PROJECT_DIR$/draggable.py" />
         <option value="$PROJECT_DIR$/myscatter.py" />
         <option value="$PROJECT_DIR$/main.ini" />
-        <option value="$PROJECT_DIR$/variables.json" />
         <option value="$PROJECT_DIR$/app_settings.py" />
-        <option value="$PROJECT_DIR$/main.kv" />
         <option value="$PROJECT_DIR$/dynamic_layout.json" />
+        <option value="$PROJECT_DIR$/main.kv" />
+        <option value="$PROJECT_DIR$/variables.json" />
         <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
@@ -208,6 +201,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -223,7 +217,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -234,127 +227,6 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\gtetil\Documents\Projects\dashio-kivy" />
     </key>
-  </component>
-  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
-    <UpdatedFiles>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Updated from server" />
-        <option name="myStatusName" value="Changed on server" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="CHANGED_ON_SERVER" />
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Updated" />
-          <option name="myStatusName" value="Changed" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/dashio-kivy.iml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/misc.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/workspace.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/dynamic_layout.json</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/main.ini</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/main.kv</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/main.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/variables.json</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Created" />
-          <option name="myStatusName" value="Created" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="CREATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/button.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/button_pressed.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/dashio.err</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/dashio.log</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Deleted" />
-          <option name="myStatusName" value="Deleted" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="true" />
-          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Restored" />
-          <option name="myStatusName" value="Will be restored" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="RESTORED" />
-        </FILE-GROUP>
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Modified" />
-        <option name="myStatusName" value="Modified" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MODIFIED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Skipped" />
-        <option name="myStatusName" value="Skipped" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SKIPPED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with conflicts" />
-        <option name="myStatusName" value="Will be merged with conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_CONFLICTS" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with tree conflicts" />
-        <option name="myStatusName" value="Merged with tree conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with property conflicts" />
-        <option name="myStatusName" value="Will be merged with property conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged" />
-        <option name="myStatusName" value="Will be merged" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Not in repository" />
-        <option name="myStatusName" value="Not in repository" />
-        <option name="mySupportsDeletion" value="true" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="UNKNOWN" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally added" />
-        <option name="myStatusName" value="Locally added" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_ADDED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally removed" />
-        <option name="myStatusName" value="Locally removed" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_REMOVED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Switched" />
-        <option name="myStatusName" value="Switched" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SWITCHED" />
-      </FILE-GROUP>
-    </UpdatedFiles>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -786,42 +658,38 @@
       <option name="project" value="LOCAL" />
       <updated>1501680262716</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="- made wigdet edges easier to see in modify mode.">
+      <created>1501692221402</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1501692221402</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18072917" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32892805" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23020063" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21330518" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3284055" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946146" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2122492" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27666315" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27624872" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32892805" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2130479" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18113208" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23020063" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27624872" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -855,7 +723,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="switched over to data driven architecture for all variables.  also, dynamic widgets can now be either inputs or outputs" />
     <MESSAGE value="started integrating json code into new architecture." />
     <MESSAGE value="finished and debugged new variables architecture." />
     <MESSAGE value="finished autovars.  might still need a little debug." />
@@ -880,7 +747,8 @@
     <MESSAGE value="- starting making screen look more modern.&#10;- removed &quot;enable&quot; checkbox on widget popup." />
     <MESSAGE value="- fixed bug in label widget." />
     <MESSAGE value="- fixed issue where widgets were getting saved with the wrong position" />
-    <option name="LAST_COMMIT_MESSAGE" value="- fixed issue where widgets were getting saved with the wrong position" />
+    <MESSAGE value="- made wigdet edges easier to see in modify mode." />
+    <option name="LAST_COMMIT_MESSAGE" value="- made wigdet edges easier to see in modify mode." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1028,7 +896,26 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5219">
           <caret line="324" column="16" lean-forward="true" selection-start-line="324" selection-start-column="16" selection-end-line="324" selection-end-column="16" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dynamic_layout.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1547">
+          <caret line="91" column="16" lean-forward="false" selection-start-line="91" selection-start-column="16" selection-end-line="91" selection-end-column="16" />
+          <folding>
+            <marker date="1501783503388" expanded="true" signature="0:5844" ph="{...}" />
+            <marker date="1501783503388" expanded="true" signature="4676:4747" ph="{&quot;enable&quot;: true...}" />
+            <marker date="1501783503388" expanded="true" signature="4759:5113" ph="{&quot;enable&quot;: true...}" />
+            <marker date="1501783503388" expanded="true" signature="4892:4940" ph="[...]" />
+            <marker date="1501783503388" expanded="true" signature="4959:5003" ph="[...]" />
+            <marker date="1501783503388" expanded="true" signature="5125:5462" ph="{&quot;enable&quot;: true...}" />
+            <marker date="1501783503388" expanded="true" signature="5242:5291" ph="[...]" />
+            <marker date="1501783503388" expanded="true" signature="5310:5355" ph="[...]" />
+            <marker date="1501783503388" expanded="true" signature="5474:5842" ph="{&quot;enable&quot;: true...}" />
+            <marker date="1501783503388" expanded="true" signature="5619:5667" ph="[...]" />
+            <marker date="1501783503388" expanded="true" signature="5686:5730" ph="[...]" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1040,60 +927,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/variables.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="657">
-          <caret line="88" column="19" lean-forward="false" selection-start-line="88" selection-start-column="19" selection-end-line="88" selection-end-column="19" />
-          <folding>
-            <marker date="1501692132864" expanded="true" signature="0:6467" ph="[...]" />
-            <marker date="1501692132864" expanded="true" signature="5080:5089" ph="{&quot;id&quot;: 2000...}" />
-            <marker date="1501692132864" expanded="true" signature="5096:5321" ph="{&quot;id&quot;: 2001...}" />
-            <marker date="1501692132864" expanded="true" signature="5328:5559" ph="{&quot;id&quot;: 2002...}" />
-            <marker date="1501692132864" expanded="true" signature="5566:5794" ph="{&quot;id&quot;: 2003...}" />
-            <marker date="1501692132864" expanded="true" signature="5801:6027" ph="{&quot;id&quot;: 2004...}" />
-            <marker date="1501692132864" expanded="true" signature="6034:6250" ph="{&quot;id&quot;: 1003...}" />
-            <marker date="1501692132864" expanded="true" signature="6257:6465" ph="{&quot;id&quot;: 1004...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dynamic_layout.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-516">
-          <caret line="91" column="16" lean-forward="true" selection-start-line="91" selection-start-column="16" selection-end-line="91" selection-end-column="16" />
-          <folding>
-            <marker date="1501692154287" expanded="true" signature="0:4900" ph="{...}" />
-            <marker date="1501692154287" expanded="true" signature="3099:3428" ph="{&quot;invert&quot;: false...}" />
-            <marker date="1501692154287" expanded="true" signature="3217:3265" ph="[...]" />
-            <marker date="1501692154287" expanded="true" signature="3284:3328" ph="[...]" />
-            <marker date="1501692154287" expanded="true" signature="3440:3803" ph="{&quot;enable&quot;: true...}" />
-            <marker date="1501692154287" expanded="true" signature="3591:3639" ph="[...]" />
-            <marker date="1501692154287" expanded="true" signature="3658:3703" ph="[...]" />
-            <marker date="1501692154287" expanded="true" signature="3815:4169" ph="{&quot;enable&quot;: true...}" />
-            <marker date="1501692154287" expanded="true" signature="3948:3996" ph="[...]" />
-            <marker date="1501692154287" expanded="true" signature="4015:4059" ph="[...]" />
-            <marker date="1501692154287" expanded="true" signature="4181:4518" ph="{&quot;enable&quot;: true...}" />
-            <marker date="1501692154287" expanded="true" signature="4298:4347" ph="[...]" />
-            <marker date="1501692154287" expanded="true" signature="4366:4411" ph="[...]" />
-            <marker date="1501692154287" expanded="true" signature="4530:4898" ph="{&quot;enable&quot;: true...}" />
-            <marker date="1501692154287" expanded="true" signature="4675:4723" ph="[...]" />
-            <marker date="1501692154287" expanded="true" signature="4742:4786" ph="[...]" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.kv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="327" column="4" lean-forward="false" selection-start-line="327" selection-start-column="4" selection-end-line="328" selection-end-column="41" />
+        <state relative-caret-position="340">
+          <caret line="20" column="76" lean-forward="false" selection-start-line="20" selection-start-column="76" selection-end-line="20" selection-end-column="76" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/variables.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="471">
+          <caret line="319" column="20" lean-forward="false" selection-start-line="319" selection-start-column="20" selection-end-line="319" selection-end-column="20" />
+          <folding>
+            <marker date="1501783872074" expanded="true" signature="0:7130" ph="[...]" />
+            <marker date="1501783872074" expanded="true" signature="5080:5089" ph="{&quot;id&quot;: 2000...}" />
+            <marker date="1501783872074" expanded="true" signature="7101:7128" ph="{&quot;id&quot;: 1007...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="354">
-          <caret line="322" column="59" lean-forward="true" selection-start-line="322" selection-start-column="59" selection-end-line="322" selection-end-column="59" />
+        <state relative-caret-position="420">
+          <caret line="691" column="34" lean-forward="true" selection-start-line="691" selection-start-column="34" selection-end-line="691" selection-end-column="34" />
           <folding />
         </state>
       </provider>

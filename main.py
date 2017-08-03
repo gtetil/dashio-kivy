@@ -40,6 +40,7 @@ import autoVar
 
 Window.size = (800,480)
 
+import psutil
 import serial
 import os
 import time
@@ -58,6 +59,7 @@ except:
     pass
 
 current_milli_time = lambda: int(round(time.time() * 1000))
+initial_time = current_milli_time()
 
 class SlideLayout(NavigationDrawer):
     pass
@@ -90,7 +92,7 @@ class ScreenManagement(ScreenManager):
             self.screen_inactive_event.cancel()
         except:
             pass
-        self.screen_inactive_event = Clock.schedule_once(self.sys_inactive, int(self.app_ref.variables.SYS_INACTIVE_TIME))
+        self.screen_inactive_event = Clock.schedule_once(self.sys_inactive, int(self.app_ref.variables.get('SYS_INACTIVE_TIME')))
 
     def sys_inactive(self, dt):
         self.app_ref.variables.set_by_alias('SYS_INACTIVE', '1')
@@ -108,8 +110,8 @@ class ScreenManagement(ScreenManager):
             except:
                 print('event probably was not created yet')
         else:
-            self.screen_off_event = Clock.schedule_once(self.delayed_screen_off, int(self.app_ref.variables.SYS_SCREEN_OFF_DELAY))
-            self.shutdown_event = Clock.schedule_once(self.delayed_shutdown, float(self.app_ref.variables.SYS_SHUTDOWN_DELAY)*60)
+            self.screen_off_event = Clock.schedule_once(self.delayed_screen_off, int(self.app_ref.variables.get('SYS_SCREEN_OFF_DELAY')))
+            self.shutdown_event = Clock.schedule_once(self.delayed_shutdown, float(self.app_ref.variables.get('SYS_SHUTDOWN_DELAY'))*60)
 
     def delayed_screen_off(self, dt):
         self.current = 'off_screen'
@@ -246,7 +248,7 @@ class DynamicLayout(Widget):
                 else:
                     dyn_widget_ref.text = dyn_widget_ref.button_on_text
         else:
-            dyn_widget_ref.text = dyn_widget_ref.button_off_text
+            dyn_widget_ref.text = dyn_widget_ref.button_on_text
 
     def add_widget_json(self):
         id_list = []
@@ -393,9 +395,9 @@ class DynItem(Widget):
     app_ref = ObjectProperty(None)
     data_change = BooleanProperty(False)
 
-    def on_data_change(self, instance, value):
-        state = self.app_ref.variables.get(self.var_alias)
-        if state == '1':
+    def on_data_change(self, instance, data):
+        value = self.app_ref.variables.get(self.var_alias)
+        if value == '1':
             bool_state = True
         else:
             bool_state = False
@@ -481,6 +483,11 @@ class DynLabel(DynItem, Label):
         super (DynLabel,self).__init__(**kwargs)
         self.dyn_label_background()
 
+    def on_data_change(self, instance, data):
+        value = self.app_ref.variables.get(self.var_alias)
+        self.text = self.button_on_text
+        self.text = self.text.replace('%d', value)
+
     def on_size(self, *args):
         self.dyn_label_background()
 
@@ -546,6 +553,7 @@ class MainApp(App):
         self.get_saved_vars()
         self.variables.save_variables()
         self.get_scripts()
+        self.screen_man.start_inactivity_clock() #restart clock in case value has changed
 
     def get_scripts(self):
         self.scripts = []
@@ -560,7 +568,7 @@ class MainApp(App):
 
     def get_saved_vars(self):
         for (key, value) in self.config.items('Settings'):
-            self.variables.set(self.variables.var_aliases_dict[key.upper()], value)
+            self.variables.set_by_alias(key.upper(), value)
 
     #get aliases from config file, right them to variables.json, update lists, then rebuild dynamic layout in case there were any alias changes that would effect a screen item
     def get_aliases(self):
@@ -585,6 +593,223 @@ class MainApp(App):
 
     def exit_app(self):
         self.stop()
+
+class Variables(Widget):
+    app_ref = ObjectProperty(None)
+    data_change = BooleanProperty(False)
+    refresh_data = BooleanProperty(False)
+    display_var_tags = ListProperty()
+    variables_file = 'variables.json'
+    DI_IGNITION = StringProperty('0')
+    SYS_REVERSE_CAM_ON = StringProperty('0')
+
+    def __init__(self, **kwargs):
+        super(Variables, self).__init__(**kwargs)
+        self.open_variables()
+        self.set_var_lists()
+        self.variable_data = ['0'] * len(self.var_aliases)
+        self.old_variable_data = ['0'] * len(self.var_aliases)
+        self.var_events = [False] * len(self.var_aliases)
+        self.arduino_data_len = 7 + 1
+        self.arduino_data = ['0'] * self.arduino_data_len
+        self.set_saved_vars()
+        self.toggle_update_clock(True)
+        self.set_by_alias('SYS_INIT', '1')
+        Clock.schedule_interval(self.read_arduino, 0.05)
+        Clock.schedule_interval(self.read_system, 1)
+
+    def set_var_lists(self):
+        self.var_aliases = []
+        self.var_save = []
+        self.var_save_values = []
+        self.var_display = []
+        self.display_var_tags = [] #this is a kivy property
+        self.var_ids_dict = {}
+        self.var_aliases_dict = {}
+        self.var_tag_dict = {}
+        self.tag_by_alias_dict = {}
+        self.alias_by_tag_dict = {}
+        self.save_by_alias_dict = {}
+        for i in range(len(self.variables_json)):
+            #create variable lists
+            hidden = self.variables_json[i]['hidden']
+            save = self.variables_json[i]['save']
+            value = self.variables_json[i]['value']
+            if self.variables_json[i]['type'] == "SYS":  #if system variable, then use tag for alias
+                alias = self.variables_json[i]['tag']
+            else:
+                alias = self.variables_json[i]['alias']
+            self.var_aliases.append(alias)
+            if not hidden: self.var_display.append(alias)
+            if save:
+                self.var_save.append(alias)
+                self.var_save_values.append(value)
+
+            # create variable dictionaries to easily find data indexes, or to reconcile variable_json
+            self.var_ids_dict[self.variables_json[i]['id']] = self.variables_json[i]['data_index']  # dictionary to find data_index by id
+            self.var_aliases_dict[alias] = self.variables_json[i]['data_index']  # dictionary to find data_index by alias
+            self.var_tag_dict[self.variables_json[i]['tag']] = self.variables_json[i]['data_index']  # dictionary to find data_index by tag
+            self.tag_by_alias_dict[self.variables_json[i]['alias']] = self.variables_json[i]['tag']  # dictionary to find tag by alias
+            self.alias_by_tag_dict[self.variables_json[i]['tag']] = self.variables_json[i]['alias']  # dictionary to find alias by tag
+            self.save_by_alias_dict[self.variables_json[i]['alias']] = self.variables_json[i]['save']  # dictionary to find save by alias
+        self.display_var_tags = self.var_display  #this is to defer kivy property updates until the end, otherwise it slows down program for every append
+
+    def open_variables(self):
+        with open(self.variables_file, 'r') as file:
+            self.variables_json = json.load(file)
+
+    def set_saved_vars(self):
+        # set variables that were saved
+        for i in range(len(self.var_save)):
+            self.set_by_alias(self.var_save[i], self.var_save_values[i])
+
+    def save_variables(self):
+        for alias in self.var_save:
+            data_index = self.var_aliases_dict[alias]
+            self.variables_json[data_index]['value'] = self.variable_data[data_index]
+        with open(self.variables_file, 'w') as file:
+            json.dump(self.variables_json, file, sort_keys=True, indent=4)
+
+    def read_arduino(self, dt):
+        if not debug_mode:
+            serial_data = ser.readline().rstrip().split(',')
+            if len(serial_data) == self.arduino_data_len:
+                self.arduino_data = serial_data
+        else:
+            pass
+
+    def read_system(self, dt):
+        self.set_by_alias('SYS_TIME', str((current_milli_time() - initial_time) / 1000))
+        self.set_by_alias('SYS_CPU_USAGE', str(psutil.cpu_percent()))
+        if not pc_mode:
+            self.set_by_alias('SYS_CPU_TEMP', os.popen('vcgencmd measure_temp').readline().replace("temp=", "").replace("'C\n", ""))
+
+    def update_data(self, dt):
+        for i in range(0, 7):
+            self.variable_data[i+1] = self.arduino_data[i]
+        if (self.variable_data != self.old_variable_data) or self.refresh_data:
+            self.data_change = True
+            print('variable data')
+            print(self.variable_data)
+            self.refresh_data = False
+        else:
+            self.data_change = False
+
+        for i in range(len(self.variable_data)):
+            if self.variable_data[i] != self.old_variable_data[i]:
+                self.var_events[i] = True
+            else:
+                self.var_events[i] = False
+
+        self.old_variable_data = list(self.variable_data)  # 'list()' must be used, otherwise it only copies a reference to the original list
+
+        #variable driven events
+        self.SYS_REVERSE_CAM_ON = self.variable_data[22]
+
+        if not debug_mode:
+            self.DI_IGNITION = self.variable_data[7]  #need to update last due to screen initialization issue
+        else:
+            self.DI_IGNITION = '1'
+
+        self.exec_scripts()
+
+        if self.get('SYS_INIT') == '1':  #turn SYS_INIT right back off, so it should only have been on for for loop cycle
+            print 'init off'
+            self.set_by_alias('SYS_INIT', '0')
+
+    def exec_scripts(self):
+        if self.data_change:
+            for script in self.app_ref.scripts:
+                if script != '':
+                    try:
+                        exec(script)
+                    except Exception as e:
+                        print('script error:')
+                        print(e)
+
+    def toggle_update_clock(self, state):
+        if state:
+            self.read_clock = Clock.schedule_interval(self.update_data, 0)
+        else:
+            try:
+                self.read_clock.cancel()
+            except:
+                pass
+
+    def get(self, alias):
+        if alias != '':
+            try:
+                data_index = self.var_aliases_dict[alias]
+                return self.variable_data[data_index]
+            except Exception as e:
+                print('variables.get error:')
+                print(e)
+                return ''
+        return ''
+
+    def get_event(self, alias):
+        if alias != '':
+            try:
+                data_index = self.var_aliases_dict[alias]
+                return self.var_events[data_index]
+            except:
+                print('variables.get_event: tag not found')
+                return ''
+        return ''
+
+    def write_arduino(self, command):
+        ser.write(command)
+
+    def set_by_alias(self, alias, value):
+        data_index = self.var_aliases_dict[alias]
+        self.set(data_index, value)
+        if self.save_by_alias_dict[alias]: #if variable's 'save' parameter is set to true, then save it
+            self.save_variables()
+            print('saved vars')
+
+    def set(self, index, value):
+        try:
+            self.variable_data[index] = value
+            channel_type = self.variables_json[index]['type']
+            tag = self.variables_json[index]['tag']
+            if channel_type == 'DO':
+                if not debug_mode:
+                    self.write_arduino('digital_output/' + str(tag) + '/' + str(value) + '/')
+            if channel_type == 'SYS':
+                self.sys_cmd(tag, value)
+        except Exception as e:
+            print('variables.set error:')
+            print(e)
+
+    #SYSTEM COMMANDS#
+
+    def sys_cmd(self, tag, value):
+        if tag == 'SYS_DIM_BACKLIGHT':
+            if value == '1':
+                self.backlight_brightness(int(self.get('SYS_SCREEN_BRIGHTNESS'))) #need to use "get" to get around initialization issue
+            else:
+                self.backlight_brightness(255)
+        if tag == 'SYS_SCREEN_BRIGHTNESS':
+            if self.get('SYS_DIM_BACKLIGHT') == "1":
+                self.backlight_brightness(int(value))
+        if tag == 'SYS_ENG_KILL_POPUP':
+            if value == '1':
+                self.app_ref.main_screen_ref.engine_kill_popup.open()
+                self.set_by_alias(tag, '0')
+
+    def backlight_brightness(self, value):
+        print('brightness cmd')
+        print(value)
+        if not pc_mode:
+            if int(value) > 0 and int(value) < 256:
+                print('brightness written')
+                _brightness = open(os.path.join(BASE, "brightness"), "w")
+                _brightness.write(str(value))
+                _brightness.close()
+                return
+
+
+###SETTINGS STUFF###
 
 class SettingAlias(SettingString):
     def _create_popup(self, instance):
@@ -722,282 +947,8 @@ class MySettingNumeric(SettingNumeric):
         # all done, open the popup !
         popup.open()
 
-class Variables(Widget):
-    app_ref = ObjectProperty(None)
-    data_change = BooleanProperty(False)
-    refresh_data = BooleanProperty(False)
-    display_var_tags = ListProperty()
-    variables_file = 'variables.json'
-    prev_autovar_state_1 = '0'
-    prev_autovar_state_2 = '0'
-    prev_autovar_state_3 = '0'
-    prev_autovar_state_4 = '0'
-    DI_0 = StringProperty('0')
-    DI_1 = StringProperty('0')
-    DI_2 = StringProperty('0')
-    DI_3 = StringProperty('0')
-    DI_4 = StringProperty('0')
-    DI_5 = StringProperty('0')
-    DI_IGNITION = StringProperty('0')
-    DO_0 = StringProperty('0')
-    DO_1 = StringProperty('0')
-    DO_2 = StringProperty('0')
-    DO_3 = StringProperty('0')
-    DO_4 = StringProperty('0')
-    DO_5 = StringProperty('0')
-    USER_VAR_0 = StringProperty('0')
-    USER_VAR_1 = StringProperty('0')
-    USER_VAR_2 = StringProperty('0')
-    USER_VAR_3 = StringProperty('0')
-    TMR_0 = StringProperty('0')
-    TMR_1 = StringProperty('0')
-    SYS_LOGGED_IN = StringProperty('0')
-    SYS_ENG_KILL_POPUP = StringProperty('0')
-    SYS_REVERSE_CAM_ON = StringProperty('0')
-    SYS_DIM_BACKLIGHT = StringProperty('0')
-    SYS_SCREEN_BRIGHTNESS = StringProperty('0')
-    SYS_SCREEN_OFF_DELAY = StringProperty('0')
-    SYS_SHUTDOWN_DELAY = StringProperty('0')
-    SYS_INACTIVE_TIME = StringProperty('0')
-    SYS_INACTIVE = StringProperty('0')
-    SYS_INIT = StringProperty('0')
 
-    def __init__(self, **kwargs):
-        super(Variables, self).__init__(**kwargs)
-        self.open_variables()
-        self.set_var_lists()
-        self.variable_data = ['0'] * len(self.var_aliases)
-        self.old_variable_data = ['0'] * len(self.var_aliases)
-        self.var_events = [False] * len(self.var_aliases)
-        self.arduino_data_len = 7 + 1
-        self.arduino_data = ['0'] * self.arduino_data_len
-        self.set_saved_vars()
-        self.toggle_update_clock(True)
-        self.set_by_alias('SYS_INIT', '1')
-        Clock.schedule_interval(self.read_arduino, 0.05)
-
-    def set_var_lists(self):
-        self.var_aliases = []
-        self.var_save = []
-        self.var_save_values = []
-        self.var_display = []
-        self.display_var_tags = [] #this is a kivy property
-        self.var_ids_dict = {}
-        self.var_aliases_dict = {}
-        self.var_tag_dict = {}
-        self.tag_by_alias_dict = {}
-        self.alias_by_tag_dict = {}
-        for i in range(len(self.variables_json)):
-            #create variable lists
-            hidden = self.variables_json[i]['hidden']
-            save = self.variables_json[i]['save']
-            value = self.variables_json[i]['value']
-            if self.variables_json[i]['type'] == "SYS":  #if system variable, then use tag for alias
-                alias = self.variables_json[i]['tag']
-            else:
-                alias = self.variables_json[i]['alias']
-            self.var_aliases.append(alias)
-            if not hidden: self.var_display.append(alias)
-            if save:
-                self.var_save.append(alias)
-                self.var_save_values.append(value)
-
-            # create variable dictionaries to easily find data indexes, or to reconcile variable_json
-            self.var_ids_dict[self.variables_json[i]['id']] = self.variables_json[i]['data_index']  # dictionary to find data_index by id
-            self.var_aliases_dict[alias] = self.variables_json[i]['data_index']  # dictionary to find data_index by alias
-            self.var_tag_dict[self.variables_json[i]['tag']] = self.variables_json[i]['data_index']  # dictionary to find data_index by tag
-            self.tag_by_alias_dict[self.variables_json[i]['alias']] = self.variables_json[i]['tag']  # dictionary to find tag by alias
-            self.alias_by_tag_dict[self.variables_json[i]['tag']] = self.variables_json[i]['alias']  # dictionary to find alias by tag
-        self.display_var_tags = self.var_display  #this is to defer kivy property updates until the end, otherwise it slows down program for every append
-
-    def open_variables(self):
-        with open(self.variables_file, 'r') as file:
-            self.variables_json = json.load(file)
-
-    def set_saved_vars(self):
-        # set variables that were saved
-        for i in range(len(self.var_save)):
-            self.set_by_alias(self.var_save[i], self.var_save_values[i])
-
-    def save_variables(self):
-        for alias in self.var_save:
-            data_index = self.var_aliases_dict[alias]
-            self.variables_json[data_index]['value'] = self.variable_data[data_index]
-        with open(self.variables_file, 'w') as file:
-            json.dump(self.variables_json, file, sort_keys=True, indent=4)
-
-    def read_arduino(self, dt):
-        if not debug_mode:
-            #try:
-            #time = current_milli_time()
-            serial_data = ser.readline().rstrip().split(',')
-            if len(serial_data) == self.arduino_data_len:
-                self.arduino_data = serial_data
-            #print(current_milli_time() - time)
-            #except:
-            #    print('Serial Read Failure, or possibly some other failure')
-            #    exit()
-        else:
-            pass
-
-    def update_data(self, dt):
-        for i in range(0, 7):
-            self.variable_data[i+1] = self.arduino_data[i]
-        if (self.variable_data != self.old_variable_data) or self.refresh_data:
-            self.data_change = True
-            print('variable data')
-            print(self.variable_data)
-            if self.variable_data[14:41] <> self.old_variable_data[14:41]:
-                self.save_variables()
-                print('saved vars')
-            self.refresh_data = False
-        else:
-            self.data_change = False
-
-        for i in range(len(self.variable_data)):
-            if self.variable_data[i] != self.old_variable_data[i]:
-                self.var_events[i] = True
-            else:
-                self.var_events[i] = False
-
-        self.old_variable_data = list(self.variable_data)  # 'list()' must be used, otherwise it only copies a reference to the original list
-
-
-        #skip index zero for blank selection
-        self.DI_0 = self.variable_data[1]
-        self.DI_1 = self.variable_data[2]
-        self.DI_2 = self.variable_data[3]
-        self.DI_3 = self.variable_data[4]
-        self.DI_4 = self.variable_data[5]
-        self.DI_5 = self.variable_data[6]
-
-        self.DO_0 = self.variable_data[8]
-        self.DO_1 = self.variable_data[9]
-        self.DO_2 = self.variable_data[10]
-        self.DO_3 = self.variable_data[11]
-        self.DO_4 = self.variable_data[12]
-        self.DO_5 = self.variable_data[13]
-        self.USER_VAR_0 = self.variable_data[14]
-        self.USER_VAR_1 = self.variable_data[15]
-        self.USER_VAR_2 = self.variable_data[16]
-        self.USER_VAR_3 = self.variable_data[17]
-        self.TMR_0 = self.variable_data[18]
-        self.TMR_1 = self.variable_data[19]
-        self.SYS_LOGGED_IN = self.variable_data[20]
-        self.SYS_ENG_KILL_POPUP = self.variable_data[21]
-        self.SYS_REVERSE_CAM_ON = self.variable_data[22]
-        self.SYS_SCREEN_BRIGHTNESS = self.variable_data[23]
-        self.SYS_DIM_BACKLIGHT = self.variable_data[24]
-        self.SYS_SCREEN_OFF_DELAY = self.variable_data[25]
-        self.SYS_SHUTDOWN_DELAY = self.variable_data[26]
-        self.SYS_INACTIVE_TIME = self.variable_data[27]
-        self.SYS_INACTIVE = self.variable_data[28]
-        self.SYS_INIT = self.variable_data[29]
-
-        if not debug_mode:
-            self.DI_IGNITION = self.variable_data[7]  #need to update last due to screen initialization issue
-        else:
-            self.DI_IGNITION = '1'
-
-        self.exec_scripts()
-
-        if self.SYS_INIT == '1':  #turn SYS_INIT right back off, so it should only have been on for for loop cycle
-            print 'init off'
-            self.set_by_alias('SYS_INIT', '0')
-
-    def exec_scripts(self):
-        if self.data_change:
-            for script in self.app_ref.scripts:
-                if script != '':
-                    try:
-                        exec(script)
-                    except Exception as e:
-                        print('script error:')
-                        print(e)
-
-    def toggle_update_clock(self, state):
-        if state:
-            self.read_clock = Clock.schedule_interval(self.update_data, 0)
-        else:
-            try:
-                self.read_clock.cancel()
-            except:
-                pass
-
-    def get(self, alias):
-        if alias != '':
-            try:
-                data_index = self.var_aliases_dict[alias]
-                return self.variable_data[data_index]
-            except Exception as e:
-                print('variables.get error:')
-                print(e)
-                return ''
-        return ''
-
-    def get_event(self, alias):
-        if alias != '':
-            try:
-                data_index = self.var_aliases_dict[alias]
-                return self.var_events[data_index]
-            except:
-                print('variables.get_event: tag not found')
-                return ''
-        return ''
-
-    def write_arduino(self, command):
-        ser.write(command)
-        #time.sleep(.1)
-
-    def set_by_alias(self, alias, value):
-        data_index = self.var_aliases_dict[alias]
-        self.set(data_index, value)
-
-    '''def set_by_tag(self, tag, value):
-        data_index = self.var_tag_dict[tag]
-        self.set(data_index, value)'''
-
-    def set(self, index, value):
-        try:
-            self.variable_data[index] = value
-            channel_type = self.variables_json[index]['type']
-            tag = self.variables_json[index]['tag']
-            if channel_type == 'DO':
-                if not debug_mode:
-                    self.write_arduino('digital_output/' + str(tag) + '/' + str(value) + '/')
-            if channel_type == 'SYS':
-                self.sys_cmd(tag, int(value))
-        except Exception as e:
-            print('variables.set error:')
-            print(e)
-
-    #SYSTEM COMMANDS#
-
-    def sys_cmd(self, tag, value):
-        if tag == 'SYS_DIM_BACKLIGHT':
-            if value == 1:
-                self.backlight_brightness(int(self.get('SYS_SCREEN_BRIGHTNESS'))) #need to use "get" to get around initialization issue
-            else:
-                self.backlight_brightness(255)
-        if tag == 'SYS_SCREEN_BRIGHTNESS':
-            if self.SYS_DIM_BACKLIGHT == "1":
-                self.backlight_brightness(value)
-        if tag == 'SYS_ENG_KILL_POPUP':
-            if value == 1:
-                self.app_ref.main_screen_ref.engine_kill_popup.open()
-                self.set_by_alias(tag, '0')
-
-    def backlight_brightness(self, value):
-        print('brightness cmd')
-        print(value)
-        if not pc_mode:
-            if int(value) > 0 and int(value) < 256:
-                print('brightness written')
-                _brightness = open(os.path.join(BASE, "brightness"), "w")
-                _brightness.write(str(value))
-                _brightness.close()
-                return
-            #raise TypeError("Brightness should be between 0 and 255")
+###SCATTER LAYOUT FOR DYN WIDGETS###
 
 class MyScatterLayout(ScatterLayout):
     app_ref = ObjectProperty(None)
