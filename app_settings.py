@@ -145,3 +145,21 @@ aliases_json = json.dumps([
      'section': 'TimerAliases',
      'key': 'TMR_1'},
 ])
+
+developer_json = json.dumps([
+    {'type': 'action',
+     'title': 'Close App',
+     'desc': '',
+     'section': 'Developer',
+     'key': 'SYS_CLOSE_APP'},
+    {'type': 'action',
+     'title': 'Reboot',
+     'desc': '',
+     'section': 'Developer',
+     'key': 'SYS_REBOOT'},
+    {'type': 'action',
+     'title': 'Shutdown',
+     'desc': '',
+     'section': 'Developer',
+     'key': 'SYS_SHUTDOWN'}
+])

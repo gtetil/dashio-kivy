@@ -328,5 +328,35 @@
         "tag": "SYS_CPU_USAGE", 
         "type": "SYS", 
         "value": "0"
+    }, 
+    {
+        "alias": "SYS_CLOSE_APP", 
+        "data_index": 33, 
+        "hidden": true, 
+        "id": 1008, 
+        "save": false, 
+        "tag": "SYS_CLOSE_APP", 
+        "type": "SYS", 
+        "value": "0"
+    }, 
+    {
+        "alias": "SYS_REBOOT", 
+        "data_index": 34, 
+        "hidden": true, 
+        "id": 1009, 
+        "save": false, 
+        "tag": "SYS_REBOOT", 
+        "type": "SYS", 
+        "value": "0"
+    }, 
+    {
+        "alias": "SYS_SHUTDOWN", 
+        "data_index": 35, 
+        "hidden": true, 
+        "id": 1010, 
+        "save": false, 
+        "tag": "SYS_SHUTDOWN", 
+        "type": "SYS", 
+        "value": "0"
     }
 ]

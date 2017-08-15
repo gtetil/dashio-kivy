@@ -63,8 +63,8 @@
             210, 
             70
         ], 
-        "var_alias": "REVERSE", 
-        "var_tag": "DO_4", 
+        "var_alias": "DI_0", 
+        "var_tag": "DI_0", 
         "widget": "Indicator"
     }, 
     "17": {
@@ -79,8 +79,8 @@
             190, 
             230
         ], 
-        "var_alias": "FRONT LIGHTS", 
-        "var_tag": "DO_1", 
+        "var_alias": "REAR LIGHTS", 
+        "var_tag": "DO_3", 
         "widget": "Toggle Button"
     }, 
     "18": {
@@ -201,15 +201,31 @@
         "off_text": "", 
         "on_text": "CPU USAGE: %d%", 
         "pos": [
-            450.0, 
-            20.0
+            460.0, 
+            0.0
         ], 
         "size": [
-            180, 
+            170, 
             40
         ], 
         "var_alias": "SYS_CPU_USAGE", 
         "var_tag": "SYS_CPU_USAGE", 
+        "widget": "Label"
+    }, 
+    "25": {
+        "invert": false, 
+        "off_text": "", 
+        "on_text": "CPU TEMP: %d", 
+        "pos": [
+            480.0, 
+            40.0
+        ], 
+        "size": [
+            150, 
+            40
+        ], 
+        "var_alias": "SYS_CPU_TEMP", 
+        "var_tag": "SYS_CPU_TEMP", 
         "widget": "Label"
     }, 
     "3": {

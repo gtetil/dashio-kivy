@@ -50,7 +50,7 @@ BASE = "/sys/class/backlight/rpi_backlight/"
 
 debug_mode = True
 pc_mode = True
-win_mode = False
+win_mode = True
 #!!!CHECK CAMERA RESOLUTION BEFORE UPLOADING TO PI!!!!
 
 try:
@@ -118,7 +118,7 @@ class ScreenManagement(ScreenManager):
         self.backlight_on(False)
 
     def delayed_shutdown(self, dt):
-        os.system("poweroff")
+        self.app_ref.variables.set_by_alias('SYS_SHUTDOWN', '1')
 
     def backlight_on(self, state):
         if not pc_mode:
@@ -525,6 +525,7 @@ class MainApp(App):
         self.get_aliases()
         self.get_scripts()
         self.get_saved_vars()
+        self.screen_man.current = 'main_screen' #fixes issue where screen is blank when adruino can't initially connect
         return self.slide_layout
 
     def build_config(self, config):
@@ -544,9 +545,11 @@ class MainApp(App):
         settings.register_type('alias', SettingAlias)
         settings.register_type('mynumeric', MySettingNumeric)
         settings.register_type('script', SettingScript)
+        settings.register_type('action', SettingAction)
         settings.add_json_panel('Settings', self.config, data=app_settings.settings_json)
         settings.add_json_panel('Aliases', self.config, data=app_settings.aliases_json)
         settings.add_json_panel('Scripts', self.config, data=app_settings.scripts_json)
+        settings.add_json_panel('Developer', self.config, data=app_settings.developer_json)
 
     def on_config_change(self, config, section, key, value):
         self.get_aliases()
@@ -615,7 +618,8 @@ class Variables(Widget):
         self.set_saved_vars()
         self.toggle_update_clock(True)
         self.set_by_alias('SYS_INIT', '1')
-        Clock.schedule_interval(self.read_arduino, 0.05)
+        self.arduino_read_dt = 0.05
+        self.arduino_read_clock(self.arduino_read_dt)
         Clock.schedule_interval(self.read_system, 1)
 
     def set_var_lists(self):
@@ -672,11 +676,39 @@ class Variables(Widget):
 
     def read_arduino(self, dt):
         if not debug_mode:
-            serial_data = ser.readline().rstrip().split(',')
-            if len(serial_data) == self.arduino_data_len:
-                self.arduino_data = serial_data
+            try:
+                serial_data = self.ser.readline().rstrip().split(',')
+                if len(serial_data) == self.arduino_data_len:
+                    self.arduino_data = serial_data
+            except Exception as e:
+                print('read_arduino error:')
+                print(e)
+                self.connect_arduino()
         else:
             pass
+
+    def connect_arduino(self):
+        try:
+            self.ser.close()
+        except:
+            pass
+        try:
+            if not win_mode:
+                self.ser = serial.Serial('/dev/ttyUSB0', 115200, timeout=0)
+            else:
+                self.ser = serial.Serial('COM5', 115200, timeout=0)
+            self.arduino_read_clock(self.arduino_read_dt)
+        except Exception as e:
+            print('connect_arduino error:')
+            print(e)
+            self.arduino_read_clock(1) #try to reconnect only every second to reduce cpu usage
+
+    def arduino_read_clock(self, dt):
+        try:
+            self.arduino_clk.cancel()
+        except:
+            pass
+        self.arduino_clk = Clock.schedule_interval(self.read_arduino, dt)
 
     def read_system(self, dt):
         self.set_by_alias('SYS_TIME', str((current_milli_time() - initial_time) / 1000))
@@ -758,7 +790,7 @@ class Variables(Widget):
         return ''
 
     def write_arduino(self, command):
-        ser.write(command)
+        self.ser.write(command)
 
     def set_by_alias(self, alias, value):
         data_index = self.var_aliases_dict[alias]
@@ -795,6 +827,18 @@ class Variables(Widget):
         if tag == 'SYS_ENG_KILL_POPUP':
             if value == '1':
                 self.app_ref.main_screen_ref.engine_kill_popup.open()
+                self.set_by_alias(tag, '0')
+        if tag == 'SYS_CLOSE_APP':
+            if value == '1':
+                self.set_by_alias(tag, '0')
+                exit()
+        if tag == 'SYS_REBOOT':
+            if value == '1':
+                os.system("reboot")
+                self.set_by_alias(tag, '0')
+        if tag == 'SYS_SHUTDOWN':
+            if value == '1':
+                os.system("poweroff")
                 self.set_by_alias(tag, '0')
 
     def backlight_brightness(self, value):
@@ -947,6 +991,43 @@ class MySettingNumeric(SettingNumeric):
         # all done, open the popup !
         popup.open()
 
+class SettingAction(SettingString):
+    app_ref = ObjectProperty(None)
+
+    def _create_popup(self, instance):
+        # create popup layout
+        content = BoxLayout(orientation='vertical', spacing='5dp')
+        popup_width = min(0.95 * Window.width, dp(500))
+        self.popup = popup = Popup(
+            title=self.title, content=content, size_hint=(None, None),
+            size=(popup_width, '250dp'), pos_hint={'middle': 1, 'top': 1})
+        # create the textinput used for numeric input
+        self.label = label = Label(
+            text='Are you sure you want to ' + self.title + '?')
+
+        # construct the content, widget are used as a spacer
+        content.add_widget(Widget())
+        content.add_widget(label)
+        content.add_widget(Widget())
+        content.add_widget(SettingSpacer())
+
+        # 2 buttons are created for accept or cancel the current value
+        btnlayout = BoxLayout(size_hint_y=None, height='50dp', spacing='5dp')
+        btn = Button(text='Yes')
+        btn.bind(on_release=self._validate)
+        btnlayout.add_widget(btn)
+        btn = Button(text='No')
+        btn.bind(on_release=self._dismiss)
+        btnlayout.add_widget(btn)
+        content.add_widget(btnlayout)
+
+        # all done, open the popup !
+        popup.open()
+
+    def _validate(self, instance):
+        self.app_ref.variables.set_by_alias(self.key, '1')
+        self._dismiss()
+
 
 ###SCATTER LAYOUT FOR DYN WIDGETS###
 
@@ -1084,21 +1165,12 @@ class MyScatterLayout(ScatterLayout):
 if __name__ == '__main__':
 
     if not debug_mode:
-        try:
-            if not win_mode:
-                ser = serial.Serial('/dev/ttyUSB0', 115200, timeout=0)
-            else:
-                ser = serial.Serial('COM6', 115200, timeout=0)
-        except:
-            print "Failed to connect"
-            exit()
-
         #turn on status output for shutdown circuit
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setup(17, GPIO.OUT)
-        GPIO.output(17, 1)
+        if not win_mode:
+            GPIO.setmode(GPIO.BCM)
+            GPIO.setup(17, GPIO.OUT)
+            GPIO.output(17, 1)
 
     MainApp().run()
 
-    ser.close()
     print('closed')
