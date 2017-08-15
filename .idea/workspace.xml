@@ -3,12 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="27b3c643-4da9-4ab8-8fac-19f30f795262" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app_settings.py" afterPath="$PROJECT_DIR$/app_settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dynamic_layout.json" afterPath="$PROJECT_DIR$/dynamic_layout.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.ini" afterPath="$PROJECT_DIR$/main.ini" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.kv" afterPath="$PROJECT_DIR$/main.kv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/variables.json" afterPath="$PROJECT_DIR$/variables.json" />
     </list>
     <list id="1e95b302-9845-4a63-bdc7-46bebc48f801" name="Revert: " comment="" />
     <list id="9acf94dc-4ce7-4798-ab9b-5692da952639" name="Revert:" comment="" />
@@ -33,8 +28,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="725">
-              <caret line="125" column="31" lean-forward="true" selection-start-line="125" selection-start-column="31" selection-end-line="125" selection-end-column="31" />
+            <state relative-caret-position="187">
+              <caret line="11" column="40" lean-forward="true" selection-start-line="11" selection-start-column="40" selection-end-line="11" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -139,8 +134,8 @@
             <state relative-caret-position="655">
               <caret line="357" column="28" lean-forward="false" selection-start-line="357" selection-start-column="28" selection-end-line="357" selection-end-column="28" />
               <folding>
-                <marker date="1502823263893" expanded="true" signature="5080:5089" ph="{&quot;id&quot;: 2000...}" />
-                <marker date="1502823263893" expanded="true" signature="7101:7128" ph="{&quot;id&quot;: 1007...}" />
+                <marker date="1502825393941" expanded="true" signature="5080:5089" ph="{&quot;id&quot;: 2000...}" />
+                <marker date="1502825393941" expanded="true" signature="7101:7128" ph="{&quot;id&quot;: 1007...}" />
               </folding>
             </state>
           </provider>
@@ -157,7 +152,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>get_al</find>
       <find>000000000B1F39A0</find>
       <find>0000000007957A70</find>
       <find>reverse</find>
@@ -187,6 +181,7 @@
       <find>variables</find>
       <find>update_cl</find>
       <find>read_cl</find>
+      <find>maxf</find>
     </findStrings>
     <replaceStrings>
       <replace>_4</replace>
@@ -226,8 +221,8 @@
         <option value="$PROJECT_DIR$/variables.json" />
         <option value="$PROJECT_DIR$/app_settings.py" />
         <option value="$PROJECT_DIR$/main.ini" />
-        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/main.kv" />
+        <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
   </component>
@@ -254,16 +249,6 @@
     <panes>
       <pane id="ProjectPane">
         <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dashio-kivy" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-          </PATH>
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="dashio-kivy" />
@@ -726,7 +711,14 @@
       <option name="project" value="LOCAL" />
       <updated>1501692221402</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="- added developer settings tab for 'close app', 'reboot', and 'shutdown'.&#10;- re-wrote code to keep searching for arduino if disconnected.">
+      <created>1502823358169</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1502823358169</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -796,7 +788,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="started integrating json code into new architecture." />
     <MESSAGE value="finished and debugged new variables architecture." />
     <MESSAGE value="finished autovars.  might still need a little debug." />
     <MESSAGE value="fully debugged new architecture and autovars.  still need to debug on RPI." />
@@ -821,7 +812,8 @@
     <MESSAGE value="- fixed bug in label widget." />
     <MESSAGE value="- fixed issue where widgets were getting saved with the wrong position" />
     <MESSAGE value="- made wigdet edges easier to see in modify mode." />
-    <option name="LAST_COMMIT_MESSAGE" value="- made wigdet edges easier to see in modify mode." />
+    <MESSAGE value="- added developer settings tab for 'close app', 'reboot', and 'shutdown'.&#10;- re-wrote code to keep searching for arduino if disconnected." />
+    <option name="LAST_COMMIT_MESSAGE" value="- added developer settings tab for 'close app', 'reboot', and 'shutdown'.&#10;- re-wrote code to keep searching for arduino if disconnected." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -939,14 +931,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/navigationdrawer/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6443">
-          <caret line="388" column="0" lean-forward="false" selection-start-line="388" selection-start-column="0" selection-end-line="388" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.PyCharmCE2016.3/system/python_stubs/-1247972723/kivy/graphics/context_instructions.py" />
     <entry file="file://$PROJECT_DIR$/launcher.sh">
       <provider selected="true" editor-type-id="text-editor">
@@ -1052,16 +1036,24 @@
         <state relative-caret-position="655">
           <caret line="357" column="28" lean-forward="false" selection-start-line="357" selection-start-column="28" selection-end-line="357" selection-end-column="28" />
           <folding>
-            <marker date="1502823263893" expanded="true" signature="5080:5089" ph="{&quot;id&quot;: 2000...}" />
-            <marker date="1502823263893" expanded="true" signature="7101:7128" ph="{&quot;id&quot;: 1007...}" />
+            <marker date="1502825393941" expanded="true" signature="5080:5089" ph="{&quot;id&quot;: 2000...}" />
+            <marker date="1502825393941" expanded="true" signature="7101:7128" ph="{&quot;id&quot;: 1007...}" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/navigationdrawer/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1518">
+          <caret line="388" column="0" lean-forward="false" selection-start-line="388" selection-start-column="0" selection-end-line="388" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="725">
-          <caret line="125" column="31" lean-forward="true" selection-start-line="125" selection-start-column="31" selection-end-line="125" selection-end-column="31" />
+        <state relative-caret-position="187">
+          <caret line="11" column="40" lean-forward="true" selection-start-line="11" selection-start-column="40" selection-end-line="11" selection-end-column="40" />
           <folding />
         </state>
       </provider>

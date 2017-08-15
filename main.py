@@ -4,6 +4,7 @@ kivy.require('1.9.1') # replace with your current kivy version !
 from kivy.config import Config
 Config.set('kivy', 'keyboard_mode', 'systemanddock')
 Config.set('graphics', 'maxfps', '100')
+Config.set('postproc', 'double_tap_distance', '100')
 
 from kivy.app import App
 from kivy.uix.widget import Widget
