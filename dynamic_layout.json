@@ -95,8 +95,8 @@
             40, 
             40
         ], 
-        "var_alias": "FRONT LIGHTS", 
-        "var_tag": "DO_1", 
+        "var_alias": "REVERSE", 
+        "var_tag": "DO_4", 
         "widget": "Toggle Button"
     }, 
     "19": {
@@ -151,13 +151,13 @@
     "21": {
         "invert": false, 
         "off_text": "", 
-        "on_text": " FRONT LIGHTS", 
+        "on_text": "REV", 
         "pos": [
-            540.0, 
+            620.0, 
             90.0
         ], 
         "size": [
-            150, 
+            70, 
             40
         ], 
         "var_alias": "FRONT LIGHTS", 

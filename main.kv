@@ -1,5 +1,6 @@
 #:kivy 1.9.1
 #:import Factory kivy.factory.Factory
+#:import KivyCamera kivy_cv
 
 <SlideLayout>:
     anim_type: 'slide_above_anim'
@@ -446,11 +447,8 @@
 
 <CameraScreen>:
     id: camera_screen
+    camera_toggle: app.variables.SYS_REVERSE_CAM_ON
 
-    Camera:
-        id: cam
-        #resolution: (800, 480)
-        play: True if app.variables.SYS_REVERSE_CAM_ON == "1" else False
 
 
 

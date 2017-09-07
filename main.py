@@ -33,7 +33,9 @@ from kivy.uix.scatter import Scatter
 from kivy.graphics.transformation import Matrix
 from kivy.graphics import Color, Rectangle
 from kivy.factory import Factory
+from kivy_cv import KivyCamera
 import app_settings
+import cv2
 
 import json
 from functools import partial
@@ -505,7 +507,19 @@ class PasscodeScreen(Screen):
     pass
 
 class CameraScreen(Screen):
-    pass
+    camera_toggle = StringProperty('0')
+
+    def __init__(self,**kwargs):
+        super (CameraScreen,self).__init__(**kwargs)
+        self.capture = cv2.VideoCapture(0)
+        self.my_camera = KivyCamera(capture=self.capture, fps=30)
+        self.add_widget(self.my_camera)
+
+    def on_camera_toggle(self, *args):
+        if self.camera_toggle == '1':
+            self.my_camera.run_camera()
+        else:
+            self.my_camera.pause_camera()
 
 class MainApp(App):
     main_screen_ref = ObjectProperty(None)

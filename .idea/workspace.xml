@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="27b3c643-4da9-4ab8-8fac-19f30f795262" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dynamic_layout.json" afterPath="$PROJECT_DIR$/dynamic_layout.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.kv" afterPath="$PROJECT_DIR$/main.kv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
     </list>
     <list id="1e95b302-9845-4a63-bdc7-46bebc48f801" name="Revert: " comment="" />
@@ -28,19 +30,21 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="40" lean-forward="true" selection-start-line="11" selection-start-column="40" selection-end-line="11" selection-end-column="40" />
+            <state relative-caret-position="361">
+              <caret line="519" column="39" lean-forward="true" selection-start-line="519" selection-start-column="39" selection-end-line="519" selection-end-column="39" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
-        <entry file="file://C:/Python27/Lib/site-packages/kivy/uix/settings.py">
+      <file leaf-file-name="kivy_cv.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/kivy_cv.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="296" column="4" lean-forward="false" selection-start-line="296" selection-start-column="4" selection-end-line="303" selection-end-column="60" />
-              <folding />
+            <state relative-caret-position="442">
+              <caret line="26" column="40" lean-forward="false" selection-start-line="26" selection-start-column="40" selection-end-line="26" selection-end-column="40" />
+              <folding>
+                <element signature="e#15#39#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -48,7 +52,7 @@
       <file leaf-file-name="app_settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app_settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="791">
+            <state relative-caret-position="483">
               <caret line="160" column="23" lean-forward="false" selection-start-line="160" selection-start-column="23" selection-end-line="160" selection-end-column="23" />
               <folding />
             </state>
@@ -58,7 +62,7 @@
       <file leaf-file-name="main.ini" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.ini">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="790">
+            <state relative-caret-position="986">
               <caret line="58" column="12" lean-forward="false" selection-start-line="58" selection-start-column="12" selection-end-line="58" selection-end-column="12" />
               <folding />
             </state>
@@ -68,8 +72,8 @@
       <file leaf-file-name="main.kv" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.kv">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="259">
-              <caret line="283" column="46" lean-forward="false" selection-start-line="283" selection-start-column="46" selection-end-line="283" selection-end-column="46" />
+            <state relative-caret-position="560">
+              <caret line="450" column="0" lean-forward="false" selection-start-line="450" selection-start-column="0" selection-end-line="450" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -78,51 +82,38 @@
       <file leaf-file-name="dynamic_layout.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dynamic_layout.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="658">
+            <state relative-caret-position="1547">
               <caret line="91" column="16" lean-forward="false" selection-start-line="91" selection-start-column="16" selection-end-line="91" selection-end-column="16" />
               <folding>
-                <marker date="1502823263905" expanded="true" signature="0:6175" ph="{...}" />
-                <marker date="1502823263905" expanded="true" signature="1458:1770" ph="{&quot;invert&quot;: false...}" />
-                <marker date="1502823263905" expanded="true" signature="1783:2095" ph="{&quot;invert&quot;: false...}" />
-                <marker date="1502823263905" expanded="true" signature="1877:1925" ph="[...]" />
-                <marker date="1502823263905" expanded="true" signature="1944:1987" ph="[...]" />
-                <marker date="1502823263905" expanded="true" signature="2108:2420" ph="{&quot;invert&quot;: false...}" />
-                <marker date="1502823263905" expanded="true" signature="2202:2251" ph="[...]" />
-                <marker date="1502823263905" expanded="true" signature="2270:2313" ph="[...]" />
-                <marker date="1502823263905" expanded="true" signature="2432:2759" ph="{&quot;enable&quot;: true...}" />
-                <marker date="1502823263905" expanded="true" signature="2549:2596" ph="[...]" />
-                <marker date="1502823263905" expanded="true" signature="2615:2659" ph="[...]" />
-                <marker date="1502823263905" expanded="true" signature="2772:3071" ph="{&quot;invert&quot;: false...}" />
-                <marker date="1502823263905" expanded="true" signature="2875:2924" ph="[...]" />
-                <marker date="1502823263905" expanded="true" signature="2943:2987" ph="[...]" />
-                <marker date="1502823263905" expanded="true" signature="3084:3400" ph="{&quot;invert&quot;: false...}" />
-                <marker date="1502823263905" expanded="true" signature="3189:3237" ph="[...]" />
-                <marker date="1502823263905" expanded="true" signature="3256:3300" ph="[...]" />
-                <marker date="1502823263905" expanded="true" signature="3413:3717" ph="{&quot;invert&quot;: false...}" />
-                <marker date="1502823263905" expanded="true" signature="3507:3555" ph="[...]" />
-                <marker date="1502823263905" expanded="true" signature="3574:3617" ph="[...]" />
-                <marker date="1502823263905" expanded="true" signature="3730:4025" ph="{&quot;invert&quot;: false...}" />
-                <marker date="1502823263905" expanded="true" signature="3831:3879" ph="[...]" />
-                <marker date="1502823263905" expanded="true" signature="3898:3941" ph="[...]" />
-                <marker date="1502823263905" expanded="true" signature="4038:4364" ph="{&quot;invert&quot;: false...}" />
-                <marker date="1502823263905" expanded="true" signature="4144:4191" ph="[...]" />
-                <marker date="1502823263905" expanded="true" signature="4210:4254" ph="[...]" />
-                <marker date="1502823263905" expanded="true" signature="4377:4700" ph="{&quot;invert&quot;: false...}" />
-                <marker date="1502823263905" expanded="true" signature="4481:4529" ph="[...]" />
-                <marker date="1502823263905" expanded="true" signature="4548:4592" ph="[...]" />
-                <marker date="1502823263905" expanded="true" signature="4712:5078" ph="{&quot;enable&quot;: true...}" />
-                <marker date="1502823263905" expanded="true" signature="4863:4911" ph="[...]" />
-                <marker date="1502823263905" expanded="true" signature="4930:4975" ph="[...]" />
-                <marker date="1502823263905" expanded="true" signature="5007:5078" ph="{&quot;enable&quot;: true...}" />
-                <marker date="1502823263905" expanded="true" signature="5090:5444" ph="{&quot;enable&quot;: true...}" />
-                <marker date="1502823263905" expanded="true" signature="5223:5271" ph="[...]" />
-                <marker date="1502823263905" expanded="true" signature="5290:5334" ph="[...]" />
-                <marker date="1502823263905" expanded="true" signature="5456:5793" ph="{&quot;enable&quot;: true...}" />
-                <marker date="1502823263905" expanded="true" signature="5573:5622" ph="[...]" />
-                <marker date="1502823263905" expanded="true" signature="5641:5686" ph="[...]" />
-                <marker date="1502823263905" expanded="true" signature="5805:6173" ph="{&quot;enable&quot;: true...}" />
-                <marker date="1502823263905" expanded="true" signature="5950:5998" ph="[...]" />
-                <marker date="1502823263905" expanded="true" signature="6017:6061" ph="[...]" />
+                <marker date="1504786368613" expanded="true" signature="0:6159" ph="{...}" />
+                <marker date="1504786368613" expanded="true" signature="1783:2012" ph="{&quot;invert&quot;: false...}" />
+                <marker date="1504786368613" expanded="true" signature="3256:3284" ph="[...]" />
+                <marker date="1504786368613" expanded="true" signature="3256:3384" ph="{&quot;invert&quot;: false...}" />
+                <marker date="1504786368613" expanded="true" signature="3397:3701" ph="{&quot;invert&quot;: false...}" />
+                <marker date="1504786368613" expanded="true" signature="3491:3539" ph="[...]" />
+                <marker date="1504786368613" expanded="true" signature="3558:3601" ph="[...]" />
+                <marker date="1504786368613" expanded="true" signature="3714:4009" ph="{&quot;invert&quot;: false...}" />
+                <marker date="1504786368613" expanded="true" signature="3815:3863" ph="[...]" />
+                <marker date="1504786368613" expanded="true" signature="3882:3925" ph="[...]" />
+                <marker date="1504786368613" expanded="true" signature="4022:4348" ph="{&quot;invert&quot;: false...}" />
+                <marker date="1504786368613" expanded="true" signature="4128:4175" ph="[...]" />
+                <marker date="1504786368613" expanded="true" signature="4194:4238" ph="[...]" />
+                <marker date="1504786368613" expanded="true" signature="4361:4684" ph="{&quot;invert&quot;: false...}" />
+                <marker date="1504786368613" expanded="true" signature="4465:4513" ph="[...]" />
+                <marker date="1504786368613" expanded="true" signature="4532:4576" ph="[...]" />
+                <marker date="1504786368613" expanded="true" signature="4696:5062" ph="{&quot;enable&quot;: true...}" />
+                <marker date="1504786368613" expanded="true" signature="4847:4895" ph="[...]" />
+                <marker date="1504786368613" expanded="true" signature="4914:4959" ph="[...]" />
+                <marker date="1504786368613" expanded="true" signature="4991:5062" ph="{&quot;enable&quot;: true...}" />
+                <marker date="1504786368613" expanded="true" signature="5074:5428" ph="{&quot;enable&quot;: true...}" />
+                <marker date="1504786368613" expanded="true" signature="5207:5255" ph="[...]" />
+                <marker date="1504786368613" expanded="true" signature="5274:5318" ph="[...]" />
+                <marker date="1504786368613" expanded="true" signature="5440:5777" ph="{&quot;enable&quot;: true...}" />
+                <marker date="1504786368613" expanded="true" signature="5557:5606" ph="[...]" />
+                <marker date="1504786368613" expanded="true" signature="5625:5670" ph="[...]" />
+                <marker date="1504786368613" expanded="true" signature="5789:6157" ph="{&quot;enable&quot;: true...}" />
+                <marker date="1504786368613" expanded="true" signature="5934:5982" ph="[...]" />
+                <marker date="1504786368613" expanded="true" signature="6001:6045" ph="[...]" />
               </folding>
             </state>
           </provider>
@@ -131,11 +122,11 @@
       <file leaf-file-name="variables.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/variables.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="655">
+            <state relative-caret-position="6069">
               <caret line="357" column="28" lean-forward="false" selection-start-line="357" selection-start-column="28" selection-end-line="357" selection-end-column="28" />
               <folding>
-                <marker date="1502825393941" expanded="true" signature="5080:5089" ph="{&quot;id&quot;: 2000...}" />
-                <marker date="1502825393941" expanded="true" signature="7101:7128" ph="{&quot;id&quot;: 1007...}" />
+                <marker date="1504806531500" expanded="true" signature="5080:5089" ph="{&quot;id&quot;: 2000...}" />
+                <marker date="1504806531500" expanded="true" signature="7101:7128" ph="{&quot;id&quot;: 1007...}" />
               </folding>
             </state>
           </provider>
@@ -152,7 +143,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>000000000B1F39A0</find>
       <find>0000000007957A70</find>
       <find>reverse</find>
       <find>dyn</find>
@@ -182,6 +172,7 @@
       <find>update_cl</find>
       <find>read_cl</find>
       <find>maxf</find>
+      <find>pau</find>
     </findStrings>
     <replaceStrings>
       <replace>_4</replace>
@@ -221,7 +212,10 @@
         <option value="$PROJECT_DIR$/variables.json" />
         <option value="$PROJECT_DIR$/app_settings.py" />
         <option value="$PROJECT_DIR$/main.ini" />
+        <option value="C:/Python27/Lib/site-packages/kivy/core/image/__init__.py" />
+        <option value="$PROJECT_DIR$/camera.py" />
         <option value="$PROJECT_DIR$/main.kv" />
+        <option value="$PROJECT_DIR$/kivy_cv.py" />
         <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
@@ -247,8 +241,20 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dashio-kivy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+          </PATH>
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="dashio-kivy" />
@@ -261,13 +267,11 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Hella_RPi" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -336,6 +340,42 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="dashio-kivy" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/draggable.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="camera" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="dashio-kivy" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/camera.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="kivy_cv" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="dashio-kivy" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/kivy_cv.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -437,16 +477,20 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method />
     </configuration>
-    <list size="3">
+    <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.main" />
       <item index="1" class="java.lang.String" itemvalue="Python.myscatter" />
       <item index="2" class="java.lang.String" itemvalue="Python.draggable" />
+      <item index="3" class="java.lang.String" itemvalue="Python.camera" />
+      <item index="4" class="java.lang.String" itemvalue="Python.kivy_cv" />
     </list>
     <recent_temporary>
-      <list size="3">
+      <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.main" />
-        <item index="1" class="java.lang.String" itemvalue="Python.myscatter" />
-        <item index="2" class="java.lang.String" itemvalue="Python.draggable" />
+        <item index="1" class="java.lang.String" itemvalue="Python.kivy_cv" />
+        <item index="2" class="java.lang.String" itemvalue="Python.camera" />
+        <item index="3" class="java.lang.String" itemvalue="Python.myscatter" />
+        <item index="4" class="java.lang.String" itemvalue="Python.draggable" />
       </list>
     </recent_temporary>
     <configuration default="true" type="tests" factoryName="Attests">
@@ -718,18 +762,24 @@
       <option name="project" value="LOCAL" />
       <updated>1502823358169</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="- added config set for double_tap_distance">
+      <created>1502825570937</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1502825570937</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18072917" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18229167" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32892805" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2122492" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2534319" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946146" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -738,23 +788,13 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32892805" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2122492" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18072917" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23020063" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27624872" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -788,7 +828,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="finished and debugged new variables architecture." />
     <MESSAGE value="finished autovars.  might still need a little debug." />
     <MESSAGE value="fully debugged new architecture and autovars.  still need to debug on RPI." />
     <MESSAGE value="debugged new architecture on RPI." />
@@ -813,49 +852,16 @@
     <MESSAGE value="- fixed issue where widgets were getting saved with the wrong position" />
     <MESSAGE value="- made wigdet edges easier to see in modify mode." />
     <MESSAGE value="- added developer settings tab for 'close app', 'reboot', and 'shutdown'.&#10;- re-wrote code to keep searching for arduino if disconnected." />
-    <option name="LAST_COMMIT_MESSAGE" value="- added developer settings tab for 'close app', 'reboot', and 'shutdown'.&#10;- re-wrote code to keep searching for arduino if disconnected." />
+    <MESSAGE value="- added config set for double_tap_distance" />
+    <option name="LAST_COMMIT_MESSAGE" value="- added config set for double_tap_distance" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="28" />
+      <option name="time" value="29" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/main.kv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="15" lean-forward="false" selection-start-line="12" selection-start-column="15" selection-end-line="12" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/settings.json" />
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.kv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="15" lean-forward="false" selection-start-line="12" selection-start-column="15" selection-end-line="12" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/settings.json" />
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.kv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -950,94 +956,57 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dynamic_layout.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="658">
+        <state relative-caret-position="1547">
           <caret line="91" column="16" lean-forward="false" selection-start-line="91" selection-start-column="16" selection-end-line="91" selection-end-column="16" />
           <folding>
-            <marker date="1502823263905" expanded="true" signature="0:6175" ph="{...}" />
-            <marker date="1502823263905" expanded="true" signature="1458:1770" ph="{&quot;invert&quot;: false...}" />
-            <marker date="1502823263905" expanded="true" signature="1783:2095" ph="{&quot;invert&quot;: false...}" />
-            <marker date="1502823263905" expanded="true" signature="1877:1925" ph="[...]" />
-            <marker date="1502823263905" expanded="true" signature="1944:1987" ph="[...]" />
-            <marker date="1502823263905" expanded="true" signature="2108:2420" ph="{&quot;invert&quot;: false...}" />
-            <marker date="1502823263905" expanded="true" signature="2202:2251" ph="[...]" />
-            <marker date="1502823263905" expanded="true" signature="2270:2313" ph="[...]" />
-            <marker date="1502823263905" expanded="true" signature="2432:2759" ph="{&quot;enable&quot;: true...}" />
-            <marker date="1502823263905" expanded="true" signature="2549:2596" ph="[...]" />
-            <marker date="1502823263905" expanded="true" signature="2615:2659" ph="[...]" />
-            <marker date="1502823263905" expanded="true" signature="2772:3071" ph="{&quot;invert&quot;: false...}" />
-            <marker date="1502823263905" expanded="true" signature="2875:2924" ph="[...]" />
-            <marker date="1502823263905" expanded="true" signature="2943:2987" ph="[...]" />
-            <marker date="1502823263905" expanded="true" signature="3084:3400" ph="{&quot;invert&quot;: false...}" />
-            <marker date="1502823263905" expanded="true" signature="3189:3237" ph="[...]" />
-            <marker date="1502823263905" expanded="true" signature="3256:3300" ph="[...]" />
-            <marker date="1502823263905" expanded="true" signature="3413:3717" ph="{&quot;invert&quot;: false...}" />
-            <marker date="1502823263905" expanded="true" signature="3507:3555" ph="[...]" />
-            <marker date="1502823263905" expanded="true" signature="3574:3617" ph="[...]" />
-            <marker date="1502823263905" expanded="true" signature="3730:4025" ph="{&quot;invert&quot;: false...}" />
-            <marker date="1502823263905" expanded="true" signature="3831:3879" ph="[...]" />
-            <marker date="1502823263905" expanded="true" signature="3898:3941" ph="[...]" />
-            <marker date="1502823263905" expanded="true" signature="4038:4364" ph="{&quot;invert&quot;: false...}" />
-            <marker date="1502823263905" expanded="true" signature="4144:4191" ph="[...]" />
-            <marker date="1502823263905" expanded="true" signature="4210:4254" ph="[...]" />
-            <marker date="1502823263905" expanded="true" signature="4377:4700" ph="{&quot;invert&quot;: false...}" />
-            <marker date="1502823263905" expanded="true" signature="4481:4529" ph="[...]" />
-            <marker date="1502823263905" expanded="true" signature="4548:4592" ph="[...]" />
-            <marker date="1502823263905" expanded="true" signature="4712:5078" ph="{&quot;enable&quot;: true...}" />
-            <marker date="1502823263905" expanded="true" signature="4863:4911" ph="[...]" />
-            <marker date="1502823263905" expanded="true" signature="4930:4975" ph="[...]" />
-            <marker date="1502823263905" expanded="true" signature="5007:5078" ph="{&quot;enable&quot;: true...}" />
-            <marker date="1502823263905" expanded="true" signature="5090:5444" ph="{&quot;enable&quot;: true...}" />
-            <marker date="1502823263905" expanded="true" signature="5223:5271" ph="[...]" />
-            <marker date="1502823263905" expanded="true" signature="5290:5334" ph="[...]" />
-            <marker date="1502823263905" expanded="true" signature="5456:5793" ph="{&quot;enable&quot;: true...}" />
-            <marker date="1502823263905" expanded="true" signature="5573:5622" ph="[...]" />
-            <marker date="1502823263905" expanded="true" signature="5641:5686" ph="[...]" />
-            <marker date="1502823263905" expanded="true" signature="5805:6173" ph="{&quot;enable&quot;: true...}" />
-            <marker date="1502823263905" expanded="true" signature="5950:5998" ph="[...]" />
-            <marker date="1502823263905" expanded="true" signature="6017:6061" ph="[...]" />
+            <marker date="1504786368613" expanded="true" signature="0:6159" ph="{...}" />
+            <marker date="1504786368613" expanded="true" signature="1783:2012" ph="{&quot;invert&quot;: false...}" />
+            <marker date="1504786368613" expanded="true" signature="3256:3284" ph="[...]" />
+            <marker date="1504786368613" expanded="true" signature="3256:3384" ph="{&quot;invert&quot;: false...}" />
+            <marker date="1504786368613" expanded="true" signature="3397:3701" ph="{&quot;invert&quot;: false...}" />
+            <marker date="1504786368613" expanded="true" signature="3491:3539" ph="[...]" />
+            <marker date="1504786368613" expanded="true" signature="3558:3601" ph="[...]" />
+            <marker date="1504786368613" expanded="true" signature="3714:4009" ph="{&quot;invert&quot;: false...}" />
+            <marker date="1504786368613" expanded="true" signature="3815:3863" ph="[...]" />
+            <marker date="1504786368613" expanded="true" signature="3882:3925" ph="[...]" />
+            <marker date="1504786368613" expanded="true" signature="4022:4348" ph="{&quot;invert&quot;: false...}" />
+            <marker date="1504786368613" expanded="true" signature="4128:4175" ph="[...]" />
+            <marker date="1504786368613" expanded="true" signature="4194:4238" ph="[...]" />
+            <marker date="1504786368613" expanded="true" signature="4361:4684" ph="{&quot;invert&quot;: false...}" />
+            <marker date="1504786368613" expanded="true" signature="4465:4513" ph="[...]" />
+            <marker date="1504786368613" expanded="true" signature="4532:4576" ph="[...]" />
+            <marker date="1504786368613" expanded="true" signature="4696:5062" ph="{&quot;enable&quot;: true...}" />
+            <marker date="1504786368613" expanded="true" signature="4847:4895" ph="[...]" />
+            <marker date="1504786368613" expanded="true" signature="4914:4959" ph="[...]" />
+            <marker date="1504786368613" expanded="true" signature="4991:5062" ph="{&quot;enable&quot;: true...}" />
+            <marker date="1504786368613" expanded="true" signature="5074:5428" ph="{&quot;enable&quot;: true...}" />
+            <marker date="1504786368613" expanded="true" signature="5207:5255" ph="[...]" />
+            <marker date="1504786368613" expanded="true" signature="5274:5318" ph="[...]" />
+            <marker date="1504786368613" expanded="true" signature="5440:5777" ph="{&quot;enable&quot;: true...}" />
+            <marker date="1504786368613" expanded="true" signature="5557:5606" ph="[...]" />
+            <marker date="1504786368613" expanded="true" signature="5625:5670" ph="[...]" />
+            <marker date="1504786368613" expanded="true" signature="5789:6157" ph="{&quot;enable&quot;: true...}" />
+            <marker date="1504786368613" expanded="true" signature="5934:5982" ph="[...]" />
+            <marker date="1504786368613" expanded="true" signature="6001:6045" ph="[...]" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Python27/Lib/site-packages/kivy/uix/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="296" column="4" lean-forward="false" selection-start-line="296" selection-start-column="4" selection-end-line="303" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="791">
-          <caret line="160" column="23" lean-forward="false" selection-start-line="160" selection-start-column="23" selection-end-line="160" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.ini">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="790">
+        <state relative-caret-position="986">
           <caret line="58" column="12" lean-forward="false" selection-start-line="58" selection-start-column="12" selection-end-line="58" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.kv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="283" column="46" lean-forward="false" selection-start-line="283" selection-start-column="46" selection-end-line="283" selection-end-column="46" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/variables.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="655">
+        <state relative-caret-position="6069">
           <caret line="357" column="28" lean-forward="false" selection-start-line="357" selection-start-column="28" selection-end-line="357" selection-end-column="28" />
           <folding>
-            <marker date="1502825393941" expanded="true" signature="5080:5089" ph="{&quot;id&quot;: 2000...}" />
-            <marker date="1502825393941" expanded="true" signature="7101:7128" ph="{&quot;id&quot;: 1007...}" />
+            <marker date="1504806531500" expanded="true" signature="5080:5089" ph="{&quot;id&quot;: 2000...}" />
+            <marker date="1504806531500" expanded="true" signature="7101:7128" ph="{&quot;id&quot;: 1007...}" />
           </folding>
         </state>
       </provider>
@@ -1050,10 +1019,90 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://C:/Python27/Lib/site-packages/kivy/uix/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="296" column="4" lean-forward="false" selection-start-line="296" selection-start-column="4" selection-end-line="303" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python27/Lib/site-packages/kivy/core/camera/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1326">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#476#507#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python27/Lib/site-packages/kivy/core/image/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="517">
+          <caret line="940" column="41" lean-forward="false" selection-start-line="940" selection-start-column="41" selection-end-line="940" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python27/Lib/site-packages/kivy/uix/image.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4364">
+          <caret line="60" column="6" lean-forward="false" selection-start-line="60" selection-start-column="6" selection-end-line="60" selection-end-column="6" />
+          <folding>
+            <element signature="e#1319#1353#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python27/Lib/site-packages/kivy/uix/camera.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="35" column="15" lean-forward="true" selection-start-line="35" selection-start-column="15" selection-end-line="35" selection-end-column="15" />
+          <folding>
+            <element signature="e#752#784#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/camera.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="8" lean-forward="true" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="160" column="23" lean-forward="false" selection-start-line="160" selection-start-column="23" selection-end-line="160" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.kv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="450" column="0" lean-forward="false" selection-start-line="450" selection-start-column="0" selection-end-line="450" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kivy_cv.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" column="40" lean-forward="false" selection-start-line="26" selection-start-column="40" selection-end-line="26" selection-end-column="40" />
+          <folding>
+            <element signature="e#15#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="40" lean-forward="true" selection-start-line="11" selection-start-column="40" selection-end-line="11" selection-end-column="40" />
+        <state relative-caret-position="361">
+          <caret line="519" column="39" lean-forward="true" selection-start-line="519" selection-start-column="39" selection-end-line="519" selection-end-column="39" />
           <folding />
         </state>
       </provider>
