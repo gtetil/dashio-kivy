@@ -39,7 +39,6 @@ import cv2
 
 import json
 from functools import partial
-import autoVar
 
 Window.size = (800,480)
 
@@ -48,13 +47,11 @@ import serial
 import os
 import time
 import re
+import platform
 from operator import xor
 BASE = "/sys/class/backlight/rpi_backlight/"
 
-debug_mode = True
-pc_mode = True
-win_mode = True
-#!!!CHECK CAMERA RESOLUTION BEFORE UPLOADING TO PI!!!!
+operating_sys = platform.system()
 
 try:
     import RPi.GPIO as GPIO
@@ -124,14 +121,17 @@ class ScreenManagement(ScreenManager):
         self.app_ref.variables.set_by_alias('SYS_SHUTDOWN', '1')
 
     def backlight_on(self, state):
-        if not pc_mode:
-            if state:
-                state_str = '0'
-            else:
-                state_str = '1'
+        if state:
+            state_str = '0'
+        else:
+            state_str = '1'
+        try:
             _power = open(os.path.join(BASE, "bl_power"), "w")
             _power.write(state_str)
             _power.close()
+        except Exception as e:
+            print('Tried to toggle RPi backlight:')
+            print(e)
 
     def on_reverse_input(self, instance, state):
         print('rev state, ' + str(state))
@@ -690,17 +690,14 @@ class Variables(Widget):
             json.dump(self.variables_json, file, sort_keys=True, indent=4)
 
     def read_arduino(self, dt):
-        if not debug_mode:
-            try:
-                serial_data = self.ser.readline().rstrip().split(',')
-                if len(serial_data) == self.arduino_data_len:
-                    self.arduino_data = serial_data
-            except Exception as e:
-                print('read_arduino error:')
-                print(e)
-                self.connect_arduino()
-        else:
-            pass
+        try:
+            serial_data = self.ser.readline().rstrip().split(',')
+            if len(serial_data) == self.arduino_data_len:
+                self.arduino_data = serial_data
+        except Exception as e:
+            print('read_arduino error:')
+            print(e)
+            self.connect_arduino()
 
     def connect_arduino(self):
         try:
@@ -708,7 +705,7 @@ class Variables(Widget):
         except:
             pass
         try:
-            if not win_mode:
+            if operating_sys == 'Linux':
                 self.ser = serial.Serial('/dev/ttyUSB0', 115200, timeout=0)
             else:
                 self.ser = serial.Serial('COM5', 115200, timeout=0)
@@ -728,8 +725,7 @@ class Variables(Widget):
     def read_system(self, dt):
         self.set_by_alias('SYS_TIME', str((current_milli_time() - initial_time) / 1000))
         self.set_by_alias('SYS_CPU_USAGE', str(psutil.cpu_percent()))
-        if not pc_mode:
-            self.set_by_alias('SYS_CPU_TEMP', os.popen('vcgencmd measure_temp').readline().replace("temp=", "").replace("'C\n", ""))
+        self.set_by_alias('SYS_CPU_TEMP', os.popen('vcgencmd measure_temp').readline().replace("temp=", "").replace("'C\n", ""))
 
     def update_data(self, dt):
         for i in range(0, 7):
@@ -753,10 +749,7 @@ class Variables(Widget):
         #variable driven events
         self.SYS_REVERSE_CAM_ON = self.variable_data[22]
 
-        if not debug_mode:
-            self.DI_IGNITION = self.variable_data[7]  #need to update last due to screen initialization issue
-        else:
-            self.DI_IGNITION = '1'
+        self.DI_IGNITION = self.variable_data[7]  #need to update last due to screen initialization issue
 
         self.exec_scripts()
 
@@ -820,8 +813,7 @@ class Variables(Widget):
             channel_type = self.variables_json[index]['type']
             tag = self.variables_json[index]['tag']
             if channel_type == 'DO':
-                if not debug_mode:
-                    self.write_arduino('digital_output/' + str(tag) + '/' + str(value) + '/')
+                self.write_arduino('digital_output/' + str(tag) + '/' + str(value) + '/')
             if channel_type == 'SYS':
                 self.sys_cmd(tag, value)
         except Exception as e:
@@ -859,13 +851,16 @@ class Variables(Widget):
     def backlight_brightness(self, value):
         print('brightness cmd')
         print(value)
-        if not pc_mode:
+        try:
             if int(value) > 0 and int(value) < 256:
                 print('brightness written')
                 _brightness = open(os.path.join(BASE, "brightness"), "w")
                 _brightness.write(str(value))
                 _brightness.close()
                 return
+        except Exception as e:
+            print('Tried changing RPi backlight brightness:')
+            print(e)
 
 
 ###SETTINGS STUFF###
@@ -1179,12 +1174,14 @@ class MyScatterLayout(ScatterLayout):
 
 if __name__ == '__main__':
 
-    if not debug_mode:
-        #turn on status output for shutdown circuit
-        if not win_mode:
-            GPIO.setmode(GPIO.BCM)
-            GPIO.setup(17, GPIO.OUT)
-            GPIO.output(17, 1)
+    #turn on status output for shutdown circuit
+    try:
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(17, GPIO.OUT)
+        GPIO.output(17, 1)
+    except Exception as e:
+        print('GPIO error:')
+        print(e)
 
     MainApp().run()
 
