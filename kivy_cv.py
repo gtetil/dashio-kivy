@@ -17,12 +17,14 @@ class KivyCamera(Image):
     def update(self, dt):
         ret, frame = self.capture.read()
         if ret:
+            destFrame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             # convert it to texture
-            buf1 = cv2.flip(frame, 0)
+            buf1 = cv2.flip(destFrame, 0)
             buf = buf1.tostring()
             image_texture = Texture.create(
-                size=(frame.shape[1], frame.shape[0]), colorfmt='bgr')
-            image_texture.blit_buffer(buf, colorfmt='bgr', bufferfmt='ubyte')
+                size=(frame.shape[1], frame.shape[0]), colorfmt='rgb')
+            image_texture.blit_buffer(buf, colorfmt='rgb', bufferfmt='ubyte')
+            #image_texture.flip_horizontal()
             # display image from the texture
             self.texture = image_texture
 
@@ -37,6 +39,7 @@ class CamApp(App):
     def build(self):
         self.capture = cv2.VideoCapture(0)
         self.my_camera = KivyCamera(capture=self.capture, fps=30)
+        #self.my_camera.run_camera()
         return self.my_camera
 
     def on_stop(self):

@@ -151,13 +151,13 @@
     "21": {
         "invert": false, 
         "off_text": "", 
-        "on_text": "REV", 
+        "on_text": " REV CAM", 
         "pos": [
-            620.0, 
+            580.0, 
             90.0
         ], 
         "size": [
-            70, 
+            110, 
             40
         ], 
         "var_alias": "FRONT LIGHTS", 
@@ -275,8 +275,8 @@
             190, 
             230
         ], 
-        "var_alias": "REAR LIGHTS", 
-        "var_tag": "DO_3", 
+        "var_alias": "FRONT LIGHTS", 
+        "var_tag": "DO_1", 
         "widget": "Toggle Button"
     }, 
     "9": {
