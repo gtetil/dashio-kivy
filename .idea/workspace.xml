@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="27b3c643-4da9-4ab8-8fac-19f30f795262" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/can_com.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dashio-kivy.iml" afterPath="$PROJECT_DIR$/.idea/dashio-kivy.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app_settings.py" afterPath="$PROJECT_DIR$/app_settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dynamic_layout.json" afterPath="$PROJECT_DIR$/dynamic_layout.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.ini" afterPath="$PROJECT_DIR$/main.ini" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/variables.json" afterPath="$PROJECT_DIR$/variables.json" />
     </list>
     <list id="1e95b302-9845-4a63-bdc7-46bebc48f801" name="Revert: " comment="" />
     <list id="9acf94dc-4ce7-4798-ab9b-5692da952639" name="Revert:" comment="" />
@@ -98,8 +94,13 @@
             <state relative-caret-position="-2222">
               <caret line="91" column="16" lean-forward="false" selection-start-line="91" selection-start-column="16" selection-end-line="91" selection-end-column="16" />
               <folding>
-                <marker date="1520862660574" expanded="true" signature="1783:2012" ph="{&quot;invert&quot;: false...}" />
-                <marker date="1520862660574" expanded="true" signature="3256:3284" ph="[...]" />
+                <marker date="1520862992304" expanded="true" signature="0:6127" ph="{...}" />
+                <marker date="1520862992304" expanded="true" signature="1783:2012" ph="{&quot;invert&quot;: false...}" />
+                <marker date="1520862992304" expanded="true" signature="3079:3152" ph="{&quot;invert&quot;: false...}" />
+                <marker date="1520862992304" expanded="true" signature="5702:5745" ph="{&quot;enable&quot;: true...}" />
+                <marker date="1520862992304" expanded="true" signature="5757:6125" ph="{&quot;enable&quot;: true...}" />
+                <marker date="1520862992304" expanded="true" signature="5902:5950" ph="[...]" />
+                <marker date="1520862992304" expanded="true" signature="5969:6013" ph="[...]" />
               </folding>
             </state>
           </provider>
@@ -108,10 +109,16 @@
       <file leaf-file-name="kivy_cv.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/kivy_cv.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="29" column="8" lean-forward="false" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="80" />
+            <state relative-caret-position="527">
+              <caret line="31" column="8" lean-forward="false" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="8" />
               <folding>
                 <element signature="e#15#39#0" expanded="true" />
+                <marker date="1520862992258" expanded="true" signature="181:487" ph="..." />
+                <marker date="1520862992258" expanded="true" signature="417:487" ph="..." />
+                <marker date="1520862992258" expanded="true" signature="474:487" ph="..." />
+                <marker date="1520862992258" expanded="true" signature="1332:1363" ph="..." />
+                <marker date="1520862992258" expanded="true" signature="1332:1488" ph="..." />
+                <marker date="1520862992258" expanded="true" signature="1387:1488" ph="..." />
               </folding>
             </state>
           </provider>
@@ -770,7 +777,14 @@
       <option name="project" value="LOCAL" />
       <updated>1504809003356</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="- Added CAN engine, and 8 row digital inputs.">
+      <created>1520862947855</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1520862947855</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -781,7 +795,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32892805" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2534319" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3284055" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946146" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -831,7 +845,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="debugged new architecture on RPI." />
     <MESSAGE value="created separate clocks for variables and arduino.  makes program much quicker." />
     <MESSAGE value="removed KivyMD.  was really clunky on RPI.  using kivy garden navigation drawer.  so far, so good." />
     <MESSAGE value="-Added 'invert' option for screen widgets." />
@@ -856,7 +869,8 @@
     <MESSAGE value="- added config set for double_tap_distance" />
     <MESSAGE value="- Switched backup camera to cv2 code.  This is due to constant driver issue in Kivy, and to gain access to more features." />
     <MESSAGE value="- Forgot to add kivy_cv.py to git last time.&#10;- Removed win, pc, debug variables.&#10;- Cleaned up project files." />
-    <option name="LAST_COMMIT_MESSAGE" value="- Forgot to add kivy_cv.py to git last time.&#10;- Removed win, pc, debug variables.&#10;- Cleaned up project files." />
+    <MESSAGE value="- Added CAN engine, and 8 row digital inputs." />
+    <option name="LAST_COMMIT_MESSAGE" value="- Added CAN engine, and 8 row digital inputs." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -980,10 +994,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/kivy_cv.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="29" column="8" lean-forward="false" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="80" />
+        <state relative-caret-position="527">
+          <caret line="31" column="8" lean-forward="false" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="8" />
           <folding>
             <element signature="e#15#39#0" expanded="true" />
+            <marker date="1520862992258" expanded="true" signature="181:487" ph="..." />
+            <marker date="1520862992258" expanded="true" signature="417:487" ph="..." />
+            <marker date="1520862992258" expanded="true" signature="474:487" ph="..." />
+            <marker date="1520862992258" expanded="true" signature="1332:1363" ph="..." />
+            <marker date="1520862992258" expanded="true" signature="1332:1488" ph="..." />
+            <marker date="1520862992258" expanded="true" signature="1387:1488" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1009,8 +1029,13 @@
         <state relative-caret-position="-2222">
           <caret line="91" column="16" lean-forward="false" selection-start-line="91" selection-start-column="16" selection-end-line="91" selection-end-column="16" />
           <folding>
-            <marker date="1520862660574" expanded="true" signature="1783:2012" ph="{&quot;invert&quot;: false...}" />
-            <marker date="1520862660574" expanded="true" signature="3256:3284" ph="[...]" />
+            <marker date="1520862992304" expanded="true" signature="0:6127" ph="{...}" />
+            <marker date="1520862992304" expanded="true" signature="1783:2012" ph="{&quot;invert&quot;: false...}" />
+            <marker date="1520862992304" expanded="true" signature="3079:3152" ph="{&quot;invert&quot;: false...}" />
+            <marker date="1520862992304" expanded="true" signature="5702:5745" ph="{&quot;enable&quot;: true...}" />
+            <marker date="1520862992304" expanded="true" signature="5757:6125" ph="{&quot;enable&quot;: true...}" />
+            <marker date="1520862992304" expanded="true" signature="5902:5950" ph="[...]" />
+            <marker date="1520862992304" expanded="true" signature="5969:6013" ph="[...]" />
           </folding>
         </state>
       </provider>
