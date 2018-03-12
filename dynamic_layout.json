@@ -231,8 +231,8 @@
     "3": {
         "enable": true, 
         "invert": false, 
-        "off_text": "DIGITAL\nOUTPUT 4", 
-        "on_text": "DIGITAL\nOUTPUT 4", 
+        "off_text": "", 
+        "on_text": "", 
         "pos": [
             220.0, 
             10.0
@@ -241,9 +241,9 @@
             190, 
             230
         ], 
-        "var_alias": "REVERSE", 
-        "var_tag": "DO_4", 
-        "widget": "Toggle Button"
+        "var_alias": "ROW 2", 
+        "var_tag": "ROW_2", 
+        "widget": "Indicator"
     }, 
     "6": {
         "enable": true, 

@@ -200,8 +200,88 @@
         "value": "0"
     }, 
     {
-        "alias": "SYS_LOGGED_IN", 
+        "alias": "ROW 1", 
         "data_index": 20, 
+        "hidden": false, 
+        "id": 3000, 
+        "save": false, 
+        "tag": "ROW_1", 
+        "type": "DI", 
+        "value": "0"
+    }, 
+    {
+        "alias": "ROW 2", 
+        "data_index": 21, 
+        "hidden": false, 
+        "id": 3001, 
+        "save": false, 
+        "tag": "ROW_2", 
+        "type": "DI", 
+        "value": "0"
+    }, 
+    {
+        "alias": "ROW 3", 
+        "data_index": 22, 
+        "hidden": false, 
+        "id": 3002, 
+        "save": false, 
+        "tag": "ROW_3", 
+        "type": "DI", 
+        "value": "0"
+    }, 
+    {
+        "alias": "ROW 4", 
+        "data_index": 23, 
+        "hidden": false, 
+        "id": 3003, 
+        "save": false, 
+        "tag": "ROW_4", 
+        "type": "DI", 
+        "value": "0"
+    }, 
+    {
+        "alias": "ROW 5", 
+        "data_index": 24, 
+        "hidden": false, 
+        "id": 3004, 
+        "save": false, 
+        "tag": "ROW_5", 
+        "type": "DI", 
+        "value": "0"
+    }, 
+    {
+        "alias": "ROW 6", 
+        "data_index": 25, 
+        "hidden": false, 
+        "id": 3005, 
+        "save": false, 
+        "tag": "ROW_6", 
+        "type": "DI", 
+        "value": "0"
+    }, 
+    {
+        "alias": "ROW 7", 
+        "data_index": 26, 
+        "hidden": false, 
+        "id": 3006, 
+        "save": false, 
+        "tag": "ROW_7", 
+        "type": "DI", 
+        "value": "0"
+    }, 
+    {
+        "alias": "ROW 8", 
+        "data_index": 27, 
+        "hidden": false, 
+        "id": 3007, 
+        "save": false, 
+        "tag": "ROW_8", 
+        "type": "DI", 
+        "value": "0"
+    }, 
+    {
+        "alias": "SYS_LOGGED_IN", 
+        "data_index": 28, 
         "hidden": false, 
         "id": 1000, 
         "save": false, 
@@ -211,7 +291,7 @@
     }, 
     {
         "alias": "SYS_ENG_KILL_POPUP", 
-        "data_index": 21, 
+        "data_index": 29, 
         "hidden": false, 
         "id": 1001, 
         "save": false, 
@@ -221,7 +301,7 @@
     }, 
     {
         "alias": "SYS_REVERSE_CAM_ON", 
-        "data_index": 22, 
+        "data_index": 30, 
         "hidden": false, 
         "id": 1002, 
         "save": false, 
@@ -231,7 +311,7 @@
     }, 
     {
         "alias": "SYS_SCREEN_BRIGHTNESS", 
-        "data_index": 23, 
+        "data_index": 31, 
         "hidden": false, 
         "id": 2000, 
         "save": true, 
@@ -241,7 +321,7 @@
     }, 
     {
         "alias": "SYS_DIM_BACKLIGHT", 
-        "data_index": 24, 
+        "data_index": 32, 
         "hidden": false, 
         "id": 2001, 
         "save": true, 
@@ -251,7 +331,7 @@
     }, 
     {
         "alias": "SYS_SCREEN_OFF_DELAY", 
-        "data_index": 25, 
+        "data_index": 33, 
         "hidden": false, 
         "id": 2002, 
         "save": true, 
@@ -261,7 +341,7 @@
     }, 
     {
         "alias": "SYS_SHUTDOWN_DELAY", 
-        "data_index": 26, 
+        "data_index": 34, 
         "hidden": false, 
         "id": 2003, 
         "save": true, 
@@ -271,17 +351,17 @@
     }, 
     {
         "alias": "SYS_INACTIVE_TIME", 
-        "data_index": 27, 
+        "data_index": 35, 
         "hidden": false, 
         "id": 2004, 
         "save": true, 
         "tag": "SYS_INACTIVE_TIME", 
         "type": "SYS", 
-        "value": "60"
+        "value": "65"
     }, 
     {
         "alias": "SYS_INACTIVE", 
-        "data_index": 28, 
+        "data_index": 36, 
         "hidden": false, 
         "id": 1003, 
         "save": false, 
@@ -291,7 +371,7 @@
     }, 
     {
         "alias": "SYS_INIT", 
-        "data_index": 29, 
+        "data_index": 37, 
         "hidden": false, 
         "id": 1004, 
         "save": false, 
@@ -301,7 +381,7 @@
     }, 
     {
         "alias": "SYS_TIME", 
-        "data_index": 30, 
+        "data_index": 38, 
         "hidden": false, 
         "id": 1005, 
         "save": false, 
@@ -311,7 +391,7 @@
     }, 
     {
         "alias": "SYS_CPU_TEMP", 
-        "data_index": 31, 
+        "data_index": 39, 
         "hidden": false, 
         "id": 1006, 
         "save": false, 
@@ -321,7 +401,7 @@
     }, 
     {
         "alias": "SYS_CPU_USAGE", 
-        "data_index": 32, 
+        "data_index": 40, 
         "hidden": false, 
         "id": 1007, 
         "save": false, 
@@ -331,7 +411,7 @@
     }, 
     {
         "alias": "SYS_CLOSE_APP", 
-        "data_index": 33, 
+        "data_index": 41, 
         "hidden": true, 
         "id": 1008, 
         "save": false, 
@@ -341,7 +421,7 @@
     }, 
     {
         "alias": "SYS_REBOOT", 
-        "data_index": 34, 
+        "data_index": 42, 
         "hidden": true, 
         "id": 1009, 
         "save": false, 
@@ -351,12 +431,32 @@
     }, 
     {
         "alias": "SYS_SHUTDOWN", 
-        "data_index": 35, 
+        "data_index": 43, 
         "hidden": true, 
         "id": 1010, 
         "save": false, 
         "tag": "SYS_SHUTDOWN", 
         "type": "SYS", 
         "value": "0"
+    }, 
+    {
+        "alias": "SYS_DIO_MODULE", 
+        "data_index": 44, 
+        "hidden": false, 
+        "id": 1011, 
+        "save": true, 
+        "tag": "SYS_DIO_MODULE", 
+        "type": "SYS", 
+        "value": "0"
+    }, 
+    {
+        "alias": "SYS_FLAME_DETECT", 
+        "data_index": 45, 
+        "hidden": false, 
+        "id": 1012, 
+        "save": true, 
+        "tag": "SYS_FLAME_DETECT", 
+        "type": "SYS", 
+        "value": "1"
     }
 ]

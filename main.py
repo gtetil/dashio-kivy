@@ -34,6 +34,7 @@ from kivy.graphics.transformation import Matrix
 from kivy.graphics import Color, Rectangle
 from kivy.factory import Factory
 from kivy_cv import KivyCamera
+from can_com import CANcom
 import app_settings
 import cv2
 
@@ -587,6 +588,8 @@ class MainApp(App):
     def get_saved_vars(self):
         for (key, value) in self.config.items('Settings'):
             self.variables.set_by_alias(key.upper(), value)
+        for (key, value) in self.config.items('Accessory'):
+            self.variables.set_by_alias(key.upper(), value)
 
     #get aliases from config file, right them to variables.json, update lists, then rebuild dynamic layout in case there were any alias changes that would effect a screen item
     def get_aliases(self):
@@ -598,6 +601,8 @@ class MainApp(App):
         for (key, value) in self.config.items('UserVarAliases'):
             self.config_aliases.append(value)
         for (key, value) in self.config.items('TimerAliases'):
+            self.config_aliases.append(value)
+        for (key, value) in self.config.items('RowAliases'):
             self.config_aliases.append(value)
         for i in range(len(self.config_aliases)):
             self.variables.variables_json[i]['alias'] = self.config_aliases[i]
@@ -630,12 +635,16 @@ class Variables(Widget):
         self.var_events = [False] * len(self.var_aliases)
         self.arduino_data_len = 7 + 1
         self.arduino_data = ['0'] * self.arduino_data_len
+        self.can_data_len = 8
+        self.can_data = ['0'] * self.can_data_len
         self.set_saved_vars()
         self.toggle_update_clock(True)
         self.set_by_alias('SYS_INIT', '1')
         self.arduino_read_dt = 0.05
         self.arduino_read_clock(self.arduino_read_dt)
         Clock.schedule_interval(self.read_system, 1)
+        self.can_com = CANcom()
+        Clock.schedule_interval(self.read_can, 0.05)
 
     def set_var_lists(self):
         self.var_aliases = []
@@ -690,14 +699,23 @@ class Variables(Widget):
             json.dump(self.variables_json, file, sort_keys=True, indent=4)
 
     def read_arduino(self, dt):
-        try:
-            serial_data = self.ser.readline().rstrip().split(',')
-            if len(serial_data) == self.arduino_data_len:
-                self.arduino_data = serial_data
-        except Exception as e:
-            print('read_arduino error:')
-            print(e)
-            self.connect_arduino()
+        if self.get('SYS_DIO_MODULE') == '1':
+            try:
+                serial_data = self.ser.readline().rstrip().split(',')
+                if len(serial_data) == self.arduino_data_len:
+                    self.arduino_data = serial_data
+            except Exception as e:
+                print('read_arduino error:')
+                print(e)
+                self.connect_arduino()
+
+    def read_can(self, dt):
+        if self.get('SYS_FLAME_DETECT') == '1':
+            try:
+                self.can_data = self.can_com.q.get()
+            except Exception as e:
+                print('CAN read error:')
+                print(e)
 
     def connect_arduino(self):
         try:
@@ -730,6 +748,8 @@ class Variables(Widget):
     def update_data(self, dt):
         for i in range(0, 7):
             self.variable_data[i+1] = self.arduino_data[i]
+        for i in range(0, 8):
+            self.variable_data[i+20] = self.can_data[i]
         if (self.variable_data != self.old_variable_data) or self.refresh_data:
             self.data_change = True
             print('variable data')
@@ -747,7 +767,7 @@ class Variables(Widget):
         self.old_variable_data = list(self.variable_data)  # 'list()' must be used, otherwise it only copies a reference to the original list
 
         #variable driven events
-        self.SYS_REVERSE_CAM_ON = self.variable_data[22]
+        self.SYS_REVERSE_CAM_ON = self.variable_data[30]
 
         self.DI_IGNITION = self.variable_data[7]  #need to update last due to screen initialization issue
 
