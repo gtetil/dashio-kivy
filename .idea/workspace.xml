@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="27b3c643-4da9-4ab8-8fac-19f30f795262" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dashio-kivy.iml" afterPath="$PROJECT_DIR$/.idea/dashio-kivy.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/can_com.py" afterPath="$PROJECT_DIR$/can_com.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
     </list>
     <list id="1e95b302-9845-4a63-bdc7-46bebc48f801" name="Revert: " comment="" />
     <list id="9acf94dc-4ce7-4798-ab9b-5692da952639" name="Revert:" comment="" />
@@ -29,8 +29,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1186">
-              <caret line="769" column="55" lean-forward="false" selection-start-line="769" selection-start-column="55" selection-end-line="769" selection-end-column="55" />
+            <state relative-caret-position="374">
+              <caret line="719" column="20" lean-forward="false" selection-start-line="719" selection-start-column="20" selection-end-line="719" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -49,8 +49,8 @@
       <file leaf-file-name="can_com.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/can_com.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="417">
-              <caret line="33" column="59" lean-forward="false" selection-start-line="33" selection-start-column="59" selection-end-line="33" selection-end-column="59" />
+            <state relative-caret-position="442">
+              <caret line="35" column="17" lean-forward="false" selection-start-line="35" selection-start-column="17" selection-end-line="35" selection-end-column="17" />
               <folding>
                 <element signature="e#15#39#0" expanded="true" />
               </folding>
@@ -61,7 +61,7 @@
       <file leaf-file-name="app_settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app_settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="925">
+            <state relative-caret-position="3162">
               <caret line="186" column="18" lean-forward="false" selection-start-line="186" selection-start-column="18" selection-end-line="186" selection-end-column="18" />
               <folding />
             </state>
@@ -81,7 +81,7 @@
       <file leaf-file-name="main.kv" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.kv">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="885">
+            <state relative-caret-position="7650">
               <caret line="450" column="0" lean-forward="false" selection-start-line="450" selection-start-column="0" selection-end-line="450" selection-end-column="0" />
               <folding />
             </state>
@@ -91,16 +91,12 @@
       <file leaf-file-name="dynamic_layout.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dynamic_layout.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2222">
+            <state relative-caret-position="1547">
               <caret line="91" column="16" lean-forward="false" selection-start-line="91" selection-start-column="16" selection-end-line="91" selection-end-column="16" />
               <folding>
-                <marker date="1520862992304" expanded="true" signature="0:6127" ph="{...}" />
                 <marker date="1520862992304" expanded="true" signature="1783:2012" ph="{&quot;invert&quot;: false...}" />
                 <marker date="1520862992304" expanded="true" signature="3079:3152" ph="{&quot;invert&quot;: false...}" />
                 <marker date="1520862992304" expanded="true" signature="5702:5745" ph="{&quot;enable&quot;: true...}" />
-                <marker date="1520862992304" expanded="true" signature="5757:6125" ph="{&quot;enable&quot;: true...}" />
-                <marker date="1520862992304" expanded="true" signature="5902:5950" ph="[...]" />
-                <marker date="1520862992304" expanded="true" signature="5969:6013" ph="[...]" />
               </folding>
             </state>
           </provider>
@@ -109,16 +105,10 @@
       <file leaf-file-name="kivy_cv.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/kivy_cv.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
+            <state relative-caret-position="459">
               <caret line="31" column="8" lean-forward="false" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="8" />
               <folding>
                 <element signature="e#15#39#0" expanded="true" />
-                <marker date="1520862992258" expanded="true" signature="181:487" ph="..." />
-                <marker date="1520862992258" expanded="true" signature="417:487" ph="..." />
-                <marker date="1520862992258" expanded="true" signature="474:487" ph="..." />
-                <marker date="1520862992258" expanded="true" signature="1332:1363" ph="..." />
-                <marker date="1520862992258" expanded="true" signature="1332:1488" ph="..." />
-                <marker date="1520862992258" expanded="true" signature="1387:1488" ph="..." />
               </folding>
             </state>
           </provider>
@@ -127,7 +117,7 @@
       <file leaf-file-name="variables.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/variables.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2710">
+            <state relative-caret-position="7701">
               <caret line="453" column="24" lean-forward="false" selection-start-line="453" selection-start-column="24" selection-end-line="453" selection-end-column="24" />
               <folding />
             </state>
@@ -245,6 +235,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -260,7 +251,6 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -784,7 +774,14 @@
       <option name="project" value="LOCAL" />
       <updated>1520862947855</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="- Added CAN engine, and 8 row digital inputs.">
+      <created>1520863120885</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1520863120885</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -986,7 +983,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.kv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="885">
+        <state relative-caret-position="7650">
           <caret line="450" column="0" lean-forward="false" selection-start-line="450" selection-start-column="0" selection-end-line="450" selection-end-column="0" />
           <folding />
         </state>
@@ -994,23 +991,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/kivy_cv.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
+        <state relative-caret-position="459">
           <caret line="31" column="8" lean-forward="false" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="8" />
           <folding>
             <element signature="e#15#39#0" expanded="true" />
-            <marker date="1520862992258" expanded="true" signature="181:487" ph="..." />
-            <marker date="1520862992258" expanded="true" signature="417:487" ph="..." />
-            <marker date="1520862992258" expanded="true" signature="474:487" ph="..." />
-            <marker date="1520862992258" expanded="true" signature="1332:1363" ph="..." />
-            <marker date="1520862992258" expanded="true" signature="1332:1488" ph="..." />
-            <marker date="1520862992258" expanded="true" signature="1387:1488" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app_settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="925">
+        <state relative-caret-position="3162">
           <caret line="186" column="18" lean-forward="false" selection-start-line="186" selection-start-column="18" selection-end-line="186" selection-end-column="18" />
           <folding />
         </state>
@@ -1026,23 +1017,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dynamic_layout.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2222">
+        <state relative-caret-position="1547">
           <caret line="91" column="16" lean-forward="false" selection-start-line="91" selection-start-column="16" selection-end-line="91" selection-end-column="16" />
           <folding>
-            <marker date="1520862992304" expanded="true" signature="0:6127" ph="{...}" />
             <marker date="1520862992304" expanded="true" signature="1783:2012" ph="{&quot;invert&quot;: false...}" />
             <marker date="1520862992304" expanded="true" signature="3079:3152" ph="{&quot;invert&quot;: false...}" />
             <marker date="1520862992304" expanded="true" signature="5702:5745" ph="{&quot;enable&quot;: true...}" />
-            <marker date="1520862992304" expanded="true" signature="5757:6125" ph="{&quot;enable&quot;: true...}" />
-            <marker date="1520862992304" expanded="true" signature="5902:5950" ph="[...]" />
-            <marker date="1520862992304" expanded="true" signature="5969:6013" ph="[...]" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/variables.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2710">
+        <state relative-caret-position="7701">
           <caret line="453" column="24" lean-forward="false" selection-start-line="453" selection-start-column="24" selection-end-line="453" selection-end-column="24" />
           <folding />
         </state>
@@ -1050,16 +1037,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1186">
-          <caret line="769" column="55" lean-forward="false" selection-start-line="769" selection-start-column="55" selection-end-line="769" selection-end-column="55" />
+        <state relative-caret-position="374">
+          <caret line="719" column="20" lean-forward="false" selection-start-line="719" selection-start-column="20" selection-end-line="719" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/can_com.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="417">
-          <caret line="33" column="59" lean-forward="false" selection-start-line="33" selection-start-column="59" selection-end-line="33" selection-end-column="59" />
+        <state relative-caret-position="442">
+          <caret line="35" column="17" lean-forward="false" selection-start-line="35" selection-start-column="17" selection-end-line="35" selection-end-column="17" />
           <folding>
             <element signature="e#15#39#0" expanded="true" />
           </folding>

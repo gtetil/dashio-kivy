@@ -635,8 +635,9 @@ class Variables(Widget):
         self.var_events = [False] * len(self.var_aliases)
         self.arduino_data_len = 7 + 1
         self.arduino_data = ['0'] * self.arduino_data_len
-        self.can_data_len = 8
-        self.can_data = ['0'] * self.can_data_len
+        #self.can_data_len = 8
+        #self.can_data = ['0'] * self.can_data_len
+        self.can_data = 0
         self.set_saved_vars()
         self.toggle_update_clock(True)
         self.set_by_alias('SYS_INIT', '1')
@@ -712,10 +713,11 @@ class Variables(Widget):
     def read_can(self, dt):
         if self.get('SYS_FLAME_DETECT') == '1':
             try:
-                self.can_data = self.can_com.q.get()
+                self.can_data = self.can_com.q.get_nowait()[0]
             except Exception as e:
-                print('CAN read error:')
-                print(e)
+                #print('CAN read error:')
+                #print(e)
+                pass
 
     def connect_arduino(self):
         try:
@@ -749,7 +751,7 @@ class Variables(Widget):
         for i in range(0, 7):
             self.variable_data[i+1] = self.arduino_data[i]
         for i in range(0, 8):
-            self.variable_data[i+20] = self.can_data[i]
+            self.variable_data[i+20] = str((self.can_data & 2**i) >> i)
         if (self.variable_data != self.old_variable_data) or self.refresh_data:
             self.data_change = True
             print('variable data')

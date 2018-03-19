@@ -20,18 +20,22 @@ class CANcom(Widget):
         super(CANcom, self).__init__(**kwargs)
         self.q = Queue.Queue()
         self.rx = Thread(target=self.can_read)
+        self.rx.daemon = True
         self.rx.start()
 
     def can_read(self):
         while True:
             try:
-                message = bus.recv()
+                message = bus.recv(timeout=0.5)
+                #print "can message"
+                #print message
                 if message.arbitration_id == 0x000:
                     self.q.put(message.data)  # Put data into queue
+                time.sleep(0.01)
             except Exception as e:
                 #print('CAN Rx error:')
                 #print(e)
-                self.q.put(['0','1','0','1','0','1','0','1'])  # Debug Data
+                self.q.put([0,0,0,0,0,0,0,0])  # Debug Data
                 time.sleep(0.1)
 
     def flush_queue(self):
