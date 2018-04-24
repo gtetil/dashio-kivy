@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="27b3c643-4da9-4ab8-8fac-19f30f795262" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/can_com.py" afterPath="$PROJECT_DIR$/can_com.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.kv" afterPath="$PROJECT_DIR$/main.kv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/variables.json" afterPath="$PROJECT_DIR$/variables.json" />
     </list>
     <list id="1e95b302-9845-4a63-bdc7-46bebc48f801" name="Revert: " comment="" />
     <list id="9acf94dc-4ce7-4798-ab9b-5692da952639" name="Revert:" comment="" />
@@ -29,31 +30,19 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="719" column="20" lean-forward="false" selection-start-line="719" selection-start-column="20" selection-end-line="719" selection-end-column="20" />
+            <state relative-caret-position="313">
+              <caret line="163" column="43" lean-forward="false" selection-start-line="163" selection-start-column="43" selection-end-line="163" selection-end-column="43" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="launcher.sh" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/launcher.sh">
+      <file leaf-file-name="main.kv" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main.kv">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="21" lean-forward="false" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="48" />
+            <state relative-caret-position="187">
+              <caret line="14" column="25" lean-forward="true" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="can_com.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/can_com.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="35" column="17" lean-forward="false" selection-start-line="35" selection-start-column="17" selection-end-line="35" selection-end-column="17" />
-              <folding>
-                <element signature="e#15#39#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -61,7 +50,7 @@
       <file leaf-file-name="app_settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app_settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3162">
+            <state relative-caret-position="7">
               <caret line="186" column="18" lean-forward="false" selection-start-line="186" selection-start-column="18" selection-end-line="186" selection-end-column="18" />
               <folding />
             </state>
@@ -78,47 +67,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.kv" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main.kv">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7650">
-              <caret line="450" column="0" lean-forward="false" selection-start-line="450" selection-start-column="0" selection-end-line="450" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="dynamic_layout.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dynamic_layout.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1547">
+            <state relative-caret-position="-452">
               <caret line="91" column="16" lean-forward="false" selection-start-line="91" selection-start-column="16" selection-end-line="91" selection-end-column="16" />
               <folding>
-                <marker date="1520862992304" expanded="true" signature="1783:2012" ph="{&quot;invert&quot;: false...}" />
-                <marker date="1520862992304" expanded="true" signature="3079:3152" ph="{&quot;invert&quot;: false...}" />
-                <marker date="1520862992304" expanded="true" signature="5702:5745" ph="{&quot;enable&quot;: true...}" />
+                <marker date="1524583018718" expanded="true" signature="1783:2012" ph="{&quot;invert&quot;: false...}" />
+                <marker date="1524583018718" expanded="true" signature="3079:3152" ph="{&quot;invert&quot;: false...}" />
+                <marker date="1524583018718" expanded="true" signature="5702:5745" ph="{&quot;enable&quot;: true...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="kivy_cv.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/kivy_cv.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="31" column="8" lean-forward="false" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="8" />
-              <folding>
-                <element signature="e#15#39#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="variables.json" pinned="false" current-in-tab="false">
+      <file leaf-file-name="variables.json" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/variables.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7701">
-              <caret line="453" column="24" lean-forward="false" selection-start-line="453" selection-start-column="24" selection-end-line="453" selection-end-column="24" />
+            <state relative-caret-position="434">
+              <caret line="479" column="22" lean-forward="false" selection-start-line="479" selection-start-column="22" selection-end-line="479" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -135,12 +102,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>&quot;toggle&quot;: true</find>
-      <find>toggle</find>
-      <find>self.dyn_layout_json[new_id]</find>
-      <find>scatter</find>
-      <find>sca</find>
-      <find>color</find>
       <find>scan</find>
       <find>calcS</find>
       <find>MenuSid</find>
@@ -165,6 +126,12 @@
       <find>SYS_INA</find>
       <find>sys_shut</find>
       <find>sys_ina</find>
+      <find>ScreenItemEditPopup</find>
+      <find>slide</find>
+      <find>passcode</find>
+      <find>passcod</find>
+      <find>self.app_ref.screen_man.current = &quot;passcode_screen&quot;</find>
+      <find>passcode_sc</find>
     </findStrings>
     <replaceStrings>
       <replace>_4</replace>
@@ -203,14 +170,16 @@
         <option value="$PROJECT_DIR$/dynamic_layout.json" />
         <option value="C:/Python27/Lib/site-packages/kivy/core/image/__init__.py" />
         <option value="$PROJECT_DIR$/camera.py" />
-        <option value="$PROJECT_DIR$/main.kv" />
         <option value="$PROJECT_DIR$/kivy_cv.py" />
         <option value="$PROJECT_DIR$/face_detect.py" />
         <option value="$PROJECT_DIR$/main.ini" />
         <option value="$PROJECT_DIR$/app_settings.py" />
-        <option value="$PROJECT_DIR$/variables.json" />
-        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/can_com.py" />
+        <option value="$PROJECT_DIR$/gesture_board.py" />
+        <option value="$PROJECT_DIR$/my_gestures.py" />
+        <option value="$PROJECT_DIR$/variables.json" />
+        <option value="$PROJECT_DIR$/main.kv" />
+        <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
   </component>
@@ -293,24 +262,6 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="camera" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="dashio-kivy" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/camera.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <method />
-    </configuration>
     <configuration default="false" name="kivy_cv" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -360,6 +311,24 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="dashio-kivy" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/can_com.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="gesture_board" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="dashio-kivy" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/gesture_board.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -463,18 +432,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.main" />
-      <item index="1" class="java.lang.String" itemvalue="Python.camera" />
-      <item index="2" class="java.lang.String" itemvalue="Python.kivy_cv" />
-      <item index="3" class="java.lang.String" itemvalue="Python.face_detect" />
-      <item index="4" class="java.lang.String" itemvalue="Python.can_com" />
+      <item index="1" class="java.lang.String" itemvalue="Python.kivy_cv" />
+      <item index="2" class="java.lang.String" itemvalue="Python.face_detect" />
+      <item index="3" class="java.lang.String" itemvalue="Python.can_com" />
+      <item index="4" class="java.lang.String" itemvalue="Python.gesture_board" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.main" />
-        <item index="1" class="java.lang.String" itemvalue="Python.can_com" />
-        <item index="2" class="java.lang.String" itemvalue="Python.face_detect" />
-        <item index="3" class="java.lang.String" itemvalue="Python.kivy_cv" />
-        <item index="4" class="java.lang.String" itemvalue="Python.camera" />
+        <item index="1" class="java.lang.String" itemvalue="Python.gesture_board" />
+        <item index="2" class="java.lang.String" itemvalue="Python.can_com" />
+        <item index="3" class="java.lang.String" itemvalue="Python.face_detect" />
+        <item index="4" class="java.lang.String" itemvalue="Python.kivy_cv" />
       </list>
     </recent_temporary>
     <configuration default="true" type="tests" factoryName="Attests">
@@ -781,7 +750,14 @@
       <option name="project" value="LOCAL" />
       <updated>1520863120885</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="- Finished flame detect and CAN debug.">
+      <created>1521460330364</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1521460330364</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -791,6 +767,7 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32892805" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23020063" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2534319" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3284055" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946146" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -805,7 +782,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23020063" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -842,7 +818,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="created separate clocks for variables and arduino.  makes program much quicker." />
     <MESSAGE value="removed KivyMD.  was really clunky on RPI.  using kivy garden navigation drawer.  so far, so good." />
     <MESSAGE value="-Added 'invert' option for screen widgets." />
     <MESSAGE value="-added compound variables to autovars.&#10;-added 'logged-in' and 'passcode prompt' SYS variables.&#10;-added 'invert' widget, only for inputs.&#10;-changed autovars to be event driven." />
@@ -867,7 +842,8 @@
     <MESSAGE value="- Switched backup camera to cv2 code.  This is due to constant driver issue in Kivy, and to gain access to more features." />
     <MESSAGE value="- Forgot to add kivy_cv.py to git last time.&#10;- Removed win, pc, debug variables.&#10;- Cleaned up project files." />
     <MESSAGE value="- Added CAN engine, and 8 row digital inputs." />
-    <option name="LAST_COMMIT_MESSAGE" value="- Added CAN engine, and 8 row digital inputs." />
+    <MESSAGE value="- Finished flame detect and CAN debug." />
+    <option name="LAST_COMMIT_MESSAGE" value="- Finished flame detect and CAN debug." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -876,8 +852,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/settings.json" />
-    <entry file="file://$PROJECT_DIR$/settings2.json" />
     <entry file="file://C:/Python27/Lib/site-packages/serial/serialwin32.py" />
     <entry file="file://$PROJECT_DIR$/system_variables.json" />
     <entry file="file://C:/Python27/Lib/site-packages/kivy/lang.py" />
@@ -915,13 +889,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5219">
           <caret line="324" column="16" lean-forward="true" selection-start-line="324" selection-start-column="16" selection-end-line="324" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/navigationdrawer/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1518">
-          <caret line="388" column="0" lean-forward="false" selection-start-line="388" selection-start-column="0" selection-end-line="388" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -966,13 +933,7 @@
     <entry file="file://$PROJECT_DIR$/myscatter.py" />
     <entry file="file://$PROJECT_DIR$/autoVar.py" />
     <entry file="file://$PROJECT_DIR$/face_detect.py" />
-    <entry file="file://$USER_HOME$/Downloads/annotated_wsgidav.conf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4565">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/Downloads/annotated_wsgidav.conf" />
     <entry file="file://$PROJECT_DIR$/launcher.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -981,10 +942,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.kv">
+    <entry file="file://$PROJECT_DIR$/can_com.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7650">
-          <caret line="450" column="0" lean-forward="false" selection-start-line="450" selection-start-column="0" selection-end-line="450" selection-end-column="0" />
+        <state relative-caret-position="476">
+          <caret line="34" column="34" lean-forward="false" selection-start-line="34" selection-start-column="12" selection-end-line="34" selection-end-column="34" />
+          <folding>
+            <element signature="e#15#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/my_gestures.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1088">
+          <caret line="64" column="79" lean-forward="true" selection-start-line="64" selection-start-column="79" selection-end-line="64" selection-end-column="79" />
           <folding />
         </state>
       </provider>
@@ -999,9 +970,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/navigationdrawer/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4301">
+          <caret line="388" column="0" lean-forward="false" selection-start-line="388" selection-start-column="0" selection-end-line="388" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gesture_board.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-680">
+          <caret line="11" column="28" lean-forward="true" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dynamic_layout.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-452">
+          <caret line="91" column="16" lean-forward="false" selection-start-line="91" selection-start-column="16" selection-end-line="91" selection-end-column="16" />
+          <folding>
+            <marker date="1524583018718" expanded="true" signature="1783:2012" ph="{&quot;invert&quot;: false...}" />
+            <marker date="1524583018718" expanded="true" signature="3079:3152" ph="{&quot;invert&quot;: false...}" />
+            <marker date="1524583018718" expanded="true" signature="5702:5745" ph="{&quot;enable&quot;: true...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app_settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3162">
+        <state relative-caret-position="7">
           <caret line="186" column="18" lean-forward="false" selection-start-line="186" selection-start-column="18" selection-end-line="186" selection-end-column="18" />
           <folding />
         </state>
@@ -1015,41 +1014,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dynamic_layout.json">
+    <entry file="file://$PROJECT_DIR$/main.kv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1547">
-          <caret line="91" column="16" lean-forward="false" selection-start-line="91" selection-start-column="16" selection-end-line="91" selection-end-column="16" />
-          <folding>
-            <marker date="1520862992304" expanded="true" signature="1783:2012" ph="{&quot;invert&quot;: false...}" />
-            <marker date="1520862992304" expanded="true" signature="3079:3152" ph="{&quot;invert&quot;: false...}" />
-            <marker date="1520862992304" expanded="true" signature="5702:5745" ph="{&quot;enable&quot;: true...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/variables.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7701">
-          <caret line="453" column="24" lean-forward="false" selection-start-line="453" selection-start-column="24" selection-end-line="453" selection-end-column="24" />
+        <state relative-caret-position="187">
+          <caret line="14" column="25" lean-forward="true" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="719" column="20" lean-forward="false" selection-start-line="719" selection-start-column="20" selection-end-line="719" selection-end-column="20" />
+        <state relative-caret-position="313">
+          <caret line="163" column="43" lean-forward="false" selection-start-line="163" selection-start-column="43" selection-end-line="163" selection-end-column="43" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/can_com.py">
+    <entry file="file://$PROJECT_DIR$/variables.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="35" column="17" lean-forward="false" selection-start-line="35" selection-start-column="17" selection-end-line="35" selection-end-column="17" />
-          <folding>
-            <element signature="e#15#39#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="434">
+          <caret line="479" column="22" lean-forward="false" selection-start-line="479" selection-start-column="22" selection-end-line="479" selection-end-column="22" />
+          <folding />
         </state>
       </provider>
     </entry>

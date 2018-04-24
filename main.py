@@ -37,7 +37,6 @@ from kivy_cv import KivyCamera
 from can_com import CANcom
 import app_settings
 import cv2
-
 import json
 from functools import partial
 
@@ -69,9 +68,9 @@ class SlideMenu(BoxLayout):
     pass
 
 class ScreenManagement(ScreenManager):
-    passcode = '1234'
+    passcode = ''
     passcode_try = ''
-    logged_in = 0
+    passcode_type = StringProperty('')
     main_screen = ObjectProperty(None)
     ignition_input = NumericProperty(0)
     reverse_input = NumericProperty(0)
@@ -145,14 +144,58 @@ class ScreenManagement(ScreenManager):
                 self.current = 'off_screen'
 
     def try_passcode(self, number):
+        if self.passcode_type == 'passcode':
+            self.passcode = self.app_ref.variables.get('SYS_PASSCODE')
+        if self.passcode_type == 'admin':
+            self.passcode = self.app_ref.variables.get('SYS_ADMIN_CODE')
         self.passcode_try = self.passcode_try + number
         if len(self.passcode_try) == len(self.passcode):
             if self.passcode_try == self.passcode:
                 self.current = 'main_screen'
-                self.app_ref.variables.set_by_alias('SYS_LOGGED_IN', '1')
+                if self.passcode_type == 'passcode':
+                    self.app_ref.variables.set_by_alias('SYS_LOGGED_IN', '1')
+                if self.passcode_type == 'admin':
+                    self.admin_login(True)
             else:
                 self.current_screen.ids.fail_popup.open()
+                if self.passcode_type == 'passcode':
+                    self.app_ref.variables.set_by_alias('SYS_LOGGED_IN', '0')
+                if self.passcode_type == 'admin':
+                    self.admin_login(False)
             self.passcode_try = ''
+
+    def admin_login(self, login):
+        if login:
+            login_str = '1'
+            disabled = False
+            button_text = 'ADMIN LOGOUT'
+            self.app_ref.slide_layout.toggle_state()
+        else:
+            login_str = '0'
+            disabled = True
+            button_text = 'ADMIN LOGIN'
+            self.back_to_main()
+        self.app_ref.variables.set_by_alias('SYS_ADMIN_LOGIN', login_str)
+        self.app_ref.slide_menu.ids.admin_login.text = button_text
+        self.app_ref.slide_menu.ids.modify_screen.disabled = disabled
+        self.app_ref.slide_menu.ids.settings.disabled = disabled
+        self.app_ref.slide_menu.ids.add_widget.disabled = disabled
+
+    def admin_toggle(self):
+        self.app_ref.slide_layout.toggle_state()
+        if self.app_ref.variables.get('SYS_ADMIN_LOGIN') == '1':
+            self.admin_login(False)
+        else:
+            self.passcode_type = 'admin'
+            self.current = "passcode_screen"
+
+    def back_to_main(self):
+        self.current = 'main_screen'
+        self.app_ref.slide_layout.toggle_state()
+        if self.app_ref.dynamic_layout.modify_mode:
+            self.app_ref.dynamic_layout.end_modify()
+            self.app_ref.variables.toggle_update_clock(True)
+
 
 class MainScreen(Screen):
     pass
@@ -437,6 +480,7 @@ class DynItem(Widget):
                             self._do_press()
                             self.output_cmd()
                         else:
+                            self.app_ref.screen_man.passcode_type = 'passcode'
                             self.app_ref.screen_man.current = "passcode_screen"  #open passcode screen with SYS_LOGGED_IN
                         return xor(True, self.invert)
                     else:
@@ -505,7 +549,7 @@ class DynLabel(DynItem, Label):
             Rectangle(pos=self.pos, size=self.size)
 
 class PasscodeScreen(Screen):
-    pass
+    app_ref = ObjectProperty(None)
 
 class CameraScreen(Screen):
     camera_toggle = StringProperty('0')

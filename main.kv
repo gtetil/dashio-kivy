@@ -10,19 +10,28 @@
 
     ModernButton:
         text: 'MAIN'
-        on_release: app.screen_man.current = 'main_screen'; app.slide_layout.toggle_state()
-        on_release: if app.dynamic_layout.modify_mode: app.dynamic_layout.end_modify(); app.variables.toggle_update_clock(True)
+        on_release: app.screen_man.back_to_main()
     ModernButton:
+        id: modify_screen
+        disabled: True
         text: 'MODIFY SCREEN'
         on_release: app.screen_man.current = 'main_screen'; app.slide_layout.toggle_state()
         on_release: if not app.dynamic_layout.modify_mode: app.dynamic_layout.modify_screen(); #app.variables.toggle_update_clock(False)
     ModernButton:
+        id: settings
+        disabled: True
         text: 'SETTINGS'
         on_release: app.open_settings(); app.screen_man.current = 'main_screen'; app.slide_layout.toggle_state()
         on_release: if app.dynamic_layout.modify_mode: app.dynamic_layout.end_modify(); app.variables.toggle_update_clock(True)
     ModernButton:
+        id: add_widget
+        disabled: True
         text: 'ADD WIDGET'
         on_release: app.dynamic_layout.add_widget_json(); app.slide_layout.toggle_state()
+    ModernButton:
+        id: admin_login
+        text: 'ADMIN LOGIN'
+        on_release: app.screen_man.admin_toggle()
 
 <ScreenManagement>:
     ignition_input: int(app.variables.DI_IGNITION)
@@ -46,6 +55,7 @@
     CameraScreen:
         name: 'camera_screen'
     PasscodeScreen:
+        id: passcode_screen
         name: 'passcode_screen'
 
 <Variables>:
@@ -370,6 +380,9 @@
     background_normal: 'button.png'
     background_down: 'button_pressed.png'
 
+<PasscodeButton@ModernButton>:
+    on_release: app.screen_man.try_passcode(self.text)
+
 <DynLabel>:
     text_size: self.size
     font_size: self.size[1] / 2
@@ -389,6 +402,7 @@
 <PasscodeScreen>:
     id: passcode_screen
     fail_popup: fail_popup.__self__
+    app_ref: app
 
     GridLayout:
         cols: 3
@@ -399,36 +413,26 @@
         width: 400
         pos: 200, 0
 
-        ModernButton:
+        PasscodeButton:
             text: '7'
-            on_release: app.screen_man.try_passcode(self.text)
-        ModernButton:
+        PasscodeButton:
             text: '8'
-            on_release: app.screen_man.try_passcode(self.text)
-        ModernButton:
+        PasscodeButton:
             text: '9'
-            on_release: app.screen_man.try_passcode(self.text)
-        ModernButton:
+        PasscodeButton:
             text: '4'
-            on_release: app.screen_man.try_passcode(self.text)
-        ModernButton:
+        PasscodeButton:
             text: '5'
-            on_release: app.screen_man.try_passcode(self.text)
-        ModernButton:
+        PasscodeButton:
             text: '6'
-            on_release: app.screen_man.try_passcode(self.text)
-        ModernButton:
+        PasscodeButton:
             text: '1'
-            on_release: app.screen_man.try_passcode(self.text)
-        ModernButton:
+        PasscodeButton:
             text: '2'
-            on_release: app.screen_man.try_passcode(self.text)
-        ModernButton:
+        PasscodeButton:
             text: '3'
-            on_release: app.screen_man.try_passcode(self.text)
-        ModernButton:
+        PasscodeButton:
             text: '0'
-            on_release: app.screen_man.try_passcode(self.text)
 
     Popup:
         id: fail_popup
@@ -438,12 +442,14 @@
         on_parent: if self.parent == passcode_screen: self.parent.remove_widget(self)
 
         BoxLayout:
+            id: fail_layout
             orientation: 'vertical'
             padding: 5
 
             ModernButton:
+                id: fail_button
                 text: 'OK'
-                on_release: fail_popup.dismiss(); app.screen_man.current = 'main_screen'; app.variables.set_by_alias('SYS_LOGGED_IN', '0')
+                on_release: fail_popup.dismiss(); app.screen_man.current = 'main_screen'
 
 <CameraScreen>:
     id: camera_screen

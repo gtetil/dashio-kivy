@@ -458,5 +458,35 @@
         "tag": "SYS_FLAME_DETECT", 
         "type": "SYS", 
         "value": "1"
+    }, 
+    {
+        "alias": "SYS_ADMIN_LOGIN", 
+        "data_index": 46, 
+        "hidden": true, 
+        "id": 1013, 
+        "save": false, 
+        "tag": "SYS_ADMIN_LOGIN", 
+        "type": "SYS", 
+        "value": "0"
+    }, 
+    {
+        "alias": "SYS_PASSCODE", 
+        "data_index": 47, 
+        "hidden": true, 
+        "id": 1014, 
+        "save": true, 
+        "tag": "SYS_PASSCODE", 
+        "type": "SYS", 
+        "value": "1234"
+    }, 
+    {
+        "alias": "SYS_ADMIN_CODE", 
+        "data_index": 48, 
+        "hidden": true, 
+        "id": 1015, 
+        "save": true, 
+        "tag": "SYS_ADMIN_CODE", 
+        "type": "SYS", 
+        "value": "5678"
     }
 ]
