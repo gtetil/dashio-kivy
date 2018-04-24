@@ -26,17 +26,19 @@ from kivy.uix.popup import Popup
 from kivy.core.window import Window
 from kivy.animation import Animation
 from navigationdrawer import NavigationDrawer
-from kivy.uix.settings import SettingsWithSidebar, SettingString, SettingNumeric, SettingSpacer, Settings
+from kivy.uix.settings import SettingsWithSidebar, SettingString, SettingNumeric, SettingSpacer, SettingPath
 from kivy.metrics import dp
 from kivy.uix.scatterlayout import ScatterLayout
 from kivy.uix.scatter import Scatter
 from kivy.graphics.transformation import Matrix
 from kivy.graphics import Color, Rectangle
 from kivy.factory import Factory
+from kivy.uix.filechooser import FileChooserListView
 from kivy_cv import KivyCamera
 from can_com import CANcom
 import app_settings
 import cv2
+
 import json
 from functools import partial
 
@@ -213,7 +215,7 @@ class FloatInput(TextInput):
 class DynamicLayout(Widget):
     app_ref = ObjectProperty(None)
     modify_mode = BooleanProperty(False)
-    layout_file = 'dynamic_layout.json'
+    layout_file = 'dynamic_layouts/dio_layout.json'
     dyn_widget_dict = {}
     scatter_dict = {}
 
@@ -604,19 +606,39 @@ class MainApp(App):
     def build_settings(self, settings):
         settings.register_type('alias', SettingAlias)
         settings.register_type('mynumeric', MySettingNumeric)
+        settings.register_type('mypath', MySettingPath)
         settings.register_type('script', SettingScript)
         settings.register_type('action', SettingAction)
         settings.add_json_panel('Settings', self.config, data=app_settings.settings_json)
-        settings.add_json_panel('Aliases', self.config, data=app_settings.aliases_json)
+        aliases = []
+        if self.variables.get('SYS_DIO_MODULE') == '1':
+            aliases = json.loads(app_settings.dio_aliases_json)
+        if self.variables.get('SYS_FLAME_DETECT') == '1':
+            aliases = aliases + json.loads(app_settings.row_aliases_json)
+        aliases = aliases + json.loads(app_settings.aliases_json)
+        aliases = json.dumps(aliases)
+        settings.add_json_panel('Aliases', self.config, data=aliases)
         settings.add_json_panel('Scripts', self.config, data=app_settings.scripts_json)
         settings.add_json_panel('Developer', self.config, data=app_settings.developer_json)
 
     def on_config_change(self, config, section, key, value):
+        if key == 'SYS_DIO_MODULE':
+            self.hide_variables(value, app_settings.dio_mod_data_start, app_settings.dio_mod_len)
+        if key == 'SYS_FLAME_DETECT':
+            self.hide_variables(value, app_settings.flame_detect_data_start, app_settings.flame_detect_len)
         self.get_aliases()
         self.get_saved_vars()
         self.variables.save_variables()
         self.get_scripts()
         self.screen_man.start_inactivity_clock() #restart clock in case value has changed
+
+    def hide_variables(self, state, start, len):
+        if state == '1':
+            hidden = False
+        else:
+            hidden = True
+        for i in range(len):
+            self.variables.variables_json[start + i]['hidden'] = hidden
 
     def get_scripts(self):
         self.scripts = []
@@ -642,11 +664,11 @@ class MainApp(App):
             self.config_aliases.append(value)
         for (key, value) in self.config.items('OutputAliases'):
             self.config_aliases.append(value)
+        for (key, value) in self.config.items('RowAliases'):
+            self.config_aliases.append(value)
         for (key, value) in self.config.items('UserVarAliases'):
             self.config_aliases.append(value)
         for (key, value) in self.config.items('TimerAliases'):
-            self.config_aliases.append(value)
-        for (key, value) in self.config.items('RowAliases'):
             self.config_aliases.append(value)
         for i in range(len(self.config_aliases)):
             self.variables.variables_json[i]['alias'] = self.config_aliases[i]
@@ -794,8 +816,8 @@ class Variables(Widget):
     def update_data(self, dt):
         for i in range(0, 7):
             self.variable_data[i+1] = self.arduino_data[i]
-        for i in range(0, 8):
-            self.variable_data[i+20] = str((self.can_data & 2**i) >> i)
+        for i in range(0, app_settings.flame_detect_len):
+            self.variable_data[i+app_settings.flame_detect_data_start] = str((self.can_data & 2**i) >> i)
         if (self.variable_data != self.old_variable_data) or self.refresh_data:
             self.data_change = True
             print('variable data')
@@ -815,7 +837,14 @@ class Variables(Widget):
         #variable driven events
         self.SYS_REVERSE_CAM_ON = self.variable_data[30]
 
-        self.DI_IGNITION = self.variable_data[7]  #need to update last due to screen initialization issue
+        #old way of reading ignition status from DIO module
+        #self.DI_IGNITION = self.variable_data[7]  #need to update last due to screen initialization issue
+
+        if operating_sys == 'Linux':
+            if GPIO.input(18):
+                self.DI_IGNITION = '1'
+            else:
+                self.DI_IGNITION = '0'
 
         self.exec_scripts()
 
@@ -1033,7 +1062,55 @@ class SettingScript(SettingString):
         self.value = value
         self.value = self.value.replace('\t', "[tab]")
 
+class MySettingPath(SettingPath):
+    app_ref = ObjectProperty(None)
+
+    def _create_popup(self, instance):
+        # create popup layout
+        content = BoxLayout(orientation='vertical', spacing=5)
+        popup_width = min(0.95 * Window.width, dp(500))
+        self.popup = popup = Popup(
+            title=self.title, content=content, size_hint=(None, 0.9),
+            width=popup_width)
+
+        # create the filechooser
+        initial_path = self.value or os.getcwd()
+        self.textinput = textinput = FileChooserListView(
+            path=initial_path, size_hint=(1, 1),
+            dirselect=self.dirselect, show_hidden=self.show_hidden)
+        textinput.bind(on_path=self._validate)
+
+        # construct the content
+        content.add_widget(textinput)
+        content.add_widget(SettingSpacer())
+
+        # 2 buttons are created for accept or cancel the current value
+        btnlayout = BoxLayout(size_hint_y=None, height='50dp', spacing='5dp')
+        btn = Button(text='Ok')
+        btn.bind(on_release=self._validate)
+        btnlayout.add_widget(btn)
+        btn = Button(text='Cancel')
+        btn.bind(on_release=self._dismiss)
+        btnlayout.add_widget(btn)
+        content.add_widget(btnlayout)
+
+        # all done, open the popup !
+        popup.open()
+
+    def _validate(self, instance):
+        self._dismiss()
+        value = self.textinput.selection
+
+        if not value:
+            return
+
+        self.value = os.path.realpath(value[0])
+
+        self.app_ref.variables.set_by_alias(self.key, self.value)
+
 class MySettingNumeric(SettingNumeric):
+    app_ref = ObjectProperty(None)
+
     def _create_popup(self, instance):
         # create popup layout
         content = BoxLayout(orientation='vertical', spacing='5dp')
@@ -1240,11 +1317,12 @@ class MyScatterLayout(ScatterLayout):
 
 if __name__ == '__main__':
 
-    #turn on status output for shutdown circuit
     try:
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(17, GPIO.OUT)
-        GPIO.output(17, 1)
+        GPIO.output(17, 1)  #turn on status output for shutdown circuit
+
+        GPIO.setup(18, GPIO.OUT)  #setup input for ignition status
     except Exception as e:
         print('GPIO error:')
         print(e)

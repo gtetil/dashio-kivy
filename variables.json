@@ -12,7 +12,7 @@
     {
         "alias": "DI_0", 
         "data_index": 1, 
-        "hidden": false, 
+        "hidden": true, 
         "id": 1, 
         "save": false, 
         "tag": "DI_0", 
@@ -22,7 +22,7 @@
     {
         "alias": "DI_1", 
         "data_index": 2, 
-        "hidden": false, 
+        "hidden": true, 
         "id": 2, 
         "save": false, 
         "tag": "DI_1", 
@@ -32,7 +32,7 @@
     {
         "alias": "DI_2", 
         "data_index": 3, 
-        "hidden": false, 
+        "hidden": true, 
         "id": 3, 
         "save": false, 
         "tag": "DI_2", 
@@ -42,7 +42,7 @@
     {
         "alias": "DI_3", 
         "data_index": 4, 
-        "hidden": false, 
+        "hidden": true, 
         "id": 4, 
         "save": false, 
         "tag": "DI_3", 
@@ -52,7 +52,7 @@
     {
         "alias": "DI_4", 
         "data_index": 5, 
-        "hidden": false, 
+        "hidden": true, 
         "id": 5, 
         "save": false, 
         "tag": "DI_4", 
@@ -62,7 +62,7 @@
     {
         "alias": "DI_5", 
         "data_index": 6, 
-        "hidden": false, 
+        "hidden": true, 
         "id": 6, 
         "save": false, 
         "tag": "DI_5", 
@@ -72,7 +72,7 @@
     {
         "alias": "DI_IGNITION", 
         "data_index": 7, 
-        "hidden": false, 
+        "hidden": true, 
         "id": 7, 
         "save": false, 
         "tag": "DI_IGNITION", 
@@ -82,7 +82,7 @@
     {
         "alias": "ENGINE KILL", 
         "data_index": 8, 
-        "hidden": false, 
+        "hidden": true, 
         "id": 100, 
         "save": false, 
         "tag": "DO_0", 
@@ -92,7 +92,7 @@
     {
         "alias": "FRONT LIGHTS", 
         "data_index": 9, 
-        "hidden": false, 
+        "hidden": true, 
         "id": 101, 
         "save": false, 
         "tag": "DO_1", 
@@ -102,7 +102,7 @@
     {
         "alias": "PARK", 
         "data_index": 10, 
-        "hidden": false, 
+        "hidden": true, 
         "id": 102, 
         "save": false, 
         "tag": "DO_2", 
@@ -112,7 +112,7 @@
     {
         "alias": "REAR LIGHTS", 
         "data_index": 11, 
-        "hidden": false, 
+        "hidden": true, 
         "id": 103, 
         "save": false, 
         "tag": "DO_3", 
@@ -122,7 +122,7 @@
     {
         "alias": "REVERSE", 
         "data_index": 12, 
-        "hidden": false, 
+        "hidden": true, 
         "id": 104, 
         "save": false, 
         "tag": "DO_4", 
@@ -132,7 +132,7 @@
     {
         "alias": "DO_5", 
         "data_index": 13, 
-        "hidden": false, 
+        "hidden": true, 
         "id": 105, 
         "save": false, 
         "tag": "DO_5", 
@@ -140,8 +140,88 @@
         "value": ""
     }, 
     {
-        "alias": "USER_VAR_0", 
+        "alias": "ROW 1", 
         "data_index": 14, 
+        "hidden": false, 
+        "id": 200, 
+        "save": false, 
+        "tag": "ROW_1", 
+        "type": "DI", 
+        "value": "0"
+    }, 
+    {
+        "alias": "ROW 2", 
+        "data_index": 15, 
+        "hidden": false, 
+        "id": 201, 
+        "save": false, 
+        "tag": "ROW_2", 
+        "type": "DI", 
+        "value": "0"
+    }, 
+    {
+        "alias": "ROW 3", 
+        "data_index": 16, 
+        "hidden": false, 
+        "id": 202, 
+        "save": false, 
+        "tag": "ROW_3", 
+        "type": "DI", 
+        "value": "0"
+    }, 
+    {
+        "alias": "ROW 4", 
+        "data_index": 17, 
+        "hidden": false, 
+        "id": 203, 
+        "save": false, 
+        "tag": "ROW_4", 
+        "type": "DI", 
+        "value": "0"
+    }, 
+    {
+        "alias": "ROW 5", 
+        "data_index": 18, 
+        "hidden": false, 
+        "id": 204, 
+        "save": false, 
+        "tag": "ROW_5", 
+        "type": "DI", 
+        "value": "0"
+    }, 
+    {
+        "alias": "ROW 6", 
+        "data_index": 19, 
+        "hidden": false, 
+        "id": 205, 
+        "save": false, 
+        "tag": "ROW_6", 
+        "type": "DI", 
+        "value": "0"
+    }, 
+    {
+        "alias": "ROW 7", 
+        "data_index": 20, 
+        "hidden": false, 
+        "id": 206, 
+        "save": false, 
+        "tag": "ROW_7", 
+        "type": "DI", 
+        "value": "0"
+    }, 
+    {
+        "alias": "ROW 8", 
+        "data_index": 21, 
+        "hidden": false, 
+        "id": 207, 
+        "save": false, 
+        "tag": "ROW_8", 
+        "type": "DI", 
+        "value": "0"
+    }, 
+    {
+        "alias": "USER_VAR_0", 
+        "data_index": 22, 
         "hidden": false, 
         "id": 500, 
         "save": false, 
@@ -151,7 +231,7 @@
     }, 
     {
         "alias": "USER_VAR_1", 
-        "data_index": 15, 
+        "data_index": 23, 
         "hidden": false, 
         "id": 501, 
         "save": false, 
@@ -161,7 +241,7 @@
     }, 
     {
         "alias": "USER_VAR_2", 
-        "data_index": 16, 
+        "data_index": 24, 
         "hidden": false, 
         "id": 502, 
         "save": false, 
@@ -171,7 +251,7 @@
     }, 
     {
         "alias": "USER_VAR_3", 
-        "data_index": 17, 
+        "data_index": 25, 
         "hidden": false, 
         "id": 503, 
         "save": false, 
@@ -181,7 +261,7 @@
     }, 
     {
         "alias": "TMR_0", 
-        "data_index": 18, 
+        "data_index": 26, 
         "hidden": false, 
         "id": 504, 
         "save": false, 
@@ -191,92 +271,12 @@
     }, 
     {
         "alias": "TMR_1", 
-        "data_index": 19, 
+        "data_index": 27, 
         "hidden": false, 
         "id": 505, 
         "save": false, 
         "tag": "TMR_1", 
         "type": "USER", 
-        "value": "0"
-    }, 
-    {
-        "alias": "ROW 1", 
-        "data_index": 20, 
-        "hidden": false, 
-        "id": 3000, 
-        "save": false, 
-        "tag": "ROW_1", 
-        "type": "DI", 
-        "value": "0"
-    }, 
-    {
-        "alias": "ROW 2", 
-        "data_index": 21, 
-        "hidden": false, 
-        "id": 3001, 
-        "save": false, 
-        "tag": "ROW_2", 
-        "type": "DI", 
-        "value": "0"
-    }, 
-    {
-        "alias": "ROW 3", 
-        "data_index": 22, 
-        "hidden": false, 
-        "id": 3002, 
-        "save": false, 
-        "tag": "ROW_3", 
-        "type": "DI", 
-        "value": "0"
-    }, 
-    {
-        "alias": "ROW 4", 
-        "data_index": 23, 
-        "hidden": false, 
-        "id": 3003, 
-        "save": false, 
-        "tag": "ROW_4", 
-        "type": "DI", 
-        "value": "0"
-    }, 
-    {
-        "alias": "ROW 5", 
-        "data_index": 24, 
-        "hidden": false, 
-        "id": 3004, 
-        "save": false, 
-        "tag": "ROW_5", 
-        "type": "DI", 
-        "value": "0"
-    }, 
-    {
-        "alias": "ROW 6", 
-        "data_index": 25, 
-        "hidden": false, 
-        "id": 3005, 
-        "save": false, 
-        "tag": "ROW_6", 
-        "type": "DI", 
-        "value": "0"
-    }, 
-    {
-        "alias": "ROW 7", 
-        "data_index": 26, 
-        "hidden": false, 
-        "id": 3006, 
-        "save": false, 
-        "tag": "ROW_7", 
-        "type": "DI", 
-        "value": "0"
-    }, 
-    {
-        "alias": "ROW 8", 
-        "data_index": 27, 
-        "hidden": false, 
-        "id": 3007, 
-        "save": false, 
-        "tag": "ROW_8", 
-        "type": "DI", 
         "value": "0"
     }, 
     {
@@ -488,5 +488,15 @@
         "tag": "SYS_ADMIN_CODE", 
         "type": "SYS", 
         "value": "5678"
+    }, 
+    {
+        "alias": "SYS_LAYOUT_PATH", 
+        "data_index": 49, 
+        "hidden": true, 
+        "id": 1016, 
+        "save": true, 
+        "tag": "SYS_LAYOUT_PATH", 
+        "type": "SYS", 
+        "value": "C:\\Users\\gtetil\\Documents\\Projects\\dashio-kivy\\dashio-kivy\\dynamic_layouts\\dashio-kivy\\dynamic_layouts\\dio_layout.json"
     }
 ]

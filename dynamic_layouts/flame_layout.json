@@ -1,0 +1,171 @@
+{
+    "10": {
+        "enable": true, 
+        "invert": false, 
+        "off_text": "DIM BACKLIGHT", 
+        "on_text": "BACKLIGHT\nDIMMED", 
+        "pos": [
+            410.0, 
+            240.0
+        ], 
+        "size": [
+            190, 
+            230
+        ], 
+        "var_alias": "SYS_DIM_BACKLIGHT", 
+        "var_tag": "SYS_DIM_BACKLIGHT", 
+        "widget": "Toggle Button"
+    }, 
+    "11": {
+        "enable": true, 
+        "invert": false, 
+        "off_text": "LOG IN", 
+        "on_text": "LOGGED IN", 
+        "pos": [
+            10.0, 
+            160.0
+        ], 
+        "size": [
+            210, 
+            80
+        ], 
+        "var_alias": "SYS_LOGGED_IN", 
+        "var_tag": "SYS_LOGGED_IN", 
+        "widget": "Button"
+    }, 
+    "12": {
+        "enable": true, 
+        "invert": false, 
+        "off_text": "", 
+        "on_text": "", 
+        "pos": [
+            10.0, 
+            10.0
+        ], 
+        "size": [
+            210, 
+            70
+        ], 
+        "var_alias": "ENGINE KILL", 
+        "var_tag": "DO_0", 
+        "widget": "Indicator"
+    }, 
+    "15": {
+        "enable": true, 
+        "invert": false, 
+        "off_text": "", 
+        "on_text": "", 
+        "pos": [
+            10.0, 
+            240.0
+        ], 
+        "size": [
+            210, 
+            70
+        ], 
+        "var_alias": "DI_0", 
+        "var_tag": "DI_0", 
+        "widget": "Indicator"
+    }, 
+    "17": {
+        "invert": false, 
+        "off_text": "", 
+        "on_text": "", 
+        "pos": [
+            600.0, 
+            240.0
+        ], 
+        "size": [
+            190, 
+            230
+        ], 
+        "var_alias": "REAR LIGHTS", 
+        "var_tag": "DO_3", 
+        "widget": "Toggle Button"
+    }, 
+    "2": {
+        "enable": true, 
+        "invert": false, 
+        "off_text": "", 
+        "on_text": "", 
+        "pos": [
+            10.0, 
+            80.0
+        ], 
+        "size": [
+            210, 
+            80
+        ], 
+        "var_alias": "PARK", 
+        "var_tag": "DO_2", 
+        "widget": "Toggle Button"
+    }, 
+    "3": {
+        "enable": true, 
+        "invert": false, 
+        "off_text": "", 
+        "on_text": "", 
+        "pos": [
+            220.0, 
+            10.0
+        ], 
+        "size": [
+            190, 
+            230
+        ], 
+        "var_alias": "ROW 2", 
+        "var_tag": "ROW_2", 
+        "widget": "Indicator"
+    }, 
+    "6": {
+        "enable": true, 
+        "invert": false, 
+        "off_text": "IGNITION", 
+        "on_text": "IGNITION", 
+        "pos": [
+            10.0, 
+            390.0
+        ], 
+        "size": [
+            210, 
+            80
+        ], 
+        "var_alias": "DI_IGNITION", 
+        "var_tag": "DI_IGNITION", 
+        "widget": "Indicator"
+    }, 
+    "8": {
+        "enable": true, 
+        "invert": false, 
+        "off_text": "", 
+        "on_text": "", 
+        "pos": [
+            220.0, 
+            240.0
+        ], 
+        "size": [
+            190, 
+            230
+        ], 
+        "var_alias": "FRONT LIGHTS", 
+        "var_tag": "DO_1", 
+        "widget": "Toggle Button"
+    }, 
+    "9": {
+        "enable": true, 
+        "invert": false, 
+        "off_text": "SYSTEM ACTIVE", 
+        "on_text": "SYSTEM INACTIVE", 
+        "pos": [
+            10.0, 
+            310.0
+        ], 
+        "size": [
+            210, 
+            80
+        ], 
+        "var_alias": "SYS_INACTIVE", 
+        "var_tag": "SYS_INACTIVE", 
+        "widget": "Indicator"
+    }
+}

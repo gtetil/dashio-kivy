@@ -1,5 +1,13 @@
 import json
 
+dio_mod_id_start = 1
+dio_mod_data_start = 1
+dio_mod_len = 13
+
+flame_detect_id_start = 200
+flame_detect_data_start = 14
+flame_detect_len = 8
+
 settings_json = json.dumps([
     {'type': 'mynumeric',
      'title': 'Screen Dim Brightness',
@@ -44,7 +52,7 @@ scripts_json = json.dumps([
      'section': 'Scripts',
      'key': 'script_3'}])
 
-aliases_json = json.dumps([
+dio_aliases_json = json.dumps([
     {'type': 'alias',
      'title': 'DI_0',
      'desc': '',
@@ -112,39 +120,9 @@ aliases_json = json.dumps([
      'desc': '',
      'section': 'OutputAliases',
      'key': 'DO_5'},
+])
 
-    {'type': 'alias',
-     'title': 'USER_VAR_0',
-     'desc': '',
-     'section': 'UserVarAliases',
-     'key': 'USER_VAR_0'},
-    {'type': 'alias',
-     'title': 'USER_VAR_1',
-     'desc': '',
-     'section': 'UserVarAliases',
-     'key': 'USER_VAR_1'},
-    {'type': 'alias',
-     'title': 'USER_VAR_2',
-     'desc': '',
-     'section': 'UserVarAliases',
-     'key': 'USER_VAR_2'},
-    {'type': 'alias',
-     'title': 'USER_VAR_3',
-     'desc': '',
-     'section': 'UserVarAliases',
-     'key': 'USER_VAR_3'},
-
-    {'type': 'alias',
-     'title': 'TMR_0',
-     'desc': '',
-     'section': 'TimerAliases',
-     'key': 'TMR_0'},
-    {'type': 'alias',
-     'title': 'TMR_1',
-     'desc': '',
-     'section': 'TimerAliases',
-     'key': 'TMR_1'},
-
+row_aliases_json = json.dumps([
     {'type': 'alias',
      'title': 'ROW_1',
      'desc': '',
@@ -187,6 +165,40 @@ aliases_json = json.dumps([
      'key': 'ROW_8'},
 ])
 
+aliases_json = json.dumps([
+    {'type': 'alias',
+     'title': 'USER_VAR_0',
+     'desc': '',
+     'section': 'UserVarAliases',
+     'key': 'USER_VAR_0'},
+    {'type': 'alias',
+     'title': 'USER_VAR_1',
+     'desc': '',
+     'section': 'UserVarAliases',
+     'key': 'USER_VAR_1'},
+    {'type': 'alias',
+     'title': 'USER_VAR_2',
+     'desc': '',
+     'section': 'UserVarAliases',
+     'key': 'USER_VAR_2'},
+    {'type': 'alias',
+     'title': 'USER_VAR_3',
+     'desc': '',
+     'section': 'UserVarAliases',
+     'key': 'USER_VAR_3'},
+
+    {'type': 'alias',
+     'title': 'TMR_0',
+     'desc': '',
+     'section': 'TimerAliases',
+     'key': 'TMR_0'},
+    {'type': 'alias',
+     'title': 'TMR_1',
+     'desc': '',
+     'section': 'TimerAliases',
+     'key': 'TMR_1'},
+])
+
 developer_json = json.dumps([
     {'type': 'action',
      'title': 'Close App',
@@ -215,5 +227,13 @@ developer_json = json.dumps([
      'title': 'Flame Detect',
      'desc': '',
      'section': 'Accessory',
-     'key': 'SYS_FLAME_DETECT'}
+     'key': 'SYS_FLAME_DETECT'},
+
+    {'type': 'title',
+     'title': 'Layout'},
+    {'type': 'mypath',
+     'title': 'Layout Path',
+     'desc': '',
+     'section': 'Layout',
+     'key': 'SYS_LAYOUT_PATH'}
 ])
