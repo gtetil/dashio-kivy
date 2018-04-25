@@ -1,12 +1,14 @@
 import json
 
+layout_dir = 'dynamic_layouts'
+
 dio_mod_id_start = 1
 dio_mod_data_start = 1
 dio_mod_len = 13
 
 flame_detect_id_start = 200
 flame_detect_data_start = 14
-flame_detect_len = 8
+flame_detect_len = 24
 
 settings_json = json.dumps([
     {'type': 'mynumeric',
@@ -163,6 +165,88 @@ row_aliases_json = json.dumps([
      'desc': '',
      'section': 'RowAliases',
      'key': 'ROW_8'},
+
+{'type': 'alias',
+     'title': 'ROW_9',
+     'desc': '',
+     'section': 'RowAliases',
+     'key': 'ROW_9'},
+    {'type': 'alias',
+     'title': 'ROW_10',
+     'desc': '',
+     'section': 'RowAliases',
+     'key': 'ROW_10'},
+    {'type': 'alias',
+     'title': 'ROW_11',
+     'desc': '',
+     'section': 'RowAliases',
+     'key': 'ROW_11'},
+    {'type': 'alias',
+     'title': 'ROW_12',
+     'desc': '',
+     'section': 'RowAliases',
+     'key': 'ROW_12'},
+    {'type': 'alias',
+     'title': 'ROW_13',
+     'desc': '',
+     'section': 'RowAliases',
+     'key': 'ROW_13'},
+    {'type': 'alias',
+     'title': 'ROW_14',
+     'desc': '',
+     'section': 'RowAliases',
+     'key': 'ROW_14'},
+    {'type': 'alias',
+     'title': 'ROW_15',
+     'desc': '',
+     'section': 'RowAliases',
+     'key': 'ROW_15'},
+    {'type': 'alias',
+     'title': 'ROW_16',
+     'desc': '',
+     'section': 'RowAliases',
+     'key': 'ROW_16'},
+
+{'type': 'alias',
+     'title': 'ROW_17',
+     'desc': '',
+     'section': 'RowAliases',
+     'key': 'ROW_17'},
+    {'type': 'alias',
+     'title': 'ROW_18',
+     'desc': '',
+     'section': 'RowAliases',
+     'key': 'ROW_18'},
+    {'type': 'alias',
+     'title': 'ROW_19',
+     'desc': '',
+     'section': 'RowAliases',
+     'key': 'ROW_19'},
+    {'type': 'alias',
+     'title': 'ROW_20',
+     'desc': '',
+     'section': 'RowAliases',
+     'key': 'ROW_20'},
+    {'type': 'alias',
+     'title': 'ROW_21',
+     'desc': '',
+     'section': 'RowAliases',
+     'key': 'ROW_21'},
+    {'type': 'alias',
+     'title': 'ROW_22',
+     'desc': '',
+     'section': 'RowAliases',
+     'key': 'ROW_22'},
+    {'type': 'alias',
+     'title': 'ROW_23',
+     'desc': '',
+     'section': 'RowAliases',
+     'key': 'ROW_23'},
+    {'type': 'alias',
+     'title': 'ROW_24',
+     'desc': '',
+     'section': 'RowAliases',
+     'key': 'ROW_24'},
 ])
 
 aliases_json = json.dumps([
@@ -232,8 +316,8 @@ developer_json = json.dumps([
     {'type': 'title',
      'title': 'Layout'},
     {'type': 'mypath',
-     'title': 'Layout Path',
+     'title': 'Layout File',
      'desc': '',
      'section': 'Layout',
-     'key': 'SYS_LAYOUT_PATH'}
+     'key': 'SYS_LAYOUT_FILE'}
 ])

@@ -19,7 +19,7 @@
         on_release: if not app.dynamic_layout.modify_mode: app.dynamic_layout.modify_screen(); #app.variables.toggle_update_clock(False)
     ModernButton:
         id: settings
-        disabled: False
+        disabled: True
         text: 'SETTINGS'
         on_release: app.open_settings(); app.screen_man.current = 'main_screen'; app.slide_layout.toggle_state()
         on_release: if app.dynamic_layout.modify_mode: app.dynamic_layout.end_modify(); app.variables.toggle_update_clock(True)

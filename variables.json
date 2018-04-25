@@ -220,8 +220,168 @@
         "value": "0"
     }, 
     {
-        "alias": "USER_VAR_0", 
+        "alias": "ROW 9", 
         "data_index": 22, 
+        "hidden": false, 
+        "id": 208, 
+        "save": false, 
+        "tag": "ROW_9", 
+        "type": "DI", 
+        "value": "0"
+    }, 
+    {
+        "alias": "ROW 10", 
+        "data_index": 23, 
+        "hidden": false, 
+        "id": 209, 
+        "save": false, 
+        "tag": "ROW_10", 
+        "type": "DI", 
+        "value": "0"
+    }, 
+    {
+        "alias": "ROW 11", 
+        "data_index": 24, 
+        "hidden": false, 
+        "id": 210, 
+        "save": false, 
+        "tag": "ROW_11", 
+        "type": "DI", 
+        "value": "0"
+    }, 
+    {
+        "alias": "ROW 12", 
+        "data_index": 25, 
+        "hidden": false, 
+        "id": 211, 
+        "save": false, 
+        "tag": "ROW_12", 
+        "type": "DI", 
+        "value": "0"
+    }, 
+    {
+        "alias": "ROW 13", 
+        "data_index": 26, 
+        "hidden": false, 
+        "id": 212, 
+        "save": false, 
+        "tag": "ROW_13", 
+        "type": "DI", 
+        "value": "0"
+    }, 
+    {
+        "alias": "ROW 14", 
+        "data_index": 27, 
+        "hidden": false, 
+        "id": 213, 
+        "save": false, 
+        "tag": "ROW_14", 
+        "type": "DI", 
+        "value": "0"
+    }, 
+    {
+        "alias": "ROW 15", 
+        "data_index": 28, 
+        "hidden": false, 
+        "id": 214, 
+        "save": false, 
+        "tag": "ROW_15", 
+        "type": "DI", 
+        "value": "0"
+    }, 
+    {
+        "alias": "ROW 16", 
+        "data_index": 29, 
+        "hidden": false, 
+        "id": 215, 
+        "save": false, 
+        "tag": "ROW_16", 
+        "type": "DI", 
+        "value": "0"
+    }, 
+    {
+        "alias": "ROW 17", 
+        "data_index": 30, 
+        "hidden": false, 
+        "id": 216, 
+        "save": false, 
+        "tag": "ROW_17", 
+        "type": "DI", 
+        "value": "0"
+    }, 
+    {
+        "alias": "ROW 18", 
+        "data_index": 31, 
+        "hidden": false, 
+        "id": 217, 
+        "save": false, 
+        "tag": "ROW_18", 
+        "type": "DI", 
+        "value": "100"
+    }, 
+    {
+        "alias": "ROW 19", 
+        "data_index": 32, 
+        "hidden": false, 
+        "id": 218, 
+        "save": false, 
+        "tag": "ROW_19", 
+        "type": "DI", 
+        "value": "5678"
+    }, 
+    {
+        "alias": "ROW 20", 
+        "data_index": 33, 
+        "hidden": false, 
+        "id": 219, 
+        "save": false, 
+        "tag": "ROW_20", 
+        "type": "DI", 
+        "value": "2"
+    }, 
+    {
+        "alias": "ROW 21", 
+        "data_index": 34, 
+        "hidden": false, 
+        "id": 220, 
+        "save": false, 
+        "tag": "ROW_21", 
+        "type": "DI", 
+        "value": "61"
+    }, 
+    {
+        "alias": "ROW 22", 
+        "data_index": 35, 
+        "hidden": false, 
+        "id": 221, 
+        "save": false, 
+        "tag": "ROW_22", 
+        "type": "DI", 
+        "value": "65"
+    }, 
+    {
+        "alias": "ROW 23", 
+        "data_index": 36, 
+        "hidden": false, 
+        "id": 222, 
+        "save": false, 
+        "tag": "ROW_23", 
+        "type": "DI", 
+        "value": "0"
+    }, 
+    {
+        "alias": "ROW 24", 
+        "data_index": 37, 
+        "hidden": false, 
+        "id": 223, 
+        "save": false, 
+        "tag": "ROW_24", 
+        "type": "DI", 
+        "value": "0"
+    }, 
+    {
+        "alias": "USER_VAR_0", 
+        "data_index": 38, 
         "hidden": false, 
         "id": 500, 
         "save": false, 
@@ -231,7 +391,7 @@
     }, 
     {
         "alias": "USER_VAR_1", 
-        "data_index": 23, 
+        "data_index": 39, 
         "hidden": false, 
         "id": 501, 
         "save": false, 
@@ -241,7 +401,7 @@
     }, 
     {
         "alias": "USER_VAR_2", 
-        "data_index": 24, 
+        "data_index": 40, 
         "hidden": false, 
         "id": 502, 
         "save": false, 
@@ -251,7 +411,7 @@
     }, 
     {
         "alias": "USER_VAR_3", 
-        "data_index": 25, 
+        "data_index": 41, 
         "hidden": false, 
         "id": 503, 
         "save": false, 
@@ -261,7 +421,7 @@
     }, 
     {
         "alias": "TMR_0", 
-        "data_index": 26, 
+        "data_index": 42, 
         "hidden": false, 
         "id": 504, 
         "save": false, 
@@ -271,7 +431,7 @@
     }, 
     {
         "alias": "TMR_1", 
-        "data_index": 27, 
+        "data_index": 43, 
         "hidden": false, 
         "id": 505, 
         "save": false, 
@@ -281,7 +441,7 @@
     }, 
     {
         "alias": "SYS_LOGGED_IN", 
-        "data_index": 28, 
+        "data_index": 44, 
         "hidden": false, 
         "id": 1000, 
         "save": false, 
@@ -291,17 +451,17 @@
     }, 
     {
         "alias": "SYS_ENG_KILL_POPUP", 
-        "data_index": 29, 
+        "data_index": 45, 
         "hidden": false, 
         "id": 1001, 
         "save": false, 
         "tag": "SYS_ENG_KILL_POPUP", 
         "type": "SYS", 
-        "value": "0"
+        "value": "1"
     }, 
     {
         "alias": "SYS_REVERSE_CAM_ON", 
-        "data_index": 30, 
+        "data_index": 46, 
         "hidden": false, 
         "id": 1002, 
         "save": false, 
@@ -311,7 +471,7 @@
     }, 
     {
         "alias": "SYS_SCREEN_BRIGHTNESS", 
-        "data_index": 31, 
+        "data_index": 47, 
         "hidden": false, 
         "id": 2000, 
         "save": true, 
@@ -321,7 +481,7 @@
     }, 
     {
         "alias": "SYS_DIM_BACKLIGHT", 
-        "data_index": 32, 
+        "data_index": 48, 
         "hidden": false, 
         "id": 2001, 
         "save": true, 
@@ -331,7 +491,7 @@
     }, 
     {
         "alias": "SYS_SCREEN_OFF_DELAY", 
-        "data_index": 33, 
+        "data_index": 49, 
         "hidden": false, 
         "id": 2002, 
         "save": true, 
@@ -341,7 +501,7 @@
     }, 
     {
         "alias": "SYS_SHUTDOWN_DELAY", 
-        "data_index": 34, 
+        "data_index": 50, 
         "hidden": false, 
         "id": 2003, 
         "save": true, 
@@ -351,7 +511,7 @@
     }, 
     {
         "alias": "SYS_INACTIVE_TIME", 
-        "data_index": 35, 
+        "data_index": 51, 
         "hidden": false, 
         "id": 2004, 
         "save": true, 
@@ -361,7 +521,7 @@
     }, 
     {
         "alias": "SYS_INACTIVE", 
-        "data_index": 36, 
+        "data_index": 52, 
         "hidden": false, 
         "id": 1003, 
         "save": false, 
@@ -371,7 +531,7 @@
     }, 
     {
         "alias": "SYS_INIT", 
-        "data_index": 37, 
+        "data_index": 53, 
         "hidden": false, 
         "id": 1004, 
         "save": false, 
@@ -381,7 +541,7 @@
     }, 
     {
         "alias": "SYS_TIME", 
-        "data_index": 38, 
+        "data_index": 54, 
         "hidden": false, 
         "id": 1005, 
         "save": false, 
@@ -391,7 +551,7 @@
     }, 
     {
         "alias": "SYS_CPU_TEMP", 
-        "data_index": 39, 
+        "data_index": 55, 
         "hidden": false, 
         "id": 1006, 
         "save": false, 
@@ -401,7 +561,7 @@
     }, 
     {
         "alias": "SYS_CPU_USAGE", 
-        "data_index": 40, 
+        "data_index": 56, 
         "hidden": false, 
         "id": 1007, 
         "save": false, 
@@ -411,7 +571,7 @@
     }, 
     {
         "alias": "SYS_CLOSE_APP", 
-        "data_index": 41, 
+        "data_index": 57, 
         "hidden": true, 
         "id": 1008, 
         "save": false, 
@@ -421,7 +581,7 @@
     }, 
     {
         "alias": "SYS_REBOOT", 
-        "data_index": 42, 
+        "data_index": 58, 
         "hidden": true, 
         "id": 1009, 
         "save": false, 
@@ -431,7 +591,7 @@
     }, 
     {
         "alias": "SYS_SHUTDOWN", 
-        "data_index": 43, 
+        "data_index": 59, 
         "hidden": true, 
         "id": 1010, 
         "save": false, 
@@ -441,7 +601,7 @@
     }, 
     {
         "alias": "SYS_DIO_MODULE", 
-        "data_index": 44, 
+        "data_index": 60, 
         "hidden": false, 
         "id": 1011, 
         "save": true, 
@@ -451,7 +611,7 @@
     }, 
     {
         "alias": "SYS_FLAME_DETECT", 
-        "data_index": 45, 
+        "data_index": 61, 
         "hidden": false, 
         "id": 1012, 
         "save": true, 
@@ -461,7 +621,7 @@
     }, 
     {
         "alias": "SYS_ADMIN_LOGIN", 
-        "data_index": 46, 
+        "data_index": 62, 
         "hidden": true, 
         "id": 1013, 
         "save": false, 
@@ -471,7 +631,7 @@
     }, 
     {
         "alias": "SYS_PASSCODE", 
-        "data_index": 47, 
+        "data_index": 63, 
         "hidden": true, 
         "id": 1014, 
         "save": true, 
@@ -481,7 +641,7 @@
     }, 
     {
         "alias": "SYS_ADMIN_CODE", 
-        "data_index": 48, 
+        "data_index": 64, 
         "hidden": true, 
         "id": 1015, 
         "save": true, 
@@ -490,13 +650,13 @@
         "value": "5678"
     }, 
     {
-        "alias": "SYS_LAYOUT_PATH", 
-        "data_index": 49, 
+        "alias": "SYS_LAYOUT_FILE", 
+        "data_index": 65, 
         "hidden": true, 
         "id": 1016, 
         "save": true, 
-        "tag": "SYS_LAYOUT_PATH", 
+        "tag": "SYS_LAYOUT_FILE", 
         "type": "SYS", 
-        "value": "C:\\Users\\gtetil\\Documents\\Projects\\dashio-kivy\\dashio-kivy\\dynamic_layouts\\dashio-kivy\\dynamic_layouts\\dio_layout.json"
+        "value": "flame_layout.json"
     }
 ]

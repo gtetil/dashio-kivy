@@ -1,37 +1,71 @@
 {
+    "0": {
+        "enable": true, 
+        "invert": false, 
+        "off_text": "", 
+        "on_text": "", 
+        "pos": [
+            0.0, 
+            90.0
+        ], 
+        "size": [
+            100, 
+            100
+        ], 
+        "var_alias": "ROW 17", 
+        "var_tag": "ROW_17", 
+        "widget": "Indicator"
+    }, 
+    "1": {
+        "enable": true, 
+        "invert": false, 
+        "off_text": "", 
+        "on_text": "", 
+        "pos": [
+            100.0, 
+            90.0
+        ], 
+        "size": [
+            100, 
+            100
+        ], 
+        "var_alias": "ROW 18", 
+        "var_tag": "ROW_18", 
+        "widget": "Indicator"
+    }, 
     "10": {
         "enable": true, 
         "invert": false, 
-        "off_text": "DIM BACKLIGHT", 
-        "on_text": "BACKLIGHT\nDIMMED", 
+        "off_text": "", 
+        "on_text": "", 
         "pos": [
-            410.0, 
-            240.0
+            0.0, 
+            190.0
         ], 
         "size": [
-            190, 
-            230
+            100, 
+            100
         ], 
-        "var_alias": "SYS_DIM_BACKLIGHT", 
-        "var_tag": "SYS_DIM_BACKLIGHT", 
-        "widget": "Toggle Button"
+        "var_alias": "ROW 9", 
+        "var_tag": "ROW_9", 
+        "widget": "Indicator"
     }, 
     "11": {
         "enable": true, 
         "invert": false, 
-        "off_text": "LOG IN", 
-        "on_text": "LOGGED IN", 
+        "off_text": "", 
+        "on_text": "", 
         "pos": [
-            10.0, 
-            160.0
+            100.0, 
+            190.0
         ], 
         "size": [
-            210, 
-            80
+            100, 
+            100
         ], 
-        "var_alias": "SYS_LOGGED_IN", 
-        "var_tag": "SYS_LOGGED_IN", 
-        "widget": "Button"
+        "var_alias": "ROW 10", 
+        "var_tag": "ROW_10", 
+        "widget": "Indicator"
     }, 
     "12": {
         "enable": true, 
@@ -39,15 +73,49 @@
         "off_text": "", 
         "on_text": "", 
         "pos": [
-            10.0, 
-            10.0
+            200.0, 
+            190.0
         ], 
         "size": [
-            210, 
-            70
+            100, 
+            100
         ], 
-        "var_alias": "ENGINE KILL", 
-        "var_tag": "DO_0", 
+        "var_alias": "ROW 11", 
+        "var_tag": "ROW_11", 
+        "widget": "Indicator"
+    }, 
+    "13": {
+        "enable": true, 
+        "invert": false, 
+        "off_text": "", 
+        "on_text": "", 
+        "pos": [
+            300.0, 
+            190.0
+        ], 
+        "size": [
+            100, 
+            100
+        ], 
+        "var_alias": "ROW 12", 
+        "var_tag": "ROW_12", 
+        "widget": "Indicator"
+    }, 
+    "14": {
+        "enable": true, 
+        "invert": false, 
+        "off_text": "", 
+        "on_text": "", 
+        "pos": [
+            400.0, 
+            190.0
+        ], 
+        "size": [
+            100, 
+            100
+        ], 
+        "var_alias": "ROW 13", 
+        "var_tag": "ROW_13", 
         "widget": "Indicator"
     }, 
     "15": {
@@ -56,32 +124,50 @@
         "off_text": "", 
         "on_text": "", 
         "pos": [
-            10.0, 
-            240.0
+            500.0, 
+            190.0
         ], 
         "size": [
-            210, 
-            70
+            100, 
+            100
         ], 
-        "var_alias": "DI_0", 
-        "var_tag": "DI_0", 
+        "var_alias": "ROW 14", 
+        "var_tag": "ROW_14", 
         "widget": "Indicator"
     }, 
-    "17": {
+    "16": {
+        "enable": true, 
         "invert": false, 
         "off_text": "", 
         "on_text": "", 
         "pos": [
             600.0, 
-            240.0
+            190.0
         ], 
         "size": [
-            190, 
-            230
+            100, 
+            100
         ], 
-        "var_alias": "REAR LIGHTS", 
-        "var_tag": "DO_3", 
-        "widget": "Toggle Button"
+        "var_alias": "ROW 15", 
+        "var_tag": "ROW_15", 
+        "widget": "Indicator"
+    }, 
+    "17": {
+        "enable": true, 
+        "invert": false, 
+        "off_text": "", 
+        "on_text": "", 
+        "pos": [
+            700.0, 
+            190.0
+        ], 
+        "size": [
+            100, 
+            100
+        ], 
+        "var_alias": "ROW 16", 
+        "var_tag": "ROW_16", 
+        "widget": "Indicator"
     }, 
     "2": {
         "enable": true, 
@@ -89,16 +175,152 @@
         "off_text": "", 
         "on_text": "", 
         "pos": [
-            10.0, 
-            80.0
+            200.0, 
+            90.0
         ], 
         "size": [
-            210, 
-            80
+            100, 
+            100
         ], 
-        "var_alias": "PARK", 
-        "var_tag": "DO_2", 
-        "widget": "Toggle Button"
+        "var_alias": "ROW 19", 
+        "var_tag": "ROW_19", 
+        "widget": "Indicator"
+    }, 
+    "20": {
+        "enable": true, 
+        "invert": false, 
+        "off_text": "", 
+        "on_text": "", 
+        "pos": [
+            0.0, 
+            290.0
+        ], 
+        "size": [
+            100, 
+            100
+        ], 
+        "var_alias": "ROW 1", 
+        "var_tag": "ROW_1", 
+        "widget": "Indicator"
+    }, 
+    "21": {
+        "enable": true, 
+        "invert": false, 
+        "off_text": "", 
+        "on_text": "", 
+        "pos": [
+            100.0, 
+            290.0
+        ], 
+        "size": [
+            100, 
+            100
+        ], 
+        "var_alias": "ROW 2", 
+        "var_tag": "ROW_2", 
+        "widget": "Indicator"
+    }, 
+    "22": {
+        "enable": true, 
+        "invert": false, 
+        "off_text": "", 
+        "on_text": "", 
+        "pos": [
+            200.0, 
+            290.0
+        ], 
+        "size": [
+            100, 
+            100
+        ], 
+        "var_alias": "ROW 3", 
+        "var_tag": "ROW_3", 
+        "widget": "Indicator"
+    }, 
+    "23": {
+        "enable": true, 
+        "invert": false, 
+        "off_text": "", 
+        "on_text": "", 
+        "pos": [
+            300.0, 
+            290.0
+        ], 
+        "size": [
+            100, 
+            100
+        ], 
+        "var_alias": "ROW 4", 
+        "var_tag": "ROW_4", 
+        "widget": "Indicator"
+    }, 
+    "24": {
+        "enable": true, 
+        "invert": false, 
+        "off_text": "", 
+        "on_text": "", 
+        "pos": [
+            400.0, 
+            290.0
+        ], 
+        "size": [
+            100, 
+            100
+        ], 
+        "var_alias": "ROW 5", 
+        "var_tag": "ROW_5", 
+        "widget": "Indicator"
+    }, 
+    "25": {
+        "enable": true, 
+        "invert": false, 
+        "off_text": "", 
+        "on_text": "", 
+        "pos": [
+            500.0, 
+            290.0
+        ], 
+        "size": [
+            100, 
+            100
+        ], 
+        "var_alias": "ROW 6", 
+        "var_tag": "ROW_6", 
+        "widget": "Indicator"
+    }, 
+    "26": {
+        "enable": true, 
+        "invert": false, 
+        "off_text": "", 
+        "on_text": "", 
+        "pos": [
+            600.0, 
+            290.0
+        ], 
+        "size": [
+            100, 
+            100
+        ], 
+        "var_alias": "ROW 7", 
+        "var_tag": "ROW_7", 
+        "widget": "Indicator"
+    }, 
+    "27": {
+        "enable": true, 
+        "invert": false, 
+        "off_text": "", 
+        "on_text": "", 
+        "pos": [
+            700.0, 
+            290.0
+        ], 
+        "size": [
+            100, 
+            100
+        ], 
+        "var_alias": "ROW 8", 
+        "var_tag": "ROW_8", 
+        "widget": "Indicator"
     }, 
     "3": {
         "enable": true, 
@@ -106,66 +328,83 @@
         "off_text": "", 
         "on_text": "", 
         "pos": [
-            220.0, 
-            10.0
+            300.0, 
+            90.0
         ], 
         "size": [
-            190, 
-            230
+            100, 
+            100
         ], 
-        "var_alias": "ROW 2", 
-        "var_tag": "ROW_2", 
+        "var_alias": "ROW 20", 
+        "var_tag": "ROW_20", 
         "widget": "Indicator"
     }, 
-    "6": {
-        "enable": true, 
-        "invert": false, 
-        "off_text": "IGNITION", 
-        "on_text": "IGNITION", 
-        "pos": [
-            10.0, 
-            390.0
-        ], 
-        "size": [
-            210, 
-            80
-        ], 
-        "var_alias": "DI_IGNITION", 
-        "var_tag": "DI_IGNITION", 
-        "widget": "Indicator"
-    }, 
-    "8": {
+    "4": {
         "enable": true, 
         "invert": false, 
         "off_text": "", 
         "on_text": "", 
         "pos": [
-            220.0, 
-            240.0
+            400.0, 
+            90.0
         ], 
         "size": [
-            190, 
-            230
+            100, 
+            100
         ], 
-        "var_alias": "FRONT LIGHTS", 
-        "var_tag": "DO_1", 
-        "widget": "Toggle Button"
+        "var_alias": "ROW 21", 
+        "var_tag": "ROW_21", 
+        "widget": "Indicator"
     }, 
-    "9": {
+    "5": {
         "enable": true, 
         "invert": false, 
-        "off_text": "SYSTEM ACTIVE", 
-        "on_text": "SYSTEM INACTIVE", 
+        "off_text": "", 
+        "on_text": "", 
         "pos": [
-            10.0, 
-            310.0
+            500.0, 
+            90.0
         ], 
         "size": [
-            210, 
-            80
+            100, 
+            100
         ], 
-        "var_alias": "SYS_INACTIVE", 
-        "var_tag": "SYS_INACTIVE", 
+        "var_alias": "ROW 22", 
+        "var_tag": "ROW_22", 
+        "widget": "Indicator"
+    }, 
+    "6": {
+        "enable": true, 
+        "invert": false, 
+        "off_text": "", 
+        "on_text": "", 
+        "pos": [
+            600.0, 
+            90.0
+        ], 
+        "size": [
+            100, 
+            100
+        ], 
+        "var_alias": "ROW 23", 
+        "var_tag": "ROW_23", 
+        "widget": "Indicator"
+    }, 
+    "7": {
+        "enable": true, 
+        "invert": false, 
+        "off_text": "", 
+        "on_text": "", 
+        "pos": [
+            700.0, 
+            90.0
+        ], 
+        "size": [
+            100, 
+            100
+        ], 
+        "var_alias": "ROW 24", 
+        "var_tag": "ROW_24", 
         "widget": "Indicator"
     }
 }

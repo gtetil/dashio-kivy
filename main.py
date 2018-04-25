@@ -215,11 +215,12 @@ class FloatInput(TextInput):
 class DynamicLayout(Widget):
     app_ref = ObjectProperty(None)
     modify_mode = BooleanProperty(False)
-    layout_file = 'dynamic_layouts/dio_layout.json'
+    layout_file = ''
     dyn_widget_dict = {}
     scatter_dict = {}
 
     def build_layout(self):
+        self.layout_file = os.path.join(app_settings.layout_dir, self.app_ref.variables.get('SYS_LAYOUT_FILE'))
         with open(self.layout_file, 'r') as file:
             self.dyn_layout_json = json.load(file)
         for id in self.dyn_layout_json:
@@ -626,6 +627,8 @@ class MainApp(App):
             self.hide_variables(value, app_settings.dio_mod_data_start, app_settings.dio_mod_len)
         if key == 'SYS_FLAME_DETECT':
             self.hide_variables(value, app_settings.flame_detect_data_start, app_settings.flame_detect_len)
+        #if key == "SYS_LAYOUT_FILE":
+            #self.dynamic_layout.build_layout()
         self.get_aliases()
         self.get_saved_vars()
         self.variables.save_variables()
@@ -779,7 +782,7 @@ class Variables(Widget):
     def read_can(self, dt):
         if self.get('SYS_FLAME_DETECT') == '1':
             try:
-                self.can_data = self.can_com.q.get_nowait()[0]
+                self.can_data = self.can_com.q.get_nowait()
             except Exception as e:
                 #print('CAN read error:')
                 #print(e)
@@ -1076,8 +1079,8 @@ class MySettingPath(SettingPath):
         # create the filechooser
         initial_path = self.value or os.getcwd()
         self.textinput = textinput = FileChooserListView(
-            path=initial_path, size_hint=(1, 1),
-            dirselect=self.dirselect, show_hidden=self.show_hidden)
+            path=app_settings.layout_dir, size_hint=(1, 1),
+            dirselect=self.dirselect, show_hidden=self.show_hidden, filters=['*.json'])
         textinput.bind(on_path=self._validate)
 
         # construct the content
@@ -1105,6 +1108,7 @@ class MySettingPath(SettingPath):
             return
 
         self.value = os.path.realpath(value[0])
+        self.value = os.path.split(self.value)[1]
 
         self.app_ref.variables.set_by_alias(self.key, self.value)
 

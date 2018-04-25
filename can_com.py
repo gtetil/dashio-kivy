@@ -24,18 +24,34 @@ class CANcom(Widget):
         self.rx.start()
 
     def can_read(self):
+        msg0 = msg1 = msg2 = 0
+        data_to_queue = False
         while True:
             try:
                 message = bus.recv(timeout=0.5)
-                #print "can message"
-                #print message
+
+                # get CAN message from module at address 0
                 if message.arbitration_id == 0x000:
-                    self.q.put(message.data)  # Put data into queue
+                    msg0 = message.data[0]
+                    data_to_queue = True
+                # get CAN message from module at address 1
+                if message.arbitration_id == 0x001:
+                    msg1 = message.data[0] << 8
+                    data_to_queue = True
+                # get CAN message from module at address 2
+                if message.arbitration_id == 0x002:
+                    msg2 = message.data[0] << 16
+                    data_to_queue = True
+
+                if data_to_queue:
+                    msg = msg0 + msg1 + msg2
+                    self.q.put(msg)  # Put data into queue
+                    data_to_queue = False
                 time.sleep(0.01)
             except Exception as e:
                 #print('CAN Rx error:')
                 #print(e)
-                self.q.put([0,0,0,0,0,0,0,0])  # Debug Data
+                self.q.put(0)  # Debug Data
                 time.sleep(0.1)
 
     def flush_queue(self):
