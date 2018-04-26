@@ -176,8 +176,8 @@
             40, 
             30
         ], 
-        "var_alias": "SYS_TIME", 
-        "var_tag": "SYS_TIME", 
+        "var_alias": "SYS_TIME_SEC",
+        "var_tag": "SYS_TIME_SEC",
         "widget": "Label"
     }, 
     "23": {

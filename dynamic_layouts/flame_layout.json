@@ -322,6 +322,38 @@
         "var_tag": "ROW_8", 
         "widget": "Indicator"
     }, 
+    "28": {
+        "invert": false, 
+        "off_text": "", 
+        "on_text": "%A, %B %d, %Y", 
+        "pos": [
+            310.0, 
+            450.0
+        ], 
+        "size": [
+            180, 
+            30
+        ], 
+        "var_alias": "SYS_TIME", 
+        "var_tag": "SYS_TIME", 
+        "widget": "Label"
+    }, 
+    "29": {
+        "invert": false, 
+        "off_text": "", 
+        "on_text": "%#I:%M %p", 
+        "pos": [
+            720.0, 
+            450.0
+        ], 
+        "size": [
+            80, 
+            30
+        ], 
+        "var_alias": "SYS_TIME", 
+        "var_tag": "SYS_TIME", 
+        "widget": "Label"
+    }, 
     "3": {
         "enable": true, 
         "invert": false, 

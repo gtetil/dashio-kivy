@@ -6,6 +6,7 @@ import os
 import Queue
 import time
 from threading import Thread
+from threading import Event
 
 try:
     import can
@@ -19,14 +20,15 @@ class CANcom(Widget):
     def __init__(self, **kwargs):
         super(CANcom, self).__init__(**kwargs)
         self.q = Queue.Queue()
-        self.rx = Thread(target=self.can_read)
+        self.stop_event = Event()
+        self.rx = Thread(target=self.can_read, args=(self.q, self.stop_event))
         self.rx.daemon = True
         self.rx.start()
 
-    def can_read(self):
+    def can_read(self, q, stop_event):
         msg0 = msg1 = msg2 = 0
         data_to_queue = False
-        while True:
+        while not stop_event.is_set():
             try:
                 message = bus.recv(timeout=0.5)
 
@@ -51,7 +53,7 @@ class CANcom(Widget):
             except Exception as e:
                 #print('CAN Rx error:')
                 #print(e)
-                self.q.put(0)  # Debug Data
+                q.put(0)  # Debug Data
                 time.sleep(0.1)
 
     def flush_queue(self):

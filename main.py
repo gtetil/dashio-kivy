@@ -48,6 +48,7 @@ import psutil
 import serial
 import os
 import time
+from datetime import datetime
 import re
 import platform
 from operator import xor
@@ -218,6 +219,7 @@ class DynamicLayout(Widget):
     layout_file = ''
     dyn_widget_dict = {}
     scatter_dict = {}
+    tag = ''
 
     def build_layout(self):
         self.layout_file = os.path.join(app_settings.layout_dir, self.app_ref.variables.get('SYS_LAYOUT_FILE'))
@@ -276,13 +278,13 @@ class DynamicLayout(Widget):
         dyn_widget_ref = self.dyn_widget_dict[id]
         try:
             alias = self.app_ref.variables.alias_by_tag_dict[dyn_widget_ref.var_tag]
-            tag = self.app_ref.variables.tag_by_alias_dict[alias]
+            self.tag = self.app_ref.variables.tag_by_alias_dict[alias]
         except:
             pass
         if dyn_widget_ref.var_alias in self.app_ref.variables.var_aliases:
-            dyn_widget_ref.var_tag = tag  # get tag just in case the alias moved to another variable
+            dyn_widget_ref.var_tag = self.tag  # get tag just in case the alias moved to another variable
         else:
-            if tag != dyn_widget_ref.var_tag:
+            if self.tag != dyn_widget_ref.var_tag:
                 dyn_widget_ref.var_alias = dyn_widget_ref.var_tag  # the tag has changed, and the alias doesn't exist anymore, so default back to tag
             else:
                 dyn_widget_ref.var_alias = dyn_widget_ref.app_ref.variables.alias_by_tag_dict[dyn_widget_ref.var_tag]  # tag is the same, so update with new alias
@@ -537,7 +539,11 @@ class DynLabel(DynItem, Label):
     def on_data_change(self, instance, data):
         value = self.app_ref.variables.get(self.var_alias)
         self.text = self.button_on_text
-        self.text = self.text.replace('%d', value)
+        if self.text == '%d':
+            self.text = self.text.replace('%d', value)
+        else:
+            if self.var_alias == 'SYS_TIME':
+                self.text = datetime.fromtimestamp(float(value)).strftime(self.text)
 
     def on_size(self, *args):
         self.dyn_label_background()
@@ -684,7 +690,8 @@ class MainApp(App):
         super(MainApp, self).close_settings(settings)
 
     def exit_app(self):
-        self.stop()
+        self.variables.can_com.stop_event.set()
+        exit()
 
 class Variables(Widget):
     app_ref = ObjectProperty(None)
@@ -812,9 +819,10 @@ class Variables(Widget):
         self.arduino_clk = Clock.schedule_interval(self.read_arduino, dt)
 
     def read_system(self, dt):
-        self.set_by_alias('SYS_TIME', str((current_milli_time() - initial_time) / 1000))
+        #self.set_by_alias('SYS_TIME_SEC', str((current_milli_time() - initial_time) / 1000))
         self.set_by_alias('SYS_CPU_USAGE', str(psutil.cpu_percent()))
         self.set_by_alias('SYS_CPU_TEMP', os.popen('vcgencmd measure_temp').readline().replace("temp=", "").replace("'C\n", ""))
+        self.set_by_alias('SYS_TIME', str(time.time()))
 
     def update_data(self, dt):
         for i in range(0, 7):
@@ -936,7 +944,7 @@ class Variables(Widget):
         if tag == 'SYS_CLOSE_APP':
             if value == '1':
                 self.set_by_alias(tag, '0')
-                exit()
+                self.app_ref.exit_app()
         if tag == 'SYS_REBOOT':
             if value == '1':
                 os.system("reboot")
