@@ -35,6 +35,7 @@ from kivy.graphics import Color, Rectangle
 from kivy.factory import Factory
 from kivy.uix.filechooser import FileChooserListView
 from kivy_cv import KivyCamera
+from datetimepicker import DatetimePicker
 from can_com import CANcom
 import app_settings
 import cv2
@@ -201,6 +202,9 @@ class ScreenManagement(ScreenManager):
 
 
 class MainScreen(Screen):
+    pass
+
+class DateTimePicker(DatetimePicker):
     pass
 
 class FloatInput(TextInput):
