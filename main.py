@@ -690,6 +690,7 @@ class MainApp(App):
         super(MainApp, self).close_settings(settings)
 
     def exit_app(self):
+        GPIO.cleanup()
         self.variables.can_com.stop_event.set()
         exit()
 
@@ -846,13 +847,13 @@ class Variables(Widget):
         self.old_variable_data = list(self.variable_data)  # 'list()' must be used, otherwise it only copies a reference to the original list
 
         #variable driven events
-        self.SYS_REVERSE_CAM_ON = self.variable_data[30]
+        #self.SYS_REVERSE_CAM_ON = self.variable_data[30]  # NOT NEEDED ANYMORE?
 
         #old way of reading ignition status from DIO module
         #self.DI_IGNITION = self.variable_data[7]  #need to update last due to screen initialization issue
 
         if operating_sys == 'Linux':
-            if GPIO.input(18):
+            if not GPIO.input(27):
                 self.DI_IGNITION = '1'
             else:
                 self.DI_IGNITION = '0'
@@ -947,10 +948,12 @@ class Variables(Widget):
                 self.app_ref.exit_app()
         if tag == 'SYS_REBOOT':
             if value == '1':
+                GPIO.cleanup()
                 os.system("reboot")
                 self.set_by_alias(tag, '0')
         if tag == 'SYS_SHUTDOWN':
             if value == '1':
+                GPIO.cleanup()
                 os.system("poweroff")
                 self.set_by_alias(tag, '0')
 
@@ -1334,7 +1337,7 @@ if __name__ == '__main__':
         GPIO.setup(17, GPIO.OUT)
         GPIO.output(17, 1)  #turn on status output for shutdown circuit
 
-        GPIO.setup(18, GPIO.OUT)  #setup input for ignition status
+        GPIO.setup(27, GPIO.IN)  #setup input for ignition status
     except Exception as e:
         print('GPIO error:')
         print(e)
