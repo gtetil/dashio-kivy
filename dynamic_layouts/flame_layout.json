@@ -371,6 +371,38 @@
         "var_tag": "ROW_20", 
         "widget": "Indicator"
     }, 
+    "30": {
+        "invert": false, 
+        "off_text": "", 
+        "on_text": "", 
+        "pos": [
+            120.0, 
+            400.0
+        ], 
+        "size": [
+            170, 
+            60
+        ], 
+        "var_alias": "ROW 1", 
+        "var_tag": "ROW_1", 
+        "widget": "Toggle Button"
+    }, 
+    "31": {
+        "invert": false, 
+        "off_text": "", 
+        "on_text": "", 
+        "pos": [
+            510.0, 
+            400.0
+        ], 
+        "size": [
+            170, 
+            50
+        ], 
+        "var_alias": "ROW 14", 
+        "var_tag": "ROW_14", 
+        "widget": "Toggle Button"
+    }, 
     "4": {
         "enable": true, 
         "invert": false, 

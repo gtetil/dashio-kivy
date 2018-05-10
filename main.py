@@ -37,6 +37,7 @@ from kivy.uix.filechooser import FileChooserListView
 from kivy_cv import KivyCamera
 from datetimepicker import DatetimePicker
 from can_com import CANcom
+from flame_alarm import FlameAlarm
 import app_settings
 import cv2
 
@@ -88,6 +89,7 @@ class ScreenManagement(ScreenManager):
 
     def on_touch_down(self, touch):
         self.start_inactivity_clock()
+        self.alarm_animation(False)  # stop alarm animation if it was running
         return super(ScreenManagement, self).on_touch_down(touch)
 
     def start_inactivity_clock(self):
@@ -200,6 +202,15 @@ class ScreenManagement(ScreenManager):
             self.app_ref.dynamic_layout.end_modify()
             self.app_ref.variables.toggle_update_clock(True)
 
+    def alarm_animation(self, state):
+        anim = Animation(opacity=0, duration=.5) + Animation(
+            opacity=1, duration=.5)
+        if state:
+            anim.repeat = True
+            anim.start(self.main_screen.ids.alarm_indicator)
+        else:
+            anim.cancel_all(self.main_screen.ids.alarm_indicator)
+            self.main_screen.ids.alarm_indicator.opacity = 0
 
 class MainScreen(Screen):
     pass
@@ -716,8 +727,6 @@ class Variables(Widget):
         self.var_events = [False] * len(self.var_aliases)
         self.arduino_data_len = 7 + 1
         self.arduino_data = ['0'] * self.arduino_data_len
-        #self.can_data_len = 8
-        #self.can_data = ['0'] * self.can_data_len
         self.can_data = 0
         self.set_saved_vars()
         self.toggle_update_clock(True)
@@ -727,6 +736,8 @@ class Variables(Widget):
         Clock.schedule_interval(self.read_system, 1)
         self.can_com = CANcom()
         Clock.schedule_interval(self.read_can, 0.05)
+        self.flame_alarms = [FlameAlarm() for i in range(app_settings.flame_detect_len)]
+        self.alarm_states = [False] * app_settings.flame_detect_len
 
     def set_var_lists(self):
         self.var_aliases = []
@@ -833,11 +844,16 @@ class Variables(Widget):
         for i in range(0, 7):
             self.variable_data[i+1] = self.arduino_data[i]
         for i in range(0, app_settings.flame_detect_len):
-            self.variable_data[i+app_settings.flame_detect_data_start] = str((self.can_data & 2**i) >> i)
+            flame_state = (self.can_data & 2**i) >> i
+            #flame_state = self.get("ROW " + str(i + 1))  # this is used for debug, when CAN isn't available
+            self.variable_data[i+app_settings.flame_detect_data_start] = str(flame_state) # update variable data array with flame states
+            self.alarm_states[i] = self.flame_alarms[i].update(bool(int(flame_state))) # get array of all flame alarm states
+        if any(self.alarm_states):
+            self.app_ref.screen_man.alarm_animation(True)  # show alarm animation
         if (self.variable_data != self.old_variable_data) or self.refresh_data:
             self.data_change = True
-            print('variable data')
-            print(self.variable_data)
+            #print('variable data')
+            #print(self.variable_data)
             self.refresh_data = False
         else:
             self.data_change = False

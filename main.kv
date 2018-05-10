@@ -56,6 +56,7 @@
     ignition_input: int(app.variables.DI_IGNITION)
     reverse_input: int(app.variables.SYS_REVERSE_CAM_ON)
     app_ref: app
+    main_screen: main_screen
 
     canvas.before:
         Color:
@@ -70,6 +71,7 @@
     Screen:
         name: 'off_screen'
     MainScreen:
+        id: main_screen
         name: 'main_screen'
     CameraScreen:
         name: 'camera_screen'
@@ -97,6 +99,11 @@
     FloatLayout:
         id: main_layout
         orientation: 'horizontal'
+
+        Button:
+            id: alarm_indicator
+            opacity: 0
+            background_normal: 'alarm.png'
 
     ScreenItemEditPopup:
         id: item_edit_popup

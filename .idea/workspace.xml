@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="27b3c643-4da9-4ab8-8fac-19f30f795262" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/datetimepicker/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/alarm.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flame_alarm.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dynamic_layouts/flame_layout.json" afterPath="$PROJECT_DIR$/dynamic_layouts/flame_layout.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.kv" afterPath="$PROJECT_DIR$/main.kv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
     </list>
@@ -27,34 +29,44 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15890">
-              <caret line="960" column="37" lean-forward="false" selection-start-line="960" selection-start-column="16" selection-end-line="960" selection-end-column="37" />
+            <state relative-caret-position="320">
+              <caret line="855" column="38" lean-forward="true" selection-start-line="855" selection-start-column="38" selection-end-line="855" selection-end-column="38" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.kv" pinned="false" current-in-tab="true">
+      <file leaf-file-name="can_com.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/can_com.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="19" column="4" lean-forward="true" selection-start-line="19" selection-start-column="4" selection-end-line="20" selection-end-column="46" />
+              <folding>
+                <element signature="e#15#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="flame_alarm.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/flame_alarm.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="9" column="34" lean-forward="true" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.kv" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.kv">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="23" column="28" lean-forward="true" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
+            <state relative-caret-position="306">
+              <caret line="96" column="24" lean-forward="true" selection-start-line="96" selection-start-column="24" selection-end-line="96" selection-end-column="24" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/datetimepicker/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="193" column="59" lean-forward="false" selection-start-line="193" selection-start-column="59" selection-end-line="193" selection-end-column="59" />
-              <folding>
-                <element signature="e#1178#1209#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -99,7 +111,16 @@
             <state relative-caret-position="2278">
               <caret line="134" column="26" lean-forward="false" selection-start-line="134" selection-start-column="26" selection-end-line="134" selection-end-column="26" />
               <folding>
-                <marker date="1525718521429" expanded="true" signature="6499:7141" ph="{&quot;invert&quot;: false...}" />
+                <marker date="1525971357449" expanded="true" signature="6499:7141" ph="{&quot;invert&quot;: false...}" />
+                <marker date="1525971357449" expanded="true" signature="8134:8463" ph="{&quot;enable&quot;: true...}" />
+                <marker date="1525971357449" expanded="true" signature="8251:8299" ph="[...]" />
+                <marker date="1525971357449" expanded="true" signature="8318:8363" ph="[...]" />
+                <marker date="1525971357449" expanded="true" signature="8475:8804" ph="{&quot;enable&quot;: true...}" />
+                <marker date="1525971357449" expanded="true" signature="8592:8640" ph="[...]" />
+                <marker date="1525971357449" expanded="true" signature="8659:8704" ph="[...]" />
+                <marker date="1525971357449" expanded="true" signature="8816:9145" ph="{&quot;enable&quot;: true...}" />
+                <marker date="1525971357449" expanded="true" signature="8933:8981" ph="[...]" />
+                <marker date="1525971357449" expanded="true" signature="9000:9045" ph="[...]" />
               </folding>
             </state>
           </provider>
@@ -108,8 +129,8 @@
       <file leaf-file-name="variables.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/variables.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="11050">
-              <caret line="650" column="7" lean-forward="false" selection-start-line="650" selection-start-column="7" selection-end-line="650" selection-end-column="7" />
+            <state relative-caret-position="747">
+              <caret line="660" column="5" lean-forward="false" selection-start-line="660" selection-start-column="5" selection-end-line="660" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -126,11 +147,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>slide</find>
-      <find>passcode</find>
-      <find>passcod</find>
-      <find>self.app_ref.screen_man.current = &quot;passcode_screen&quot;</find>
-      <find>passcode_sc</find>
       <find>Row</find>
       <find>disp</find>
       <find>ignit</find>
@@ -156,6 +172,11 @@
       <find>shutdo</find>
       <find>engin</find>
       <find>shut</find>
+      <find>True</find>
+      <find>true</find>
+      <find>list</find>
+      <find>tru</find>
+      <find>anim</find>
     </findStrings>
     <replaceStrings>
       <replace>_4</replace>
@@ -205,14 +226,15 @@
         <option value="$PROJECT_DIR$/can_com.py" />
         <option value="$PROJECT_DIR$/dynamic_layouts/dio_layout.json" />
         <option value="$PROJECT_DIR$/main.ini" />
-        <option value="$PROJECT_DIR$/variables.json" />
         <option value="$PROJECT_DIR$/my_settings.py" />
         <option value="$PROJECT_DIR$/datetimetest.py" />
         <option value="$PROJECT_DIR$/garden/garden.datetimepicker/__init__.py" />
         <option value="$PROJECT_DIR$/libs/garden/garden.datetimepicker/__init__.py" />
-        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/datetimepicker/__init__.py" />
+        <option value="$PROJECT_DIR$/variables.json" />
         <option value="$PROJECT_DIR$/main.kv" />
+        <option value="$PROJECT_DIR$/flame_alarm.py" />
+        <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
   </component>
@@ -238,6 +260,7 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -250,23 +273,8 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dashio-kivy" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dashio-kivy" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="datetimepicker" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -846,14 +854,20 @@
       <option name="project" value="LOCAL" />
       <updated>1525692526900</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="- Added popup to adjust date/time.">
+      <created>1525719444578</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1525719444578</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32892805" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2534319" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -907,7 +921,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="- created myscatter for testing scaling buttons." />
     <MESSAGE value="- finished scatter widget proof of concept." />
     <MESSAGE value="- integrated scatter widgets into main application, and debugged." />
     <MESSAGE value="- working out a few variable bugs related to alias addition" />
@@ -932,7 +945,8 @@
     <MESSAGE value="- Selectable dynamic layout done.&#10;- Added ability to communicate with two more Flame Detect modules.&#10;- Created a 24ch flame detect layout." />
     <MESSAGE value="- Changed SYS_TIME to seconds, instead of elapsed time.&#10;- Label can now format SYS_TIME into a time/date stamp." />
     <MESSAGE value="- Changed ignition input GPIO to 27.&#10;- Added GPIO.cleanup() to shutdown, reboot, and exit to make sure output to power supply micro always shuts off." />
-    <option name="LAST_COMMIT_MESSAGE" value="- Changed ignition input GPIO to 27.&#10;- Added GPIO.cleanup() to shutdown, reboot, and exit to make sure output to power supply micro always shuts off." />
+    <MESSAGE value="- Added popup to adjust date/time." />
+    <option name="LAST_COMMIT_MESSAGE" value="- Added popup to adjust date/time." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -941,9 +955,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://C:/Python27/Lib/site-packages/kivy/base.py" />
-    <entry file="file://C:/Python27/Lib/site-packages/kivy/clock.py" />
-    <entry file="file:///usr/lib/python2.7/dist-packages/kivy/data/style.kv" />
     <entry file="file:///usr/lib/python2.7/dist-packages/kivy/uix/scatterlayout.py" />
     <entry file="file:///usr/lib/python2.7/dist-packages/kivy/uix/widget.py" />
     <entry file="file:///usr/lib/python2.7/dist-packages/kivy/uix/scatter.py" />
@@ -1004,16 +1015,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/my_gestures.py" />
-    <entry file="file://$PROJECT_DIR$/kivy_cv.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="31" column="8" lean-forward="false" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="8" />
-          <folding>
-            <element signature="e#15#39#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gesture_board.py" />
     <entry file="file://C:/Python27/Lib/site-packages/kivy/uix/settings.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -1043,16 +1044,17 @@
         <state relative-caret-position="2278">
           <caret line="134" column="26" lean-forward="false" selection-start-line="134" selection-start-column="26" selection-end-line="134" selection-end-column="26" />
           <folding>
-            <marker date="1525718521429" expanded="true" signature="6499:7141" ph="{&quot;invert&quot;: false...}" />
+            <marker date="1525971357449" expanded="true" signature="6499:7141" ph="{&quot;invert&quot;: false...}" />
+            <marker date="1525971357449" expanded="true" signature="8134:8463" ph="{&quot;enable&quot;: true...}" />
+            <marker date="1525971357449" expanded="true" signature="8251:8299" ph="[...]" />
+            <marker date="1525971357449" expanded="true" signature="8318:8363" ph="[...]" />
+            <marker date="1525971357449" expanded="true" signature="8475:8804" ph="{&quot;enable&quot;: true...}" />
+            <marker date="1525971357449" expanded="true" signature="8592:8640" ph="[...]" />
+            <marker date="1525971357449" expanded="true" signature="8659:8704" ph="[...]" />
+            <marker date="1525971357449" expanded="true" signature="8816:9145" ph="{&quot;enable&quot;: true...}" />
+            <marker date="1525971357449" expanded="true" signature="8933:8981" ph="[...]" />
+            <marker date="1525971357449" expanded="true" signature="9000:9045" ph="[...]" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="17" lean-forward="false" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1076,10 +1078,87 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/button.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/my_settings.py" />
+    <entry file="file://$PROJECT_DIR$/datetimetest.py" />
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/garden/garden.datetimepicker/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/navigationdrawer/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4249">
+          <caret line="388" column="0" lean-forward="false" selection-start-line="388" selection-start-column="0" selection-end-line="388" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libs/garden/garden.roulette/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/libs/garden/garden.datetimepicker/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/datetimepicker/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="92" column="25" lean-forward="true" selection-start-line="92" selection-start-column="25" selection-end-line="92" selection-end-column="25" />
+          <folding>
+            <element signature="e#1178#1209#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kivy_cv.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="31" column="8" lean-forward="false" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python27/Lib/re.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/can_com.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="4" lean-forward="true" selection-start-line="19" selection-start-column="4" selection-end-line="20" selection-end-column="46" />
+          <folding>
+            <element signature="e#15#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/variables.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11050">
-          <caret line="650" column="7" lean-forward="false" selection-start-line="650" selection-start-column="7" selection-end-line="650" selection-end-column="7" />
+        <state relative-caret-position="747">
+          <caret line="660" column="5" lean-forward="false" selection-start-line="660" selection-start-column="5" selection-end-line="660" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="17" lean-forward="false" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python27/Lib/site-packages/kivy/uix/widget.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="481">
+          <caret line="340" column="17" lean-forward="false" selection-start-line="340" selection-start-column="17" selection-end-line="340" selection-end-column="17" />
           <folding />
         </state>
       </provider>
@@ -1089,92 +1168,26 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/button.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/my_settings.py" />
-    <entry file="file://$PROJECT_DIR$/can_com.py">
+    <entry file="file://$PROJECT_DIR$/main.kv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="56" column="16" lean-forward="false" selection-start-line="56" selection-start-column="16" selection-end-line="56" selection-end-column="16" />
-          <folding>
-            <element signature="e#15#39#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/datetimetest.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="16" lean-forward="false" selection-start-line="0" selection-start-column="16" selection-end-line="0" selection-end-column="16" />
+        <state relative-caret-position="306">
+          <caret line="96" column="24" lean-forward="true" selection-start-line="96" selection-start-column="24" selection-end-line="96" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py">
+    <entry file="file://$PROJECT_DIR$/flame_alarm.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/garden/garden.datetimepicker/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="631">
-          <caret line="55" column="27" lean-forward="true" selection-start-line="55" selection-start-column="27" selection-end-line="55" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/navigationdrawer/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4249">
-          <caret line="388" column="0" lean-forward="false" selection-start-line="388" selection-start-column="0" selection-end-line="388" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/libs/garden/garden.roulette/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1631">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/libs/garden/garden.datetimepicker/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="415">
-          <caret line="282" column="21" lean-forward="true" selection-start-line="282" selection-start-column="21" selection-end-line="282" selection-end-column="21" />
+        <state relative-caret-position="153">
+          <caret line="9" column="34" lean-forward="true" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15890">
-          <caret line="960" column="37" lean-forward="false" selection-start-line="960" selection-start-column="16" selection-end-line="960" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/datetimepicker/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="193" column="59" lean-forward="false" selection-start-line="193" selection-start-column="59" selection-end-line="193" selection-end-column="59" />
-          <folding>
-            <element signature="e#1178#1209#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.kv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="23" column="28" lean-forward="true" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
+        <state relative-caret-position="320">
+          <caret line="855" column="38" lean-forward="true" selection-start-line="855" selection-start-column="38" selection-end-line="855" selection-end-column="38" />
           <folding />
         </state>
       </provider>
