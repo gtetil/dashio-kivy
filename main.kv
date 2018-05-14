@@ -1,6 +1,7 @@
 #:kivy 1.9.1
 #:import Factory kivy.factory.Factory
 #:import KivyCamera kivy_cv
+#:import get_color_from_hex kivy.utils.get_color_from_hex
 
 <SlideLayout>:
     anim_type: 'slide_above_anim'
@@ -103,7 +104,8 @@
         Button:
             id: alarm_indicator
             opacity: 0
-            background_normal: 'alarm.png'
+            background_normal: ''
+            background_color: 1,0,0,1
 
     ScreenItemEditPopup:
         id: item_edit_popup
@@ -249,6 +251,14 @@
                     size_hint: .2, 1
                     on_release: item_edit_popup.save_item()
 
+                #ModernButton:
+                #    #text: 'Color'
+                #    background_normal: ''
+                #    background_down: ''
+                #    background_color: color_select.color
+                #    size_hint: .2, 1
+                #    on_release: color_select.open()
+
                 ModernButton:
                     text: 'Del'
                     size_hint: .1, 1
@@ -301,6 +311,31 @@
                 size_hint_y: .2
                 text: 'OK'
                 on_release: datetime_picker.set_rpi_datetime(); datetime_popup.dismiss()
+
+    Popup:
+        id: color_select
+        color: get_color_from_hex('#4c32ffff')
+        title: 'Color Slector'
+        content:content
+        on_parent: if self.parent == main_screen: self.parent.remove_widget(self)
+
+        BoxLayout:
+            id: content
+            orientation: 'vertical'
+            ColorPicker:
+                id: clr_picker
+                color: color_select.color
+            BoxLayout:
+                size_hint_y: None
+                height: '27sp'
+                Button:
+                    text: 'ok'
+                    on_release:
+                        color_select.color = clr_picker.color
+                        color_select.dismiss()
+                Button:
+                    text: 'cancel'
+                    on_release: color_select.dismiss()
 
 <-SettingAlias>:
     size_hint: .25, None

@@ -43,7 +43,9 @@ experience. You are encourage to contribute to improve the default appearance
 of the datetimepicker!
 
 '''
-
+import sys
+import os
+sys.path.insert(0, os.path.abspath("path/to/libs/garden/garden.contextmenu"))
 from calendar import monthrange
 from datetime import datetime, timedelta
 from functools import partial
@@ -58,6 +60,7 @@ from kivy.properties import ObjectProperty, NumericProperty, AliasProperty, \
     BooleanProperty
 from kivy.uix.boxlayout import BoxLayout
 import os
+import subprocess
 
 Builder.load_string('''
 <Symbol@Label>:
@@ -180,9 +183,14 @@ class DatetimePicker(BoxLayout):
         self.second.select_and_center(now.second)
 
     def set_rpi_datetime(self):
-        set_time_cmd = "sudo date --set=" + str(self.selected_datetime)
+        print self.selected_datetime
+        set_time_cmd = "sudo date --set='" + str(self.selected_datetime) + "'"
         os.system(set_time_cmd)  # change system date/time
-        os.system('sudo hwclock -w')  # write to RTC
+        p = subprocess.Popen('sudo hwclock -w', shell=True) # write to RTC
+        try:
+            p.wait()
+        except:
+            p.kill()
 
     def add_widgets(self):
         '''children = [
