@@ -1,5 +1,7 @@
 {
     "10": {
+        "color_off": "#373737ff", 
+        "color_on": "#4c32ffff", 
         "enable": true, 
         "invert": false, 
         "off_text": "DIM BACKLIGHT", 
@@ -17,6 +19,8 @@
         "widget": "Toggle Button"
     }, 
     "11": {
+        "color_off": "#373737ff", 
+        "color_on": "#4c32ffff", 
         "enable": true, 
         "invert": false, 
         "off_text": "LOG IN", 
@@ -34,6 +38,8 @@
         "widget": "Button"
     }, 
     "12": {
+        "color_off": "#373737ff", 
+        "color_on": "#4c32ffff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -51,6 +57,8 @@
         "widget": "Indicator"
     }, 
     "15": {
+        "color_off": "#373737ff", 
+        "color_on": "#4c32ffff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -68,6 +76,8 @@
         "widget": "Indicator"
     }, 
     "17": {
+        "color_off": "#373737ff", 
+        "color_on": "#4c32ffff", 
         "invert": false, 
         "off_text": "", 
         "on_text": "", 
@@ -84,6 +94,8 @@
         "widget": "Toggle Button"
     }, 
     "18": {
+        "color_off": "#373737ff", 
+        "color_on": "#4c32ffff", 
         "invert": false, 
         "off_text": " ", 
         "on_text": " ", 
@@ -100,6 +112,8 @@
         "widget": "Toggle Button"
     }, 
     "19": {
+        "color_off": "#373737ff", 
+        "color_on": "#4c32ffff", 
         "invert": false, 
         "off_text": " ", 
         "on_text": " ", 
@@ -116,6 +130,8 @@
         "widget": "Toggle Button"
     }, 
     "2": {
+        "color_off": "#373737ff", 
+        "color_on": "#4c32ffff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -133,6 +149,8 @@
         "widget": "Toggle Button"
     }, 
     "20": {
+        "color_off": "#373737ff", 
+        "color_on": "#4c32ffff", 
         "invert": false, 
         "off_text": "", 
         "on_text": "REAR LIGHTS", 
@@ -149,6 +167,8 @@
         "widget": "Label"
     }, 
     "21": {
+        "color_off": "#373737ff", 
+        "color_on": "#4c32ffff", 
         "invert": false, 
         "off_text": "", 
         "on_text": " REV CAM", 
@@ -165,6 +185,8 @@
         "widget": "Label"
     }, 
     "22": {
+        "color_off": "#373737ff", 
+        "color_on": "#4c32ffff", 
         "invert": false, 
         "off_text": "", 
         "on_text": "%d", 
@@ -176,11 +198,13 @@
             40, 
             30
         ], 
-        "var_alias": "SYS_TIME_SEC",
-        "var_tag": "SYS_TIME_SEC",
+        "var_alias": "SYS_TIME_SEC", 
+        "var_tag": "SYS_TIME_SEC", 
         "widget": "Label"
     }, 
     "23": {
+        "color_off": "#373737ff", 
+        "color_on": "#4c32ffff", 
         "invert": false, 
         "off_text": "", 
         "on_text": "SYS TIME:", 
@@ -197,6 +221,8 @@
         "widget": "Label"
     }, 
     "24": {
+        "color_off": "#373737ff", 
+        "color_on": "#4c32ffff", 
         "invert": false, 
         "off_text": "", 
         "on_text": "CPU USAGE: %d%", 
@@ -213,6 +239,8 @@
         "widget": "Label"
     }, 
     "25": {
+        "color_off": "#373737ff", 
+        "color_on": "#4c32ffff", 
         "invert": false, 
         "off_text": "", 
         "on_text": "CPU TEMP: %d", 
@@ -229,6 +257,8 @@
         "widget": "Label"
     }, 
     "3": {
+        "color_off": "#373737ff", 
+        "color_on": "#4c32ffff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -246,6 +276,8 @@
         "widget": "Indicator"
     }, 
     "6": {
+        "color_off": "#373737ff", 
+        "color_on": "#4c32ffff", 
         "enable": true, 
         "invert": false, 
         "off_text": "IGNITION", 
@@ -263,6 +295,8 @@
         "widget": "Indicator"
     }, 
     "8": {
+        "color_off": "#373737ff", 
+        "color_on": "#4c32ffff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -280,6 +314,8 @@
         "widget": "Toggle Button"
     }, 
     "9": {
+        "color_off": "#373737ff", 
+        "color_on": "#4c32ffff", 
         "enable": true, 
         "invert": false, 
         "off_text": "SYSTEM ACTIVE", 

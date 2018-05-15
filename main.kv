@@ -2,6 +2,7 @@
 #:import Factory kivy.factory.Factory
 #:import KivyCamera kivy_cv
 #:import get_color_from_hex kivy.utils.get_color_from_hex
+#:import get_hex_from_color kivy.utils.get_hex_from_color
 
 <SlideLayout>:
     anim_type: 'slide_above_anim'
@@ -11,7 +12,7 @@
 
     ModernButton:
         text: 'MAIN'
-        on_release: app.screen_man.back_to_main()
+        on_release: app.screen_man.back_to_main(toggle=True)
 
     BoxLayout:
         orientation: 'horizontal'
@@ -89,6 +90,21 @@
 <MyScatterLayout>:
     app_ref: app
 
+<ScreenEditLabel>:
+    text: 'Screen Edit Mode'
+    color: 1,1,1,1
+    text_size: self.size
+    font_size: '12sp'
+    halign: 'center'
+    valign: 'middle'
+    background_normal: ''
+    background_down: ''
+    background_color: 1,1,0,.1
+    size_hint: None, None
+    size: 800, 15
+    pos_hint: {'middle': 1, 'bottom': 1}
+    on_release: app.screen_man.back_to_main(toggle=False)
+
 <MainScreen>:
     id: main_screen
     app_ref: app
@@ -115,6 +131,8 @@
         button_on_text: button_on_text
         button_off_text: button_off_text
         invert_check: invert_check
+        color_on_button: color_on_button
+        color_off_button: color_off_button
         variable_spinner: variable_spinner
         widget_spinner: widget_spinner
         title: "Modify"
@@ -192,7 +210,17 @@
 
                     TextInput:
                         id: button_on_text
-                        size_hint: .75, 1
+                        size_hint: .55, 1
+
+                    BoxLayout:
+                        size_hint: .03, 1
+
+                    ModernButton:
+                        id: color_on_button
+                        background_normal: ''
+                        background_down: ''
+                        size_hint: .17, 1
+                        on_release: color_select.color_open(item_edit_popup, True)
 
                 BoxLayout:
                     orientation: 'horizontal'
@@ -208,7 +236,17 @@
 
                     TextInput:
                         id: button_off_text
-                        size_hint: .75, 1
+                        size_hint: .55, 1
+
+                    BoxLayout:
+                        size_hint: .03, 1
+
+                    ModernButton:
+                        id: color_off_button
+                        background_normal: ''
+                        background_down: ''
+                        size_hint: .17, 1
+                        on_release: color_select.color_open(item_edit_popup, False)
 
             BoxLayout:
                 orientation: 'horizontal'
@@ -217,10 +255,12 @@
 
                 BoxLayout:
                     orientation: 'horizontal'
+                    size_hint: .5, 1
+                    padding: 1
 
                     Label:
                         text: 'Invert:'
-                        size_hint: .1, 1
+                        size_hint: .098, 1
                         text_size: self.size
                         halign: 'left'
                         valign: 'middle'
@@ -231,7 +271,7 @@
                         halign: 'left'
 
                     BoxLayout:
-                        size_hint: .82, 1
+                        size_hint: .822, 1
 
             BoxLayout:
                 orientation: 'horizontal'
@@ -244,20 +284,12 @@
                 spacing: 5
 
                 BoxLayout:
-                    size_hint: .5, 1
+                    size_hint: .3, 1
 
                 ModernButton:
                     text: 'OK'
                     size_hint: .2, 1
                     on_release: item_edit_popup.save_item()
-
-                #ModernButton:
-                #    #text: 'Color'
-                #    background_normal: ''
-                #    background_down: ''
-                #    background_color: color_select.color
-                #    size_hint: .2, 1
-                #    on_release: color_select.open()
 
                 ModernButton:
                     text: 'Del'
@@ -312,10 +344,10 @@
                 text: 'OK'
                 on_release: datetime_picker.set_rpi_datetime(); datetime_popup.dismiss()
 
-    Popup:
+    ColorSelector:
         id: color_select
-        color: get_color_from_hex('#4c32ffff')
-        title: 'Color Slector'
+        widget_color: '#4c32ffff'
+        title: 'Color Selector'
         content:content
         on_parent: if self.parent == main_screen: self.parent.remove_widget(self)
 
@@ -324,18 +356,18 @@
             orientation: 'vertical'
             ColorPicker:
                 id: clr_picker
-                color: color_select.color
+                color: get_color_from_hex(color_select.widget_color)
             BoxLayout:
                 size_hint_y: None
                 height: '27sp'
                 Button:
                     text: 'ok'
                     on_release:
-                        color_select.color = clr_picker.color
-                        color_select.dismiss()
+                        color_select.widget_color = get_hex_from_color(clr_picker.color)
+                        color_select.color_save()
                 Button:
                     text: 'cancel'
-                    on_release: color_select.dismiss()
+                    on_release: color_select.color_close()
 
 <-SettingAlias>:
     size_hint: .25, None
@@ -494,8 +526,17 @@
     font_size: '18sp'
     halign: 'center'
     valign: 'middle'
-    background_normal: 'button.png'
-    background_down: 'button_pressed.png'
+    background_normal: ''
+    background_down: ''
+    background_color: 1,1,1,0
+    canvas.before:
+        Clear
+        Color:
+            rgba: get_color_from_hex(self.canvas_color)
+        RoundedRectangle:
+            size: self.size[0] - 2, self.size[1] - 2
+            pos: self.pos[0] + 1, self.pos[1] + 1
+            radius: (dp(4),)
 
 <ModernButton@Button>:
     background_normal: 'button.png'
@@ -519,6 +560,8 @@
     button_on_text: ''
     button_off_text: ''
     invert: False
+    color_on: '#4c32ffff'  # blue
+    color_off: '#373737ff' # charcoal
 
 <PasscodeScreen>:
     id: passcode_screen

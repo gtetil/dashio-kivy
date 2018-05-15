@@ -34,6 +34,7 @@ from kivy.graphics.transformation import Matrix
 from kivy.graphics import Color, Rectangle
 from kivy.factory import Factory
 from kivy.uix.filechooser import FileChooserListView
+from kivy.utils import get_color_from_hex, get_hex_from_color
 from kivy_cv import KivyCamera
 from datetimepicker import DatetimePicker
 from can_com import CANcom
@@ -195,9 +196,10 @@ class ScreenManagement(ScreenManager):
             self.passcode_type = 'admin'
             self.current = "passcode_screen"
 
-    def back_to_main(self):
+    def back_to_main(self, toggle):
         self.current = 'main_screen'
-        self.app_ref.slide_layout.toggle_state()
+        if toggle:
+            self.app_ref.slide_layout.toggle_state()
         if self.app_ref.dynamic_layout.modify_mode:
             self.app_ref.dynamic_layout.end_modify()
             self.app_ref.variables.toggle_update_clock(True)
@@ -212,11 +214,49 @@ class ScreenManagement(ScreenManager):
             anim.cancel_all(self.main_screen.ids.alarm_indicator)
             self.main_screen.ids.alarm_indicator.opacity = 0
 
-class MainScreen(Screen):
+class ScreenEditLabel(Button):
     pass
+
+class MainScreen(Screen):
+    app_ref = ObjectProperty(None)
+
+    def __init__(self,**kwargs):
+        super (MainScreen,self).__init__(**kwargs)
+        self.label = ScreenEditLabel()
+
+    def screen_edit_label(self, state):
+        if state:
+            self.add_widget(self.label)
+        else:
+            self.remove_widget(self.label)
 
 class DateTimePicker(DatetimePicker):
     pass
+
+class ColorSelector(Popup):
+    app_ref = ObjectProperty(None)
+    widget_color = StringProperty('')
+    pop_up_ref = ObjectProperty(None)
+    on_select = False
+
+    def color_open(self, pop_up_ref, on_select):
+        self.pop_up_ref = pop_up_ref
+        self.on_select = on_select
+        if on_select:
+            self.widget_color = get_hex_from_color(pop_up_ref.color_on_button.background_color)
+        else:
+            self.widget_color = get_hex_from_color(pop_up_ref.color_off_button.background_color)
+        self.open()
+
+    def color_save(self):
+        if self.on_select:
+            self.pop_up_ref.color_on_button.background_color = get_color_from_hex(self.widget_color)
+        else:
+            self.pop_up_ref.color_off_button.background_color = get_color_from_hex(self.widget_color)
+        self.dismiss()
+
+    def color_close(self):
+        self.dismiss()
 
 class FloatInput(TextInput):
     pat = re.compile('[^0-9]')
@@ -260,7 +300,9 @@ class DynamicLayout(Widget):
                                          var_tag=self.dyn_layout_json[id]['var_tag'],
                                          var_alias=self.dyn_layout_json[id]['var_alias'],
                                          widget=widget,
-                                         invert=self.dyn_layout_json[id]['invert'])
+                                         invert=self.dyn_layout_json[id]['invert'],
+                                         color_on=self.dyn_layout_json[id]['color_on'],
+                                         color_off=self.dyn_layout_json[id]['color_off'])
         elif widget == 'Button':
             dyn_widget = DynButton(text='',
                                    id=str(id),
@@ -269,7 +311,9 @@ class DynamicLayout(Widget):
                                    var_tag=self.dyn_layout_json[id]['var_tag'],
                                    var_alias=self.dyn_layout_json[id]['var_alias'],
                                    widget=widget,
-                                   invert=self.dyn_layout_json[id]['invert'])
+                                   invert=self.dyn_layout_json[id]['invert'],
+                                   color_on=self.dyn_layout_json[id]['color_on'],
+                                   color_off=self.dyn_layout_json[id]['color_off'])
         else:
             dyn_widget = DynLabel(text='',
                                    id=str(id),
@@ -278,7 +322,9 @@ class DynamicLayout(Widget):
                                    var_tag=self.dyn_layout_json[id]['var_tag'],
                                    var_alias=self.dyn_layout_json[id]['var_alias'],
                                    widget=widget,
-                                   invert=self.dyn_layout_json[id]['invert'])
+                                   invert=self.dyn_layout_json[id]['invert'],
+                                   color_on=self.dyn_layout_json[id]['color_on'],
+                                   color_off=self.dyn_layout_json[id]['color_off'])
         scatter_layout = MyScatterLayout(id=str(id) + '_scatter',
                                          do_rotation=False,
                                          size=(self.dyn_layout_json[id]['size'][0], self.dyn_layout_json[id]['size'][1]),
@@ -332,6 +378,8 @@ class DynamicLayout(Widget):
         new_json['invert'] = False
         new_json['size'] = (170, 160)
         new_json['pos'] = (320, 160)
+        new_json['color_on'] = '#4c32ffff'  # blue
+        new_json['color_off'] = '#373737ff' # charcoal
         self.dyn_layout_json.update({new_id: new_json})
         self.create_dyn_widget(new_id)
         self.update_widget(new_id)
@@ -349,6 +397,8 @@ class DynamicLayout(Widget):
         self.dyn_layout_json[id]['var_alias'] = dyn_widget_ref.var_alias
         self.dyn_layout_json[id]['widget'] = dyn_widget_ref.widget
         self.dyn_layout_json[id]['invert'] = dyn_widget_ref.invert
+        self.dyn_layout_json[id]['color_on'] = dyn_widget_ref.color_on
+        self.dyn_layout_json[id]['color_off'] = dyn_widget_ref.color_off
         self.dyn_layout_json[id]['size'] = scatter_ref.size
         self.dyn_layout_json[id]['pos'] = scatter_ref.pos
 
@@ -378,34 +428,21 @@ class DynamicLayout(Widget):
 
     def modify_screen(self):
         self.modify_mode = True
+        self.app_ref.main_screen_ref.screen_edit_label(True)
+        #self.app_ref.main_screen_ref.ids.screen_edit_label.text = 'Screen Edit Mode'
         for id, dyn_widget in self.dyn_widget_dict.items():
             if dyn_widget.widget == 'Label':
                 dyn_widget.dyn_label_background()
-            else:
-                dyn_widget.background_color = 1, 1, 1, .3
-                dyn_widget.background_normal = 'button_pressed.png'
-                dyn_widget.background_down = 'button_pressed.png'
-                self.animate(dyn_widget)
 
     def end_modify(self):
         self.modify_mode = False
+        self.app_ref.main_screen_ref.screen_edit_label(False)
+        #self.app_ref.main_screen_ref.ids.screen_edit_label.text = ''
         for id, dyn_widget in self.dyn_widget_dict.items():
-            Animation.cancel_all(dyn_widget)
             if dyn_widget.widget == 'Label':
                 dyn_widget.dyn_label_background()
-            else:
-                dyn_widget.color = 1, 1, 1, 1
-                dyn_widget.background_color = 1, 1, 1, 1
-                dyn_widget.background_normal = 'button.png'
-                dyn_widget.background_down = 'button_pressed.png'
         self.save_layout() #save for size and position changes
         self.app_ref.variables.refresh_data = True
-
-    def animate(self, widget):
-        anim = Animation(background_color=[1, 1, 1, 0.3],  duration=1, t='linear') + Animation(
-            background_color=[1, 1, 1, .5], duration=1, t='linear')
-        anim.repeat = True
-        anim.start(widget)
 
 class ScreenItemEditPopup(Popup):
     app_ref = ObjectProperty(None)
@@ -424,6 +461,8 @@ class ScreenItemEditPopup(Popup):
             self.button_on_text.text = self.item.button_on_text
             self.button_off_text.text = self.item.button_off_text
             self.invert_check.active = self.item.invert
+            self.color_on_button.background_color = get_color_from_hex(self.item.color_on)
+            self.color_off_button.background_color = get_color_from_hex(self.item.color_off)
             self.variable_spinner.text = self.item.var_alias
             self.widget_spinner.text = self.item.widget
             self.open()
@@ -432,6 +471,8 @@ class ScreenItemEditPopup(Popup):
         self.item.button_on_text = self.button_on_text.text
         self.item.button_off_text = self.button_off_text.text
         self.item.invert = self.invert_check.active
+        self.item.color_on = get_hex_from_color(self.color_on_button.background_color)
+        self.item.color_off = get_hex_from_color(self.color_off_button.background_color)
         self.item.var_alias = self.variable_spinner.text
         self.item.var_tag = self.app_ref.variables.tag_by_alias_dict[self.item.var_alias]  #save tag of associated alias, in case alias is changed/deleted
         if self.item.widget != self.widget_spinner.text:
@@ -457,6 +498,9 @@ class DynItem(Widget):
     widget = StringProperty("")
     button_on_text = StringProperty("")
     button_off_text = StringProperty("")
+    color_on = StringProperty("")
+    color_off = StringProperty("")
+    canvas_color = StringProperty("")
     ignition_input = NumericProperty(0)
     digital_inputs = NumericProperty(0)
     app_ref = ObjectProperty(None)
@@ -471,12 +515,14 @@ class DynItem(Widget):
         bool_state = xor(bool_state, self.invert)
         if bool_state:
             self.state = 'down'
+            self.canvas_color = self.color_on
             if self.button_on_text != '':
                 self.text = self.button_on_text
             else:
                 self.text = self.var_alias
         else:
             self.state = 'normal'
+            self.canvas_color = self.color_off
             if self.button_off_text != '':
                 self.text = self.button_off_text
             else:
@@ -485,6 +531,7 @@ class DynItem(Widget):
     def on_ignition_input(self, instance, state):
         if state == 0:
             self.state = 'normal'
+            self.canvas_color = self.color_off
             if self.button_off_text != '':
                 self.text = self.button_off_text
             else:
@@ -541,7 +588,7 @@ class DynItem(Widget):
             self.app_ref.variables.refresh_data = True
 
 class DynToggleButton(DynItem, ToggleButton):
-    pass
+    canvas_color = StringProperty("")
 
 class DynButton(DynItem, Button):
     pass
@@ -845,7 +892,7 @@ class Variables(Widget):
             self.variable_data[i+1] = self.arduino_data[i]
         for i in range(0, app_settings.flame_detect_len):
             flame_state = (self.can_data & 2**i) >> i
-            #flame_state = self.get("ROW " + str(i + 1))  # this is used for debug, when CAN isn't available
+            flame_state = self.get("ROW " + str(i + 1))  # this is used for debug, when CAN isn't available
             self.variable_data[i+app_settings.flame_detect_data_start] = str(flame_state) # update variable data array with flame states
             self.alarm_states[i] = self.flame_alarms[i].update(bool(int(flame_state))) # get array of all flame alarm states
         if any(self.alarm_states):
