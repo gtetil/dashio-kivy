@@ -1,6 +1,6 @@
 {
     "0": {
-        "color_off": "#373737ff", 
+        "color_off": "#373737a5", 
         "color_on": "#1952ffff", 
         "enable": true, 
         "invert": false, 
@@ -19,7 +19,7 @@
         "widget": "Indicator"
     }, 
     "1": {
-        "color_off": "#373737ff", 
+        "color_off": "#373737a5", 
         "color_on": "#4c32ffff", 
         "enable": true, 
         "invert": false, 
@@ -38,7 +38,7 @@
         "widget": "Indicator"
     }, 
     "10": {
-        "color_off": "#373737ff", 
+        "color_off": "#373737a5", 
         "color_on": "#4c32ffff", 
         "enable": true, 
         "invert": false, 
@@ -57,7 +57,7 @@
         "widget": "Indicator"
     }, 
     "11": {
-        "color_off": "#373737ff", 
+        "color_off": "#373737a5", 
         "color_on": "#4c32ffff", 
         "enable": true, 
         "invert": false, 
@@ -76,7 +76,7 @@
         "widget": "Indicator"
     }, 
     "12": {
-        "color_off": "#373737ff", 
+        "color_off": "#373737a5", 
         "color_on": "#4c32ffff", 
         "enable": true, 
         "invert": false, 
@@ -95,7 +95,7 @@
         "widget": "Indicator"
     }, 
     "13": {
-        "color_off": "#373737ff", 
+        "color_off": "#373737a5", 
         "color_on": "#4c32ffff", 
         "enable": true, 
         "invert": false, 
@@ -114,7 +114,7 @@
         "widget": "Indicator"
     }, 
     "14": {
-        "color_off": "#373737ff", 
+        "color_off": "#373737a5", 
         "color_on": "#4c32ffff", 
         "enable": true, 
         "invert": false, 
@@ -133,7 +133,7 @@
         "widget": "Indicator"
     }, 
     "15": {
-        "color_off": "#373737ff", 
+        "color_off": "#373737a5", 
         "color_on": "#4c32ffff", 
         "enable": true, 
         "invert": false, 
@@ -152,7 +152,7 @@
         "widget": "Indicator"
     }, 
     "16": {
-        "color_off": "#373737ff", 
+        "color_off": "#373737a5", 
         "color_on": "#4c32ffff", 
         "enable": true, 
         "invert": false, 
@@ -171,7 +171,7 @@
         "widget": "Indicator"
     }, 
     "17": {
-        "color_off": "#373737ff", 
+        "color_off": "#373737a5", 
         "color_on": "#4c32ffff", 
         "enable": true, 
         "invert": false, 
@@ -190,7 +190,7 @@
         "widget": "Indicator"
     }, 
     "2": {
-        "color_off": "#373737ff", 
+        "color_off": "#373737a5", 
         "color_on": "#4c32ffff", 
         "enable": true, 
         "invert": false, 
@@ -209,8 +209,8 @@
         "widget": "Indicator"
     }, 
     "20": {
-        "color_off": "#373737ff", 
-        "color_on": "#3619ffff", 
+        "color_off": "#373737a5", 
+        "color_on": "#4c32ffff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -228,7 +228,7 @@
         "widget": "Indicator"
     }, 
     "21": {
-        "color_off": "#373737ff", 
+        "color_off": "#373737a5", 
         "color_on": "#4c32ffff", 
         "enable": true, 
         "invert": false, 
@@ -247,7 +247,7 @@
         "widget": "Indicator"
     }, 
     "22": {
-        "color_off": "#373737ff", 
+        "color_off": "#373737a5", 
         "color_on": "#4c32ffff", 
         "enable": true, 
         "invert": false, 
@@ -266,7 +266,7 @@
         "widget": "Indicator"
     }, 
     "23": {
-        "color_off": "#373737ff", 
+        "color_off": "#373737a5", 
         "color_on": "#4c32ffff", 
         "enable": true, 
         "invert": false, 
@@ -285,7 +285,7 @@
         "widget": "Indicator"
     }, 
     "24": {
-        "color_off": "#373737ff", 
+        "color_off": "#373737a5", 
         "color_on": "#4c32ffff", 
         "enable": true, 
         "invert": false, 
@@ -304,7 +304,7 @@
         "widget": "Indicator"
     }, 
     "25": {
-        "color_off": "#373737ff", 
+        "color_off": "#373737a5", 
         "color_on": "#4c32ffff", 
         "enable": true, 
         "invert": false, 
@@ -323,7 +323,7 @@
         "widget": "Indicator"
     }, 
     "26": {
-        "color_off": "#373737ff", 
+        "color_off": "#373737a5", 
         "color_on": "#4c32ffff", 
         "enable": true, 
         "invert": false, 
@@ -342,7 +342,7 @@
         "widget": "Indicator"
     }, 
     "27": {
-        "color_off": "#373737ff", 
+        "color_off": "#373737a5", 
         "color_on": "#4c32ffff", 
         "enable": true, 
         "invert": false, 
@@ -361,7 +361,7 @@
         "widget": "Indicator"
     }, 
     "28": {
-        "color_off": "#373737ff", 
+        "color_off": "#373737a5", 
         "color_on": "#4c32ffff", 
         "invert": false, 
         "off_text": "", 
@@ -379,7 +379,7 @@
         "widget": "Label"
     }, 
     "29": {
-        "color_off": "#373737ff", 
+        "color_off": "#373737a5", 
         "color_on": "#4c32ffff", 
         "invert": false, 
         "off_text": "", 
@@ -397,7 +397,7 @@
         "widget": "Label"
     }, 
     "3": {
-        "color_off": "#373737ff", 
+        "color_off": "#373737a5", 
         "color_on": "#4c32ffff", 
         "enable": true, 
         "invert": false, 
@@ -416,32 +416,32 @@
         "widget": "Indicator"
     }, 
     "30": {
-        "color_off": "#373737ff", 
-        "color_on": "#3619ffff", 
+        "color_off": "#373737a5", 
+        "color_on": "#4c32ffff", 
         "invert": false, 
         "off_text": "", 
         "on_text": "", 
         "pos": [
-            110.0, 
+            120.0, 
             410.0
         ], 
         "size": [
             150, 
-            50
+            40
         ], 
         "var_alias": "ROW 1", 
         "var_tag": "ROW_1", 
         "widget": "Toggle Button"
     }, 
     "31": {
-        "color_off": "#373737ff", 
+        "color_off": "#373737a5", 
         "color_on": "#4c32ffff", 
         "invert": false, 
         "off_text": "", 
         "on_text": "", 
         "pos": [
             510.0, 
-            410.0
+            400.0
         ], 
         "size": [
             190, 
@@ -452,7 +452,7 @@
         "widget": "Toggle Button"
     }, 
     "4": {
-        "color_off": "#373737ff", 
+        "color_off": "#373737a5", 
         "color_on": "#4c32ffff", 
         "enable": true, 
         "invert": false, 
@@ -471,7 +471,7 @@
         "widget": "Indicator"
     }, 
     "5": {
-        "color_off": "#373737ff", 
+        "color_off": "#373737a5", 
         "color_on": "#4c32ffff", 
         "enable": true, 
         "invert": false, 
@@ -490,7 +490,7 @@
         "widget": "Indicator"
     }, 
     "6": {
-        "color_off": "#373737ff", 
+        "color_off": "#373737a5", 
         "color_on": "#4c32ffff", 
         "enable": true, 
         "invert": false, 
@@ -509,7 +509,7 @@
         "widget": "Indicator"
     }, 
     "7": {
-        "color_off": "#373737ff", 
+        "color_off": "#373737a5", 
         "color_on": "#4c32ffff", 
         "enable": true, 
         "invert": false, 
