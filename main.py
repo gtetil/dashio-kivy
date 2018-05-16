@@ -87,6 +87,7 @@ class ScreenManagement(ScreenManager):
         super (ScreenManagement,self).__init__(**kwargs)
         self.transition = NoTransition()
         self.start_inactivity_clock()
+        self.alarm_state = False
 
     def on_touch_down(self, touch):
         self.start_inactivity_clock()
@@ -213,6 +214,7 @@ class ScreenManagement(ScreenManager):
         else:
             anim.cancel_all(self.main_screen.ids.alarm_indicator)
             self.main_screen.ids.alarm_indicator.opacity = 0
+        self.alarm_state = state
 
 class ScreenEditLabel(Button):
     pass
@@ -895,7 +897,7 @@ class Variables(Widget):
             flame_state = self.get("ROW " + str(i + 1))  # this is used for debug, when CAN isn't available
             self.variable_data[i+app_settings.flame_detect_data_start] = str(flame_state) # update variable data array with flame states
             self.alarm_states[i] = self.flame_alarms[i].update(bool(int(flame_state))) # get array of all flame alarm states
-        if any(self.alarm_states):
+        if any(self.alarm_states) and not self.app_ref.screen_man.alarm_state:
             self.app_ref.screen_man.alarm_animation(True)  # show alarm animation
         if (self.variable_data != self.old_variable_data) or self.refresh_data:
             self.data_change = True

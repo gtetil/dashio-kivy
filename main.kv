@@ -62,10 +62,8 @@
 
     canvas.before:
         Color:
-            #rgba: .271, .275, .306, 1
-
-            #rgba: .337, .341, .38, 1
-            rgba: .153, .153, .153, 1
+            #rgba: .153, .153, .153, 1
+            rgba: 1, 1, 1, 1
         Rectangle:
             pos: self.pos
             size: self.size
@@ -92,14 +90,14 @@
 
 <ScreenEditLabel>:
     text: 'Screen Edit Mode'
-    color: 1,1,1,1
+    color: 0,0,0,1
     text_size: self.size
     font_size: '12sp'
     halign: 'center'
     valign: 'middle'
     background_normal: ''
     background_down: ''
-    background_color: 1,1,0,.1
+    background_color: 1,1,0,.3
     size_hint: None, None
     size: 800, 15
     pos_hint: {'middle': 1, 'bottom': 1}
@@ -529,15 +527,22 @@
     background_normal: ''
     background_down: ''
     background_color: 1,1,1,0
+    color: 0,0,0,1
     canvas.before:
         Clear
         Color:
-            rgba: get_color_from_hex(self.canvas_color)
+            rgba: 0,0,0,1
         RoundedRectangle:
-            #size: self.size
-            #pos: self.pos
             size: self.size[0] - 2, self.size[1] - 2
             pos: self.pos[0] + 1, self.pos[1] + 1
+            radius: (dp(0),)
+        Color:
+            rgba: get_color_from_hex(self.canvas_color)
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            size: self.size[0] - 4, self.size[1] - 4
+            pos: self.pos[0] + 2, self.pos[1] + 2
             radius: (dp(0),)
 
 <ModernButton@Button>:
@@ -552,6 +557,7 @@
     font_size: self.size[1] / 2
     halign: 'center'
     valign: 'middle'
+    color: 0,0,0,1
 
 <DynItem>:
     app_ref: app

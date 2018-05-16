@@ -5,6 +5,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dynamic_layouts/flame_layout.json" afterPath="$PROJECT_DIR$/dynamic_layouts/flame_layout.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.kv" afterPath="$PROJECT_DIR$/main.kv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
     </list>
     <list id="1e95b302-9845-4a63-bdc7-46bebc48f801" name="Revert: " comment="" />
     <list id="9acf94dc-4ce7-4798-ab9b-5692da952639" name="Revert:" comment="" />
@@ -29,8 +30,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="354">
-              <caret line="220" column="34" lean-forward="true" selection-start-line="220" selection-start-column="34" selection-end-line="220" selection-end-column="34" />
+            <state relative-caret-position="9648">
+              <caret line="898" column="31" lean-forward="false" selection-start-line="898" selection-start-column="31" selection-end-line="898" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -39,8 +40,8 @@
       <file leaf-file-name="main.kv" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.kv">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="475">
-              <caret line="539" column="12" lean-forward="false" selection-start-line="539" selection-start-column="12" selection-end-line="539" selection-end-column="12" />
+            <state relative-caret-position="8387">
+              <caret line="528" column="29" lean-forward="true" selection-start-line="528" selection-start-column="29" selection-end-line="528" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -49,9 +50,60 @@
       <file leaf-file-name="flame_layout.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dynamic_layouts/flame_layout.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="389">
-              <caret line="238" column="17" lean-forward="true" selection-start-line="238" selection-start-column="17" selection-end-line="238" selection-end-column="17" />
-              <folding />
+            <state relative-caret-position="51">
+              <caret line="3" column="33" lean-forward="false" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="33" />
+              <folding>
+                <marker date="1526477210803" expanded="true" signature="0:10650" ph="{...}" />
+                <marker date="1526477210803" expanded="true" signature="11:407" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
+                <marker date="1526477210803" expanded="true" signature="197:243" ph="[...]" />
+                <marker date="1526477210803" expanded="true" signature="262:307" ph="[...]" />
+                <marker date="1526477210803" expanded="true" signature="419:817" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
+                <marker date="1526477210803" expanded="true" signature="605:653" ph="[...]" />
+                <marker date="1526477210803" expanded="true" signature="672:717" ph="[...]" />
+                <marker date="1526477210803" expanded="true" signature="830:1225" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
+                <marker date="1526477210803" expanded="true" signature="1016:1063" ph="[...]" />
+                <marker date="1526477210803" expanded="true" signature="1082:1127" ph="[...]" />
+                <marker date="1526477210803" expanded="true" signature="1238:1637" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
+                <marker date="1526477210803" expanded="true" signature="1424:1473" ph="[...]" />
+                <marker date="1526477210803" expanded="true" signature="1492:1537" ph="[...]" />
+                <marker date="1526477210803" expanded="true" signature="1650:2049" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
+                <marker date="1526477210803" expanded="true" signature="1836:1885" ph="[...]" />
+                <marker date="1526477210803" expanded="true" signature="1904:1949" ph="[...]" />
+                <marker date="1526477210803" expanded="true" signature="2062:2461" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
+                <marker date="1526477210803" expanded="true" signature="2248:2297" ph="[...]" />
+                <marker date="1526477210803" expanded="true" signature="2316:2361" ph="[...]" />
+                <marker date="1526477210803" expanded="true" signature="2474:2873" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
+                <marker date="1526477210803" expanded="true" signature="2660:2709" ph="[...]" />
+                <marker date="1526477210803" expanded="true" signature="2728:2773" ph="[...]" />
+                <marker date="1526477210803" expanded="true" signature="2886:3285" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
+                <marker date="1526477210803" expanded="true" signature="3072:3121" ph="[...]" />
+                <marker date="1526477210803" expanded="true" signature="3140:3185" ph="[...]" />
+                <marker date="1526477210803" expanded="true" signature="3298:3697" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
+                <marker date="1526477210803" expanded="true" signature="3484:3533" ph="[...]" />
+                <marker date="1526477210803" expanded="true" signature="3552:3597" ph="[...]" />
+                <marker date="1526477210803" expanded="true" signature="3710:4109" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
+                <marker date="1526477210803" expanded="true" signature="3896:3945" ph="[...]" />
+                <marker date="1526477210803" expanded="true" signature="3964:4009" ph="[...]" />
+                <marker date="1526477210803" expanded="true" signature="4121:4519" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
+                <marker date="1526477210803" expanded="true" signature="4307:4355" ph="[...]" />
+                <marker date="1526477210803" expanded="true" signature="4374:4419" ph="[...]" />
+                <marker date="1526477210803" expanded="true" signature="4532:4911" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
+                <marker date="1526477210803" expanded="true" signature="4718:4765" ph="[...]" />
+                <marker date="1526477210803" expanded="true" signature="4784:4829" ph="[...]" />
+                <marker date="1526477210803" expanded="true" signature="9001:9008" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
+                <marker date="1526477210803" expanded="true" signature="9020:9418" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
+                <marker date="1526477210803" expanded="true" signature="9206:9254" ph="[...]" />
+                <marker date="1526477210803" expanded="true" signature="9273:9318" ph="[...]" />
+                <marker date="1526477210803" expanded="true" signature="9430:9828" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
+                <marker date="1526477210803" expanded="true" signature="9616:9664" ph="[...]" />
+                <marker date="1526477210803" expanded="true" signature="9683:9728" ph="[...]" />
+                <marker date="1526477210803" expanded="true" signature="9840:10238" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
+                <marker date="1526477210803" expanded="true" signature="10026:10074" ph="[...]" />
+                <marker date="1526477210803" expanded="true" signature="10093:10138" ph="[...]" />
+                <marker date="1526477210803" expanded="true" signature="10250:10648" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
+                <marker date="1526477210803" expanded="true" signature="10436:10484" ph="[...]" />
+                <marker date="1526477210803" expanded="true" signature="10503:10548" ph="[...]" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -164,8 +216,8 @@
         <option value="$PROJECT_DIR$/roulette/__init__.py" />
         <option value="$PROJECT_DIR$/datetimepicker/__init__.py" />
         <option value="$PROJECT_DIR$/dynamic_layouts/dio_layout.json" />
-        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/dynamic_layouts/flame_layout.json" />
+        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/main.kv" />
       </list>
     </option>
@@ -484,13 +536,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1484573106753</updated>
-    </task>
-    <task id="LOCAL-00001" summary="finished new settings functions.">
-      <created>1484582745713</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1484582745713</updated>
     </task>
     <task id="LOCAL-00002" summary="started working on Variable widget">
       <created>1490212880697</created>
@@ -828,7 +873,14 @@
       <option name="project" value="LOCAL" />
       <updated>1526403776399</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="- Minor button modifications.">
+      <created>1526410553043</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1526410553047</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -889,7 +941,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="- trying to work out major bug with &quot;on_data_change&quot; and widget references" />
     <MESSAGE value="- started major changes to get away from &quot;clear_widgets&quot; architecture" />
     <MESSAGE value="- finished architecture change to keep track of all widgets and not use the mass &quot;clear_widgets&quot;.&#10;- able to add and delete widgets&#10;- start scheme in edit popup to allow for new types of widgets." />
     <MESSAGE value="- finished adding and debugging 'label' widget" />
@@ -914,7 +965,8 @@
     <MESSAGE value="- Added flame alarm." />
     <MESSAGE value="- Fixed some bugs with the time/date popup." />
     <MESSAGE value="- Buttons now use a canvas for future flexibility.&#10;- Button colors can now be changed.&#10;- Screen item edit mode is now a little more obvious and easier to exit from." />
-    <option name="LAST_COMMIT_MESSAGE" value="- Buttons now use a canvas for future flexibility.&#10;- Button colors can now be changed.&#10;- Screen item edit mode is now a little more obvious and easier to exit from." />
+    <MESSAGE value="- Minor button modifications." />
+    <option name="LAST_COMMIT_MESSAGE" value="- Minor button modifications." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1118,14 +1170,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="354">
-          <caret line="220" column="34" lean-forward="true" selection-start-line="220" selection-start-column="34" selection-end-line="220" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dynamic_layouts/dio_layout.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2861">
@@ -1136,16 +1180,75 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dynamic_layouts/flame_layout.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="389">
-          <caret line="238" column="17" lean-forward="true" selection-start-line="238" selection-start-column="17" selection-end-line="238" selection-end-column="17" />
+        <state relative-caret-position="51">
+          <caret line="3" column="33" lean-forward="false" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="33" />
+          <folding>
+            <marker date="1526477210803" expanded="true" signature="0:10650" ph="{...}" />
+            <marker date="1526477210803" expanded="true" signature="11:407" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
+            <marker date="1526477210803" expanded="true" signature="197:243" ph="[...]" />
+            <marker date="1526477210803" expanded="true" signature="262:307" ph="[...]" />
+            <marker date="1526477210803" expanded="true" signature="419:817" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
+            <marker date="1526477210803" expanded="true" signature="605:653" ph="[...]" />
+            <marker date="1526477210803" expanded="true" signature="672:717" ph="[...]" />
+            <marker date="1526477210803" expanded="true" signature="830:1225" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
+            <marker date="1526477210803" expanded="true" signature="1016:1063" ph="[...]" />
+            <marker date="1526477210803" expanded="true" signature="1082:1127" ph="[...]" />
+            <marker date="1526477210803" expanded="true" signature="1238:1637" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
+            <marker date="1526477210803" expanded="true" signature="1424:1473" ph="[...]" />
+            <marker date="1526477210803" expanded="true" signature="1492:1537" ph="[...]" />
+            <marker date="1526477210803" expanded="true" signature="1650:2049" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
+            <marker date="1526477210803" expanded="true" signature="1836:1885" ph="[...]" />
+            <marker date="1526477210803" expanded="true" signature="1904:1949" ph="[...]" />
+            <marker date="1526477210803" expanded="true" signature="2062:2461" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
+            <marker date="1526477210803" expanded="true" signature="2248:2297" ph="[...]" />
+            <marker date="1526477210803" expanded="true" signature="2316:2361" ph="[...]" />
+            <marker date="1526477210803" expanded="true" signature="2474:2873" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
+            <marker date="1526477210803" expanded="true" signature="2660:2709" ph="[...]" />
+            <marker date="1526477210803" expanded="true" signature="2728:2773" ph="[...]" />
+            <marker date="1526477210803" expanded="true" signature="2886:3285" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
+            <marker date="1526477210803" expanded="true" signature="3072:3121" ph="[...]" />
+            <marker date="1526477210803" expanded="true" signature="3140:3185" ph="[...]" />
+            <marker date="1526477210803" expanded="true" signature="3298:3697" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
+            <marker date="1526477210803" expanded="true" signature="3484:3533" ph="[...]" />
+            <marker date="1526477210803" expanded="true" signature="3552:3597" ph="[...]" />
+            <marker date="1526477210803" expanded="true" signature="3710:4109" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
+            <marker date="1526477210803" expanded="true" signature="3896:3945" ph="[...]" />
+            <marker date="1526477210803" expanded="true" signature="3964:4009" ph="[...]" />
+            <marker date="1526477210803" expanded="true" signature="4121:4519" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
+            <marker date="1526477210803" expanded="true" signature="4307:4355" ph="[...]" />
+            <marker date="1526477210803" expanded="true" signature="4374:4419" ph="[...]" />
+            <marker date="1526477210803" expanded="true" signature="4532:4911" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
+            <marker date="1526477210803" expanded="true" signature="4718:4765" ph="[...]" />
+            <marker date="1526477210803" expanded="true" signature="4784:4829" ph="[...]" />
+            <marker date="1526477210803" expanded="true" signature="9001:9008" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
+            <marker date="1526477210803" expanded="true" signature="9020:9418" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
+            <marker date="1526477210803" expanded="true" signature="9206:9254" ph="[...]" />
+            <marker date="1526477210803" expanded="true" signature="9273:9318" ph="[...]" />
+            <marker date="1526477210803" expanded="true" signature="9430:9828" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
+            <marker date="1526477210803" expanded="true" signature="9616:9664" ph="[...]" />
+            <marker date="1526477210803" expanded="true" signature="9683:9728" ph="[...]" />
+            <marker date="1526477210803" expanded="true" signature="9840:10238" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
+            <marker date="1526477210803" expanded="true" signature="10026:10074" ph="[...]" />
+            <marker date="1526477210803" expanded="true" signature="10093:10138" ph="[...]" />
+            <marker date="1526477210803" expanded="true" signature="10250:10648" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
+            <marker date="1526477210803" expanded="true" signature="10436:10484" ph="[...]" />
+            <marker date="1526477210803" expanded="true" signature="10503:10548" ph="[...]" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9648">
+          <caret line="898" column="31" lean-forward="false" selection-start-line="898" selection-start-column="31" selection-end-line="898" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.kv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="539" column="12" lean-forward="false" selection-start-line="539" selection-start-column="12" selection-end-line="539" selection-end-column="12" />
+        <state relative-caret-position="8387">
+          <caret line="528" column="29" lean-forward="true" selection-start-line="528" selection-start-column="29" selection-end-line="528" selection-end-column="29" />
           <folding />
         </state>
       </provider>
