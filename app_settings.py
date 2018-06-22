@@ -3,8 +3,10 @@ import json
 layout_dir = 'dynamic_layouts'
 
 dio_mod_id_start = 1
-dio_mod_data_start = 1
+dio_mod_di_data_start = 1
+dio_mod_do_data_start = 8
 dio_mod_len = 13
+dio_mod_input_len = 7
 
 flame_detect_id_start = 200
 flame_detect_data_start = 14
@@ -30,7 +32,28 @@ settings_json = json.dumps([
      'title': 'Screen Inactivity Time',
      'desc': 'When the screen has not been touched for this many seconds, the SYS_INACTIVE variable will be set',
      'section': 'Settings',
-     'key': 'SYS_INACTIVE_TIME'}])
+     'key': 'SYS_INACTIVE_TIME'},
+    {'type': 'color_picker',
+     'title': 'Widget Background OFF Color',
+     'desc': 'Background color of widget when OFF',
+     'section': 'Settings',
+     'key': 'SYS_WIDGET_BACKGROUND_OFF_COLOR'},
+    {'type': 'color_picker',
+     'title': 'Widget Background ON Color',
+     'desc': 'Background color of widget when ON',
+     'section': 'Settings',
+     'key': 'SYS_WIDGET_BACKGROUND_ON_COLOR'},
+    {'type': 'color_picker',
+     'title': 'Widget Text OFF Color',
+     'desc': 'Text color of widget when OFF',
+     'section': 'Settings',
+     'key': 'SYS_WIDGET_TEXT_OFF_COLOR'},
+    {'type': 'color_picker',
+     'title': 'Widget Text ON Color',
+     'desc': 'Text color of widget when ON',
+     'section': 'Settings',
+     'key': 'SYS_WIDGET_TEXT_ON_COLOR'}
+])
 
 scripts_json = json.dumps([
     {'type': 'script',

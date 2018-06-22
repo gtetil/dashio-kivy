@@ -3,9 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="27b3c643-4da9-4ab8-8fac-19f30f795262" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app_settings.py" afterPath="$PROJECT_DIR$/app_settings.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/can_com.py" afterPath="$PROJECT_DIR$/can_com.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dynamic_layouts/flame_layout.json" afterPath="$PROJECT_DIR$/dynamic_layouts/flame_layout.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.ini" afterPath="$PROJECT_DIR$/main.ini" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.kv" afterPath="$PROJECT_DIR$/main.kv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/variables.json" afterPath="$PROJECT_DIR$/variables.json" />
     </list>
     <list id="1e95b302-9845-4a63-bdc7-46bebc48f801" name="Revert: " comment="" />
     <list id="9acf94dc-4ce7-4798-ab9b-5692da952639" name="Revert:" comment="" />
@@ -27,21 +31,83 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="9648">
-              <caret line="898" column="31" lean-forward="false" selection-start-line="898" selection-start-column="31" selection-end-line="898" selection-end-column="31" />
+            <state relative-caret-position="480">
+              <caret line="960" column="40" lean-forward="true" selection-start-line="960" selection-start-column="40" selection-end-line="960" selection-end-column="40" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.kv" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.kv" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.kv">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8387">
-              <caret line="528" column="29" lean-forward="true" selection-start-line="528" selection-start-column="29" selection-end-line="528" selection-end-column="29" />
+            <state relative-caret-position="782">
+              <caret line="46" column="23" lean-forward="false" selection-start-line="46" selection-start-column="23" selection-end-line="46" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="can_com.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/can_com.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="551">
+              <caret line="64" column="50" lean-forward="true" selection-start-line="64" selection-start-column="50" selection-end-line="64" selection-end-column="50" />
+              <folding>
+                <element signature="e#15#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="can_com_(old).py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/can_com_(old).py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-408">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app_settings.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app_settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="25" lean-forward="false" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="variables.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/variables.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="8024">
+              <caret line="526" column="22" lean-forward="true" selection-start-line="526" selection-start-column="22" selection-end-line="526" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.ini" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main.ini">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="885">
+              <caret line="92" column="4" lean-forward="false" selection-start-line="92" selection-start-column="4" selection-end-line="92" selection-end-column="4" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dio_layout.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dynamic_layouts/dio_layout.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="859">
+              <caret line="319" column="24" lean-forward="false" selection-start-line="319" selection-start-column="24" selection-end-line="319" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -50,70 +116,12 @@
       <file leaf-file-name="flame_layout.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dynamic_layouts/flame_layout.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="33" lean-forward="false" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="33" />
+            <state relative-caret-position="859">
+              <caret line="345" column="30" lean-forward="true" selection-start-line="345" selection-start-column="21" selection-end-line="345" selection-end-column="30" />
               <folding>
-                <marker date="1526477210803" expanded="true" signature="0:10650" ph="{...}" />
-                <marker date="1526477210803" expanded="true" signature="11:407" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
-                <marker date="1526477210803" expanded="true" signature="197:243" ph="[...]" />
-                <marker date="1526477210803" expanded="true" signature="262:307" ph="[...]" />
-                <marker date="1526477210803" expanded="true" signature="419:817" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
-                <marker date="1526477210803" expanded="true" signature="605:653" ph="[...]" />
-                <marker date="1526477210803" expanded="true" signature="672:717" ph="[...]" />
-                <marker date="1526477210803" expanded="true" signature="830:1225" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
-                <marker date="1526477210803" expanded="true" signature="1016:1063" ph="[...]" />
-                <marker date="1526477210803" expanded="true" signature="1082:1127" ph="[...]" />
-                <marker date="1526477210803" expanded="true" signature="1238:1637" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
-                <marker date="1526477210803" expanded="true" signature="1424:1473" ph="[...]" />
-                <marker date="1526477210803" expanded="true" signature="1492:1537" ph="[...]" />
-                <marker date="1526477210803" expanded="true" signature="1650:2049" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
-                <marker date="1526477210803" expanded="true" signature="1836:1885" ph="[...]" />
-                <marker date="1526477210803" expanded="true" signature="1904:1949" ph="[...]" />
-                <marker date="1526477210803" expanded="true" signature="2062:2461" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
-                <marker date="1526477210803" expanded="true" signature="2248:2297" ph="[...]" />
-                <marker date="1526477210803" expanded="true" signature="2316:2361" ph="[...]" />
-                <marker date="1526477210803" expanded="true" signature="2474:2873" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
-                <marker date="1526477210803" expanded="true" signature="2660:2709" ph="[...]" />
-                <marker date="1526477210803" expanded="true" signature="2728:2773" ph="[...]" />
-                <marker date="1526477210803" expanded="true" signature="2886:3285" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
-                <marker date="1526477210803" expanded="true" signature="3072:3121" ph="[...]" />
-                <marker date="1526477210803" expanded="true" signature="3140:3185" ph="[...]" />
-                <marker date="1526477210803" expanded="true" signature="3298:3697" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
-                <marker date="1526477210803" expanded="true" signature="3484:3533" ph="[...]" />
-                <marker date="1526477210803" expanded="true" signature="3552:3597" ph="[...]" />
-                <marker date="1526477210803" expanded="true" signature="3710:4109" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
-                <marker date="1526477210803" expanded="true" signature="3896:3945" ph="[...]" />
-                <marker date="1526477210803" expanded="true" signature="3964:4009" ph="[...]" />
-                <marker date="1526477210803" expanded="true" signature="4121:4519" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
-                <marker date="1526477210803" expanded="true" signature="4307:4355" ph="[...]" />
-                <marker date="1526477210803" expanded="true" signature="4374:4419" ph="[...]" />
-                <marker date="1526477210803" expanded="true" signature="4532:4911" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
-                <marker date="1526477210803" expanded="true" signature="4718:4765" ph="[...]" />
-                <marker date="1526477210803" expanded="true" signature="4784:4829" ph="[...]" />
-                <marker date="1526477210803" expanded="true" signature="9001:9008" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
-                <marker date="1526477210803" expanded="true" signature="9020:9418" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
-                <marker date="1526477210803" expanded="true" signature="9206:9254" ph="[...]" />
-                <marker date="1526477210803" expanded="true" signature="9273:9318" ph="[...]" />
-                <marker date="1526477210803" expanded="true" signature="9430:9828" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
-                <marker date="1526477210803" expanded="true" signature="9616:9664" ph="[...]" />
-                <marker date="1526477210803" expanded="true" signature="9683:9728" ph="[...]" />
-                <marker date="1526477210803" expanded="true" signature="9840:10238" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
-                <marker date="1526477210803" expanded="true" signature="10026:10074" ph="[...]" />
-                <marker date="1526477210803" expanded="true" signature="10093:10138" ph="[...]" />
-                <marker date="1526477210803" expanded="true" signature="10250:10648" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
-                <marker date="1526477210803" expanded="true" signature="10436:10484" ph="[...]" />
-                <marker date="1526477210803" expanded="true" signature="10503:10548" ph="[...]" />
+                <marker date="1527189059899" expanded="true" signature="4532:4911" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
+                <marker date="1527189059899" expanded="true" signature="9001:9008" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dio_layout.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dynamic_layouts/dio_layout.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2861">
-              <caret line="319" column="24" lean-forward="false" selection-start-line="319" selection-start-column="24" selection-end-line="319" selection-end-column="24" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -129,18 +137,10 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>mynu</find>
-      <find>SYS_LAYOUT_PATH</find>
-      <find>LAYOUT</find>
-      <find>can_com</find>
-      <find>exit</find>
-      <find>cpu</find>
-      <find>SYS_TIME</find>
       <find>sys_time</find>
       <find>%d</find>
       <find>flo</find>
       <find>sys_tim</find>
-      <find>GPIO</find>
       <find>reverse</find>
       <find>shutdow</find>
       <find>shutdo</find>
@@ -150,7 +150,6 @@
       <find>true</find>
       <find>list</find>
       <find>tru</find>
-      <find>anim</find>
       <find>time</find>
       <find>datetime</find>
       <find>sub</find>
@@ -159,6 +158,15 @@
       <find>&quot;invert&quot;: false,</find>
       <find>back_to</find>
       <find>&quot;color_off&quot;: &quot;#373737ff&quot;</find>
+      <find>scatter</find>
+      <find>double</find>
+      <find>anim</find>
+      <find>del</find>
+      <find>colors</find>
+      <find>pop_up_ref</find>
+      <find>pop_up</find>
+      <find>gpio</find>
+      <find>GPIO</find>
     </findStrings>
     <replaceStrings>
       <replace>_4</replace>
@@ -203,22 +211,22 @@
         <option value="$PROJECT_DIR$/gesture_board.py" />
         <option value="$PROJECT_DIR$/my_gestures.py" />
         <option value="$PROJECT_DIR$/write_data_indicies.py" />
-        <option value="$PROJECT_DIR$/app_settings.py" />
         <option value="$PROJECT_DIR$/test.py" />
-        <option value="$PROJECT_DIR$/can_com.py" />
-        <option value="$PROJECT_DIR$/main.ini" />
         <option value="$PROJECT_DIR$/my_settings.py" />
         <option value="$PROJECT_DIR$/datetimetest.py" />
         <option value="$PROJECT_DIR$/garden/garden.datetimepicker/__init__.py" />
         <option value="$PROJECT_DIR$/libs/garden/garden.datetimepicker/__init__.py" />
-        <option value="$PROJECT_DIR$/variables.json" />
         <option value="$PROJECT_DIR$/flame_alarm.py" />
         <option value="$PROJECT_DIR$/roulette/__init__.py" />
         <option value="$PROJECT_DIR$/datetimepicker/__init__.py" />
         <option value="$PROJECT_DIR$/dynamic_layouts/dio_layout.json" />
         <option value="$PROJECT_DIR$/dynamic_layouts/flame_layout.json" />
-        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/main.kv" />
+        <option value="$PROJECT_DIR$/main.ini" />
+        <option value="$PROJECT_DIR$/variables.json" />
+        <option value="$PROJECT_DIR$/app_settings.py" />
+        <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/can_com.py" />
       </list>
     </option>
   </component>
@@ -243,8 +251,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -273,6 +279,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -281,14 +289,14 @@
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$2/Languages" value="Python" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\gtetil\Documents\Projects\dashio-kivy" />
+      <recent name="C:\Users\gtetil\Documents\Projects\dashio-kivy\datetimepicker" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\gtetil\Documents\Projects\dashio-kivy" />
       <recent name="C:\Users\gtetil\Documents\Projects\dashio-kivy\datetimepicker" />
       <recent name="C:\Users\gtetil\Documents\Projects\dashio-kivy\dynamic_layouts" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\gtetil\Documents\Projects\dashio-kivy\datetimepicker" />
-      <recent name="C:\Users\gtetil\Documents\Projects\dashio-kivy" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -340,24 +348,6 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="__init__ (3)" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/roulettescroll" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="dashio-kivy" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/roulettescroll/__init__.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <method />
-    </configuration>
     <configuration default="false" name="__init__ (4)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -389,6 +379,24 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="dashio-kivy" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="write_data_indicies" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="dashio-kivy" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/write_data_indicies.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -493,17 +501,17 @@
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.__init__" />
       <item index="1" class="java.lang.String" itemvalue="Python.__init__ (1)" />
-      <item index="2" class="java.lang.String" itemvalue="Python.__init__ (3)" />
-      <item index="3" class="java.lang.String" itemvalue="Python.__init__ (4)" />
-      <item index="4" class="java.lang.String" itemvalue="Python.main" />
+      <item index="2" class="java.lang.String" itemvalue="Python.__init__ (4)" />
+      <item index="3" class="java.lang.String" itemvalue="Python.main" />
+      <item index="4" class="java.lang.String" itemvalue="Python.write_data_indicies" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.main" />
-        <item index="1" class="java.lang.String" itemvalue="Python.__init__ (1)" />
-        <item index="2" class="java.lang.String" itemvalue="Python.__init__" />
-        <item index="3" class="java.lang.String" itemvalue="Python.__init__ (4)" />
-        <item index="4" class="java.lang.String" itemvalue="Python.__init__ (3)" />
+        <item index="1" class="java.lang.String" itemvalue="Python.write_data_indicies" />
+        <item index="2" class="java.lang.String" itemvalue="Python.__init__ (1)" />
+        <item index="3" class="java.lang.String" itemvalue="Python.__init__" />
+        <item index="4" class="java.lang.String" itemvalue="Python.__init__ (4)" />
       </list>
     </recent_temporary>
     <configuration default="true" type="tests" factoryName="Attests">
@@ -536,13 +544,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1484573106753</updated>
-    </task>
-    <task id="LOCAL-00002" summary="started working on Variable widget">
-      <created>1490212880697</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1490212880697</updated>
     </task>
     <task id="LOCAL-00003" summary="more work on Variable widget">
       <created>1490284141097</created>
@@ -880,7 +881,14 @@
       <option name="project" value="LOCAL" />
       <updated>1526410553047</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="- Fixed issue with flame alarm.&#10;- Trying out new theme with white background.">
+      <created>1526479683072</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1526479683072</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -941,7 +949,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="- started major changes to get away from &quot;clear_widgets&quot; architecture" />
     <MESSAGE value="- finished architecture change to keep track of all widgets and not use the mass &quot;clear_widgets&quot;.&#10;- able to add and delete widgets&#10;- start scheme in edit popup to allow for new types of widgets." />
     <MESSAGE value="- finished adding and debugging 'label' widget" />
     <MESSAGE value="- finished initial 'scripts' implementation.  need to add ability to insert aliases." />
@@ -966,7 +973,8 @@
     <MESSAGE value="- Fixed some bugs with the time/date popup." />
     <MESSAGE value="- Buttons now use a canvas for future flexibility.&#10;- Button colors can now be changed.&#10;- Screen item edit mode is now a little more obvious and easier to exit from." />
     <MESSAGE value="- Minor button modifications." />
-    <option name="LAST_COMMIT_MESSAGE" value="- Minor button modifications." />
+    <MESSAGE value="- Fixed issue with flame alarm.&#10;- Trying out new theme with white background." />
+    <option name="LAST_COMMIT_MESSAGE" value="- Fixed issue with flame alarm.&#10;- Trying out new theme with white background." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -975,8 +983,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://C:/Python27/Lib/site-packages/kivy/uix/scatter.py" />
-    <entry file="file://$PROJECT_DIR$/doToggle.py" />
     <entry file="file://C:/Python27/Lib/site-packages/kivy/animation.py" />
     <entry file="file://$USER_HOME$/.PyCharmCE2016.3/system/python_stubs/-1247972723/kivy/graphics/context_instructions.py" />
     <entry file="file:///usr/lib/python2.7/dist-packages/kivy/app.py" />
@@ -1045,21 +1051,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/write_data_indicies.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test.py" />
-    <entry file="file://$PROJECT_DIR$/main.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1496">
-          <caret line="88" column="4" lean-forward="false" selection-start-line="88" selection-start-column="4" selection-end-line="88" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/my_settings.py" />
     <entry file="file://$PROJECT_DIR$/datetimetest.py" />
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py">
@@ -1083,27 +1075,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/can_com.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="4" lean-forward="true" selection-start-line="19" selection-start-column="4" selection-end-line="20" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/variables.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="747">
-          <caret line="660" column="5" lean-forward="false" selection-start-line="660" selection-start-column="5" selection-end-line="660" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="17" lean-forward="false" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -1148,7 +1119,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="9" column="34" lean-forward="true" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1166,13 +1136,34 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-183">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/write_data_indicies.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python27/Lib/site-packages/kivy/uix/colorpicker.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-80">
+          <caret line="136" column="8" lean-forward="false" selection-start-line="136" selection-start-column="8" selection-end-line="136" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="885">
+          <caret line="92" column="4" lean-forward="false" selection-start-line="92" selection-start-column="4" selection-end-line="92" selection-end-column="4" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dynamic_layouts/dio_layout.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2861">
+        <state relative-caret-position="859">
           <caret line="319" column="24" lean-forward="false" selection-start-line="319" selection-start-column="24" selection-end-line="319" selection-end-column="24" />
           <folding />
         </state>
@@ -1180,75 +1171,61 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dynamic_layouts/flame_layout.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="33" lean-forward="false" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="33" />
+        <state relative-caret-position="859">
+          <caret line="345" column="30" lean-forward="true" selection-start-line="345" selection-start-column="21" selection-end-line="345" selection-end-column="30" />
           <folding>
-            <marker date="1526477210803" expanded="true" signature="0:10650" ph="{...}" />
-            <marker date="1526477210803" expanded="true" signature="11:407" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
-            <marker date="1526477210803" expanded="true" signature="197:243" ph="[...]" />
-            <marker date="1526477210803" expanded="true" signature="262:307" ph="[...]" />
-            <marker date="1526477210803" expanded="true" signature="419:817" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
-            <marker date="1526477210803" expanded="true" signature="605:653" ph="[...]" />
-            <marker date="1526477210803" expanded="true" signature="672:717" ph="[...]" />
-            <marker date="1526477210803" expanded="true" signature="830:1225" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
-            <marker date="1526477210803" expanded="true" signature="1016:1063" ph="[...]" />
-            <marker date="1526477210803" expanded="true" signature="1082:1127" ph="[...]" />
-            <marker date="1526477210803" expanded="true" signature="1238:1637" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
-            <marker date="1526477210803" expanded="true" signature="1424:1473" ph="[...]" />
-            <marker date="1526477210803" expanded="true" signature="1492:1537" ph="[...]" />
-            <marker date="1526477210803" expanded="true" signature="1650:2049" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
-            <marker date="1526477210803" expanded="true" signature="1836:1885" ph="[...]" />
-            <marker date="1526477210803" expanded="true" signature="1904:1949" ph="[...]" />
-            <marker date="1526477210803" expanded="true" signature="2062:2461" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
-            <marker date="1526477210803" expanded="true" signature="2248:2297" ph="[...]" />
-            <marker date="1526477210803" expanded="true" signature="2316:2361" ph="[...]" />
-            <marker date="1526477210803" expanded="true" signature="2474:2873" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
-            <marker date="1526477210803" expanded="true" signature="2660:2709" ph="[...]" />
-            <marker date="1526477210803" expanded="true" signature="2728:2773" ph="[...]" />
-            <marker date="1526477210803" expanded="true" signature="2886:3285" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
-            <marker date="1526477210803" expanded="true" signature="3072:3121" ph="[...]" />
-            <marker date="1526477210803" expanded="true" signature="3140:3185" ph="[...]" />
-            <marker date="1526477210803" expanded="true" signature="3298:3697" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
-            <marker date="1526477210803" expanded="true" signature="3484:3533" ph="[...]" />
-            <marker date="1526477210803" expanded="true" signature="3552:3597" ph="[...]" />
-            <marker date="1526477210803" expanded="true" signature="3710:4109" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
-            <marker date="1526477210803" expanded="true" signature="3896:3945" ph="[...]" />
-            <marker date="1526477210803" expanded="true" signature="3964:4009" ph="[...]" />
-            <marker date="1526477210803" expanded="true" signature="4121:4519" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
-            <marker date="1526477210803" expanded="true" signature="4307:4355" ph="[...]" />
-            <marker date="1526477210803" expanded="true" signature="4374:4419" ph="[...]" />
-            <marker date="1526477210803" expanded="true" signature="4532:4911" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
-            <marker date="1526477210803" expanded="true" signature="4718:4765" ph="[...]" />
-            <marker date="1526477210803" expanded="true" signature="4784:4829" ph="[...]" />
-            <marker date="1526477210803" expanded="true" signature="9001:9008" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
-            <marker date="1526477210803" expanded="true" signature="9020:9418" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
-            <marker date="1526477210803" expanded="true" signature="9206:9254" ph="[...]" />
-            <marker date="1526477210803" expanded="true" signature="9273:9318" ph="[...]" />
-            <marker date="1526477210803" expanded="true" signature="9430:9828" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
-            <marker date="1526477210803" expanded="true" signature="9616:9664" ph="[...]" />
-            <marker date="1526477210803" expanded="true" signature="9683:9728" ph="[...]" />
-            <marker date="1526477210803" expanded="true" signature="9840:10238" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
-            <marker date="1526477210803" expanded="true" signature="10026:10074" ph="[...]" />
-            <marker date="1526477210803" expanded="true" signature="10093:10138" ph="[...]" />
-            <marker date="1526477210803" expanded="true" signature="10250:10648" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
-            <marker date="1526477210803" expanded="true" signature="10436:10484" ph="[...]" />
-            <marker date="1526477210803" expanded="true" signature="10503:10548" ph="[...]" />
+            <marker date="1527189059899" expanded="true" signature="4532:4911" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
+            <marker date="1527189059899" expanded="true" signature="9001:9008" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.kv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="782">
+          <caret line="46" column="23" lean-forward="false" selection-start-line="46" selection-start-column="23" selection-end-line="46" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/can_com_(old).py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-408">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/variables.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8024">
+          <caret line="526" column="22" lean-forward="true" selection-start-line="526" selection-start-column="22" selection-end-line="526" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="25" lean-forward="false" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/can_com.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="551">
+          <caret line="64" column="50" lean-forward="true" selection-start-line="64" selection-start-column="50" selection-end-line="64" selection-end-column="50" />
+          <folding>
+            <element signature="e#15#39#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9648">
-          <caret line="898" column="31" lean-forward="false" selection-start-line="898" selection-start-column="31" selection-end-line="898" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.kv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8387">
-          <caret line="528" column="29" lean-forward="true" selection-start-line="528" selection-start-column="29" selection-end-line="528" selection-end-column="29" />
+        <state relative-caret-position="480">
+          <caret line="960" column="40" lean-forward="true" selection-start-line="960" selection-start-column="40" selection-end-line="960" selection-end-column="40" />
           <folding />
         </state>
       </provider>

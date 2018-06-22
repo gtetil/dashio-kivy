@@ -415,6 +415,24 @@
         "var_tag": "ROW_20", 
         "widget": "Indicator"
     }, 
+    "30": {
+        "color_off": "#ffffffff", 
+        "color_on": "#99ffffff", 
+        "invert": false, 
+        "off_text": "BACKLIGHT", 
+        "on_text": "BACKLIGHT", 
+        "pos": [
+            300.0, 
+            0.0
+        ], 
+        "size": [
+            200, 
+            50
+        ], 
+        "var_alias": "SYS_DIM_BACKLIGHT", 
+        "var_tag": "SYS_DIM_BACKLIGHT", 
+        "widget": "Toggle Button"
+    }, 
     "4": {
         "color_off": "#ffffffff", 
         "color_on": "#8fff7fff", 

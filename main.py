@@ -36,6 +36,7 @@ from kivy.factory import Factory
 from kivy.uix.filechooser import FileChooserListView
 from kivy.utils import get_color_from_hex, get_hex_from_color
 from kivy_cv import KivyCamera
+from kivy.uix.colorpicker import ColorPicker, ColorWheel
 from datetimepicker import DatetimePicker
 from can_com import CANcom
 from flame_alarm import FlameAlarm
@@ -666,7 +667,11 @@ class MainApp(App):
             'SYS_SCREEN_BRIGHTNESS': 255,
             'SYS_SCREEN_OFF_DELAY': 1,
             'SYS_SHUTDOWN_DELAY': 60,
-            'SYS_INACTIVE_TIME': 5})
+            'SYS_INACTIVE_TIME': 5,
+            'SYS_WIDGET_BACKGROUND_OFF_COLOR': '#ffffffff',
+            'SYS_WIDGET_BACKGROUND_ON_COLOR': '#8fff7fff',
+            'SYS_WIDGET_TEXT_OFF_COLOR': '#00000000',
+            'SYS_WIDGET_TEXT_ON_COLOR': '#00000000',})
         '''for key in app_settings.auto_var_tags:
             config.setdefaults('AutoVars', {key: ''})
         for key in app_settings.arduino_input_tags:
@@ -680,6 +685,7 @@ class MainApp(App):
         settings.register_type('mypath', MySettingPath)
         settings.register_type('script', SettingScript)
         settings.register_type('action', SettingAction)
+        settings.register_type('color_picker', SettingColorPicker)
         settings.add_json_panel('Settings', self.config, data=app_settings.settings_json)
         aliases = []
         if self.variables.get('SYS_DIO_MODULE') == '1':
@@ -774,14 +780,10 @@ class Variables(Widget):
         self.variable_data = ['0'] * len(self.var_aliases)
         self.old_variable_data = ['0'] * len(self.var_aliases)
         self.var_events = [False] * len(self.var_aliases)
-        self.arduino_data_len = 7 + 1
-        self.arduino_data = ['0'] * self.arduino_data_len
         self.can_data = 0
         self.set_saved_vars()
         self.toggle_update_clock(True)
         self.set_by_alias('SYS_INIT', '1')
-        self.arduino_read_dt = 0.05
-        self.arduino_read_clock(self.arduino_read_dt)
         Clock.schedule_interval(self.read_system, 1)
         self.can_com = CANcom()
         Clock.schedule_interval(self.read_can, 0.05)
@@ -840,48 +842,13 @@ class Variables(Widget):
         with open(self.variables_file, 'w') as file:
             json.dump(self.variables_json, file, sort_keys=True, indent=4)
 
-    def read_arduino(self, dt):
-        if self.get('SYS_DIO_MODULE') == '1':
-            try:
-                serial_data = self.ser.readline().rstrip().split(',')
-                if len(serial_data) == self.arduino_data_len:
-                    self.arduino_data = serial_data
-            except Exception as e:
-                print('read_arduino error:')
-                print(e)
-                self.connect_arduino()
-
     def read_can(self, dt):
-        if self.get('SYS_FLAME_DETECT') == '1':
-            try:
-                self.can_data = self.can_com.q.get_nowait()
-            except Exception as e:
-                #print('CAN read error:')
-                #print(e)
-                pass
-
-    def connect_arduino(self):
         try:
-            self.ser.close()
-        except:
-            pass
-        try:
-            if operating_sys == 'Linux':
-                self.ser = serial.Serial('/dev/ttyUSB0', 115200, timeout=0)
-            else:
-                self.ser = serial.Serial('COM5', 115200, timeout=0)
-            self.arduino_read_clock(self.arduino_read_dt)
+            self.can_data = self.can_com.can_read_data
         except Exception as e:
-            print('connect_arduino error:')
-            print(e)
-            self.arduino_read_clock(1) #try to reconnect only every second to reduce cpu usage
-
-    def arduino_read_clock(self, dt):
-        try:
-            self.arduino_clk.cancel()
-        except:
+            #print('CAN read error:')
+            #print(e)
             pass
-        self.arduino_clk = Clock.schedule_interval(self.read_arduino, dt)
 
     def read_system(self, dt):
         #self.set_by_alias('SYS_TIME_SEC', str((current_milli_time() - initial_time) / 1000))
@@ -890,13 +857,16 @@ class Variables(Widget):
         self.set_by_alias('SYS_TIME', str(time.time()))
 
     def update_data(self, dt):
-        for i in range(0, 7):
-            self.variable_data[i+1] = self.arduino_data[i]
-        for i in range(0, app_settings.flame_detect_len):
-            flame_state = (self.can_data & 2**i) >> i
-            flame_state = self.get("ROW " + str(i + 1))  # this is used for debug, when CAN isn't available
-            self.variable_data[i+app_settings.flame_detect_data_start] = str(flame_state) # update variable data array with flame states
-            self.alarm_states[i] = self.flame_alarms[i].update(bool(int(flame_state))) # get array of all flame alarm states
+        if self.get('SYS_DIO_MODULE') == '1':
+            for i in range(0, app_settings.dio_mod_input_len):
+                di_state = (self.can_data & 2**i) >> i
+                self.variable_data[i + app_settings.dio_mod_di_data_start] = str(di_state)  # update variable data array with di states
+        if self.get('SYS_FLAME_DETECT') == '1':
+            for i in range(0, app_settings.flame_detect_len):
+                flame_state = (self.can_data & 2**i) >> i
+                #flame_state = self.get("ROW " + str(i + 1))  # this is used for debug, when CAN isn't available
+                self.variable_data[i+app_settings.flame_detect_data_start] = str(flame_state) # update variable data array with flame states
+                self.alarm_states[i] = self.flame_alarms[i].update(bool(int(flame_state))) # get array of all flame alarm states
         if any(self.alarm_states) and not self.app_ref.screen_man.alarm_state:
             self.app_ref.screen_man.alarm_animation(True)  # show alarm animation
         if (self.variable_data != self.old_variable_data) or self.refresh_data:
@@ -973,9 +943,6 @@ class Variables(Widget):
                 return ''
         return ''
 
-    def write_arduino(self, command):
-        self.ser.write(command)
-
     def set_by_alias(self, alias, value):
         data_index = self.var_aliases_dict[alias]
         self.set(data_index, value)
@@ -989,7 +956,7 @@ class Variables(Widget):
             channel_type = self.variables_json[index]['type']
             tag = self.variables_json[index]['tag']
             if channel_type == 'DO':
-                self.write_arduino('digital_output/' + str(tag) + '/' + str(value) + '/')
+                self.can_com.can_write(index - 1, int(value))
             if channel_type == 'SYS':
                 self.sys_cmd(tag, value)
         except Exception as e:
@@ -1042,6 +1009,38 @@ class Variables(Widget):
 
 
 ###SETTINGS STUFF###
+
+class SettingColorPicker(SettingString):
+    def _create_popup(self, instance):
+        # create popup layout
+        content = BoxLayout(orientation='vertical', color='1,1,1,1')
+        self.popup = popup = Popup(
+            title=self.title, content=content)
+        # create the textinput used for numeric input
+        self.color_picker = ColorPicker(color=get_color_from_hex(self.value), size_hint_y=None, height='350dp')
+
+        # construct the content, widget are used as a spacer
+        content.add_widget(Widget())
+        content.add_widget(self.color_picker)
+        content.add_widget(Widget())
+        content.add_widget(SettingSpacer())
+
+        # 2 buttons are created for accept or cancel the current value
+        btnlayout = BoxLayout(size_hint_y=None, height='50dp', spacing='5dp')
+        btn = Button(text='Ok')
+        btn.bind(on_release=self._validate)
+        btnlayout.add_widget(btn)
+        btn = Button(text='Cancel')
+        btn.bind(on_release=self._dismiss)
+        btnlayout.add_widget(btn)
+        content.add_widget(btnlayout)
+
+        # all done, open the popup !
+        popup.open()
+
+    def _validate(self, instance):
+        self._dismiss()
+        self.value = get_hex_from_color(self.color_picker.color)
 
 class SettingAlias(SettingString):
     def _create_popup(self, instance):
