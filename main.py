@@ -183,7 +183,7 @@ class ScreenManagement(ScreenManager):
             login_str = '0'
             disabled = True
             button_text = 'ADMIN LOGIN'
-            self.back_to_main()
+            self.back_to_main(True)
         self.app_ref.variables.set_by_alias('SYS_ADMIN_LOGIN', login_str)
         self.app_ref.slide_menu.ids.admin_login.text = button_text
         self.app_ref.slide_menu.ids.modify_screen.disabled = disabled
@@ -381,8 +381,8 @@ class DynamicLayout(Widget):
         new_json['invert'] = False
         new_json['size'] = (170, 160)
         new_json['pos'] = (320, 160)
-        new_json['color_on'] = '#4c32ffff'  # blue
-        new_json['color_off'] = '#373737ff' # charcoal
+        new_json['color_on'] = '#8fff7fff'  # green
+        new_json['color_off'] = '#ffffffff' # white
         self.dyn_layout_json.update({new_id: new_json})
         self.create_dyn_widget(new_id)
         self.update_widget(new_id)
@@ -700,7 +700,7 @@ class MainApp(App):
 
     def on_config_change(self, config, section, key, value):
         if key == 'SYS_DIO_MODULE':
-            self.hide_variables(value, app_settings.dio_mod_data_start, app_settings.dio_mod_len)
+            self.hide_variables(value, app_settings.dio_mod_di_data_start, app_settings.dio_mod_len)
         if key == 'SYS_FLAME_DETECT':
             self.hide_variables(value, app_settings.flame_detect_data_start, app_settings.flame_detect_len)
         #if key == "SYS_LAYOUT_FILE":
@@ -760,8 +760,10 @@ class MainApp(App):
         super(MainApp, self).close_settings(settings)
 
     def exit_app(self):
-        GPIO.cleanup()
-        self.variables.can_com.stop_event.set()
+        try:
+            GPIO.cleanup()
+        except Exception as e:
+            print e
         exit()
 
 class Variables(Widget):
@@ -789,6 +791,16 @@ class Variables(Widget):
         Clock.schedule_interval(self.read_can, 0.05)
         self.flame_alarms = [FlameAlarm() for i in range(app_settings.flame_detect_len)]
         self.alarm_states = [False] * app_settings.flame_detect_len
+        self.shutdown_pin = 17
+        self.ignition_pin = 27
+        self.last_shutdown_state = 0
+        try:
+            GPIO.setmode(GPIO.BCM)
+            GPIO.setup(self.shutdown_pin, GPIO.OUT) # status output for shutdown circuit
+            GPIO.setup(self.ignition_pin, GPIO.IN)  # setup input for ignition status
+        except Exception as e:
+            print('GPIO error:')
+            print(e)
 
     def set_var_lists(self):
         self.var_aliases = []
@@ -856,6 +868,10 @@ class Variables(Widget):
         self.set_by_alias('SYS_CPU_TEMP', os.popen('vcgencmd measure_temp').readline().replace("temp=", "").replace("'C\n", ""))
         self.set_by_alias('SYS_TIME', str(time.time()))
 
+        # heartbeat signal to rpi power supply
+        self.set_gpio_output(self.shutdown_pin, self.last_shutdown_state)
+        self.last_shutdown_state = not self.last_shutdown_state
+
     def update_data(self, dt):
         if self.get('SYS_DIO_MODULE') == '1':
             for i in range(0, app_settings.dio_mod_input_len):
@@ -892,7 +908,7 @@ class Variables(Widget):
         #self.DI_IGNITION = self.variable_data[7]  #need to update last due to screen initialization issue
 
         if operating_sys == 'Linux':
-            if not GPIO.input(27):
+            if not GPIO.input(self.ignition_pin):
                 self.DI_IGNITION = '1'
             else:
                 self.DI_IGNITION = '0'
@@ -956,11 +972,17 @@ class Variables(Widget):
             channel_type = self.variables_json[index]['type']
             tag = self.variables_json[index]['tag']
             if channel_type == 'DO':
-                self.can_com.can_write(index - 1, int(value))
+                self.can_com.can_write(index - app_settings.dio_mod_do_data_start, int(value))
             if channel_type == 'SYS':
                 self.sys_cmd(tag, value)
         except Exception as e:
             print('variables.set error:')
+            print(e)
+
+    def set_gpio_output(self, pin, state):
+        try:
+            GPIO.output(pin, state)
+        except Exception as e:
             print(e)
 
     #SYSTEM COMMANDS#
@@ -989,9 +1011,17 @@ class Variables(Widget):
                 self.set_by_alias(tag, '0')
         if tag == 'SYS_SHUTDOWN':
             if value == '1':
-                GPIO.cleanup()
+                try:
+                    GPIO.cleanup()
+                except Exception as e:
+                    print e
                 os.system("poweroff")
                 self.set_by_alias(tag, '0')
+        if tag == 'SYS_REVERSE_CAM_ON':
+            if value == '1':
+                self.SYS_REVERSE_CAM_ON = '1'
+            else:
+                self.SYS_REVERSE_CAM_ON = '0'
 
     def backlight_brightness(self, value):
         print('brightness cmd')
@@ -1399,16 +1429,6 @@ class MyScatterLayout(ScatterLayout):
         return True
 
 if __name__ == '__main__':
-
-    try:
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setup(17, GPIO.OUT)
-        GPIO.output(17, 1)  #turn on status output for shutdown circuit
-
-        GPIO.setup(27, GPIO.IN)  #setup input for ignition status
-    except Exception as e:
-        print('GPIO error:')
-        print(e)
 
     MainApp().run()
 

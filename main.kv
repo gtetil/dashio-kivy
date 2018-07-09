@@ -44,7 +44,7 @@
 
     ModernButton:
         id: settings
-        disabled: False
+        disabled: True
         text: 'SETTINGS'
         on_release: app.open_settings(); app.screen_man.current = 'main_screen'; app.slide_layout.toggle_state()
         on_release: if app.dynamic_layout.modify_mode: app.dynamic_layout.end_modify(); app.variables.toggle_update_clock(True)
@@ -568,8 +568,8 @@
     button_on_text: ''
     button_off_text: ''
     invert: False
-    color_on: '#4c32ffff'  # blue
-    color_off: '#373737ff' # charcoal
+    color_on: '#8fff7fff'  # green
+    color_off: '#ffffffff' # white
 
 <PasscodeScreen>:
     id: passcode_screen

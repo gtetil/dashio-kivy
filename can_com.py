@@ -53,7 +53,7 @@ class CANcom(Widget):
 
     def can_write(self, index, value):
         self.can_write_data = self.set_bit(self.can_write_data, index, value)
-        msg = can.Message(arbitration_id=0x000, data=[0, 0, 0, 0, 0, 0, 0, self.can_write_data])
+        msg = can.Message(arbitration_id=0x000+0x010, extended_id=False, data=[0, 0, 0, 0, 0, 0, 0, self.can_write_data])
         bus.send(msg)
 
     def set_bit(self, v, index, x):
