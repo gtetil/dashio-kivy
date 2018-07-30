@@ -791,6 +791,7 @@ class Variables(Widget):
         Clock.schedule_interval(self.read_can, 0.05)
         self.flame_alarms = [FlameAlarm() for i in range(app_settings.flame_detect_len)]
         self.alarm_states = [False] * app_settings.flame_detect_len
+        self.alarm_counters = [0] * app_settings.flame_detect_len
         self.shutdown_pin = 17
         self.ignition_pin = 27
         self.last_shutdown_state = 0
@@ -867,6 +868,7 @@ class Variables(Widget):
         self.set_by_alias('SYS_CPU_USAGE', str(psutil.cpu_percent()))
         self.set_by_alias('SYS_CPU_TEMP', os.popen('vcgencmd measure_temp').readline().replace("temp=", "").replace("'C\n", ""))
         self.set_by_alias('SYS_TIME', str(time.time()))
+        print self.alarm_counters
 
         # heartbeat signal to rpi power supply
         self.set_gpio_output(self.shutdown_pin, self.last_shutdown_state)
@@ -883,6 +885,7 @@ class Variables(Widget):
                 #flame_state = self.get("ROW " + str(i + 1))  # this is used for debug, when CAN isn't available
                 self.variable_data[i+app_settings.flame_detect_data_start] = str(flame_state) # update variable data array with flame states
                 self.alarm_states[i] = self.flame_alarms[i].update(bool(int(flame_state))) # get array of all flame alarm states
+                self.alarm_counters[i] = self.flame_alarms[i].counter
         if any(self.alarm_states) and not self.app_ref.screen_man.alarm_state:
             self.app_ref.screen_man.alarm_animation(True)  # show alarm animation
         if (self.variable_data != self.old_variable_data) or self.refresh_data:

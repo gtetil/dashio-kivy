@@ -4,11 +4,8 @@
     <list default="true" id="27b3c643-4da9-4ab8-8fac-19f30f795262" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/can_com.py" afterPath="$PROJECT_DIR$/can_com.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dynamic_layouts/dio_layout.json" afterPath="$PROJECT_DIR$/dynamic_layouts/dio_layout.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.ini" afterPath="$PROJECT_DIR$/main.ini" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.kv" afterPath="$PROJECT_DIR$/main.kv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flame_alarm.py" afterPath="$PROJECT_DIR$/flame_alarm.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/variables.json" afterPath="$PROJECT_DIR$/variables.json" />
     </list>
     <list id="1e95b302-9845-4a63-bdc7-46bebc48f801" name="Revert: " comment="" />
     <list id="9acf94dc-4ce7-4798-ab9b-5692da952639" name="Revert:" comment="" />
@@ -33,8 +30,18 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1445">
-              <caret line="857" column="12" lean-forward="true" selection-start-line="857" selection-start-column="12" selection-end-line="857" selection-end-column="12" />
+            <state relative-caret-position="374">
+              <caret line="875" column="0" lean-forward="true" selection-start-line="875" selection-start-column="0" selection-end-line="875" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="flame_alarm.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/flame_alarm.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="561">
+              <caret line="33" column="25" lean-forward="true" selection-start-line="33" selection-start-column="25" selection-end-line="33" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -43,7 +50,7 @@
       <file leaf-file-name="main.kv" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.kv">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-203">
+            <state relative-caret-position="9690">
               <caret line="570" column="12" lean-forward="false" selection-start-line="570" selection-start-column="4" selection-end-line="570" selection-end-column="12" />
               <folding />
             </state>
@@ -53,8 +60,8 @@
       <file leaf-file-name="can_com.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/can_com.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="488">
-              <caret line="82" column="15" lean-forward="false" selection-start-line="82" selection-start-column="15" selection-end-line="82" selection-end-column="15" />
+            <state relative-caret-position="400">
+              <caret line="43" column="58" lean-forward="true" selection-start-line="43" selection-start-column="58" selection-end-line="43" selection-end-column="58" />
               <folding>
                 <element signature="e#15#39#0" expanded="true" />
               </folding>
@@ -95,7 +102,7 @@
       <file leaf-file-name="dio_layout.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dynamic_layouts/dio_layout.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2270">
+            <state relative-caret-position="3842">
               <caret line="226" column="31" lean-forward="true" selection-start-line="226" selection-start-column="22" selection-end-line="226" selection-end-column="31" />
               <folding />
             </state>
@@ -105,7 +112,7 @@
       <file leaf-file-name="flame_layout.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dynamic_layouts/flame_layout.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5525">
+            <state relative-caret-position="859">
               <caret line="325" column="8" lean-forward="false" selection-start-line="325" selection-start-column="8" selection-end-line="326" selection-end-column="33" />
               <folding>
                 <marker date="1530547832174" expanded="true" signature="4532:4911" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
@@ -205,16 +212,16 @@
         <option value="$PROJECT_DIR$/datetimetest.py" />
         <option value="$PROJECT_DIR$/garden/garden.datetimepicker/__init__.py" />
         <option value="$PROJECT_DIR$/libs/garden/garden.datetimepicker/__init__.py" />
-        <option value="$PROJECT_DIR$/flame_alarm.py" />
         <option value="$PROJECT_DIR$/roulette/__init__.py" />
         <option value="$PROJECT_DIR$/datetimepicker/__init__.py" />
         <option value="$PROJECT_DIR$/dynamic_layouts/flame_layout.json" />
         <option value="$PROJECT_DIR$/main.ini" />
         <option value="$PROJECT_DIR$/variables.json" />
         <option value="$PROJECT_DIR$/app_settings.py" />
-        <option value="$PROJECT_DIR$/can_com.py" />
         <option value="$PROJECT_DIR$/dynamic_layouts/dio_layout.json" />
         <option value="$PROJECT_DIR$/main.kv" />
+        <option value="$PROJECT_DIR$/can_com.py" />
+        <option value="$PROJECT_DIR$/flame_alarm.py" />
         <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
@@ -240,6 +247,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -268,8 +277,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -533,13 +540,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1484573106753</updated>
-    </task>
-    <task id="LOCAL-00004" summary="mostly finished Variable widget">
-      <created>1490369127079</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1490369127079</updated>
     </task>
     <task id="LOCAL-00005" summary="started integrating variable widgets into dynamic layout widgets">
       <created>1490989714220</created>
@@ -877,17 +877,23 @@
       <option name="project" value="LOCAL" />
       <updated>1529695938439</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="- Change RPi state output to a heartbeat.&#10;- Fixed some widget color issues.&#10;- New CAN should be fully debugged.">
+      <created>1531147425995</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1531147425996</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13854167" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32892805" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23020063" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2534319" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3284055" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3284055" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -902,6 +908,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23020063" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -938,7 +945,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="- finished adding and debugging 'label' widget" />
     <MESSAGE value="- finished initial 'scripts' implementation.  need to add ability to insert aliases." />
     <MESSAGE value="- debugged latest release (aliases, moveable widgets, add/delete widgets, new settings screen)" />
     <MESSAGE value="- starting making screen look more modern.&#10;- removed &quot;enable&quot; checkbox on widget popup." />
@@ -963,7 +969,8 @@
     <MESSAGE value="- Minor button modifications." />
     <MESSAGE value="- Fixed issue with flame alarm.&#10;- Trying out new theme with white background." />
     <MESSAGE value="- Switched from serial to CAN for dio module.  Still needs debug." />
-    <option name="LAST_COMMIT_MESSAGE" value="- Switched from serial to CAN for dio module.  Still needs debug." />
+    <MESSAGE value="- Change RPi state output to a heartbeat.&#10;- Fixed some widget color issues.&#10;- New CAN should be fully debugged." />
+    <option name="LAST_COMMIT_MESSAGE" value="- Change RPi state output to a heartbeat.&#10;- Fixed some widget color issues.&#10;- New CAN should be fully debugged." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1104,13 +1111,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/flame_alarm.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="34" lean-forward="true" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Python27/Lib/site-packages/kivy/core/text/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-183">
@@ -1132,32 +1132,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dynamic_layouts/flame_layout.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5525">
-          <caret line="325" column="8" lean-forward="false" selection-start-line="325" selection-start-column="8" selection-end-line="326" selection-end-column="33" />
-          <folding>
-            <marker date="1530547832174" expanded="true" signature="4532:4911" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
-            <marker date="1530547832174" expanded="true" signature="9001:9008" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/can_com_(old).py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/can_com.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="488">
-          <caret line="82" column="15" lean-forward="false" selection-start-line="82" selection-start-column="15" selection-end-line="82" selection-end-column="15" />
-          <folding>
-            <element signature="e#15#39#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1173,7 +1151,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dynamic_layouts/dio_layout.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2270">
+        <state relative-caret-position="3842">
           <caret line="226" column="31" lean-forward="true" selection-start-line="226" selection-start-column="22" selection-end-line="226" selection-end-column="31" />
           <folding />
         </state>
@@ -1205,16 +1183,45 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.kv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-203">
+        <state relative-caret-position="9690">
           <caret line="570" column="12" lean-forward="false" selection-start-line="570" selection-start-column="4" selection-end-line="570" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/can_com.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="43" column="58" lean-forward="true" selection-start-line="43" selection-start-column="58" selection-end-line="43" selection-end-column="58" />
+          <folding>
+            <element signature="e#15#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dynamic_layouts/flame_layout.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="859">
+          <caret line="325" column="8" lean-forward="false" selection-start-line="325" selection-start-column="8" selection-end-line="326" selection-end-column="33" />
+          <folding>
+            <marker date="1530547832174" expanded="true" signature="4532:4911" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
+            <marker date="1530547832174" expanded="true" signature="9001:9008" ph="{&quot;color_off&quot;: &quot;##ffffffff&quot;...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flame_alarm.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="33" column="25" lean-forward="true" selection-start-line="33" selection-start-column="25" selection-end-line="33" selection-end-column="25" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1445">
-          <caret line="857" column="12" lean-forward="true" selection-start-line="857" selection-start-column="12" selection-end-line="857" selection-end-column="12" />
+        <state relative-caret-position="374">
+          <caret line="875" column="0" lean-forward="true" selection-start-line="875" selection-start-column="0" selection-end-line="875" selection-end-column="0" />
           <folding />
         </state>
       </provider>

@@ -25,29 +25,30 @@ class CANcom(Widget):
         super(CANcom, self).__init__(**kwargs)
         self.can_read_data = 0
         self.can_write_data = 0
-        self.can_event = Clock.schedule_interval(self.can_read, 0.05)
+        self.can_event = Clock.schedule_interval(self.can_read, 0.01)
+        self.msg0 = self.msg1 = self.msg2 = 0
+        self.write_can_data = False
 
     def can_read(self, dt):
-        msg0 = msg1 = msg2 = 0
-        write_can_data = False
         try:
-            message = bufferedReader.get_message(timeout=0.01)
+            message = bufferedReader.get_message(timeout=0.005)
             if message:
                 # get CAN message from module at address 0
                 if message.arbitration_id == 0x000:
-                    msg0 = message.data[0]
-                    write_can_data = True
+                    self.msg0 = message.data[0]
+                    self.write_can_data = True
                 # get CAN message from module at address 1
                 if message.arbitration_id == 0x001:
-                    msg1 = message.data[0] << 8
-                    write_can_data = True
+                    self.msg1 = message.data[0] << 8
+                    self.write_can_data = True
                 # get CAN message from module at address 2
                 if message.arbitration_id == 0x002:
-                    msg2 = message.data[0] << 16
-                    write_can_data = True
+                    self.msg2 = message.data[0] << 16
+                    self.write_can_data = True
 
-                if write_can_data:
-                    self.can_read_data = msg0 + msg1 + msg2
+                if self.write_can_data:
+                    self.can_read_data = self.msg0 + self.msg1 + self.msg2
+                    self.write_can_data = False
         except Exception as e:
             pass
 
