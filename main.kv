@@ -1,6 +1,6 @@
 #:kivy 1.9.1
 #:import Factory kivy.factory.Factory
-#:import KivyCamera kivy_cv
+#:import KivyCamera engines.kivy_cv
 #:import get_color_from_hex kivy.utils.get_color_from_hex
 #:import get_hex_from_color kivy.utils.get_hex_from_color
 
@@ -546,8 +546,8 @@
             radius: (dp(0),)
 
 <ModernButton@Button>:
-    background_normal: 'button.png'
-    background_down: 'button_pressed.png'
+    background_normal: 'pics/button.png'
+    background_down: 'pics/button_pressed.png'
 
 <PasscodeButton@ModernButton>:
     on_release: app.screen_man.try_passcode(self.text)

@@ -9,7 +9,8 @@ class FlameAlarm:
         self.on_debounce_time = 5
         self.off_debounce_time = 1
         self.prev_time = time.time()
-        self.counter = 0
+        self.alarm_counter = 0
+        self.state_change_ctr = 0
 
     def update(self, state):
         self.alarm = False # always reset alarm as it is used as an event
@@ -17,6 +18,7 @@ class FlameAlarm:
         # check if flame state has changed
         if state and not self.prev_state or self.prev_state and not state:
             self.prev_time = time.time()  # state changed, so reset timer
+            self.state_change_ctr = self.state_change_ctr + 1
 
         alarm_timer = time.time() - self.prev_time
 
@@ -27,7 +29,7 @@ class FlameAlarm:
             if (alarm_timer > self.off_debounce_time) and self.flame_on_latch:
                 self.flame_on_latch = False
                 self.alarm = True # flame has been off long enough, and it was previously on long enough, so set alarm
-                self.counter = self.counter + 1
+                self.alarm_counter = self.alarm_counter + 1
 
         self.prev_state = state
 

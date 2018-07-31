@@ -3,10 +3,7 @@ from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.clock import Clock
 import os
-import Queue
 import time
-from threading import Thread
-from threading import Event
 
 
 try:

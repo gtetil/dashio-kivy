@@ -95,7 +95,7 @@
     }, 
     "18": {
         "color_off": "#ffffffff", 
-        "color_on": "#8fff7fff",
+        "color_on": "#8fff7fff", 
         "invert": false, 
         "off_text": "", 
         "on_text": "", 
@@ -113,7 +113,7 @@
     }, 
     "19": {
         "color_off": "#ffffffff", 
-        "color_on": "#8fff7fff",
+        "color_on": "#8fff7fff", 
         "invert": false, 
         "off_text": "", 
         "on_text": "", 
@@ -150,7 +150,7 @@
     }, 
     "20": {
         "color_off": "#ffffffff", 
-        "color_on": "#8fff7fff",
+        "color_on": "#8fff7fff", 
         "invert": false, 
         "off_text": "", 
         "on_text": "", 
@@ -181,7 +181,7 @@
             190, 
             230
         ], 
-        "var_alias": "DO_4", 
+        "var_alias": "REVERSE", 
         "var_tag": "DO_4", 
         "widget": "Toggle Button"
     }, 
