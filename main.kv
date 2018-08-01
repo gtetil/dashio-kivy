@@ -44,7 +44,7 @@
 
     ModernButton:
         id: settings
-        disabled: True
+        disabled: False
         text: 'SETTINGS'
         on_release: app.open_settings(); app.screen_man.current = 'main_screen'; app.slide_layout.toggle_state()
         on_release: if app.dynamic_layout.modify_mode: app.dynamic_layout.end_modify(); app.variables.toggle_update_clock(True)
@@ -512,6 +512,43 @@
 
             Label:
                 text: root.value or ''
+                pos: root.pos
+                font_size: '15sp'
+
+<-SettingCSVReader>:
+    app_ref: app
+    size_hint: .25, None
+    height: labellayout.texture_size[1] + dp(20)
+    content: content
+    canvas:
+        Color:
+            rgba: 47 / 255., 167 / 255., 212 / 255., self.selected_alpha
+        Rectangle:
+            pos: self.x, self.y + 1
+            size: self.size
+        Color:
+            rgb: .2, .2, .2
+        Rectangle:
+            pos: self.x, self.y - 2
+            size: self.width, 1
+
+    BoxLayout:
+        pos: root.pos
+
+        Label:
+            size_hint_x: .66
+            id: labellayout
+            markup: True
+            text: root.title or ''
+            font_size: '15sp'
+            text_size: self.width - 32, None
+
+        BoxLayout:
+            id: content
+            size_hint_x: .33
+
+            Label:
+                #text: root.value or ''
                 pos: root.pos
                 font_size: '15sp'
 
