@@ -290,19 +290,14 @@ class SettingCSVReader(SettingPath):
             dirselect=False, show_hidden=self.show_hidden, filters=['*.csv'])
         #textinput.bind(on_path=self._print_csv_data)
 
-        # create list for viewing csv data
-        self.csv_list = csv_list = ListView()
-
         # construct the content
         content.add_widget(textinput)
-        content.add_widget(SettingSpacer())
-        content.add_widget(csv_list)
         content.add_widget(SettingSpacer())
 
         # 2 buttons are created for accept or cancel the current value
         btnlayout = BoxLayout(size_hint_y=None, height='50dp', spacing='5dp')
         btn = Button(text='Open')
-        btn.bind(on_release=self._print_csv_data)
+        btn.bind(on_release=self._csv_data_popup)
         btnlayout.add_widget(btn)
         btn = Button(text='Close')
         btn.bind(on_release=self._dismiss)
@@ -312,12 +307,13 @@ class SettingCSVReader(SettingPath):
         # all done, open the popup !
         popup.open()
 
-    def _print_csv_data(self, instance):
+    def _csv_data_popup(self, instance):
         value = self.textinput.selection[0]
 
         if not value:
             return
 
+        # read csv file
         with open(value, 'rb') as csvfile:
             reader = csv.reader(csvfile, delimiter=',')
             items = [row for row in reader]
@@ -325,4 +321,27 @@ class SettingCSVReader(SettingPath):
             for i, item in enumerate(items[0]):
                 list.append(item + ':   ' + items[1][i])
 
-        self.csv_list.item_strings = list
+        # create popup layout
+        content = BoxLayout(orientation='vertical', spacing=5)
+        popup_width = min(0.95 * Window.width, dp(500))
+        self.csv_popup = popup = Popup(
+            title=value, content=content, size_hint=(None, 0.9),
+            width=popup_width)
+
+        # create list for viewing csv data
+        self.csv_list = csv_list = ListView()
+        csv_list.item_strings = list
+
+        # construct the content
+        content.add_widget(csv_list)
+        content.add_widget(SettingSpacer())
+
+        # 2 buttons are created for accept or cancel the current value
+        btnlayout = BoxLayout(size_hint_y=None, height='50dp', spacing='5dp')
+        btn = Button(text='Close')
+        btn.bind(on_release=popup.dismiss)
+        btnlayout.add_widget(btn)
+        content.add_widget(btnlayout)
+
+        # all done, open the popup !
+        popup.open()
