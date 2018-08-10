@@ -21,6 +21,7 @@ class ScreenManagement(ScreenManager):
     ignition_input = NumericProperty(0)
     reverse_input = NumericProperty(0)
     app_ref = ObjectProperty(None)
+    screen_background_color = StringProperty('')
     settings_file = 'settings.json'
 
     def __init__(self,**kwargs):
@@ -28,6 +29,7 @@ class ScreenManagement(ScreenManager):
         self.transition = NoTransition()
         self.start_inactivity_clock()
         self.alarm_state = False
+        self.background_color()
 
     def on_touch_down(self, touch):
         self.start_inactivity_clock()
@@ -155,6 +157,9 @@ class ScreenManagement(ScreenManager):
             anim.cancel_all(self.main_screen.ids.alarm_indicator)
             self.main_screen.ids.alarm_indicator.opacity = 0
         self.alarm_state = state
+
+    def background_color(self):
+        self.screen_background_color = self.app_ref.variables.get('SYS_SCREEN_BACKGROUND_COLOR')
 
 class MainScreen(Screen):
     app_ref = ObjectProperty(None)

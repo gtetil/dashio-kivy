@@ -56,6 +56,7 @@ class MainApp(App):
             'SYS_SCREEN_OFF_DELAY': 1,
             'SYS_SHUTDOWN_DELAY': 60,
             'SYS_INACTIVE_TIME': 5,
+            'SYS_SCREEN_BACKGROUND_COLOR': '#ffffffff',
             'SYS_WIDGET_BACKGROUND_OFF_COLOR': '#ffffffff',
             'SYS_WIDGET_BACKGROUND_ON_COLOR': '#8fff7fff',
             'SYS_WIDGET_TEXT_OFF_COLOR': '#00000000',

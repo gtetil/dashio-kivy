@@ -1,7 +1,9 @@
 {
     "0": {
         "color_off": "#ffffffff", 
-        "color_on": "#8fff7fff", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#a5ff99ff", 
+        "color_on_text": "#000000ff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -20,7 +22,9 @@
     }, 
     "1": {
         "color_off": "#ffffffff", 
-        "color_on": "#8fff7fff", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#a5ff99ff", 
+        "color_on_text": "#000000ff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -39,7 +43,9 @@
     }, 
     "10": {
         "color_off": "#ffffffff", 
-        "color_on": "#8fff7fff", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#a5ff99ff", 
+        "color_on_text": "#000000ff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -58,7 +64,9 @@
     }, 
     "11": {
         "color_off": "#ffffffff", 
-        "color_on": "#8fff7fff", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#a5ff99ff", 
+        "color_on_text": "#000000ff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -77,7 +85,9 @@
     }, 
     "12": {
         "color_off": "#ffffffff", 
-        "color_on": "#8fff7fff", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#a5ff99ff", 
+        "color_on_text": "#000000ff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -96,7 +106,9 @@
     }, 
     "13": {
         "color_off": "#ffffffff", 
-        "color_on": "#8fff7fff", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#a5ff99ff", 
+        "color_on_text": "#000000ff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -115,7 +127,9 @@
     }, 
     "14": {
         "color_off": "#ffffffff", 
-        "color_on": "#8fff7fff", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#a5ff99ff", 
+        "color_on_text": "#000000ff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -134,7 +148,9 @@
     }, 
     "15": {
         "color_off": "#ffffffff", 
-        "color_on": "#8fff7fff", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#a5ff99ff", 
+        "color_on_text": "#000000ff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -153,7 +169,9 @@
     }, 
     "16": {
         "color_off": "#ffffffff", 
-        "color_on": "#8fff7fff", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#a5ff99ff", 
+        "color_on_text": "#000000ff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -172,7 +190,9 @@
     }, 
     "17": {
         "color_off": "#ffffffff", 
-        "color_on": "#8fff7fff", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#a5ff99ff", 
+        "color_on_text": "#000000ff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -191,7 +211,9 @@
     }, 
     "2": {
         "color_off": "#ffffffff", 
-        "color_on": "#8fff7fff", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#a5ff99ff", 
+        "color_on_text": "#000000ff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -210,7 +232,9 @@
     }, 
     "20": {
         "color_off": "#ffffffff", 
-        "color_on": "#8fff7fff", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#a5ff99ff", 
+        "color_on_text": "#000000ff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -229,7 +253,9 @@
     }, 
     "21": {
         "color_off": "#ffffffff", 
-        "color_on": "#8fff7fff", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#a5ff99ff", 
+        "color_on_text": "#000000ff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -248,7 +274,9 @@
     }, 
     "22": {
         "color_off": "#ffffffff", 
-        "color_on": "#8fff7fff", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#a5ff99ff", 
+        "color_on_text": "#000000ff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -267,7 +295,9 @@
     }, 
     "23": {
         "color_off": "#ffffffff", 
-        "color_on": "#8fff7fff", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#a5ff99ff", 
+        "color_on_text": "#000000ff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -284,28 +314,11 @@
         "var_tag": "ROW_4", 
         "widget": "Indicator"
     }, 
-    "24": {
-        "color_off": "#ffffffff", 
-        "color_on": "#8fff7fff", 
-        "enable": true, 
-        "invert": false, 
-        "off_text": "", 
-        "on_text": "", 
-        "pos": [
-            400.0, 
-            290.0
-        ], 
-        "size": [
-            100, 
-            100
-        ], 
-        "var_alias": "ROW 5", 
-        "var_tag": "ROW_5", 
-        "widget": "Indicator"
-    }, 
     "25": {
         "color_off": "#ffffffff", 
-        "color_on": "#8fff7fff", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#a5ff99ff", 
+        "color_on_text": "#000000ff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -324,7 +337,9 @@
     }, 
     "26": {
         "color_off": "#ffffffff", 
-        "color_on": "#8fff7fff", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#a5ff99ff", 
+        "color_on_text": "#000000ff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -343,7 +358,9 @@
     }, 
     "27": {
         "color_off": "#ffffffff", 
-        "color_on": "#8fff7fff", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#a5ff99ff", 
+        "color_on_text": "#000000ff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -362,7 +379,9 @@
     }, 
     "28": {
         "color_off": "#ffffffff", 
-        "color_on": "#8fff7fff", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#a5ff99ff", 
+        "color_on_text": "#000000ff", 
         "invert": false, 
         "off_text": "", 
         "on_text": "%A, %B %d, %Y", 
@@ -380,7 +399,9 @@
     }, 
     "29": {
         "color_off": "#ffffffff", 
-        "color_on": "#8fff7fff", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#a5ff99ff", 
+        "color_on_text": "#000000ff", 
         "invert": false, 
         "off_text": "", 
         "on_text": "%#I:%M %p", 
@@ -398,7 +419,9 @@
     }, 
     "3": {
         "color_off": "#ffffffff", 
-        "color_on": "#8fff7fff", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#a5ff99ff", 
+        "color_on_text": "#000000ff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -417,7 +440,9 @@
     }, 
     "30": {
         "color_off": "#ffffffff", 
-        "color_on": "#99ffffff", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#a5ff99ff", 
+        "color_on_text": "#000000ff", 
         "invert": false, 
         "off_text": "BACKLIGHT", 
         "on_text": "BACKLIGHT", 
@@ -433,9 +458,31 @@
         "var_tag": "SYS_DIM_BACKLIGHT", 
         "widget": "Toggle Button"
     }, 
+    "31": {
+        "color_off": "#ffffffff", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#a5ff99ff", 
+        "color_on_text": "#000000ff", 
+        "invert": false, 
+        "off_text": "", 
+        "on_text": "", 
+        "pos": [
+            400.0, 
+            290.0
+        ], 
+        "size": [
+            100, 
+            100
+        ], 
+        "var_alias": "ROW 5", 
+        "var_tag": "ROW_5", 
+        "widget": "Indicator"
+    }, 
     "4": {
         "color_off": "#ffffffff", 
-        "color_on": "#8fff7fff", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#a5ff99ff", 
+        "color_on_text": "#000000ff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -454,7 +501,9 @@
     }, 
     "5": {
         "color_off": "#ffffffff", 
-        "color_on": "#8fff7fff", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#a5ff99ff", 
+        "color_on_text": "#000000ff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -473,7 +522,9 @@
     }, 
     "6": {
         "color_off": "#ffffffff", 
-        "color_on": "#8fff7fff", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#a5ff99ff", 
+        "color_on_text": "#000000ff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -492,7 +543,9 @@
     }, 
     "7": {
         "color_off": "#ffffffff", 
-        "color_on": "#8fff7fff", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#a5ff99ff", 
+        "color_on_text": "#000000ff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 

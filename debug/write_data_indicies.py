@@ -1,5 +1,5 @@
 import json
-variables_file = 'variables.json'
+variables_file = r'C:\Users\gtetil\Documents\Projects\dashio-kivy\settings\variables.json'
 
 with open(variables_file, 'r') as file:
     variables_json = json.load(file)

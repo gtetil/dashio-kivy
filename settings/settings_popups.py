@@ -19,6 +19,8 @@ import os
 import csv
 
 class SettingColorPicker(SettingString):
+    app_ref = ObjectProperty(None)
+
     def _create_popup(self, instance):
         # create popup layout
         content = BoxLayout(orientation='vertical', color='1,1,1,1')
@@ -49,6 +51,7 @@ class SettingColorPicker(SettingString):
     def _validate(self, instance):
         self._dismiss()
         self.value = get_hex_from_color(self.color_picker.color)
+        self.app_ref.dynamic_layout.global_modify()
 
 class SettingAlias(SettingString):
     def _create_popup(self, instance):
