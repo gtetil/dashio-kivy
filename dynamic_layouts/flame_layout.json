@@ -230,27 +230,6 @@
         "var_tag": "ROW_19", 
         "widget": "Indicator"
     }, 
-    "20": {
-        "color_off": "#ffffffff", 
-        "color_off_text": "#000000ff", 
-        "color_on": "#a5ff99ff", 
-        "color_on_text": "#000000ff", 
-        "enable": true, 
-        "invert": false, 
-        "off_text": "", 
-        "on_text": "", 
-        "pos": [
-            0.0, 
-            290.0
-        ], 
-        "size": [
-            100, 
-            100
-        ], 
-        "var_alias": "ROW 1", 
-        "var_tag": "ROW_1", 
-        "widget": "Toggle Button"
-    }, 
     "21": {
         "color_off": "#ffffffff", 
         "color_off_text": "#000000ff", 
@@ -386,11 +365,11 @@
         "off_text": "", 
         "on_text": "%A, %B %d, %Y", 
         "pos": [
-            310.0, 
+            300.0, 
             450.0
         ], 
         "size": [
-            180, 
+            200, 
             30
         ], 
         "var_alias": "SYS_TIME", 
@@ -477,6 +456,27 @@
         "var_alias": "ROW 5", 
         "var_tag": "ROW_5", 
         "widget": "Indicator"
+    }, 
+    "33": {
+        "color_off": "#ffffffff", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#a5ff99ff", 
+        "color_on_text": "#000000ff", 
+        "enable": true, 
+        "invert": false, 
+        "off_text": "", 
+        "on_text": "", 
+        "pos": [
+            0.0, 
+            290.0
+        ], 
+        "size": [
+            100, 
+            100
+        ], 
+        "var_alias": "ROW 1", 
+        "var_tag": "ROW_1", 
+        "widget": "Toggle Button"
     }, 
     "4": {
         "color_off": "#ffffffff", 

@@ -47,7 +47,7 @@ class MainApp(App):
         self.get_aliases()
         self.get_scripts()
         self.get_saved_vars()
-        self.screen_man.current = 'main_screen' #fixes issue where screen is blank when adruino can't initially connect
+        self.screen_man.current = 'main_screen' #fixes issue where screen is blank when arduino can't initially connect
         return self.slide_layout
 
     def build_config(self, config):

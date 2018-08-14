@@ -11,6 +11,7 @@ from kivy.uix.popup import Popup
 from kivy.core.window import Window
 from kivy.graphics import Color, Rectangle
 from kivy.utils import get_color_from_hex, get_hex_from_color
+from copy import deepcopy
 
 import settings.app_settings as app_settings
 
@@ -57,10 +58,10 @@ class DynamicLayout(Widget):
                                          var_alias=self.dyn_layout_json[id]['var_alias'],
                                          widget=widget,
                                          invert=self.dyn_layout_json[id]['invert'],
-                                         color_on=self.dyn_layout_json[id]['color_on'],
-                                         color_off=self.dyn_layout_json[id]['color_off'],
-                                         color_on_text = self.dyn_layout_json[id].setdefault('color_on_text', '#00000000'),
-                                         color_off_text = self.dyn_layout_json[id].setdefault('color_off_text', '#00000000'))
+                                         color_on=self.dyn_layout_json[id].setdefault('color_on', '#8fff7fff'),
+                                         color_off=self.dyn_layout_json[id].setdefault('color_off', '#ffffffff'),
+                                         color_on_text = self.dyn_layout_json[id].setdefault('color_on_text', '#000000ff'),
+                                         color_off_text = self.dyn_layout_json[id].setdefault('color_off_text', '#000000ff'))
         elif widget == 'Button':
             dyn_widget = DynButton(text='',
                                          id=str(id),
@@ -70,10 +71,10 @@ class DynamicLayout(Widget):
                                          var_alias=self.dyn_layout_json[id]['var_alias'],
                                          widget=widget,
                                          invert=self.dyn_layout_json[id]['invert'],
-                                         color_on=self.dyn_layout_json[id]['color_on'],
-                                         color_off=self.dyn_layout_json[id]['color_off'],
-                                         color_on_text = self.dyn_layout_json[id].setdefault('color_on_text', '#00000000'),
-                                         color_off_text = self.dyn_layout_json[id].setdefault('color_off_text', '#00000000'))
+                                         color_on=self.dyn_layout_json[id].setdefault('color_on', '#8fff7fff'),
+                                         color_off=self.dyn_layout_json[id].setdefault('color_off', '#ffffffff'),
+                                         color_on_text = self.dyn_layout_json[id].setdefault('color_on_text', '#000000ff'),
+                                         color_off_text = self.dyn_layout_json[id].setdefault('color_off_text', '#000000ff'))
         else:
             dyn_widget = DynLabel(text='',
                                          id=str(id),
@@ -83,10 +84,10 @@ class DynamicLayout(Widget):
                                          var_alias=self.dyn_layout_json[id]['var_alias'],
                                          widget=widget,
                                          invert=self.dyn_layout_json[id]['invert'],
-                                         color_on=self.dyn_layout_json[id]['color_on'],
-                                         color_off=self.dyn_layout_json[id]['color_off'],
-                                         color_on_text = self.dyn_layout_json[id].setdefault('color_on_text', '#00000000'),
-                                         color_off_text = self.dyn_layout_json[id].setdefault('color_off_text', '#00000000'))
+                                         color_on=self.dyn_layout_json[id].setdefault('color_on', '#8fff7fff'),
+                                         color_off=self.dyn_layout_json[id].setdefault('color_off', '#ffffffff'),
+                                         color_on_text = self.dyn_layout_json[id].setdefault('color_on_text', '#000000ff'),
+                                         color_off_text = self.dyn_layout_json[id].setdefault('color_off_text', '#000000ff'))
         scatter_layout = MyScatterLayout(id=str(id) + '_scatter',
                                          do_rotation=False,
                                          size=(self.dyn_layout_json[id]['size'][0], self.dyn_layout_json[id]['size'][1]),
@@ -151,6 +152,22 @@ class DynamicLayout(Widget):
         self.end_modify()
         self.modify_screen()
         self.app_ref.main_screen_ref.item_edit_popup.edit_popup(self.dyn_widget_dict[new_id])
+
+    def copy_widget(self, current_id):
+        id_list = []
+        for id, dyn_widget in self.dyn_widget_dict.items():
+            id_list.append(int(id))
+        new_id = str(max(id_list) + 1)  # make new id one greater than largest id
+        # copy current widget json data to new one
+        current_json = self.dyn_layout_json[current_id]
+        new_json = deepcopy(current_json)
+        new_json['pos'] = (current_json['pos'][0] + current_json['size'][0], current_json['pos'][1])
+        self.dyn_layout_json.update({new_id: new_json})
+        self.create_dyn_widget(new_id)
+        self.update_widget(new_id)
+        self.save_layout()
+        self.end_modify()
+        self.modify_screen()
 
     def edit_widget_json(self, id):
         dyn_widget_ref = self.dyn_widget_dict[id]
@@ -278,6 +295,10 @@ class ScreenItemEditPopup(Popup):
 
     def delete_item(self):
         self.dynamic_layout.delete_widget(self.item.id)
+        self.dismiss()
+
+    def copy_item(self):
+        self.dynamic_layout.copy_widget(self.item.id)
         self.dismiss()
 
 class DynItem(Widget):
@@ -425,7 +446,7 @@ class ColorSelector(Popup):
             self.widget_color = get_hex_from_color(pop_up_ref.color_on_button.background_color)
         if property == 'off_button':
             self.widget_color = get_hex_from_color(pop_up_ref.color_off_button.background_color)
-        if property == 'off_text':
+        if property == 'on_text':
             self.widget_color = get_hex_from_color(pop_up_ref.color_on_text.background_color)
         if property == 'off_text':
             self.widget_color = get_hex_from_color(pop_up_ref.color_off_text.background_color)

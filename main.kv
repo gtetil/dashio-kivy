@@ -215,21 +215,11 @@
                         padding: 1
 
                         Label:
-                            text: 'On Color\nBackgnd/Text:'
+                            text: 'On Color\nText/Bckgnd:'
                             size_hint: .25, 1
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
-
-                        ModernButton:
-                            id: color_on_button
-                            background_normal: ''
-                            background_down: ''
-                            size_hint: .1, 1
-                            on_release: color_select.color_open(item_edit_popup, 'on_button')
-
-                        BoxLayout:
-                            size_hint: .01, 1
 
                         ModernButton:
                             id: color_on_text
@@ -237,6 +227,16 @@
                             background_down: ''
                             size_hint: .1, 1
                             on_release: color_select.color_open(item_edit_popup, 'on_text')
+
+                        BoxLayout:
+                            size_hint: .01, 1
+
+                        ModernButton:
+                            id: color_on_button
+                            background_normal: ''
+                            background_down: ''
+                            size_hint: .1, 1
+                            on_release: color_select.color_open(item_edit_popup, 'on_button')
 
                         BoxLayout:
                             size_hint: .53, 1
@@ -261,21 +261,11 @@
                         padding: 1
 
                         Label:
-                            text: 'Off Color\nBackgnd/Text:'
+                            text: 'Off Color\nText/Bckgnd:'
                             size_hint: .25, 1
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
-
-                        ModernButton:
-                            id: color_off_button
-                            background_normal: ''
-                            background_down: ''
-                            size_hint: .1, 1
-                            on_release: color_select.color_open(item_edit_popup, 'off_button')
-
-                        BoxLayout:
-                            size_hint: .01, 1
 
                         ModernButton:
                             id: color_off_text
@@ -283,6 +273,16 @@
                             background_down: ''
                             size_hint: .1, 1
                             on_release: color_select.color_open(item_edit_popup, 'off_text')
+
+                        BoxLayout:
+                            size_hint: .01, 1
+
+                        ModernButton:
+                            id: color_off_button
+                            background_normal: ''
+                            background_down: ''
+                            size_hint: .1, 1
+                            on_release: color_select.color_open(item_edit_popup, 'off_button')
 
                         BoxLayout:
                             size_hint: .53, 1
@@ -313,8 +313,13 @@
                 size_hint: 1, 0.2
                 spacing: 5
 
+                ModernButton:
+                    text: 'Del'
+                    size_hint: .1, 1
+                    on_release: item_edit_popup.delete_item()
+
                 BoxLayout:
-                    size_hint: .3, 1
+                    size_hint: .1, 1
 
                 ModernButton:
                     text: 'OK'
@@ -322,9 +327,9 @@
                     on_release: item_edit_popup.save_item()
 
                 ModernButton:
-                    text: 'Del'
-                    size_hint: .1, 1
-                    on_release: item_edit_popup.delete_item()
+                    text: 'Copy'
+                    size_hint: .2, 1
+                    on_release: item_edit_popup.copy_item()
 
                 ModernButton:
                     text: 'Cancel'
@@ -657,8 +662,6 @@
         Color:
             rgba: get_color_from_hex(self.canvas_color)
         RoundedRectangle:
-            size: self.size
-            pos: self.pos
             size: self.size[0] - 4, self.size[1] - 4
             pos: self.pos[0] + 2, self.pos[1] + 2
             radius: (dp(0),)
