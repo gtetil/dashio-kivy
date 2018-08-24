@@ -708,5 +708,15 @@
         "tag": "SYS_LAYOUT_FILE", 
         "type": "SYS", 
         "value": "flame_layout.json"
+    }, 
+    {
+        "alias": "SYS_COLOR_HISTORY", 
+        "data_index": 71, 
+        "hidden": true, 
+        "id": 1017, 
+        "save": true, 
+        "tag": "SYS_COLOR_HISTORY", 
+        "type": "SYS", 
+        "value": "#ffffffff"
     }
 ]

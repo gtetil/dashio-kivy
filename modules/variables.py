@@ -130,8 +130,9 @@ class Variables(Widget):
         self.set_by_alias('SYS_TIME', str(time.time()))
 
         # heartbeat signal to rpi power supply
-        self.set_gpio_output(self.shutdown_pin, self.last_shutdown_state)
-        self.last_shutdown_state = not self.last_shutdown_state
+        if operating_sys == 'Linux':
+            self.set_gpio_output(self.shutdown_pin, self.last_shutdown_state)
+            self.last_shutdown_state = not self.last_shutdown_state
 
     def log_files(self, dt):
         self.flame_alarm_log.write(self.alarm_counters)

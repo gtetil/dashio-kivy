@@ -3,6 +3,7 @@
 #:import KivyCamera engines.kivy_cv
 #:import get_color_from_hex kivy.utils.get_color_from_hex
 #:import get_hex_from_color kivy.utils.get_hex_from_color
+#:import MyColorPicker modules.color_picker
 
 <SlideLayout>:
     anim_type: 'slide_above_anim'
@@ -109,6 +110,7 @@
     item_edit_popup: item_edit_popup.__self__
     engine_kill_popup: engine_kill_popup.__self__
     datetime_popup: datetime_popup.__self__
+    color_select: color_select.__self__
     on_parent: app.main_screen_ref = self
 
     FloatLayout:
@@ -381,7 +383,12 @@
 
     ColorSelector:
         id: color_select
-        widget_color: '#4c32ffff'
+        app_ref: app
+        widget_color: ''
+        size_hint: None, None
+        size: 400, 480
+        pos_hint: {'middle': 1, 'center': 1}
+        clr_picker: clr_picker
         title: 'Color Selector'
         content:content
         on_parent: if self.parent == main_screen: self.parent.remove_widget(self)
@@ -389,20 +396,23 @@
         BoxLayout:
             id: content
             orientation: 'vertical'
-            ColorPicker:
+            spacing: 5
+
+            MyColorPicker:
                 id: clr_picker
-                color: get_color_from_hex(color_select.widget_color)
+
             BoxLayout:
                 size_hint_y: None
-                height: '27sp'
+                height: '50sp'
                 Button:
-                    text: 'ok'
+                    text: 'Ok'
                     on_release:
-                        color_select.widget_color = get_hex_from_color(clr_picker.color)
+                        color_select.widget_color = clr_picker.current_color
                         color_select.color_save()
                 Button:
-                    text: 'cancel'
-                    on_release: color_select.color_close()
+                    text: 'Cancel'
+                    on_release:
+                        color_select.color_close()
 
 <-SettingAlias>:
     size_hint: .25, None

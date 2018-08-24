@@ -227,20 +227,22 @@ class DynamicLayout(Widget):
         self.save_layout() #save for size and position changes
         self.app_ref.variables.refresh_data = True
 
-    def global_modify(self):
-        background_color_off = self.app_ref.variables.get('SYS_WIDGET_BACKGROUND_OFF_COLOR')
-        background_color_on = self.app_ref.variables.get('SYS_WIDGET_BACKGROUND_ON_COLOR')
-        text_color_off = self.app_ref.variables.get('SYS_WIDGET_TEXT_OFF_COLOR')
-        text_color_on = self.app_ref.variables.get('SYS_WIDGET_TEXT_ON_COLOR')
+    def global_modify(self, variable):
+        color = self.app_ref.variables.get(variable)
         for id in self.dyn_layout_json:
-            self.dyn_layout_json[id]['color_off'] = background_color_off
-            self.dyn_layout_json[id]['color_on'] = background_color_on
-            self.dyn_layout_json[id]['color_off_text'] = text_color_off
-            self.dyn_layout_json[id]['color_on_text'] = text_color_on
+            if variable == 'SYS_WIDGET_BACKGROUND_OFF_COLOR':
+                self.dyn_layout_json[id]['color_off'] = color
+            if variable == 'SYS_WIDGET_BACKGROUND_ON_COLOR':
+                self.dyn_layout_json[id]['color_on'] = color
+            if variable == 'SYS_WIDGET_TEXT_OFF_COLOR':
+                self.dyn_layout_json[id]['color_off_text'] = color
+            if variable == 'SYS_WIDGET_TEXT_ON_COLOR':
+                self.dyn_layout_json[id]['color_on_text'] = color
             self.remove_dyn_widget(id)
             self.create_dyn_widget(id)
         self.end_modify()
-        self.app_ref.screen_man.background_color()
+        if variable == 'SYS_SCREEN_BACKGROUND_COLOR':
+            self.app_ref.screen_man.background_color()
 
 class ScreenItemEditPopup(Popup):
     app_ref = ObjectProperty(None)
@@ -437,9 +439,10 @@ class ColorSelector(Popup):
     app_ref = ObjectProperty(None)
     widget_color = StringProperty('')
     pop_up_ref = ObjectProperty(None)
-    on_select = False
+    clr_picker = ObjectProperty(None)
 
     def color_open(self, pop_up_ref, property):
+        self.clr_picker.prev_sel_color = self.app_ref.variables.get('SYS_COLOR_HISTORY')
         self.pop_up_ref = pop_up_ref
         self.property = property
         if property == 'on_button':
@@ -450,9 +453,11 @@ class ColorSelector(Popup):
             self.widget_color = get_hex_from_color(pop_up_ref.color_on_text.background_color)
         if property == 'off_text':
             self.widget_color = get_hex_from_color(pop_up_ref.color_off_text.background_color)
+        self.clr_picker.current_color = self.widget_color
         self.open()
 
     def color_save(self):
+        self.app_ref.variables.set_by_alias('SYS_COLOR_HISTORY', self.widget_color)
         if self.property == 'on_button':
             self.pop_up_ref.color_on_button.background_color = get_color_from_hex(self.widget_color)
         if self.property == 'off_button':

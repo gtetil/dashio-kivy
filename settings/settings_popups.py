@@ -12,7 +12,7 @@ from kivy.metrics import dp
 from kivy.factory import Factory
 from kivy.uix.filechooser import FileChooserListView
 from kivy.utils import get_color_from_hex, get_hex_from_color
-from kivy.uix.colorpicker import ColorPicker, ColorWheel
+from modules.color_picker import MyColorPicker
 from kivy.uix.listview import ListView
 import app_settings
 import os
@@ -23,35 +23,74 @@ class SettingColorPicker(SettingString):
 
     def _create_popup(self, instance):
         # create popup layout
-        content = BoxLayout(orientation='vertical', color='1,1,1,1')
-        self.popup = popup = Popup(
-            title=self.title, content=content)
-        # create the textinput used for numeric input
-        self.color_picker = ColorPicker(color=get_color_from_hex(self.value), size_hint_y=None, height='350dp')
+        content = BoxLayout(orientation='vertical', color='1,1,1,1', spacing=5)
+        self.color_popup = popup = Popup(
+            title=self.title, content=content, size_hint=(None,None), size=(400,480), pos_hint={'middle': 1, 'center': 1})
+        # create the textinput used for numeric input.
+        self.color_picker = MyColorPicker(current_color=self.value,
+                                          prev_sel_color = self.app_ref.variables.get('SYS_COLOR_HISTORY'))
 
         # construct the content, widget are used as a spacer
-        content.add_widget(Widget())
         content.add_widget(self.color_picker)
-        content.add_widget(Widget())
-        content.add_widget(SettingSpacer())
 
         # 2 buttons are created for accept or cancel the current value
-        btnlayout = BoxLayout(size_hint_y=None, height='50dp', spacing='5dp')
+        btnlayout = BoxLayout(size_hint_y=None, height='50dp')
         btn = Button(text='Ok')
-        btn.bind(on_release=self._validate)
+        btn.bind(on_release=self._warning_popup)
         btnlayout.add_widget(btn)
         btn = Button(text='Cancel')
-        btn.bind(on_release=self._dismiss)
+        btn.bind(on_release=popup.dismiss)
         btnlayout.add_widget(btn)
         content.add_widget(btnlayout)
 
         # all done, open the popup !
         popup.open()
 
+    def _warning_popup(self, instance):
+        if self.key != 'SYS_SCREEN_BACKGROUND_COLOR':
+            # create popup layout
+            content = BoxLayout(orientation='vertical', color='1,1,1,1')
+            popup_width = min(0.95 * Window.width, dp(500))
+            self.warning_popup = popup = Popup(
+                title=self.title, content=content, size_hint=(None, None),
+            size=(popup_width, '250dp'), pos_hint={'middle': 1, 'center': 1})
+            # create the textinput used for numeric input
+            self.label = Label(text='This action will affect ALL widgets.  Is that ok?')
+
+            # construct the content, widget are used as a spacer
+            content.add_widget(Widget())
+            content.add_widget(self.label)
+            content.add_widget(Widget())
+            content.add_widget(SettingSpacer())
+
+            # 2 buttons are created for accept or cancel the current value
+            btnlayout = BoxLayout(size_hint_y=None, height='50dp', spacing='5dp')
+            btn = Button(text='Yes')
+            btn.bind(on_release=self._validate)
+            btnlayout.add_widget(btn)
+            btn = Button(text='Cancel')
+            btn.bind(on_release=self._dismiss_warning)
+            btnlayout.add_widget(btn)
+            content.add_widget(btnlayout)
+
+            # all done, open the popup !
+            popup.open()
+        else:
+            self._validate(instance)
+
+    def _dismiss_warning(self, instance):
+        try:
+            self.warning_popup.dismiss()
+        except:
+            pass
+        self.color_popup.dismiss()
+
     def _validate(self, instance):
-        self._dismiss()
-        self.value = get_hex_from_color(self.color_picker.color)
-        self.app_ref.dynamic_layout.global_modify()
+        self._dismiss_warning(instance)
+        self.value = self.color_picker.current_color
+        self.app_ref.variables.set_by_alias('SYS_COLOR_HISTORY', self.value)
+        self.app_ref.dynamic_layout.global_modify(self.key)
+
 
 class SettingAlias(SettingString):
     def _create_popup(self, instance):
