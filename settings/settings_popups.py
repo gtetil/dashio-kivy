@@ -376,6 +376,7 @@ class SettingCSVReader(SettingPath):
             width=popup_width)
 
         # construct the self.csv_content
+        self.csv_content.add_widget(SettingSpacer())
         self.csv_content.add_widget(self.data_viewer)
         self.csv_content.add_widget(SettingSpacer())
 
@@ -417,7 +418,9 @@ class SettingViewer(SettingString):
             size=(popup_width, '480dp'), pos_hint={'middle': 1, 'top': 1})
 
         # construct the content, widget are used as a spacer
+        self.content.add_widget(SettingSpacer())
         self.content.add_widget(self.data_viewer)
+        self.content.add_widget(SettingSpacer())
 
         # 2 buttons are created for accept or cancel the current value
         btnlayout = BoxLayout(size_hint_y=None, height='50dp', spacing='5dp')

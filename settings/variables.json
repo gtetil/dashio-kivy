@@ -717,6 +717,16 @@
         "save": true, 
         "tag": "SYS_COLOR_HISTORY", 
         "type": "SYS", 
-        "value": "#ffffffff"
+        "value": "#a5ff99ff"
+    }, 
+    {
+        "alias": "SYS_DEBUG_MODE", 
+        "data_index": 72, 
+        "hidden": true, 
+        "id": 1018, 
+        "save": true, 
+        "tag": "SYS_DEBUG_MODE", 
+        "type": "SYS", 
+        "value": "1"
     }
 ]

@@ -58,7 +58,12 @@ settings_json = json.dumps([
      'title': 'Widget Text ON Color',
      'desc': 'Text color of widget when ON',
      'section': 'Settings',
-     'key': 'SYS_WIDGET_TEXT_ON_COLOR'}
+     'key': 'SYS_WIDGET_TEXT_ON_COLOR'},
+    {'type': 'bool',
+     'title': 'System Debug Mode',
+     'desc': 'Turn on to simulate data when devices are not available',
+     'section': 'Settings',
+     'key': 'SYS_DEBUG_MODE'}
 ])
 
 scripts_json = json.dumps([

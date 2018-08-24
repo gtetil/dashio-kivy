@@ -20,7 +20,7 @@
 
         ModernButton:
             id: modify_screen
-            disabled: False
+            disabled: not app.variables.SYS_DEBUG_MODE
             text: 'MODIFY\nSCREEN'
             text_size: self.size
             halign: 'center'
@@ -30,7 +30,7 @@
 
         ModernButton:
             id: add_widget
-            disabled: False
+            disabled: not app.variables.SYS_DEBUG_MODE
             text: 'ADD\nWIDGET'
             text_size: self.size
             halign: 'center'
@@ -45,13 +45,14 @@
 
     ModernButton:
         id: settings
-        disabled: False
+        disabled: not app.variables.SYS_DEBUG_MODE
         text: 'SETTINGS'
         on_release: app.open_settings(); app.screen_man.current = 'main_screen'; app.slide_layout.toggle_state()
         on_release: if app.dynamic_layout.modify_mode: app.dynamic_layout.end_modify(); app.variables.toggle_update_clock(True)
 
     ModernButton:
         id: admin_login
+        disabled: app.variables.SYS_DEBUG_MODE
         text: 'ADMIN LOGIN'
         on_release: app.screen_man.admin_toggle()
 

@@ -29,6 +29,7 @@ class Variables(Widget):
     variables_file = 'settings/variables.json'
     DI_IGNITION = StringProperty('0')
     SYS_REVERSE_CAM_ON = StringProperty('0')
+    SYS_DEBUG_MODE = BooleanProperty(False)
 
     def __init__(self, **kwargs):
         super(Variables, self).__init__(**kwargs)
@@ -130,7 +131,7 @@ class Variables(Widget):
         self.set_by_alias('SYS_TIME', str(time.time()))
 
         # heartbeat signal to rpi power supply
-        if operating_sys == 'Linux':
+        if not self.SYS_DEBUG_MODE:
             self.set_gpio_output(self.shutdown_pin, self.last_shutdown_state)
             self.last_shutdown_state = not self.last_shutdown_state
 
@@ -145,8 +146,10 @@ class Variables(Widget):
                 self.variable_data[i + app_settings.dio_mod_di_data_start] = str(di_state)  # update variable data array with di states
         if self.get('SYS_FLAME_DETECT') == '1':
             for i in range(0, app_settings.flame_detect_len):
-                flame_state = (self.can_data & 2**i) >> i
-                flame_state = self.get("ROW " + str(i + 1))  # this is used for debug, when CAN isn't available
+                if self.SYS_DEBUG_MODE:
+                    flame_state = self.get("ROW " + str(i + 1))  # this is used for debug, when CAN isn't available
+                else:
+                    flame_state = (self.can_data & 2**i) >> i
                 self.variable_data[i+app_settings.flame_detect_data_start] = str(flame_state) # update variable data array with flame states
                 self.alarm_states[i] = self.flame_alarms[i].update(bool(int(flame_state))) # get array of all flame alarm states
                 self.alarm_counters[i] = self.flame_alarms[i].alarm_counter
@@ -175,11 +178,16 @@ class Variables(Widget):
         #old way of reading ignition status from DIO module
         #self.DI_IGNITION = self.variable_data[7]  #need to update last due to screen initialization issue
 
-        if operating_sys == 'Linux':
-            if not GPIO.input(self.ignition_pin):
-                self.DI_IGNITION = '1'
-            else:
-                self.DI_IGNITION = '0'
+        if not self.SYS_DEBUG_MODE:
+            try:
+                ignition_state = GPIO.input(self.ignition_pin)
+                if not ignition_state:
+                    self.DI_IGNITION = '1'
+                else:
+                    self.DI_IGNITION = '0'
+            except Exception as e:
+                print('gpio error:')
+                print(e)
 
         self.exec_scripts()
 
@@ -292,6 +300,12 @@ class Variables(Widget):
                 self.SYS_REVERSE_CAM_ON = '1'
             else:
                 self.SYS_REVERSE_CAM_ON = '0'
+        if tag == 'SYS_DEBUG_MODE':
+            if value == '1':
+                self.app_ref.screen_man.admin_login(False)
+                self.SYS_DEBUG_MODE = True
+            else:
+                self.SYS_DEBUG_MODE = False
 
     def backlight_brightness(self, value):
         print('brightness cmd')
