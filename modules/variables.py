@@ -302,7 +302,7 @@ class Variables(Widget):
                 self.SYS_REVERSE_CAM_ON = '0'
         if tag == 'SYS_DEBUG_MODE':
             if value == '1':
-                self.app_ref.screen_man.admin_login(False)
+                self.app_ref.screen_man.admin_login(False, toggle=False)
                 self.SYS_DEBUG_MODE = True
             else:
                 self.SYS_DEBUG_MODE = False

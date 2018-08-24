@@ -114,7 +114,7 @@ class ScreenManagement(ScreenManager):
                     self.admin_login(False)
             self.passcode_try = ''
 
-    def admin_login(self, login):
+    def admin_login(self, login, toggle=True):
         if login:
             login_str = '1'
             disabled = False
@@ -124,7 +124,7 @@ class ScreenManagement(ScreenManager):
             login_str = '0'
             disabled = True
             button_text = 'ADMIN LOGIN'
-            self.back_to_main(True)
+            self.back_to_main(toggle)
         self.app_ref.variables.set_by_alias('SYS_ADMIN_LOGIN', login_str)
         self.app_ref.slide_menu.ids.admin_login.text = button_text
         self.app_ref.slide_menu.ids.modify_screen.disabled = disabled

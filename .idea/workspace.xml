@@ -3,12 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="27b3c643-4da9-4ab8-8fac-19f30f795262" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.ini" afterPath="$PROJECT_DIR$/main.ini" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.kv" afterPath="$PROJECT_DIR$/main.kv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/screens.py" afterPath="$PROJECT_DIR$/modules/screens.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/variables.py" afterPath="$PROJECT_DIR$/modules/variables.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings/app_settings.py" afterPath="$PROJECT_DIR$/settings/app_settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings/settings_popups.py" afterPath="$PROJECT_DIR$/settings/settings_popups.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings/variables.json" afterPath="$PROJECT_DIR$/settings/variables.json" />
     </list>
     <list id="1e95b302-9845-4a63-bdc7-46bebc48f801" name="Revert: " comment="" />
     <list id="9acf94dc-4ce7-4798-ab9b-5692da952639" name="Revert:" comment="" />
@@ -88,7 +84,7 @@
         <entry file="file://$PROJECT_DIR$/modules/variables.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="466">
-              <caret line="304" column="58" lean-forward="false" selection-start-line="304" selection-start-column="58" selection-end-line="304" selection-end-column="58" />
+              <caret line="304" column="71" lean-forward="false" selection-start-line="304" selection-start-column="71" selection-end-line="304" selection-end-column="71" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -99,8 +95,8 @@
       <file leaf-file-name="screens.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modules/screens.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="145" column="51" lean-forward="true" selection-start-line="145" selection-start-column="51" selection-end-line="145" selection-end-column="51" />
+            <state relative-caret-position="255">
+              <caret line="128" column="19" lean-forward="true" selection-start-line="128" selection-start-column="19" selection-end-line="128" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -244,7 +240,6 @@
         <option value="$PROJECT_DIR$/engines/can_com.py" />
         <option value="$PROJECT_DIR$/csv_test.py" />
         <option value="$PROJECT_DIR$/debug/write_data_indicies.py" />
-        <option value="$PROJECT_DIR$/modules/screens.py" />
         <option value="$PROJECT_DIR$/dynamic_layouts/dio_layout.json" />
         <option value="$PROJECT_DIR$/dynamic_layouts/flame_layout.json" />
         <option value="C:/Python27/Lib/site-packages/kivy/data/style.kv" />
@@ -259,6 +254,7 @@
         <option value="$PROJECT_DIR$/main.ini" />
         <option value="$PROJECT_DIR$/settings/variables.json" />
         <option value="$PROJECT_DIR$/main.kv" />
+        <option value="$PROJECT_DIR$/modules/screens.py" />
         <option value="$PROJECT_DIR$/modules/variables.py" />
       </list>
     </option>
@@ -617,13 +613,6 @@
       <option name="presentableId" value="Default" />
       <updated>1484573106753</updated>
     </task>
-    <task id="LOCAL-00013" summary="created separate clocks for variables and arduino.  makes program much quicker.">
-      <created>1492695953902</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1492695953902</updated>
-    </task>
     <task id="LOCAL-00014" summary="removed KivyMD.  was really clunky on RPI.  using kivy garden navigation drawer.  so far, so good.">
       <created>1493057977135</created>
       <option name="number" value="00014" />
@@ -960,7 +949,14 @@
       <option name="project" value="LOCAL" />
       <updated>1535131817438</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="- Added debug mode to settings.">
+      <created>1535137418607</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1535137418607</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1041,7 +1037,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="- Switched backup camera to cv2 code.  This is due to constant driver issue in Kivy, and to gain access to more features." />
     <MESSAGE value="- Forgot to add kivy_cv.py to git last time.&#10;- Removed win, pc, debug variables.&#10;- Cleaned up project files." />
     <MESSAGE value="- Added CAN engine, and 8 row digital inputs." />
     <MESSAGE value="- Finished flame detect and CAN debug." />
@@ -1066,7 +1061,8 @@
     <MESSAGE value="- Added function to copy a widget." />
     <MESSAGE value="- Created a custom color picker, including a history color." />
     <MESSAGE value="- Added live data viewer, and changed csv reader to recycle view." />
-    <option name="LAST_COMMIT_MESSAGE" value="- Added live data viewer, and changed csv reader to recycle view." />
+    <MESSAGE value="- Added debug mode to settings." />
+    <option name="LAST_COMMIT_MESSAGE" value="- Added debug mode to settings." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1336,14 +1332,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modules/screens.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="145" column="51" lean-forward="true" selection-start-line="145" selection-start-column="51" selection-end-line="145" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.kv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
@@ -1352,10 +1340,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/modules/screens.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="128" column="19" lean-forward="true" selection-start-line="128" selection-start-column="19" selection-end-line="128" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/modules/variables.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="466">
-          <caret line="304" column="58" lean-forward="false" selection-start-line="304" selection-start-column="58" selection-end-line="304" selection-end-column="58" />
+          <caret line="304" column="71" lean-forward="false" selection-start-line="304" selection-start-column="71" selection-end-line="304" selection-end-column="71" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
