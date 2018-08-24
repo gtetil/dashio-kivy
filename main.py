@@ -11,7 +11,7 @@ from kivy.properties import ObjectProperty
 from kivy.core.window import Window
 from kivy.uix.settings import SettingsWithSidebar
 from modules.variables import Variables
-from settings.settings_popups import SettingColorPicker, SettingAlias, SettingScript, MySettingPath, MySettingNumeric, SettingAction, SettingCSVReader
+from settings.settings_popups import SettingColorPicker, SettingAlias, SettingScript, MySettingPath, MySettingNumeric, SettingAction, SettingCSVReader, SettingViewer
 from modules.dynamic_layout import DynamicLayout
 from modules.screens import ScreenManagement, SlideLayout, SlideMenu
 import settings.app_settings as app_settings
@@ -76,6 +76,7 @@ class MainApp(App):
         settings.register_type('action', SettingAction)
         settings.register_type('color_picker', SettingColorPicker)
         settings.register_type('csv_reader', SettingCSVReader)
+        settings.register_type('data_viewer', SettingViewer)
         settings.add_json_panel('Settings', self.config, data=app_settings.settings_json)
         aliases = []
         if self.variables.get('SYS_DIO_MODULE') == '1':

@@ -14,7 +14,7 @@ from math import cos, sin, pi, sqrt, atan
 from colorsys import rgb_to_hsv, hsv_to_rgb
 from kivy.app import App
 from kivy.core.window import Window
-Window.size = (400,480)
+Window.size = (375,365)
 
 from kivy.lang import Builder
 Builder.load_string('''
@@ -49,6 +49,46 @@ Builder.load_string('''
                 Color:
                     group: 'a'
                     rgba: get_color_from_hex(root.prev_sel_color)
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+                    radius: (dp(25),)
+                    
+        Button:
+            id: prev_sel_color_indicator
+            size_hint: None,None
+            width: '50sp'
+            height: '50sp'
+            pos: color_wheel.pos[0] + 15, color_wheel.pos[1] + 255
+            background_color: 1,1,1,0
+            background_normal: ''
+            background_down: ''
+            on_release: root.current_color = get_hex_from_color(self.canvas.before.get_group('a')[0].rgba)
+            canvas.before:
+                Clear
+                Color:
+                    group: 'a'
+                    rgba: 1,1,1,1
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+                    radius: (dp(25),)
+                    
+        Button:
+            id: prev_sel_color_indicator
+            size_hint: None,None
+            width: '50sp'
+            height: '50sp'
+            pos: color_wheel.pos[0] + 315, color_wheel.pos[1] + 255
+            background_color: 1,1,1,0
+            background_normal: ''
+            background_down: ''
+            on_release: root.current_color = get_hex_from_color(self.canvas.before.get_group('a')[0].rgba)
+            canvas.before:
+                Clear
+                Color:
+                    group: 'a'
+                    rgba: 0,0,0,1
                 RoundedRectangle:
                     size: self.size
                     pos: self.pos

@@ -313,6 +313,11 @@ aliases_json = json.dumps([
 ])
 
 developer_json = json.dumps([
+    {'type': 'data_viewer',
+     'title': 'Live Data',
+     'desc': '',
+     'section': 'Developer',
+     'key': 'SYS_LIVE_DATA'},
     {'type': 'csv_reader',
      'title': 'CSV Reader',
      'desc': '',

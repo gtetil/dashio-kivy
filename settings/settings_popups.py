@@ -13,7 +13,11 @@ from kivy.factory import Factory
 from kivy.uix.filechooser import FileChooserListView
 from kivy.utils import get_color_from_hex, get_hex_from_color
 from modules.color_picker import MyColorPicker
+from modules.data_viewer import DataViewer
 from kivy.uix.listview import ListView
+from kivy.uix.recycleview import RecycleView
+from kivy.uix.recycleboxlayout import RecycleBoxLayout
+from kivy.clock import Clock
 import app_settings
 import os
 import csv
@@ -316,6 +320,7 @@ class SettingAction(SettingString):
 
 class SettingCSVReader(SettingPath):
     app_ref = ObjectProperty(None)
+    data_viewer = DataViewer()
 
     def _create_popup(self, instance):
         # create popup layout
@@ -359,31 +364,76 @@ class SettingCSVReader(SettingPath):
         with open(value, 'rb') as csvfile:
             reader = csv.reader(csvfile, delimiter=',')
             items = [row for row in reader]
-            list = []
-            for i, item in enumerate(items[0]):
-                list.append(item + ':   ' + items[1][i])
+            self.data_viewer.clear()
+            for i, item in reversed(list(enumerate(items[0]))):
+                self.data_viewer.insert(item + ':   ' + items[1][i])
 
         # create popup layout
-        content = BoxLayout(orientation='vertical', spacing=5)
+        self.csv_content = BoxLayout(orientation='vertical', spacing=5)
         popup_width = min(0.95 * Window.width, dp(500))
-        self.csv_popup = popup = Popup(
-            title=value, content=content, size_hint=(None, 0.9),
+        self.csv_popup = Popup(
+            title=value, content=self.csv_content, size_hint=(None, 0.9),
             width=popup_width)
 
-        # create list for viewing csv data
-        self.csv_list = csv_list = ListView()
-        csv_list.item_strings = list
-
-        # construct the content
-        content.add_widget(csv_list)
-        content.add_widget(SettingSpacer())
+        # construct the self.csv_content
+        self.csv_content.add_widget(self.data_viewer)
+        self.csv_content.add_widget(SettingSpacer())
 
         # 2 buttons are created for accept or cancel the current value
         btnlayout = BoxLayout(size_hint_y=None, height='50dp', spacing='5dp')
         btn = Button(text='Close')
-        btn.bind(on_release=popup.dismiss)
+        btn.bind(on_release=self._csv_dismiss)
         btnlayout.add_widget(btn)
-        content.add_widget(btnlayout)
+        self.csv_content.add_widget(btnlayout)
+
+        # all done, open the popup !
+        self.csv_popup.open()
+
+    def _csv_dismiss(self, instance):
+        self.csv_popup.dismiss()
+        self.csv_content.remove_widget(self.data_viewer)
+
+class SettingViewer(SettingString):
+    app_ref = ObjectProperty(None)
+    data_viewer = DataViewer()
+
+    def __init__(self, **kwargs):
+        super(SettingViewer, self).__init__(**kwargs)
+        self.get_data(0)  #this solves an initial refresh issue
+
+    def get_data(self, dt):
+        self.data_viewer.clear()
+        for i, item in reversed(list(enumerate(self.app_ref.variables.var_aliases))):
+            self.data_viewer.insert(item + ':   ' + self.app_ref.variables.variable_data[i])
+        self.data_viewer.remove()  #the first element in variables is a placeholder, so remove
+
+    def _create_popup(self, instance):
+        self.data_clock = Clock.schedule_interval(self.get_data, 1)
+        # create popup layout
+        self.content = BoxLayout(orientation='vertical', spacing='5dp')
+        popup_width = min(0.95 * Window.width, dp(500))
+        self.popup = popup = Popup(
+            title=self.title, content=self.content, size_hint=(None, None),
+            size=(popup_width, '480dp'), pos_hint={'middle': 1, 'top': 1})
+
+        # construct the content, widget are used as a spacer
+        self.content.add_widget(self.data_viewer)
+
+        # 2 buttons are created for accept or cancel the current value
+        btnlayout = BoxLayout(size_hint_y=None, height='50dp', spacing='5dp')
+        btn = Button(text='Close')
+        btn.bind(on_release=self._dismiss)
+        btnlayout.add_widget(btn)
+        self.content.add_widget(btnlayout)
 
         # all done, open the popup !
         popup.open()
+
+    def _dismiss(self, *largs):
+        if self.textinput:
+            self.textinput.focus = False
+        if self.popup:
+            self.popup.dismiss()
+        self.popup = None
+        self.data_clock.cancel()
+        self.content.remove_widget(self.data_viewer)
