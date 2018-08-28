@@ -1,6 +1,6 @@
 {
     "10": {
-        "color_off": "#ffffffff", 
+        "color_off": "#ccd8ffff", 
         "color_off_text": "#000000ff", 
         "color_on": "#8fff7fff", 
         "color_on_text": "#000000ff", 
@@ -21,7 +21,7 @@
         "widget": "Toggle Button"
     }, 
     "11": {
-        "color_off": "#ffffffff", 
+        "color_off": "#ccd8ffff", 
         "color_off_text": "#000000ff", 
         "color_on": "#8fff7fff", 
         "color_on_text": "#000000ff", 
@@ -42,7 +42,7 @@
         "widget": "Button"
     }, 
     "12": {
-        "color_off": "#ffffffff", 
+        "color_off": "#ccd8ffff", 
         "color_off_text": "#000000ff", 
         "color_on": "#8fff7fff", 
         "color_on_text": "#000000ff", 
@@ -63,7 +63,7 @@
         "widget": "Indicator"
     }, 
     "15": {
-        "color_off": "#ffffffff", 
+        "color_off": "#ccd8ffff", 
         "color_off_text": "#000000ff", 
         "color_on": "#8fff7fff", 
         "color_on_text": "#000000ff", 
@@ -84,7 +84,7 @@
         "widget": "Indicator"
     }, 
     "17": {
-        "color_off": "#ffffffff", 
+        "color_off": "#ccd8ffff", 
         "color_off_text": "#000000ff", 
         "color_on": "#8fff7fff", 
         "color_on_text": "#000000ff", 
@@ -104,7 +104,7 @@
         "widget": "Toggle Button"
     }, 
     "18": {
-        "color_off": "#ffffffff", 
+        "color_off": "#ccd8ffff", 
         "color_off_text": "#000000ff", 
         "color_on": "#8fff7fff", 
         "color_on_text": "#000000ff", 
@@ -124,7 +124,7 @@
         "widget": "Toggle Button"
     }, 
     "19": {
-        "color_off": "#ffffffff", 
+        "color_off": "#ccd8ffff", 
         "color_off_text": "#000000ff", 
         "color_on": "#8fff7fff", 
         "color_on_text": "#000000ff", 
@@ -144,7 +144,7 @@
         "widget": "Toggle Button"
     }, 
     "2": {
-        "color_off": "#ffffffff", 
+        "color_off": "#ccd8ffff", 
         "color_off_text": "#000000ff", 
         "color_on": "#8fff7fff", 
         "color_on_text": "#000000ff", 
@@ -165,7 +165,7 @@
         "widget": "Toggle Button"
     }, 
     "20": {
-        "color_off": "#ffffffff", 
+        "color_off": "#ccd8ffff", 
         "color_off_text": "#000000ff", 
         "color_on": "#8fff7fff", 
         "color_on_text": "#000000ff", 
@@ -185,7 +185,7 @@
         "widget": "Toggle Button"
     }, 
     "3": {
-        "color_off": "#ffffffff", 
+        "color_off": "#ccd8ffff", 
         "color_off_text": "#000000ff", 
         "color_on": "#8fff7fff", 
         "color_on_text": "#000000ff", 
@@ -206,7 +206,7 @@
         "widget": "Toggle Button"
     }, 
     "6": {
-        "color_off": "#ffffffff", 
+        "color_off": "#ccd8ffff", 
         "color_off_text": "#000000ff", 
         "color_on": "#8fff7fff", 
         "color_on_text": "#000000ff", 
@@ -227,7 +227,7 @@
         "widget": "Indicator"
     }, 
     "8": {
-        "color_off": "#ffffffff", 
+        "color_off": "#ccd8ffff", 
         "color_off_text": "#000000ff", 
         "color_on": "#8fff7fff", 
         "color_on_text": "#000000ff", 
@@ -248,7 +248,7 @@
         "widget": "Toggle Button"
     }, 
     "9": {
-        "color_off": "#ffffffff", 
+        "color_off": "#ccd8ffff", 
         "color_off_text": "#000000ff", 
         "color_on": "#8fff7fff", 
         "color_on_text": "#000000ff", 

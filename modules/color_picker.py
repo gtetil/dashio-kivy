@@ -36,6 +36,9 @@ Builder.load_string('''
             
         Button:
             id: prev_sel_color_indicator
+            text: 'T' if root.prev_sel_color == '#00000000' else ''
+            color: 1,1,1,1 
+            font_size: '20sp'
             size_hint: None,None
             width: '50sp'
             height: '50sp'
@@ -55,7 +58,7 @@ Builder.load_string('''
                     radius: (dp(25),)
                     
         Button:
-            id: prev_sel_color_indicator
+            id: wht_sel_color
             size_hint: None,None
             width: '50sp'
             height: '50sp'
@@ -75,7 +78,7 @@ Builder.load_string('''
                     radius: (dp(25),)
                     
         Button:
-            id: prev_sel_color_indicator
+            id: blk_sel_color
             size_hint: None,None
             width: '50sp'
             height: '50sp'
@@ -89,6 +92,29 @@ Builder.load_string('''
                 Color:
                     group: 'a'
                     rgba: 0,0,0,1
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+                    radius: (dp(25),)
+                    
+        Button:
+            id: tsp_sel_color
+            text: 'T'
+            color: 1,1,1,1
+            font_size: '20sp'
+            size_hint: None,None
+            width: '50sp'
+            height: '50sp'
+            pos: color_wheel.pos[0] + 315, color_wheel.pos[1] + 20
+            background_color: 1,1,1,0
+            background_normal: ''
+            background_down: ''
+            on_release: root.current_color = get_hex_from_color((0,0,0,0))
+            canvas.before:
+                Clear
+                Color:
+                    group: 'a'
+                    rgba: 0,0,0,0
                 RoundedRectangle:
                     size: self.size
                     pos: self.pos
@@ -109,6 +135,9 @@ Builder.load_string('''
         Button:
             id: new_color
             size_hint: .7, 1
+            text: 'T' if root.current_color == '#00000000' else ''
+            color: 1,1,1,1 
+            font_size: '20sp'
             background_color: get_color_from_hex(root.current_color)
             background_normal: ''
             background_down: ''
@@ -441,7 +470,7 @@ class MyColorPicker(BoxLayout):
 
 class ColorWheelApp(App):
     def build(self):
-        main_layout = MyColorPicker(current_color = '#00ffffff', prev_sel_color = '#ff00ffff')
+        main_layout = MyColorPicker(current_color = '#00ffffff', prev_sel_color = '#00000000')
         return main_layout
 
 if __name__ =='__main__':

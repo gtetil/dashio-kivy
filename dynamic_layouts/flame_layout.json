@@ -1,9 +1,10 @@
 {
     "0": {
-        "color_off": "#ffffffff", 
+        "border_color": "#00000000", 
+        "color_off": "#e5f5ffff", 
         "color_off_text": "#000000ff", 
-        "color_on": "#a5ff99ff", 
-        "color_on_text": "#000000ff", 
+        "color_on": "#1952ffff", 
+        "color_on_text": "#ffffffff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -21,10 +22,11 @@
         "widget": "Indicator"
     }, 
     "1": {
-        "color_off": "#ffffffff", 
+        "border_color": "#00000000", 
+        "color_off": "#e5f5ffff", 
         "color_off_text": "#000000ff", 
-        "color_on": "#a5ff99ff", 
-        "color_on_text": "#000000ff", 
+        "color_on": "#1952ffff", 
+        "color_on_text": "#ffffffff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -42,10 +44,11 @@
         "widget": "Indicator"
     }, 
     "10": {
-        "color_off": "#ffffffff", 
+        "border_color": "#00000000", 
+        "color_off": "#e5f5ffff", 
         "color_off_text": "#000000ff", 
-        "color_on": "#a5ff99ff", 
-        "color_on_text": "#000000ff", 
+        "color_on": "#1952ffff", 
+        "color_on_text": "#ffffffff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -63,10 +66,11 @@
         "widget": "Indicator"
     }, 
     "11": {
-        "color_off": "#ffffffff", 
+        "border_color": "#00000000", 
+        "color_off": "#e5f5ffff", 
         "color_off_text": "#000000ff", 
-        "color_on": "#a5ff99ff", 
-        "color_on_text": "#000000ff", 
+        "color_on": "#1952ffff", 
+        "color_on_text": "#ffffffff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -84,10 +88,11 @@
         "widget": "Indicator"
     }, 
     "12": {
-        "color_off": "#ffffffff", 
+        "border_color": "#00000000", 
+        "color_off": "#e5f5ffff", 
         "color_off_text": "#000000ff", 
-        "color_on": "#a5ff99ff", 
-        "color_on_text": "#000000ff", 
+        "color_on": "#1952ffff", 
+        "color_on_text": "#ffffffff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -105,10 +110,11 @@
         "widget": "Indicator"
     }, 
     "13": {
-        "color_off": "#ffffffff", 
+        "border_color": "#00000000", 
+        "color_off": "#e5f5ffff", 
         "color_off_text": "#000000ff", 
-        "color_on": "#a5ff99ff", 
-        "color_on_text": "#000000ff", 
+        "color_on": "#1952ffff", 
+        "color_on_text": "#ffffffff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -126,10 +132,11 @@
         "widget": "Indicator"
     }, 
     "14": {
-        "color_off": "#ffffffff", 
+        "border_color": "#00000000", 
+        "color_off": "#e5f5ffff", 
         "color_off_text": "#000000ff", 
-        "color_on": "#a5ff99ff", 
-        "color_on_text": "#000000ff", 
+        "color_on": "#1952ffff", 
+        "color_on_text": "#ffffffff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -147,10 +154,11 @@
         "widget": "Indicator"
     }, 
     "15": {
-        "color_off": "#ffffffff", 
+        "border_color": "#00000000", 
+        "color_off": "#e5f5ffff", 
         "color_off_text": "#000000ff", 
-        "color_on": "#a5ff99ff", 
-        "color_on_text": "#000000ff", 
+        "color_on": "#1952ffff", 
+        "color_on_text": "#ffffffff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -168,10 +176,11 @@
         "widget": "Indicator"
     }, 
     "16": {
-        "color_off": "#ffffffff", 
+        "border_color": "#00000000", 
+        "color_off": "#e5f5ffff", 
         "color_off_text": "#000000ff", 
-        "color_on": "#a5ff99ff", 
-        "color_on_text": "#000000ff", 
+        "color_on": "#1952ffff", 
+        "color_on_text": "#ffffffff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -189,10 +198,11 @@
         "widget": "Indicator"
     }, 
     "17": {
-        "color_off": "#ffffffff", 
+        "border_color": "#00000000", 
+        "color_off": "#e5f5ffff", 
         "color_off_text": "#000000ff", 
-        "color_on": "#a5ff99ff", 
-        "color_on_text": "#000000ff", 
+        "color_on": "#1952ffff", 
+        "color_on_text": "#ffffffff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -210,10 +220,11 @@
         "widget": "Indicator"
     }, 
     "2": {
-        "color_off": "#ffffffff", 
+        "border_color": "#00000000", 
+        "color_off": "#e5f5ffff", 
         "color_off_text": "#000000ff", 
-        "color_on": "#a5ff99ff", 
-        "color_on_text": "#000000ff", 
+        "color_on": "#1952ffff", 
+        "color_on_text": "#ffffffff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -231,10 +242,11 @@
         "widget": "Indicator"
     }, 
     "21": {
-        "color_off": "#ffffffff", 
+        "border_color": "#00000000", 
+        "color_off": "#e5f5ffff", 
         "color_off_text": "#000000ff", 
-        "color_on": "#a5ff99ff", 
-        "color_on_text": "#000000ff", 
+        "color_on": "#1952ffff", 
+        "color_on_text": "#ffffffff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -252,10 +264,11 @@
         "widget": "Toggle Button"
     }, 
     "22": {
-        "color_off": "#ffffffff", 
+        "border_color": "#00000000", 
+        "color_off": "#e5f5ffff", 
         "color_off_text": "#000000ff", 
-        "color_on": "#a5ff99ff", 
-        "color_on_text": "#000000ff", 
+        "color_on": "#1952ffff", 
+        "color_on_text": "#ffffffff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -273,10 +286,11 @@
         "widget": "Indicator"
     }, 
     "23": {
-        "color_off": "#ffffffff", 
+        "border_color": "#00000000", 
+        "color_off": "#e5f5ffff", 
         "color_off_text": "#000000ff", 
-        "color_on": "#a5ff99ff", 
-        "color_on_text": "#000000ff", 
+        "color_on": "#1952ffff", 
+        "color_on_text": "#ffffffff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -294,10 +308,11 @@
         "widget": "Indicator"
     }, 
     "25": {
-        "color_off": "#ffffffff", 
+        "border_color": "#00000000", 
+        "color_off": "#e5f5ffff", 
         "color_off_text": "#000000ff", 
-        "color_on": "#a5ff99ff", 
-        "color_on_text": "#000000ff", 
+        "color_on": "#1952ffff", 
+        "color_on_text": "#ffffffff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -315,10 +330,11 @@
         "widget": "Indicator"
     }, 
     "26": {
-        "color_off": "#ffffffff", 
+        "border_color": "#00000000", 
+        "color_off": "#e5f5ffff", 
         "color_off_text": "#000000ff", 
-        "color_on": "#a5ff99ff", 
-        "color_on_text": "#000000ff", 
+        "color_on": "#1952ffff", 
+        "color_on_text": "#ffffffff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -336,10 +352,11 @@
         "widget": "Indicator"
     }, 
     "27": {
-        "color_off": "#ffffffff", 
+        "border_color": "#00000000", 
+        "color_off": "#e5f5ffff", 
         "color_off_text": "#000000ff", 
-        "color_on": "#a5ff99ff", 
-        "color_on_text": "#000000ff", 
+        "color_on": "#1952ffff", 
+        "color_on_text": "#ffffffff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -357,9 +374,10 @@
         "widget": "Indicator"
     }, 
     "28": {
-        "color_off": "#ffffffff", 
+        "border_color": "#00000000", 
+        "color_off": "#e5f5ffff", 
         "color_off_text": "#000000ff", 
-        "color_on": "#a5ff99ff", 
+        "color_on": "#ffffffff", 
         "color_on_text": "#000000ff", 
         "invert": false, 
         "off_text": "", 
@@ -377,9 +395,10 @@
         "widget": "Label"
     }, 
     "29": {
-        "color_off": "#ffffffff", 
+        "border_color": "#00000000", 
+        "color_off": "#e5f5ffff", 
         "color_off_text": "#000000ff", 
-        "color_on": "#a5ff99ff", 
+        "color_on": "#ffffffff", 
         "color_on_text": "#000000ff", 
         "invert": false, 
         "off_text": "", 
@@ -397,10 +416,11 @@
         "widget": "Label"
     }, 
     "3": {
-        "color_off": "#ffffffff", 
+        "border_color": "#00000000", 
+        "color_off": "#e5f5ffff", 
         "color_off_text": "#000000ff", 
-        "color_on": "#a5ff99ff", 
-        "color_on_text": "#000000ff", 
+        "color_on": "#1952ffff", 
+        "color_on_text": "#ffffffff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -418,10 +438,11 @@
         "widget": "Indicator"
     }, 
     "30": {
-        "color_off": "#ffffffff", 
+        "border_color": "#00000000", 
+        "color_off": "#e5f5ffff", 
         "color_off_text": "#000000ff", 
-        "color_on": "#a5ff99ff", 
-        "color_on_text": "#000000ff", 
+        "color_on": "#1952ffff", 
+        "color_on_text": "#ffffffff", 
         "invert": false, 
         "off_text": "BACKLIGHT", 
         "on_text": "BACKLIGHT", 
@@ -438,10 +459,11 @@
         "widget": "Toggle Button"
     }, 
     "31": {
-        "color_off": "#ffffffff", 
+        "border_color": "#00000000", 
+        "color_off": "#e5f5ffff", 
         "color_off_text": "#000000ff", 
-        "color_on": "#a5ff99ff", 
-        "color_on_text": "#000000ff", 
+        "color_on": "#1952ffff", 
+        "color_on_text": "#ffffffff", 
         "invert": false, 
         "off_text": "", 
         "on_text": "", 
@@ -458,10 +480,11 @@
         "widget": "Indicator"
     }, 
     "33": {
-        "color_off": "#ffffffff", 
+        "border_color": "#00000000", 
+        "color_off": "#e5f5ffff", 
         "color_off_text": "#000000ff", 
-        "color_on": "#a5ff99ff", 
-        "color_on_text": "#000000ff", 
+        "color_on": "#1952ffff", 
+        "color_on_text": "#ffffffff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -479,10 +502,11 @@
         "widget": "Toggle Button"
     }, 
     "4": {
-        "color_off": "#ffffffff", 
+        "border_color": "#00000000", 
+        "color_off": "#e5f5ffff", 
         "color_off_text": "#000000ff", 
-        "color_on": "#a5ff99ff", 
-        "color_on_text": "#000000ff", 
+        "color_on": "#1952ffff", 
+        "color_on_text": "#ffffffff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -500,10 +524,11 @@
         "widget": "Indicator"
     }, 
     "5": {
-        "color_off": "#ffffffff", 
+        "border_color": "#00000000", 
+        "color_off": "#e5f5ffff", 
         "color_off_text": "#000000ff", 
-        "color_on": "#a5ff99ff", 
-        "color_on_text": "#000000ff", 
+        "color_on": "#1952ffff", 
+        "color_on_text": "#ffffffff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -521,10 +546,11 @@
         "widget": "Indicator"
     }, 
     "6": {
-        "color_off": "#ffffffff", 
+        "border_color": "#00000000", 
+        "color_off": "#e5f5ffff", 
         "color_off_text": "#000000ff", 
-        "color_on": "#a5ff99ff", 
-        "color_on_text": "#000000ff", 
+        "color_on": "#1952ffff", 
+        "color_on_text": "#ffffffff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 
@@ -542,10 +568,11 @@
         "widget": "Indicator"
     }, 
     "7": {
-        "color_off": "#ffffffff", 
+        "border_color": "#00000000", 
+        "color_off": "#e5f5ffff", 
         "color_off_text": "#000000ff", 
-        "color_on": "#a5ff99ff", 
-        "color_on_text": "#000000ff", 
+        "color_on": "#1952ffff", 
+        "color_on_text": "#ffffffff", 
         "enable": true, 
         "invert": false, 
         "off_text": "", 

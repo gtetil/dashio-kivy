@@ -61,7 +61,8 @@ class DynamicLayout(Widget):
                                          color_on=self.dyn_layout_json[id].setdefault('color_on', '#8fff7fff'),
                                          color_off=self.dyn_layout_json[id].setdefault('color_off', '#ffffffff'),
                                          color_on_text = self.dyn_layout_json[id].setdefault('color_on_text', '#000000ff'),
-                                         color_off_text = self.dyn_layout_json[id].setdefault('color_off_text', '#000000ff'))
+                                         color_off_text = self.dyn_layout_json[id].setdefault('color_off_text', '#000000ff'),
+                                         border_color=self.dyn_layout_json[id].setdefault('border_color', '#ffffffff'))
         elif widget == 'Button':
             dyn_widget = DynButton(text='',
                                          id=str(id),
@@ -74,7 +75,8 @@ class DynamicLayout(Widget):
                                          color_on=self.dyn_layout_json[id].setdefault('color_on', '#8fff7fff'),
                                          color_off=self.dyn_layout_json[id].setdefault('color_off', '#ffffffff'),
                                          color_on_text = self.dyn_layout_json[id].setdefault('color_on_text', '#000000ff'),
-                                         color_off_text = self.dyn_layout_json[id].setdefault('color_off_text', '#000000ff'))
+                                         color_off_text = self.dyn_layout_json[id].setdefault('color_off_text', '#000000ff'),
+                                         border_color=self.dyn_layout_json[id].setdefault('border_color', '#ffffffff'))
         else:
             dyn_widget = DynLabel(text='',
                                          id=str(id),
@@ -84,10 +86,11 @@ class DynamicLayout(Widget):
                                          var_alias=self.dyn_layout_json[id]['var_alias'],
                                          widget=widget,
                                          invert=self.dyn_layout_json[id]['invert'],
-                                         color_on=self.dyn_layout_json[id].setdefault('color_on', '#8fff7fff'),
+                                         color_on=self.dyn_layout_json[id].setdefault('color_on', '#ffffffff'),
                                          color_off=self.dyn_layout_json[id].setdefault('color_off', '#ffffffff'),
                                          color_on_text = self.dyn_layout_json[id].setdefault('color_on_text', '#000000ff'),
-                                         color_off_text = self.dyn_layout_json[id].setdefault('color_off_text', '#000000ff'))
+                                         color_off_text = self.dyn_layout_json[id].setdefault('color_off_text', '#000000ff'),
+                                         border_color=self.dyn_layout_json[id].setdefault('border_color', '#ffffffff'))
         scatter_layout = MyScatterLayout(id=str(id) + '_scatter',
                                          do_rotation=False,
                                          size=(self.dyn_layout_json[id]['size'][0], self.dyn_layout_json[id]['size'][1]),
@@ -145,6 +148,7 @@ class DynamicLayout(Widget):
         new_json['color_off'] = self.app_ref.variables.get('SYS_WIDGET_BACKGROUND_OFF_COLOR')
         new_json['color_on_text'] = self.app_ref.variables.get('SYS_WIDGET_TEXT_ON_COLOR')
         new_json['color_off_text'] = self.app_ref.variables.get('SYS_WIDGET_TEXT_OFF_COLOR')
+        new_json['border_color'] = self.app_ref.variables.get('SYS_WIDGET_BORDER_COLOR')
         self.dyn_layout_json.update({new_id: new_json})
         self.create_dyn_widget(new_id)
         self.update_widget(new_id)
@@ -182,6 +186,7 @@ class DynamicLayout(Widget):
         self.dyn_layout_json[id]['color_off'] = dyn_widget_ref.color_off
         self.dyn_layout_json[id]['color_on_text'] = dyn_widget_ref.color_on_text
         self.dyn_layout_json[id]['color_off_text'] = dyn_widget_ref.color_off_text
+        self.dyn_layout_json[id]['border_color'] = dyn_widget_ref.border_color
         self.dyn_layout_json[id]['size'] = scatter_ref.size
         self.dyn_layout_json[id]['pos'] = scatter_ref.pos
 
@@ -238,6 +243,8 @@ class DynamicLayout(Widget):
                 self.dyn_layout_json[id]['color_off_text'] = color
             if variable == 'SYS_WIDGET_TEXT_ON_COLOR':
                 self.dyn_layout_json[id]['color_on_text'] = color
+            if variable == 'SYS_WIDGET_BORDER_COLOR':
+                self.dyn_layout_json[id]['border_color'] = color
             self.remove_dyn_widget(id)
             self.create_dyn_widget(id)
         self.end_modify()
@@ -255,6 +262,7 @@ class ScreenItemEditPopup(Popup):
     color_on_text = ObjectProperty(None)
     color_off_button = ObjectProperty(None)
     color_off_text = ObjectProperty(None)
+    border_color = ObjectProperty(None)
     item = ObjectProperty(None)
     dynamic_layout = ObjectProperty(None)
     modify_mode = BooleanProperty(False)
@@ -269,6 +277,7 @@ class ScreenItemEditPopup(Popup):
             self.color_off_button.background_color = get_color_from_hex(self.item.color_off)
             self.color_on_text.background_color = get_color_from_hex(self.item.color_on_text)
             self.color_off_text.background_color = get_color_from_hex(self.item.color_off_text)
+            self.border_color.background_color = get_color_from_hex(self.item.border_color)
             self.variable_spinner.text = self.item.var_alias
             self.widget_spinner.text = self.item.widget
             self.open()
@@ -281,6 +290,7 @@ class ScreenItemEditPopup(Popup):
         self.item.color_off = get_hex_from_color(self.color_off_button.background_color)
         self.item.color_on_text = get_hex_from_color(self.color_on_text.background_color)
         self.item.color_off_text = get_hex_from_color(self.color_off_text.background_color)
+        self.item.border_color = get_hex_from_color(self.border_color.background_color)
         self.item.var_alias = self.variable_spinner.text
         self.item.var_tag = self.app_ref.variables.tag_by_alias_dict[self.item.var_alias]  #save tag of associated alias, in case alias is changed/deleted
         if self.item.widget != self.widget_spinner.text:
@@ -314,6 +324,7 @@ class DynItem(Widget):
     color_off = StringProperty("")
     color_on_text = StringProperty("")
     color_off_text = StringProperty("")
+    border_color = StringProperty("")
     canvas_color = StringProperty("")
     ignition_input = NumericProperty(0)
     digital_inputs = NumericProperty(0)
@@ -432,7 +443,8 @@ class DynLabel(DynItem, Label):
             if self.app_ref.dynamic_layout.modify_mode:
                 Color(.298, .298, .047, .3)
             else:
-                Color(0, 0, 0, 0)
+                Color(rgba=get_color_from_hex(self.color_on))
+                self.color = get_color_from_hex(self.color_on_text)
             Rectangle(pos=self.pos, size=self.size)
 
 class ColorSelector(Popup):
@@ -453,6 +465,8 @@ class ColorSelector(Popup):
             self.widget_color = get_hex_from_color(pop_up_ref.color_on_text.background_color)
         if property == 'off_text':
             self.widget_color = get_hex_from_color(pop_up_ref.color_off_text.background_color)
+        if property == 'border_color':
+            self.widget_color = get_hex_from_color(pop_up_ref.border_color.background_color)
         self.clr_picker.current_color = self.widget_color
         self.open()
 
@@ -466,6 +480,8 @@ class ColorSelector(Popup):
             self.pop_up_ref.color_on_text.background_color = get_color_from_hex(self.widget_color)
         if self.property == 'off_text':
             self.pop_up_ref.color_off_text.background_color = get_color_from_hex(self.widget_color)
+        if self.property == 'border_color':
+            self.pop_up_ref.border_color.background_color = get_color_from_hex(self.widget_color)
         self.dismiss()
 
     def color_close(self):

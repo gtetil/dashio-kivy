@@ -136,6 +136,7 @@
         color_on_text: color_on_text
         color_off_button: color_off_button
         color_off_text: color_off_text
+        border_color: border_color
         variable_spinner: variable_spinner
         widget_spinner: widget_spinner
         title: "Modify"
@@ -224,21 +225,15 @@
                             halign: 'left'
                             valign: 'middle'
 
-                        ModernButton:
+                        ColorButton:
                             id: color_on_text
-                            background_normal: ''
-                            background_down: ''
-                            size_hint: .1, 1
                             on_release: color_select.color_open(item_edit_popup, 'on_text')
 
                         BoxLayout:
                             size_hint: .01, 1
 
-                        ModernButton:
+                        ColorButton:
                             id: color_on_button
-                            background_normal: ''
-                            background_down: ''
-                            size_hint: .1, 1
                             on_release: color_select.color_open(item_edit_popup, 'on_button')
 
                         BoxLayout:
@@ -270,25 +265,38 @@
                             halign: 'left'
                             valign: 'middle'
 
-                        ModernButton:
+                        ColorButton:
                             id: color_off_text
-                            background_normal: ''
-                            background_down: ''
-                            size_hint: .1, 1
                             on_release: color_select.color_open(item_edit_popup, 'off_text')
 
                         BoxLayout:
                             size_hint: .01, 1
 
-                        ModernButton:
+                        ColorButton:
                             id: color_off_button
-                            background_normal: ''
-                            background_down: ''
-                            size_hint: .1, 1
                             on_release: color_select.color_open(item_edit_popup, 'off_button')
 
                         BoxLayout:
                             size_hint: .53, 1
+
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        padding: 1
+
+                        Label:
+                            text: 'Border Color:'
+                            size_hint: .25, 1
+                            text_size: self.size
+                            halign: 'left'
+                            valign: 'middle'
+
+                        ColorButton:
+                            id: border_color
+                            on_release: color_select.color_open(item_edit_popup, 'border_color')
+
+                        BoxLayout:
+                            size_hint: .64, 1
+
 
                     BoxLayout:
                         orientation: 'horizontal'
@@ -414,6 +422,127 @@
                     text: 'Cancel'
                     on_release:
                         color_select.color_close()
+
+<SpinnerLabel@SpinnerOption>:
+    font_size: '13sp'
+
+<ColorButton@Button>:
+    background_normal: ''
+    background_down: ''
+    size_hint: .1, 1
+    text: 'T' if self.background_color == [0,0,0,0] else ''
+    color: 1,1,1,1
+    font_size: '20sp'
+
+<DynToggleButton, DynButton>:
+    ignition_input: int(app.variables.DI_IGNITION)
+    text_size: self.size
+    font_size: '18sp'
+    halign: 'center'
+    valign: 'middle'
+    background_normal: ''
+    background_down: ''
+    background_color: 1,1,1,0
+    color: 0,0,0,1
+    canvas.before:
+        Clear
+        Color:
+            rgba: get_color_from_hex(self.border_color)
+        RoundedRectangle:
+            size: self.size[0] - 2, self.size[1] - 2
+            pos: self.pos[0] + 1, self.pos[1] + 1
+            radius: (dp(0),)
+        Color:
+            rgba: get_color_from_hex(self.canvas_color)
+        RoundedRectangle:
+            size: self.size[0] - 4, self.size[1] - 4
+            pos: self.pos[0] + 2, self.pos[1] + 2
+            radius: (dp(0),)
+
+<ModernButton@Button>:
+    background_normal: 'pics/button.png'
+    background_down: 'pics/button_pressed.png'
+
+<PasscodeButton@ModernButton>:
+    on_release: app.screen_man.try_passcode(self.text)
+
+<DynLabel>:
+    text_size: self.size
+    font_size: self.size[1] / 2
+    halign: 'center'
+    valign: 'middle'
+    color: 0,0,0,1
+
+<DynItem>:
+    app_ref: app
+    data_change: app.variables.data_change
+    var_tag: ''
+    var_alias: ''
+    widget: ''
+    button_on_text: ''
+    button_off_text: ''
+    invert: False
+    color_on: ''
+    color_off: ''
+    color_on_text: ''
+    color_off_text: ''
+    border_color: ''
+
+<PasscodeScreen>:
+    id: passcode_screen
+    fail_popup: fail_popup.__self__
+    app_ref: app
+
+    GridLayout:
+        cols: 3
+        rows: 4
+        spacing: 5
+        padding: 5
+        size_hint_x: None
+        width: 400
+        pos: 200, 0
+
+        PasscodeButton:
+            text: '7'
+        PasscodeButton:
+            text: '8'
+        PasscodeButton:
+            text: '9'
+        PasscodeButton:
+            text: '4'
+        PasscodeButton:
+            text: '5'
+        PasscodeButton:
+            text: '6'
+        PasscodeButton:
+            text: '1'
+        PasscodeButton:
+            text: '2'
+        PasscodeButton:
+            text: '3'
+        PasscodeButton:
+            text: '0'
+
+    Popup:
+        id: fail_popup
+        title: "Invalid Passcode"
+        size_hint: None, None
+        size: 150, 150
+        on_parent: if self.parent == passcode_screen: self.parent.remove_widget(self)
+
+        BoxLayout:
+            id: fail_layout
+            orientation: 'vertical'
+            padding: 5
+
+            ModernButton:
+                id: fail_button
+                text: 'OK'
+                on_release: fail_popup.dismiss(); app.screen_man.current = 'main_screen'
+
+<CameraScreen>:
+    id: camera_screen
+    camera_toggle: app.variables.SYS_REVERSE_CAM_ON
 
 <-SettingAlias>:
     size_hint: .25, None
@@ -606,6 +735,9 @@
                 height: '30dp'
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
                 background_color: get_color_from_hex(root.value or '#ffffffff')
+                text: 'T' if self.background_color == [0,0,0,0] else ''
+                color: 1,1,1,1
+                font_size: '20sp'
 
             #Label:
             #    text: root.value or ''
@@ -686,118 +818,14 @@
                 pos: root.pos
                 font_size: '15sp'
 
-<SpinnerLabel@SpinnerOption>:
-    font_size: '13sp'
-
-<DynToggleButton, DynButton>:
-    ignition_input: int(app.variables.DI_IGNITION)
-    text_size: self.size
-    font_size: '18sp'
-    halign: 'center'
-    valign: 'middle'
-    background_normal: ''
-    background_down: ''
-    background_color: 1,1,1,0
-    color: 0,0,0,1
+<-Settings>:
+    orientation: 'horizontal'
     canvas.before:
-        Clear
         Color:
-            rgba: 0,0,0,1
-        RoundedRectangle:
-            size: self.size[0] - 2, self.size[1] - 2
-            pos: self.pos[0] + 1, self.pos[1] + 1
-            radius: (dp(0),)
-        Color:
-            rgba: get_color_from_hex(self.canvas_color)
-        RoundedRectangle:
-            size: self.size[0] - 4, self.size[1] - 4
-            pos: self.pos[0] + 2, self.pos[1] + 2
-            radius: (dp(0),)
-
-<ModernButton@Button>:
-    background_normal: 'pics/button.png'
-    background_down: 'pics/button_pressed.png'
-
-<PasscodeButton@ModernButton>:
-    on_release: app.screen_man.try_passcode(self.text)
-
-<DynLabel>:
-    text_size: self.size
-    font_size: self.size[1] / 2
-    halign: 'center'
-    valign: 'middle'
-    color: 0,0,0,1
-
-<DynItem>:
-    app_ref: app
-    data_change: app.variables.data_change
-    var_tag: ''
-    var_alias: ''
-    widget: ''
-    button_on_text: ''
-    button_off_text: ''
-    invert: False
-    color_on: ''
-    color_off: ''
-    color_on_text: ''
-    color_off_text: ''
-
-<PasscodeScreen>:
-    id: passcode_screen
-    fail_popup: fail_popup.__self__
-    app_ref: app
-
-    GridLayout:
-        cols: 3
-        rows: 4
-        spacing: 5
-        padding: 5
-        size_hint_x: None
-        width: 400
-        pos: 200, 0
-
-        PasscodeButton:
-            text: '7'
-        PasscodeButton:
-            text: '8'
-        PasscodeButton:
-            text: '9'
-        PasscodeButton:
-            text: '4'
-        PasscodeButton:
-            text: '5'
-        PasscodeButton:
-            text: '6'
-        PasscodeButton:
-            text: '1'
-        PasscodeButton:
-            text: '2'
-        PasscodeButton:
-            text: '3'
-        PasscodeButton:
-            text: '0'
-
-    Popup:
-        id: fail_popup
-        title: "Invalid Passcode"
-        size_hint: None, None
-        size: 150, 150
-        on_parent: if self.parent == passcode_screen: self.parent.remove_widget(self)
-
-        BoxLayout:
-            id: fail_layout
-            orientation: 'vertical'
-            padding: 5
-
-            ModernButton:
-                id: fail_button
-                text: 'OK'
-                on_release: fail_popup.dismiss(); app.screen_man.current = 'main_screen'
-
-<CameraScreen>:
-    id: camera_screen
-    camera_toggle: app.variables.SYS_REVERSE_CAM_ON
-
+            rgb: .15,.15,.15
+        Rectangle:
+            pos: self.pos
+            size: self.size
 
 
 

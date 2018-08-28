@@ -537,7 +537,7 @@
         "save": true, 
         "tag": "SYS_WIDGET_BACKGROUND_OFF_COLOR", 
         "type": "SYS", 
-        "value": "#ffffffff"
+        "value": "#ccffd8ff"
     }, 
     {
         "alias": "SYS_WIDGET_BACKGROUND_ON_COLOR", 
@@ -547,7 +547,7 @@
         "save": true, 
         "tag": "SYS_WIDGET_BACKGROUND_ON_COLOR", 
         "type": "SYS", 
-        "value": "#a5ff99ff"
+        "value": "#19ff52ff"
     }, 
     {
         "alias": "SYS_WIDGET_TEXT_OFF_COLOR", 
@@ -567,11 +567,21 @@
         "save": true, 
         "tag": "SYS_WIDGET_TEXT_ON_COLOR", 
         "type": "SYS", 
-        "value": "#000000ff"
+        "value": "#ffffffff"
+    }, 
+    {
+        "alias": "SYS_WIDGET_BORDER_COLOR", 
+        "data_index": 57, 
+        "hidden": true, 
+        "id": 2010, 
+        "save": true, 
+        "tag": "SYS_WIDGET_BORDER_COLOR", 
+        "type": "SYS", 
+        "value": "#00000000"
     }, 
     {
         "alias": "SYS_INACTIVE", 
-        "data_index": 57, 
+        "data_index": 58, 
         "hidden": false, 
         "id": 1003, 
         "save": false, 
@@ -581,7 +591,7 @@
     }, 
     {
         "alias": "SYS_INIT", 
-        "data_index": 58, 
+        "data_index": 59, 
         "hidden": false, 
         "id": 1004, 
         "save": false, 
@@ -591,7 +601,7 @@
     }, 
     {
         "alias": "SYS_TIME", 
-        "data_index": 59, 
+        "data_index": 60, 
         "hidden": false, 
         "id": 1005, 
         "save": false, 
@@ -601,7 +611,7 @@
     }, 
     {
         "alias": "SYS_CPU_TEMP", 
-        "data_index": 60, 
+        "data_index": 61, 
         "hidden": false, 
         "id": 1006, 
         "save": false, 
@@ -611,7 +621,7 @@
     }, 
     {
         "alias": "SYS_CPU_USAGE", 
-        "data_index": 61, 
+        "data_index": 62, 
         "hidden": false, 
         "id": 1007, 
         "save": false, 
@@ -621,7 +631,7 @@
     }, 
     {
         "alias": "SYS_CLOSE_APP", 
-        "data_index": 62, 
+        "data_index": 63, 
         "hidden": true, 
         "id": 1008, 
         "save": false, 
@@ -631,7 +641,7 @@
     }, 
     {
         "alias": "SYS_REBOOT", 
-        "data_index": 63, 
+        "data_index": 64, 
         "hidden": true, 
         "id": 1009, 
         "save": false, 
@@ -641,7 +651,7 @@
     }, 
     {
         "alias": "SYS_SHUTDOWN", 
-        "data_index": 64, 
+        "data_index": 65, 
         "hidden": true, 
         "id": 1010, 
         "save": false, 
@@ -651,7 +661,7 @@
     }, 
     {
         "alias": "SYS_DIO_MODULE", 
-        "data_index": 65, 
+        "data_index": 66, 
         "hidden": true, 
         "id": 1011, 
         "save": true, 
@@ -661,7 +671,7 @@
     }, 
     {
         "alias": "SYS_FLAME_DETECT", 
-        "data_index": 66, 
+        "data_index": 67, 
         "hidden": true, 
         "id": 1012, 
         "save": true, 
@@ -671,7 +681,7 @@
     }, 
     {
         "alias": "SYS_ADMIN_LOGIN", 
-        "data_index": 67, 
+        "data_index": 68, 
         "hidden": true, 
         "id": 1013, 
         "save": false, 
@@ -681,7 +691,7 @@
     }, 
     {
         "alias": "SYS_PASSCODE", 
-        "data_index": 68, 
+        "data_index": 69, 
         "hidden": true, 
         "id": 1014, 
         "save": true, 
@@ -691,7 +701,7 @@
     }, 
     {
         "alias": "SYS_ADMIN_CODE", 
-        "data_index": 69, 
+        "data_index": 70, 
         "hidden": true, 
         "id": 1015, 
         "save": true, 
@@ -701,7 +711,7 @@
     }, 
     {
         "alias": "SYS_LAYOUT_FILE", 
-        "data_index": 70, 
+        "data_index": 71, 
         "hidden": true, 
         "id": 1016, 
         "save": true, 
@@ -711,17 +721,17 @@
     }, 
     {
         "alias": "SYS_COLOR_HISTORY", 
-        "data_index": 71, 
+        "data_index": 72, 
         "hidden": true, 
         "id": 1017, 
         "save": true, 
         "tag": "SYS_COLOR_HISTORY", 
         "type": "SYS", 
-        "value": "#a5ff99ff"
+        "value": "#19ff52ff"
     }, 
     {
         "alias": "SYS_DEBUG_MODE", 
-        "data_index": 72, 
+        "data_index": 73, 
         "hidden": true, 
         "id": 1018, 
         "save": true, 
