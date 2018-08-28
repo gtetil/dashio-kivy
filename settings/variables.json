@@ -537,7 +537,7 @@
         "save": true, 
         "tag": "SYS_WIDGET_BACKGROUND_OFF_COLOR", 
         "type": "SYS", 
-        "value": "#ccffd8ff"
+        "value": "#e5f5ffff"
     }, 
     {
         "alias": "SYS_WIDGET_BACKGROUND_ON_COLOR", 
@@ -547,7 +547,7 @@
         "save": true, 
         "tag": "SYS_WIDGET_BACKGROUND_ON_COLOR", 
         "type": "SYS", 
-        "value": "#19ff52ff"
+        "value": "#3265ffff"
     }, 
     {
         "alias": "SYS_WIDGET_TEXT_OFF_COLOR", 
@@ -727,7 +727,7 @@
         "save": true, 
         "tag": "SYS_COLOR_HISTORY", 
         "type": "SYS", 
-        "value": "#19ff52ff"
+        "value": "#ffffffff"
     }, 
     {
         "alias": "SYS_DEBUG_MODE", 

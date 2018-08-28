@@ -11,6 +11,7 @@ from kivy.uix.popup import Popup
 from kivy.core.window import Window
 from kivy.graphics import Color, Rectangle
 from kivy.utils import get_color_from_hex, get_hex_from_color
+from kivy.uix.image import Image
 from copy import deepcopy
 
 import settings.app_settings as app_settings
@@ -77,7 +78,7 @@ class DynamicLayout(Widget):
                                          color_on_text = self.dyn_layout_json[id].setdefault('color_on_text', '#000000ff'),
                                          color_off_text = self.dyn_layout_json[id].setdefault('color_off_text', '#000000ff'),
                                          border_color=self.dyn_layout_json[id].setdefault('border_color', '#ffffffff'))
-        else:
+        elif widget == 'Label':
             dyn_widget = DynLabel(text='',
                                          id=str(id),
                                          button_on_text=self.dyn_layout_json[id]['on_text'],
@@ -91,6 +92,20 @@ class DynamicLayout(Widget):
                                          color_on_text = self.dyn_layout_json[id].setdefault('color_on_text', '#000000ff'),
                                          color_off_text = self.dyn_layout_json[id].setdefault('color_off_text', '#000000ff'),
                                          border_color=self.dyn_layout_json[id].setdefault('border_color', '#ffffffff'))
+        else:
+            dyn_widget = DynImage(text='',
+                                  id=str(id),
+                                  button_on_text=self.dyn_layout_json[id]['on_text'],
+                                  button_off_text=self.dyn_layout_json[id]['off_text'],
+                                  var_tag=self.dyn_layout_json[id]['var_tag'],
+                                  var_alias=self.dyn_layout_json[id]['var_alias'],
+                                  widget=widget,
+                                  invert=self.dyn_layout_json[id]['invert'],
+                                  color_on=self.dyn_layout_json[id].setdefault('color_on', '#ffffffff'),
+                                  color_off=self.dyn_layout_json[id].setdefault('color_off', '#ffffffff'),
+                                  color_on_text=self.dyn_layout_json[id].setdefault('color_on_text', '#000000ff'),
+                                  color_off_text=self.dyn_layout_json[id].setdefault('color_off_text', '#000000ff'),
+                                  border_color=self.dyn_layout_json[id].setdefault('border_color', '#ffffffff'))
         scatter_layout = MyScatterLayout(id=str(id) + '_scatter',
                                          do_rotation=False,
                                          size=(self.dyn_layout_json[id]['size'][0], self.dyn_layout_json[id]['size'][1]),
@@ -115,7 +130,7 @@ class DynamicLayout(Widget):
                 dyn_widget_ref.var_alias = dyn_widget_ref.var_tag  # the tag has changed, and the alias doesn't exist anymore, so default back to tag
             else:
                 dyn_widget_ref.var_alias = dyn_widget_ref.app_ref.variables.alias_by_tag_dict[dyn_widget_ref.var_tag]  # tag is the same, so update with new alias
-        if dyn_widget_ref.widget != 'Label':
+        if dyn_widget_ref.widget in ['Button', 'Toggle Button', 'Indicator']:
             if dyn_widget_ref.state == 'normal':
                 if dyn_widget_ref.button_off_text == '':
                     dyn_widget_ref.text = dyn_widget_ref.var_alias
@@ -369,7 +384,7 @@ class DynItem(Widget):
         if self.collide_point(*touch.pos):
             if self.app_ref.slide_layout.state != 'open':
                 if not self.app_ref.dynamic_layout.modify_mode and self.widget != 'Label':
-                    if self.widget != 'Indicator':
+                    if self.widget in ['Button', 'Toggle Button', 'Indicator']:
                         if self.var_alias != 'SYS_LOGGED_IN': #don't allow SYS_LOGGED_IN to be changed by a button
                             self._do_press()
                             self.output_cmd()
@@ -418,6 +433,9 @@ class DynToggleButton(DynItem, ToggleButton):
     canvas_color = StringProperty("")
 
 class DynButton(DynItem, Button):
+    pass
+
+class DynImage(DynItem, Image):
     pass
 
 class DynLabel(DynItem, Label):

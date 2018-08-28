@@ -4,6 +4,8 @@
 #:import get_color_from_hex kivy.utils.get_color_from_hex
 #:import get_hex_from_color kivy.utils.get_hex_from_color
 #:import MyColorPicker modules.color_picker
+#:import md_icons settings.icon_definitions.md_icons
+
 
 <SlideLayout>:
     anim_type: 'slide_above_anim'
@@ -118,6 +120,18 @@
         id: main_layout
         orientation: 'horizontal'
 
+        Label:
+            pos: 0,0
+            size_hint: None, None
+            size: 100,100
+            text_size: self.size
+            font_size: self.size[1] / 2
+            halign: 'center'
+            valign: 'middle'
+            color: 0,0,0,1
+            font_name: 'pics/materialdesignicons-webfont.ttf'
+            text: u"{}".format(md_icons['access-point'])
+
         Button:
             id: alarm_indicator
             opacity: 0
@@ -197,7 +211,7 @@
                             option_cls: Factory.get("SpinnerLabel")
                             font_size: '13sp'
                             text: 'Toggle Button'
-                            values: ['Indicator', 'Button', 'Toggle Button', 'Label']
+                            values: ['Indicator', 'Button', 'Toggle Button', 'Label', 'Image']
 
                     BoxLayout:
                         orientation: 'horizontal'
@@ -458,6 +472,11 @@
             size: self.size[0] - 4, self.size[1] - 4
             pos: self.pos[0] + 2, self.pos[1] + 2
             radius: (dp(0),)
+
+<DynImage>:
+    source: 'pics/ti_auto_long.png'
+    allow_stretch: True
+    keep_ratio: False
 
 <ModernButton@Button>:
     background_normal: 'pics/button.png'
