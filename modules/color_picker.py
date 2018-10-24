@@ -14,7 +14,6 @@ from math import cos, sin, pi, sqrt, atan
 from colorsys import rgb_to_hsv, hsv_to_rgb
 from kivy.app import App
 from kivy.core.window import Window
-Window.size = (375,365)
 
 from kivy.lang import Builder
 Builder.load_string('''
@@ -474,4 +473,5 @@ class ColorWheelApp(App):
         return main_layout
 
 if __name__ =='__main__':
+    Window.size = (375, 365)
     ColorWheelApp().run()

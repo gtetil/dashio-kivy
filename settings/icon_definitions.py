@@ -11,6 +11,7 @@
 # https://zavoloklom.github.io/material-design-iconic-font/icons.html
 
 md_icons = {
+    'no-selection': u'',
     'access-point': u'\uF002',
     'access-point-network': u'\uF003',
     'account': u'\uF004',

@@ -5,6 +5,7 @@
 #:import get_hex_from_color kivy.utils.get_hex_from_color
 #:import MyColorPicker modules.color_picker
 #:import md_icons settings.icon_definitions.md_icons
+#:import IconPicker modules.icon_picker
 
 
 <SlideLayout>:
@@ -114,23 +115,13 @@
     engine_kill_popup: engine_kill_popup.__self__
     datetime_popup: datetime_popup.__self__
     color_select: color_select.__self__
+    icon_select: icon_select.__self__
+    icon_on_button: icon_on_button.__self__
     on_parent: app.main_screen_ref = self
 
     FloatLayout:
         id: main_layout
         orientation: 'horizontal'
-
-        Label:
-            pos: 0,0
-            size_hint: None, None
-            size: 100,100
-            text_size: self.size
-            font_size: self.size[1] / 2
-            halign: 'center'
-            valign: 'middle'
-            color: 0,0,0,1
-            font_name: 'pics/materialdesignicons-webfont.ttf'
-            text: u"{}".format(md_icons['access-point'])
 
         Button:
             id: alarm_indicator
@@ -153,6 +144,9 @@
         border_color: border_color
         variable_spinner: variable_spinner
         widget_spinner: widget_spinner
+        icon_on_button: icon_on_button
+        icon_off_button: icon_off_button
+        item_edit_grid: item_edit_grid
         title: "Modify"
         size_hint: None, None
         size: 450, 265
@@ -167,13 +161,14 @@
                 size_hint: 1, 0.8
 
                 GridLayout:
+                    id: item_edit_grid
                     cols: 1
                     spacing: 5
                     padding: 5
                     size_hint_y: None
-                    row_default_height: '40dp'
-                    row_force_default: True
-                    height: 350
+                    #row_default_height: '40dp'
+                    #row_force_default: True
+                    height: 500
 
                     BoxLayout:
                         orientation: 'horizontal'
@@ -218,15 +213,57 @@
                         padding: 1
 
                         Label:
-                            text: 'On Text:'
+                            text: 'Graphic Type:'
                             size_hint: .25, 1
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
 
-                        TextInput:
+                        Spinner:
+                            id: graphic_spinner
+                            size_hint: .75, 1
+                            option_cls: Factory.get("SpinnerLabel")
+                            font_size: '13sp'
+                            text: 'Text'
+                            values: ['Text', 'Icon', 'Picture']
+                            on_text: item_edit_popup.graphic_type(self.text)
+
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        padding: 1
+                        size_hint_y: 1 if button_on_text.visible else 0
+
+                        VLabel:
+                            text: 'On Text:'
+                            size_hint: .25, 1
+                            text_size: self.size
+                            halign: 'left'
+                            valign: 'middle'
+                            visible: button_on_text.visible
+
+                        VTextInput:
                             id: button_on_text
                             size_hint: .75, 1
+                            visible: False
+
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        padding: 1
+                        size_hint_y: 1 if icon_on_button.visible else 0
+
+                        VLabel:
+                            text: 'On Icon:'
+                            size_hint: .25, 1
+                            text_size: self.size
+                            halign: 'left'
+                            valign: 'middle'
+                            visible: icon_on_button.visible
+
+                        Icon:
+                            id: icon_on_button
+                            size_hint: .75, 1
+                            visible: True
+                            on_release: icon_select.icon_open(item_edit_popup, 'icon_on')
 
                     BoxLayout:
                         orientation: 'horizontal'
@@ -256,17 +293,39 @@
                     BoxLayout:
                         orientation: 'horizontal'
                         padding: 1
+                        size_hint_y: 1 if button_on_text.visible else 0
 
-                        Label:
+                        VLabel:
                             text: 'Off Text:'
                             size_hint: .25, 1
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
+                            visible: button_on_text.visible
 
-                        TextInput:
+                        VTextInput:
                             id: button_off_text
                             size_hint: .75, 1
+                            visible: False
+
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        padding: 1
+                        size_hint_y: 1 if icon_off_button.visible else 0
+
+                        VLabel:
+                            text: 'Off Icon:'
+                            size_hint: .25, 1
+                            text_size: self.size
+                            halign: 'left'
+                            valign: 'middle'
+                            visible: icon_off_button.visible
+
+                        Icon:
+                            id: icon_off_button
+                            size_hint: .75, 1
+                            visible: True
+                            on_release: icon_select.icon_open(item_edit_popup, 'icon_off')
 
                     BoxLayout:
                         orientation: 'horizontal'
@@ -437,6 +496,61 @@
                     on_release:
                         color_select.color_close()
 
+    IconSelector:
+        id: icon_select
+        icon_picker: icon_picker
+        title: 'Icon Selector'
+        icon: 'no-selection'
+        on_parent: if self.parent == main_screen: self.parent.remove_widget(self), self.icon_picker.populate_list()
+
+        BoxLayout:
+            orientation: 'vertical'
+            spacing: 5
+
+            IconPicker:
+                id: icon_picker
+
+            BoxLayout:
+                size_hint_y: None
+                height: '50sp'
+                Button:
+                    text: 'Select Icon'
+                    on_release:
+                        icon_select.icon = icon_picker.icon
+                        icon_select.icon_save()
+                Button:
+                    text: 'Remove Icon'
+                    on_release:
+                        icon_select.icon = 'no-selection'
+                        icon_select.icon_save()
+
+<Icon@Button>:
+    value: 'no-selection'
+    text: u"{}".format(md_icons[self.value]) if not '' else ''
+    text_size: self.size
+    font_size: self.size[1] / 2
+    halign: 'center'
+    valign: 'middle'
+    font_name: 'pics/materialdesignicons-webfont.ttf'
+    #background_normal: ''
+    #background_down: ''
+    visible: True
+    size_hint_y: 1 if self.visible else 0
+    opacity: 1 if self.visible else 0
+    disabled: not self.visible
+
+<VTextInput@TextInput>:
+    visible: True
+    size_hint_y: 1 if self.visible else 0
+    opacity: 1 if self.visible else 0
+    disabled: not self.visible
+
+<VLabel@Label>:
+    visible: True
+    size_hint_y: 1 if self.visible else 0
+    opacity: 1 if self.visible else 0
+    disabled: not self.visible
+
 <SpinnerLabel@SpinnerOption>:
     font_size: '13sp'
 
@@ -506,6 +620,8 @@
     color_on_text: ''
     color_off_text: ''
     border_color: ''
+    icon_on: ''
+    icon_off: ''
 
 <PasscodeScreen>:
     id: passcode_screen
