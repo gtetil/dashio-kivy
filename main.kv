@@ -116,7 +116,6 @@
     datetime_popup: datetime_popup.__self__
     color_select: color_select.__self__
     icon_select: icon_select.__self__
-    icon_on_button: icon_on_button.__self__
     on_parent: app.main_screen_ref = self
 
     FloatLayout:
@@ -146,10 +145,11 @@
         widget_spinner: widget_spinner
         icon_on_button: icon_on_button
         icon_off_button: icon_off_button
-        item_edit_grid: item_edit_grid
+        graphic_type_spinner: graphic_type_spinner
         title: "Modify"
         size_hint: None, None
-        size: 450, 265
+        #size: 450, 265
+        size: 450, 480
         pos_hint: {'middle': 1, 'top': 1}
         on_parent: if self.parent == main_screen: self.parent.remove_widget(self)
 
@@ -220,7 +220,7 @@
                             valign: 'middle'
 
                         Spinner:
-                            id: graphic_spinner
+                            id: graphic_type_spinner
                             size_hint: .75, 1
                             option_cls: Factory.get("SpinnerLabel")
                             font_size: '13sp'
@@ -231,39 +231,40 @@
                     BoxLayout:
                         orientation: 'horizontal'
                         padding: 1
-                        size_hint_y: 1 if button_on_text.visible else 0
 
-                        VLabel:
+                        DLabel:
                             text: 'On Text:'
                             size_hint: .25, 1
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
-                            visible: button_on_text.visible
+                            disable_gray: button_on_text.disable_gray
 
-                        VTextInput:
+                        DTextInput:
                             id: button_on_text
                             size_hint: .75, 1
-                            visible: False
+                            disable_gray: True
 
                     BoxLayout:
                         orientation: 'horizontal'
                         padding: 1
-                        size_hint_y: 1 if icon_on_button.visible else 0
 
-                        VLabel:
+                        DLabel:
                             text: 'On Icon:'
                             size_hint: .25, 1
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
-                            visible: icon_on_button.visible
+                            disable_gray: icon_on_button.disable_gray
 
                         Icon:
                             id: icon_on_button
-                            size_hint: .75, 1
-                            visible: True
+                            size_hint: .1, 1
+                            disable_gray: False
                             on_release: icon_select.icon_open(item_edit_popup, 'icon_on')
+
+                        BoxLayout:
+                            size_hint: .65, 1
 
                     BoxLayout:
                         orientation: 'horizontal'
@@ -293,39 +294,40 @@
                     BoxLayout:
                         orientation: 'horizontal'
                         padding: 1
-                        size_hint_y: 1 if button_on_text.visible else 0
 
-                        VLabel:
+                        DLabel:
                             text: 'Off Text:'
                             size_hint: .25, 1
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
-                            visible: button_on_text.visible
+                            disable_gray: button_on_text.disable_gray
 
-                        VTextInput:
+                        DTextInput:
                             id: button_off_text
                             size_hint: .75, 1
-                            visible: False
+                            disable_gray: True
 
                     BoxLayout:
                         orientation: 'horizontal'
                         padding: 1
-                        size_hint_y: 1 if icon_off_button.visible else 0
 
-                        VLabel:
+                        DLabel:
                             text: 'Off Icon:'
                             size_hint: .25, 1
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
-                            visible: icon_off_button.visible
+                            disable_gray: icon_off_button.disable_gray
 
                         Icon:
                             id: icon_off_button
-                            size_hint: .75, 1
-                            visible: True
+                            size_hint: .1, 1
+                            disable_gray: False
                             on_release: icon_select.icon_open(item_edit_popup, 'icon_off')
+
+                        BoxLayout:
+                            size_hint: .65, 1
 
                     BoxLayout:
                         orientation: 'horizontal'
@@ -532,24 +534,19 @@
     halign: 'center'
     valign: 'middle'
     font_name: 'pics/materialdesignicons-webfont.ttf'
-    #background_normal: ''
-    #background_down: ''
-    visible: True
-    size_hint_y: 1 if self.visible else 0
-    opacity: 1 if self.visible else 0
-    disabled: not self.visible
+    disable_gray: True
+    opacity: 1 if self.disable_gray else .7
+    disabled: not self.disable_gray
 
-<VTextInput@TextInput>:
-    visible: True
-    size_hint_y: 1 if self.visible else 0
-    opacity: 1 if self.visible else 0
-    disabled: not self.visible
+<DTextInput@TextInput>:
+    disable_gray: True
+    opacity: 1 if self.disable_gray else .7
+    disabled: not self.disable_gray
 
-<VLabel@Label>:
-    visible: True
-    size_hint_y: 1 if self.visible else 0
-    opacity: 1 if self.visible else 0
-    disabled: not self.visible
+<DLabel@Label>:
+    disable_gray: True
+    opacity: 1 if self.disable_gray else .7
+    disabled: not self.disable_gray
 
 <SpinnerLabel@SpinnerOption>:
     font_size: '13sp'
@@ -622,6 +619,7 @@
     border_color: ''
     icon_on: ''
     icon_off: ''
+    graphic_type: ''
 
 <PasscodeScreen>:
     id: passcode_screen

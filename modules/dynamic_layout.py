@@ -65,7 +65,8 @@ class DynamicLayout(Widget):
                                          color_off_text = self.dyn_layout_json[id].setdefault('color_off_text', '#000000ff'),
                                          border_color=self.dyn_layout_json[id].setdefault('border_color', '#ffffffff'),
                                          icon_on=self.dyn_layout_json[id].setdefault('icon_on', 'no-selection'),
-                                         icon_off=self.dyn_layout_json[id].setdefault('icon_off', 'no-selection'))
+                                         icon_off=self.dyn_layout_json[id].setdefault('icon_off', 'no-selection'),
+                                         graphic_type=self.dyn_layout_json[id].setdefault('graphic_type', 'text'))
         elif widget == 'Button':
             dyn_widget = DynButton(text='',
                                          id=str(id),
@@ -81,7 +82,8 @@ class DynamicLayout(Widget):
                                          color_off_text = self.dyn_layout_json[id].setdefault('color_off_text', '#000000ff'),
                                          border_color=self.dyn_layout_json[id].setdefault('border_color', '#ffffffff'),
                                          icon_on=self.dyn_layout_json[id].setdefault('icon_on', 'no-selection'),
-                                         icon_off=self.dyn_layout_json[id].setdefault('icon_off', 'no-selection'))
+                                         icon_off=self.dyn_layout_json[id].setdefault('icon_off', 'no-selection'),
+                                         graphic_type=self.dyn_layout_json[id].setdefault('graphic_type', 'text'))
         elif widget == 'Label':
             dyn_widget = DynLabel(text='',
                                          id=str(id),
@@ -97,23 +99,25 @@ class DynamicLayout(Widget):
                                          color_off_text = self.dyn_layout_json[id].setdefault('color_off_text', '#000000ff'),
                                          border_color=self.dyn_layout_json[id].setdefault('border_color', '#ffffffff'),
                                          icon_on=self.dyn_layout_json[id].setdefault('icon_on', 'no-selection'),
-                                         icon_off=self.dyn_layout_json[id].setdefault('icon_off', 'no-selection'))
+                                         icon_off=self.dyn_layout_json[id].setdefault('icon_off', 'no-selection'),
+                                         graphic_type=self.dyn_layout_json[id].setdefault('graphic_type', 'text'))
         else:
             dyn_widget = DynImage(text='',
-                                  id=str(id),
-                                  button_on_text=self.dyn_layout_json[id]['on_text'],
-                                  button_off_text=self.dyn_layout_json[id]['off_text'],
-                                  var_tag=self.dyn_layout_json[id]['var_tag'],
-                                  var_alias=self.dyn_layout_json[id]['var_alias'],
-                                  widget=widget,
-                                  invert=self.dyn_layout_json[id]['invert'],
-                                  color_on=self.dyn_layout_json[id].setdefault('color_on', '#ffffffff'),
-                                  color_off=self.dyn_layout_json[id].setdefault('color_off', '#ffffffff'),
-                                  color_on_text=self.dyn_layout_json[id].setdefault('color_on_text', '#000000ff'),
-                                  color_off_text=self.dyn_layout_json[id].setdefault('color_off_text', '#000000ff'),
-                                  border_color=self.dyn_layout_json[id].setdefault('border_color', '#ffffffff'),
-                                  icon_on=self.dyn_layout_json[id].setdefault('icon_on', 'no-selection'),
-                                  icon_off=self.dyn_layout_json[id].setdefault('icon_off', 'no-selection'))
+                                         id=str(id),
+                                         button_on_text=self.dyn_layout_json[id]['on_text'],
+                                         button_off_text=self.dyn_layout_json[id]['off_text'],
+                                         var_tag=self.dyn_layout_json[id]['var_tag'],
+                                         var_alias=self.dyn_layout_json[id]['var_alias'],
+                                         widget=widget,
+                                         invert=self.dyn_layout_json[id]['invert'],
+                                         color_on=self.dyn_layout_json[id].setdefault('color_on', '#ffffffff'),
+                                         color_off=self.dyn_layout_json[id].setdefault('color_off', '#ffffffff'),
+                                         color_on_text=self.dyn_layout_json[id].setdefault('color_on_text', '#000000ff'),
+                                         color_off_text=self.dyn_layout_json[id].setdefault('color_off_text', '#000000ff'),
+                                         border_color=self.dyn_layout_json[id].setdefault('border_color', '#ffffffff'),
+                                         icon_on=self.dyn_layout_json[id].setdefault('icon_on', 'no-selection'),
+                                         icon_off=self.dyn_layout_json[id].setdefault('icon_off', 'no-selection'),
+                                         graphic_type=self.dyn_layout_json[id].setdefault('graphic_type', 'text'))
         scatter_layout = MyScatterLayout(id=str(id) + '_scatter',
                                          do_rotation=False,
                                          size=(self.dyn_layout_json[id]['size'][0], self.dyn_layout_json[id]['size'][1]),
@@ -174,6 +178,7 @@ class DynamicLayout(Widget):
         new_json['border_color'] = self.app_ref.variables.get('SYS_WIDGET_BORDER_COLOR')
         new_json['icon_on'] = 'no-selection'
         new_json['icon_off'] = 'no-selection'
+        new_json['graphic_type'] = 'text'
         self.dyn_layout_json.update({new_id: new_json})
         self.create_dyn_widget(new_id)
         self.update_widget(new_id)
@@ -214,6 +219,7 @@ class DynamicLayout(Widget):
         self.dyn_layout_json[id]['border_color'] = dyn_widget_ref.border_color
         self.dyn_layout_json[id]['icon_on'] = dyn_widget_ref.icon_on
         self.dyn_layout_json[id]['icon_off'] = dyn_widget_ref.icon_off
+        self.dyn_layout_json[id]['graphic_type'] = dyn_widget_ref.graphic_type
         self.dyn_layout_json[id]['size'] = scatter_ref.size
         self.dyn_layout_json[id]['pos'] = scatter_ref.pos
 
@@ -244,7 +250,6 @@ class DynamicLayout(Widget):
     def modify_screen(self):
         self.modify_mode = True
         self.app_ref.main_screen_ref.screen_edit_label(True)
-        #self.app_ref.main_screen_ref.ids.screen_edit_label.text = 'Screen Edit Mode'
         for id, dyn_widget in self.dyn_widget_dict.items():
             if dyn_widget.widget == 'Label':
                 dyn_widget.dyn_label_background()
@@ -252,7 +257,6 @@ class DynamicLayout(Widget):
     def end_modify(self):
         self.modify_mode = False
         self.app_ref.main_screen_ref.screen_edit_label(False)
-        #self.app_ref.main_screen_ref.ids.screen_edit_label.text = ''
         for id, dyn_widget in self.dyn_widget_dict.items():
             if dyn_widget.widget == 'Label':
                 dyn_widget.dyn_label_background()
@@ -292,6 +296,7 @@ class ScreenItemEditPopup(Popup):
     border_color = ObjectProperty(None)
     icon_on_button = ObjectProperty(None)
     icon_off_button = ObjectProperty(None)
+    graphic_type_spinner = ObjectProperty(None)
     item = ObjectProperty(None)
     dynamic_layout = ObjectProperty(None)
     modify_mode = BooleanProperty(False)
@@ -309,6 +314,7 @@ class ScreenItemEditPopup(Popup):
             self.border_color.background_color = get_color_from_hex(self.item.border_color)
             self.icon_on_button.value = self.item.icon_on
             self.icon_off_button.value = self.item.icon_off
+            self.graphic_type_spinner.text = self.item.graphic_type
             self.variable_spinner.text = self.item.var_alias
             self.widget_spinner.text = self.item.widget
             self.open()
@@ -324,6 +330,7 @@ class ScreenItemEditPopup(Popup):
         self.item.border_color = get_hex_from_color(self.border_color.background_color)
         self.item.icon_on = self.icon_on_button.value
         self.item.icon_off = self.icon_off_button.value
+        self.item.graphic_type = self.graphic_type_spinner.text
         self.item.var_alias = self.variable_spinner.text
         self.item.var_tag = self.app_ref.variables.tag_by_alias_dict[self.item.var_alias]  #save tag of associated alias, in case alias is changed/deleted
         if self.item.widget != self.widget_spinner.text:
@@ -348,15 +355,15 @@ class ScreenItemEditPopup(Popup):
 
     def graphic_type(self, value):
         if value == 'Text':
-            self.button_on_text.visible = True
-            self.button_off_text.visible = True
-            self.icon_on_button.visible = False
-            self.icon_off_button.visible = False
+            self.button_on_text.disable_gray = True
+            self.button_off_text.disable_gray = True
+            self.icon_on_button.disable_gray = False
+            self.icon_off_button.disable_gray = False
         if value == 'Icon':
-            self.button_on_text.visible = False
-            self.button_off_text.visible = False
-            self.icon_on_button.visible = True
-            self.icon_off_button.visible = True
+            self.button_on_text.disable_gray = False
+            self.button_off_text.disable_gray = False
+            self.icon_on_button.disable_gray = True
+            self.icon_off_button.disable_gray = True
 
 class DynItem(Widget):
     invert = BooleanProperty(True)
@@ -373,6 +380,7 @@ class DynItem(Widget):
     canvas_color = StringProperty("")
     icon_on = StringProperty("")
     icon_off = StringProperty("")
+    graphic_type = StringProperty("")
     ignition_input = NumericProperty(0)
     digital_inputs = NumericProperty(0)
     app_ref = ObjectProperty(None)
@@ -388,7 +396,7 @@ class DynItem(Widget):
         if bool_state:
             self.state = 'down'
             self.canvas_color = self.color_on
-            if self.icon_on == 'no-selection':
+            if self.graphic_type == 'Text':
                 self.font_name = 'Roboto'
                 self.font_size = '18sp'
                 if self.button_on_text != '':
@@ -403,7 +411,7 @@ class DynItem(Widget):
         else:
             self.state = 'normal'
             self.canvas_color = self.color_off
-            if self.icon_off == 'no-selection':
+            if self.graphic_type == 'Text':
                 self.font_name = 'Roboto'
                 self.font_size = '18sp'
                 if self.button_off_text != '':
@@ -420,7 +428,7 @@ class DynItem(Widget):
         if state == 0:
             self.state = 'normal'
             self.canvas_color = self.color_off
-            if self.icon_off == 'no-selection':
+            if self.graphic_type == 'Text':
                 self.font_name = 'Roboto'
                 self.font_size = '18sp'
                 if self.button_off_text != '':
