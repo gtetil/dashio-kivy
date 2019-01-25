@@ -13,6 +13,14 @@ flame_detect_id_start = 200
 flame_detect_data_start = 14
 flame_detect_len = 24
 
+stack_id_start = 300
+stack_read_data_start = 40
+stack_read_data_len = 2
+
+syrup_id_start = 350
+syrup_read_data_start = 46
+syrup_read_data_len = 5
+
 settings_json = json.dumps([
     {'type': 'mynumeric',
      'title': 'Screen Dim Brightness',
@@ -288,6 +296,78 @@ row_aliases_json = json.dumps([
      'key': 'ROW_24'},
 ])
 
+
+stack_aliases_json = json.dumps([
+    {'type': 'alias',
+     'title': 'STACK_TEMP_SETPOINT_WRITE',
+     'desc': '',
+     'section': 'StackAliases',
+     'key': 'STACK_TEMP_SETPOINT_WRITE'},
+    {'type': 'alias',
+     'title': 'STACK_TEMP_OUTPUT_ENABLE',
+     'desc': '',
+     'section': 'StackAliases',
+     'key': 'STACK_TEMP_OUTPUT_ENABLE'},
+    {'type': 'alias',
+     'title': 'STACK_CURRENT_TEMP',
+     'desc': '',
+     'section': 'StackAliases',
+     'key': 'STACK_CURRENT_TEMP'},
+    {'type': 'alias',
+     'title': 'STACK_TEMP_SETPOINT_READ',
+     'desc': '',
+     'section': 'StackAliases',
+     'key': 'STACK_TEMP_SETPOINT_READ'},
+])
+
+syrup_aliases_json = json.dumps([
+    {'type': 'alias',
+     'title': 'SYRUP_TEMP_SETPOINT_WRITE',
+     'desc': '',
+     'section': 'SyrupAliases',
+     'key': 'SYRUP_TEMP_SETPOINT_WRITE'},
+    {'type': 'alias',
+     'title': 'SYRUP_TEMP_AUTO_MODE',
+     'desc': '',
+     'section': 'SyrupAliases',
+     'key': 'SYRUP_TEMP_AUTO_MODE'},
+    {'type': 'alias',
+     'title': 'SYRUP_TEMP_CLOSE_VALVE',
+     'desc': '',
+     'section': 'SyrupAliases',
+     'key': 'SYRUP_TEMP_CLOSE_VALVE'},
+    {'type': 'alias',
+     'title': 'SYRUP_TEMP_OPEN_VALVE',
+     'desc': '',
+     'section': 'SyrupAliases',
+     'key': 'SYRUP_TEMP_OPEN_VALVE'},
+    {'type': 'alias',
+     'title': 'SYRUP_CURRENT_TEMP',
+     'desc': '',
+     'section': 'SyrupAliases',
+     'key': 'SYRUP_CURRENT_TEMP'},
+    {'type': 'alias',
+     'title': 'SYRUP_TEMP_SETPOINT_READ',
+     'desc': '',
+     'section': 'SyrupAliases',
+     'key': 'SYRUP_TEMP_SETPOINT_READ'},
+    {'type': 'alias',
+     'title': 'SYRUP_TEMP_AUTO_MODE_STATE',
+     'desc': '',
+     'section': 'SyrupAliases',
+     'key': 'SYRUP_TEMP_AUTO_MODE_STATE'},
+    {'type': 'alias',
+     'title': 'SYRUP_TEMP_CLOSE_VALVE_STATE',
+     'desc': '',
+     'section': 'SyrupAliases',
+     'key': 'SYRUP_TEMP_CLOSE_VALVE_STATE'},
+    {'type': 'alias',
+     'title': 'SYRUP_TEMP_OPEN_VALVE_STATE',
+     'desc': '',
+     'section': 'SyrupAliases',
+     'key': 'SYRUP_TEMP_OPEN_VALVE_STATE'},
+])
+
 aliases_json = json.dumps([
     {'type': 'alias',
      'title': 'USER_VAR_0',
@@ -361,6 +441,16 @@ developer_json = json.dumps([
      'desc': '',
      'section': 'Accessory',
      'key': 'SYS_FLAME_DETECT'},
+    {'type': 'bool',
+     'title': 'Stack Temp',
+     'desc': '',
+     'section': 'Accessory',
+     'key': 'SYS_STACK_TEMP'},
+    {'type': 'bool',
+     'title': 'Syrup Temp',
+     'desc': '',
+     'section': 'Accessory',
+     'key': 'SYS_SYRUP_TEMP'},
 
     {'type': 'title',
      'title': 'Layout'},

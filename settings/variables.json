@@ -142,7 +142,7 @@
     {
         "alias": "ROW 1", 
         "data_index": 14, 
-        "hidden": false, 
+        "hidden": true, 
         "id": 200, 
         "save": false, 
         "tag": "ROW_1", 
@@ -152,7 +152,7 @@
     {
         "alias": "ROW 2", 
         "data_index": 15, 
-        "hidden": false, 
+        "hidden": true, 
         "id": 201, 
         "save": false, 
         "tag": "ROW_2", 
@@ -162,7 +162,7 @@
     {
         "alias": "ROW 3", 
         "data_index": 16, 
-        "hidden": false, 
+        "hidden": true, 
         "id": 202, 
         "save": false, 
         "tag": "ROW_3", 
@@ -172,7 +172,7 @@
     {
         "alias": "ROW 4", 
         "data_index": 17, 
-        "hidden": false, 
+        "hidden": true, 
         "id": 203, 
         "save": false, 
         "tag": "ROW_4", 
@@ -182,7 +182,7 @@
     {
         "alias": "ROW 5", 
         "data_index": 18, 
-        "hidden": false, 
+        "hidden": true, 
         "id": 204, 
         "save": false, 
         "tag": "ROW_5", 
@@ -192,7 +192,7 @@
     {
         "alias": "ROW 6", 
         "data_index": 19, 
-        "hidden": false, 
+        "hidden": true, 
         "id": 205, 
         "save": false, 
         "tag": "ROW_6", 
@@ -202,7 +202,7 @@
     {
         "alias": "ROW 7", 
         "data_index": 20, 
-        "hidden": false, 
+        "hidden": true, 
         "id": 206, 
         "save": false, 
         "tag": "ROW_7", 
@@ -212,7 +212,7 @@
     {
         "alias": "ROW 8", 
         "data_index": 21, 
-        "hidden": false, 
+        "hidden": true, 
         "id": 207, 
         "save": false, 
         "tag": "ROW_8", 
@@ -222,7 +222,7 @@
     {
         "alias": "ROW 9", 
         "data_index": 22, 
-        "hidden": false, 
+        "hidden": true, 
         "id": 208, 
         "save": false, 
         "tag": "ROW_9", 
@@ -232,7 +232,7 @@
     {
         "alias": "ROW 10", 
         "data_index": 23, 
-        "hidden": false, 
+        "hidden": true, 
         "id": 209, 
         "save": false, 
         "tag": "ROW_10", 
@@ -242,7 +242,7 @@
     {
         "alias": "ROW 11", 
         "data_index": 24, 
-        "hidden": false, 
+        "hidden": true, 
         "id": 210, 
         "save": false, 
         "tag": "ROW_11", 
@@ -252,7 +252,7 @@
     {
         "alias": "ROW 12", 
         "data_index": 25, 
-        "hidden": false, 
+        "hidden": true, 
         "id": 211, 
         "save": false, 
         "tag": "ROW_12", 
@@ -262,7 +262,7 @@
     {
         "alias": "ROW 13", 
         "data_index": 26, 
-        "hidden": false, 
+        "hidden": true, 
         "id": 212, 
         "save": false, 
         "tag": "ROW_13", 
@@ -272,7 +272,7 @@
     {
         "alias": "ROW 14", 
         "data_index": 27, 
-        "hidden": false, 
+        "hidden": true, 
         "id": 213, 
         "save": false, 
         "tag": "ROW_14", 
@@ -282,7 +282,7 @@
     {
         "alias": "ROW 15", 
         "data_index": 28, 
-        "hidden": false, 
+        "hidden": true, 
         "id": 214, 
         "save": false, 
         "tag": "ROW_15", 
@@ -292,7 +292,7 @@
     {
         "alias": "ROW 16", 
         "data_index": 29, 
-        "hidden": false, 
+        "hidden": true, 
         "id": 215, 
         "save": false, 
         "tag": "ROW_16", 
@@ -302,7 +302,7 @@
     {
         "alias": "ROW 17", 
         "data_index": 30, 
-        "hidden": false, 
+        "hidden": true, 
         "id": 216, 
         "save": false, 
         "tag": "ROW_17", 
@@ -312,7 +312,7 @@
     {
         "alias": "ROW 18", 
         "data_index": 31, 
-        "hidden": false, 
+        "hidden": true, 
         "id": 217, 
         "save": false, 
         "tag": "ROW_18", 
@@ -322,7 +322,7 @@
     {
         "alias": "ROW 19", 
         "data_index": 32, 
-        "hidden": false, 
+        "hidden": true, 
         "id": 218, 
         "save": false, 
         "tag": "ROW_19", 
@@ -332,7 +332,7 @@
     {
         "alias": "ROW 20", 
         "data_index": 33, 
-        "hidden": false, 
+        "hidden": true, 
         "id": 219, 
         "save": false, 
         "tag": "ROW_20", 
@@ -342,7 +342,7 @@
     {
         "alias": "ROW 21", 
         "data_index": 34, 
-        "hidden": false, 
+        "hidden": true, 
         "id": 220, 
         "save": false, 
         "tag": "ROW_21", 
@@ -352,7 +352,7 @@
     {
         "alias": "ROW 22", 
         "data_index": 35, 
-        "hidden": false, 
+        "hidden": true, 
         "id": 221, 
         "save": false, 
         "tag": "ROW_22", 
@@ -362,7 +362,7 @@
     {
         "alias": "ROW 23", 
         "data_index": 36, 
-        "hidden": false, 
+        "hidden": true, 
         "id": 222, 
         "save": false, 
         "tag": "ROW_23", 
@@ -372,7 +372,7 @@
     {
         "alias": "ROW 24", 
         "data_index": 37, 
-        "hidden": false, 
+        "hidden": true, 
         "id": 223, 
         "save": false, 
         "tag": "ROW_24", 
@@ -380,8 +380,138 @@
         "value": "0"
     }, 
     {
-        "alias": "USER_VAR_0", 
+        "alias": "STACK_TEMP_SETPOINT_WRITE", 
         "data_index": 38, 
+        "hidden": false, 
+        "id": 300, 
+        "save": false, 
+        "tag": "STACK_TEMP_SETPOINT_WRITE", 
+        "type": "STACK_TEMP_WRITE", 
+        "value": "0"
+    }, 
+    {
+        "alias": "STACK_TEMP_OUTPUT_ENABLE", 
+        "data_index": 39, 
+        "hidden": false, 
+        "id": 301, 
+        "save": false, 
+        "tag": "STACK_TEMP_OUTPUT_ENABLE", 
+        "type": "STACK_TEMP_WRITE", 
+        "value": "0"
+    }, 
+    {
+        "alias": "STACK_CURRENT_TEMP", 
+        "data_index": 40, 
+        "hidden": false, 
+        "id": 310, 
+        "save": false, 
+        "tag": "STACK_CURRENT_TEMP", 
+        "type": "STACK_TEMP_READ", 
+        "value": "0"
+    }, 
+    {
+        "alias": "STACK_TEMP_SETPOINT_READ", 
+        "data_index": 41, 
+        "hidden": false, 
+        "id": 311, 
+        "save": false, 
+        "tag": "STACK_TEMP_SETPOINT_READ", 
+        "type": "STACK_TEMP_READ", 
+        "value": "0"
+    }, 
+    {
+        "alias": "SYRUP_TEMP_SETPOINT_WRITE", 
+        "data_index": 42, 
+        "hidden": false, 
+        "id": 350, 
+        "save": false, 
+        "tag": "SYRUP_TEMP_SETPOINT_WRITE", 
+        "type": "SYRUP_TEMP_WRITE", 
+        "value": "0"
+    }, 
+    {
+        "alias": "SYRUP_TEMP_AUTO_MODE", 
+        "data_index": 43, 
+        "hidden": false, 
+        "id": 351, 
+        "save": false, 
+        "tag": "SYRUP_TEMP_AUTO_MODE", 
+        "type": "SYRUP_TEMP_WRITE", 
+        "value": "0"
+    }, 
+    {
+        "alias": "SYRUP_TEMP_CLOSE_VALVE", 
+        "data_index": 44, 
+        "hidden": false, 
+        "id": 352, 
+        "save": false, 
+        "tag": "SYRUP_TEMP_CLOSE_VALVE", 
+        "type": "SYRUP_TEMP_WRITE", 
+        "value": "0"
+    }, 
+    {
+        "alias": "SYRUP_TEMP_OPEN_VALVE", 
+        "data_index": 45, 
+        "hidden": false, 
+        "id": 353, 
+        "save": false, 
+        "tag": "SYRUP_TEMP_OPEN_VALVE", 
+        "type": "SYRUP_TEMP_WRITE", 
+        "value": "0"
+    }, 
+    {
+        "alias": "SYRUP_CURRENT_TEMP", 
+        "data_index": 46, 
+        "hidden": false, 
+        "id": 360, 
+        "save": false, 
+        "tag": "SYRUP_CURRENT_TEMP", 
+        "type": "SYRUP_TEMP_READ", 
+        "value": "0"
+    }, 
+    {
+        "alias": "SYRUP_TEMP_SETPOINT_READ", 
+        "data_index": 47, 
+        "hidden": false, 
+        "id": 361, 
+        "save": false, 
+        "tag": "SYRUP_TEMP_SETPOINT_READ", 
+        "type": "SYRUP_TEMP_READ", 
+        "value": "0"
+    }, 
+    {
+        "alias": "SYRUP_TEMP_AUTO_MODE_STATE", 
+        "data_index": 48, 
+        "hidden": false, 
+        "id": 362, 
+        "save": false, 
+        "tag": "SYRUP_TEMP_AUTO_MODE_STATE", 
+        "type": "SYRUP_TEMP_READ", 
+        "value": "0"
+    }, 
+    {
+        "alias": "SYRUP_TEMP_CLOSE_VALVE_STATE", 
+        "data_index": 49, 
+        "hidden": false, 
+        "id": 363, 
+        "save": false, 
+        "tag": "SYRUP_TEMP_CLOSE_VALVE_STATE", 
+        "type": "SYRUP_TEMP_READ", 
+        "value": "0"
+    }, 
+    {
+        "alias": "SYRUP_TEMP_OPEN_VALVE_STATE", 
+        "data_index": 50, 
+        "hidden": false, 
+        "id": 364, 
+        "save": false, 
+        "tag": "SYRUP_TEMP_OPEN_VALVE_STATE", 
+        "type": "SYRUP_TEMP_READ", 
+        "value": "0"
+    }, 
+    {
+        "alias": "USER_VAR_0", 
+        "data_index": 51, 
         "hidden": false, 
         "id": 500, 
         "save": false, 
@@ -391,7 +521,7 @@
     }, 
     {
         "alias": "USER_VAR_1", 
-        "data_index": 39, 
+        "data_index": 52, 
         "hidden": false, 
         "id": 501, 
         "save": false, 
@@ -401,7 +531,7 @@
     }, 
     {
         "alias": "USER_VAR_2", 
-        "data_index": 40, 
+        "data_index": 53, 
         "hidden": false, 
         "id": 502, 
         "save": false, 
@@ -411,7 +541,7 @@
     }, 
     {
         "alias": "USER_VAR_3", 
-        "data_index": 41, 
+        "data_index": 54, 
         "hidden": false, 
         "id": 503, 
         "save": false, 
@@ -421,7 +551,7 @@
     }, 
     {
         "alias": "TMR_0", 
-        "data_index": 42, 
+        "data_index": 55, 
         "hidden": false, 
         "id": 504, 
         "save": false, 
@@ -431,7 +561,7 @@
     }, 
     {
         "alias": "TMR_1", 
-        "data_index": 43, 
+        "data_index": 56, 
         "hidden": false, 
         "id": 505, 
         "save": false, 
@@ -441,7 +571,7 @@
     }, 
     {
         "alias": "SYS_LOGGED_IN", 
-        "data_index": 44, 
+        "data_index": 57, 
         "hidden": false, 
         "id": 1000, 
         "save": false, 
@@ -451,7 +581,7 @@
     }, 
     {
         "alias": "SYS_ENG_KILL_POPUP", 
-        "data_index": 45, 
+        "data_index": 58, 
         "hidden": false, 
         "id": 1001, 
         "save": false, 
@@ -461,7 +591,7 @@
     }, 
     {
         "alias": "SYS_REVERSE_CAM_ON", 
-        "data_index": 46, 
+        "data_index": 59, 
         "hidden": false, 
         "id": 1002, 
         "save": false, 
@@ -471,7 +601,7 @@
     }, 
     {
         "alias": "SYS_SCREEN_BRIGHTNESS", 
-        "data_index": 47, 
+        "data_index": 60, 
         "hidden": false, 
         "id": 2000, 
         "save": true, 
@@ -481,7 +611,7 @@
     }, 
     {
         "alias": "SYS_DIM_BACKLIGHT", 
-        "data_index": 48, 
+        "data_index": 61, 
         "hidden": false, 
         "id": 2001, 
         "save": true, 
@@ -491,7 +621,7 @@
     }, 
     {
         "alias": "SYS_SCREEN_OFF_DELAY", 
-        "data_index": 49, 
+        "data_index": 62, 
         "hidden": false, 
         "id": 2002, 
         "save": true, 
@@ -501,7 +631,7 @@
     }, 
     {
         "alias": "SYS_SHUTDOWN_DELAY", 
-        "data_index": 50, 
+        "data_index": 63, 
         "hidden": false, 
         "id": 2003, 
         "save": true, 
@@ -511,7 +641,7 @@
     }, 
     {
         "alias": "SYS_INACTIVE_TIME", 
-        "data_index": 51, 
+        "data_index": 64, 
         "hidden": false, 
         "id": 2004, 
         "save": true, 
@@ -521,7 +651,7 @@
     }, 
     {
         "alias": "SYS_SCREEN_BACKGROUND_COLOR", 
-        "data_index": 52, 
+        "data_index": 65, 
         "hidden": true, 
         "id": 2005, 
         "save": true, 
@@ -531,17 +661,17 @@
     }, 
     {
         "alias": "SYS_WIDGET_BACKGROUND_OFF_COLOR", 
-        "data_index": 53, 
+        "data_index": 66, 
         "hidden": true, 
         "id": 2006, 
         "save": true, 
         "tag": "SYS_WIDGET_BACKGROUND_OFF_COLOR", 
         "type": "SYS", 
-        "value": "#e5f5ffff"
+        "value": "#00000000"
     }, 
     {
         "alias": "SYS_WIDGET_BACKGROUND_ON_COLOR", 
-        "data_index": 54, 
+        "data_index": 67, 
         "hidden": true, 
         "id": 2007, 
         "save": true, 
@@ -551,7 +681,7 @@
     }, 
     {
         "alias": "SYS_WIDGET_TEXT_OFF_COLOR", 
-        "data_index": 55, 
+        "data_index": 68, 
         "hidden": true, 
         "id": 2008, 
         "save": true, 
@@ -561,7 +691,7 @@
     }, 
     {
         "alias": "SYS_WIDGET_TEXT_ON_COLOR", 
-        "data_index": 56, 
+        "data_index": 69, 
         "hidden": true, 
         "id": 2009, 
         "save": true, 
@@ -571,7 +701,7 @@
     }, 
     {
         "alias": "SYS_WIDGET_BORDER_COLOR", 
-        "data_index": 57, 
+        "data_index": 70, 
         "hidden": true, 
         "id": 2010, 
         "save": true, 
@@ -581,7 +711,7 @@
     }, 
     {
         "alias": "SYS_INACTIVE", 
-        "data_index": 58, 
+        "data_index": 71, 
         "hidden": false, 
         "id": 1003, 
         "save": false, 
@@ -591,7 +721,7 @@
     }, 
     {
         "alias": "SYS_INIT", 
-        "data_index": 59, 
+        "data_index": 72, 
         "hidden": false, 
         "id": 1004, 
         "save": false, 
@@ -601,7 +731,7 @@
     }, 
     {
         "alias": "SYS_TIME", 
-        "data_index": 60, 
+        "data_index": 73, 
         "hidden": false, 
         "id": 1005, 
         "save": false, 
@@ -611,7 +741,7 @@
     }, 
     {
         "alias": "SYS_CPU_TEMP", 
-        "data_index": 61, 
+        "data_index": 74, 
         "hidden": false, 
         "id": 1006, 
         "save": false, 
@@ -621,7 +751,7 @@
     }, 
     {
         "alias": "SYS_CPU_USAGE", 
-        "data_index": 62, 
+        "data_index": 75, 
         "hidden": false, 
         "id": 1007, 
         "save": false, 
@@ -631,7 +761,7 @@
     }, 
     {
         "alias": "SYS_CLOSE_APP", 
-        "data_index": 63, 
+        "data_index": 76, 
         "hidden": true, 
         "id": 1008, 
         "save": false, 
@@ -641,7 +771,7 @@
     }, 
     {
         "alias": "SYS_REBOOT", 
-        "data_index": 64, 
+        "data_index": 77, 
         "hidden": true, 
         "id": 1009, 
         "save": false, 
@@ -651,7 +781,7 @@
     }, 
     {
         "alias": "SYS_SHUTDOWN", 
-        "data_index": 65, 
+        "data_index": 78, 
         "hidden": true, 
         "id": 1010, 
         "save": false, 
@@ -661,7 +791,7 @@
     }, 
     {
         "alias": "SYS_DIO_MODULE", 
-        "data_index": 66, 
+        "data_index": 79, 
         "hidden": true, 
         "id": 1011, 
         "save": true, 
@@ -671,19 +801,39 @@
     }, 
     {
         "alias": "SYS_FLAME_DETECT", 
-        "data_index": 67, 
+        "data_index": 80, 
         "hidden": true, 
         "id": 1012, 
         "save": true, 
         "tag": "SYS_FLAME_DETECT", 
         "type": "SYS", 
+        "value": "0"
+    }, 
+    {
+        "alias": "SYS_STACK_TEMP", 
+        "data_index": 81, 
+        "hidden": true, 
+        "id": 1013, 
+        "save": true, 
+        "tag": "SYS_STACK_TEMP", 
+        "type": "SYS", 
+        "value": "1"
+    }, 
+    {
+        "alias": "SYS_SYRUP_TEMP", 
+        "data_index": 82, 
+        "hidden": true, 
+        "id": 1014, 
+        "save": true, 
+        "tag": "SYS_SYRUP_TEMP", 
+        "type": "SYS", 
         "value": "1"
     }, 
     {
         "alias": "SYS_ADMIN_LOGIN", 
-        "data_index": 68, 
+        "data_index": 83, 
         "hidden": true, 
-        "id": 1013, 
+        "id": 1015, 
         "save": false, 
         "tag": "SYS_ADMIN_LOGIN", 
         "type": "SYS", 
@@ -691,9 +841,9 @@
     }, 
     {
         "alias": "SYS_PASSCODE", 
-        "data_index": 69, 
+        "data_index": 84, 
         "hidden": true, 
-        "id": 1014, 
+        "id": 1016, 
         "save": true, 
         "tag": "SYS_PASSCODE", 
         "type": "SYS", 
@@ -701,9 +851,9 @@
     }, 
     {
         "alias": "SYS_ADMIN_CODE", 
-        "data_index": 70, 
+        "data_index": 85, 
         "hidden": true, 
-        "id": 1015, 
+        "id": 1017, 
         "save": true, 
         "tag": "SYS_ADMIN_CODE", 
         "type": "SYS", 
@@ -711,29 +861,29 @@
     }, 
     {
         "alias": "SYS_LAYOUT_FILE", 
-        "data_index": 71, 
+        "data_index": 86, 
         "hidden": true, 
-        "id": 1016, 
+        "id": 1018, 
         "save": true, 
         "tag": "SYS_LAYOUT_FILE", 
         "type": "SYS", 
-        "value": "flame_layout.json"
+        "value": "sap_layout.json"
     }, 
     {
         "alias": "SYS_COLOR_HISTORY", 
-        "data_index": 72, 
+        "data_index": 87, 
         "hidden": true, 
-        "id": 1017, 
+        "id": 1019, 
         "save": true, 
         "tag": "SYS_COLOR_HISTORY", 
         "type": "SYS", 
-        "value": "#ffffffff"
+        "value": "#00000000"
     }, 
     {
         "alias": "SYS_DEBUG_MODE", 
-        "data_index": 73, 
+        "data_index": 88, 
         "hidden": true, 
-        "id": 1018, 
+        "id": 1020, 
         "save": true, 
         "tag": "SYS_DEBUG_MODE", 
         "type": "SYS", 

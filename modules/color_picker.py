@@ -14,6 +14,7 @@ from math import cos, sin, pi, sqrt, atan
 from colorsys import rgb_to_hsv, hsv_to_rgb
 from kivy.app import App
 from kivy.core.window import Window
+from kivy.uix.colorpicker import ColorWheel
 
 from kivy.lang import Builder
 Builder.load_string('''
@@ -29,7 +30,7 @@ Builder.load_string('''
     FloatLayout:
         size_hint: 1, .9
     
-        ColorWheel:
+        MyColorWheel:
             id: color_wheel
             on_color: root.current_color = get_hex_from_color(self.color)
             
@@ -141,7 +142,7 @@ Builder.load_string('''
             background_normal: ''
             background_down: ''
     
-<-ColorWheel>:
+<MyColorWheel>:
     pos_hint: {'center_x': .5, 'center_y': .5}
     size_hint: 1, 1
     _origin: self.center
@@ -173,7 +174,7 @@ def rect_to_polar(origin, x, y):
 
     return (distance((x, y), origin), t)
 
-class ColorWheel(Widget):
+class MyColorWheel(ColorWheel):
     '''Chromatic wheel for the ColorPicker.
 
     .. versionchanged:: 1.7.1
@@ -236,7 +237,7 @@ class ColorWheel(Widget):
         pdv = self._piece_divisions
         self.sv_s = [(float(x) / pdv, 1) for x in range(pdv)] + [
             (1, float(y) / pdv) for y in reversed(range(pdv))]
-        super(ColorWheel, self).__init__(**kwargs)
+        super(MyColorWheel, self).__init__(**kwargs)
 
     def on__origin(self, instance, value):
         self.init_wheel(None)
@@ -267,6 +268,23 @@ class ColorWheel(Widget):
                                1)))
 
                 self.canvas.add(self.arcs[-1])
+
+        '''for r in range(pdv):
+            t = ppie-1
+            self.arcs.append(
+                _ColorArc(
+                    self._radius * (float(r) / float(pdv)),
+                    self._radius * (float(r + 1) / float(pdv)),
+                    2 * pi * (float(t) / float(ppie)),
+                    2 * pi * (float(t + 1) / float(ppie)),
+                    origin=self._origin,
+                    color=(0,
+                           0,
+                           self.sv_s[8 + r][1],
+                           1)))
+
+            self.canvas.add(self.arcs[-1])'''
+
 
     def recolor_wheel(self):
         ppie = self._pieces_of_pie

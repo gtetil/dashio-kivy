@@ -38,13 +38,33 @@ class Variables(Widget):
         self.variable_data = ['0'] * len(self.var_aliases)
         self.old_variable_data = ['0'] * len(self.var_aliases)
         self.var_events = [False] * len(self.var_aliases)
-        self.can_data = 0
         self.set_saved_vars()
         self.toggle_update_clock(True)
         self.set_by_alias('SYS_INIT', '1')
         Clock.schedule_interval(self.read_system, 1)
-        self.can_com = CANcom()
+        self.shutdown_pin = 17
+        self.ignition_pin = 27
+        self.last_shutdown_state = 0
+        try:
+            GPIO.setmode(GPIO.BCM)
+            GPIO.setup(self.shutdown_pin, GPIO.OUT)  # status output for shutdown circuit
+            GPIO.setup(self.ignition_pin, GPIO.IN)  # setup input for ignition status
+        except Exception as e:
+            print('GPIO error:')
+            print(e)
+
+        # CAN init
+        self.can_data = 0
+        self.stack_temp_can_read_data = ['0'] * app_settings.stack_read_data_len
+        self.syrup_temp_can_read_data = ['0'] * app_settings.syrup_read_data_len
+        self.dio_module = self.get_bool('SYS_DIO_MODULE')
+        self.flame_detect = self.get_bool('SYS_FLAME_DETECT')
+        self.stack_temp = self.get_bool('SYS_STACK_TEMP')
+        self.syrup_temp = self.get_bool('SYS_SYRUP_TEMP')
+        self.can_com = CANcom(dio_module=self.dio_module, flame_detect=self.flame_detect, stack_temp=self.stack_temp, syrup_temp=self.syrup_temp)
         Clock.schedule_interval(self.read_can, 0.05)
+
+        # flame detect init
         self.flame_alarms = [FlameAlarm() for i in range(app_settings.flame_detect_len)]
         self.alarm_states = [False] * app_settings.flame_detect_len
         self.alarm_counters = [0] * app_settings.flame_detect_len
@@ -53,16 +73,6 @@ class Variables(Widget):
         self.flame_alarm_log = EventLog(directory=os.path.join(app_settings.flame_log_dir, 'alarm_counters'), header=self.flame_log_header)
         self.flame_state_log = EventLog(directory=os.path.join(app_settings.flame_log_dir, 'state_change_counters'), header=self.flame_log_header)
         Clock.schedule_interval(self.log_files, 1)
-        self.shutdown_pin = 17
-        self.ignition_pin = 27
-        self.last_shutdown_state = 0
-        try:
-            GPIO.setmode(GPIO.BCM)
-            GPIO.setup(self.shutdown_pin, GPIO.OUT) # status output for shutdown circuit
-            GPIO.setup(self.ignition_pin, GPIO.IN)  # setup input for ignition status
-        except Exception as e:
-            print('GPIO error:')
-            print(e)
 
     def set_var_lists(self):
         self.var_aliases = []
@@ -119,6 +129,8 @@ class Variables(Widget):
     def read_can(self, dt):
         try:
             self.can_data = self.can_com.can_read_data
+            self.stack_temp_can_read_data = self.can_com.stack_temp_can_read_data
+            self.syrup_temp_can_read_data = self.can_com.syrup_temp_can_read_data
         except Exception as e:
             #print('CAN read error:')
             #print(e)
@@ -140,11 +152,12 @@ class Variables(Widget):
         self.flame_state_log.write(self.flame_state_ctrs)
 
     def update_data(self, dt):
-        if self.get('SYS_DIO_MODULE') == '1':
+        if self.dio_module:
             for i in range(0, app_settings.dio_mod_input_len):
                 di_state = (self.can_data & 2**i) >> i
                 self.variable_data[i + app_settings.dio_mod_di_data_start] = str(di_state)  # update variable data array with di states
-        if self.get('SYS_FLAME_DETECT') == '1':
+
+        if self.flame_detect:
             for i in range(0, app_settings.flame_detect_len):
                 if self.SYS_DEBUG_MODE:
                     flame_state = self.get("ROW " + str(i + 1))  # this is used for debug, when CAN isn't available
@@ -156,6 +169,15 @@ class Variables(Widget):
                 self.flame_state_ctrs[i] = self.flame_alarms[i].state_change_ctr
         if any(self.alarm_states) and not self.app_ref.screen_man.alarm_state:
             self.app_ref.screen_man.alarm_animation(True)  # show alarm animation
+
+        if self.stack_temp:
+            for i in range (0, app_settings.stack_read_data_len):
+                self.variable_data[i + app_settings.stack_read_data_start] = str(self.stack_temp_can_read_data[i])
+
+        if self.syrup_temp:
+            for i in range (0, app_settings.syrup_read_data_len):
+                self.variable_data[i + app_settings.syrup_read_data_start] = str(self.syrup_temp_can_read_data[i])
+
         if (self.variable_data != self.old_variable_data) or self.refresh_data:
             self.data_change = True
             #print('variable data')
@@ -225,6 +247,9 @@ class Variables(Widget):
                 return ''
         return ''
 
+    def get_bool(self, alias):
+        return True if self.get(alias) == '1' else False
+
     def get_event(self, alias):
         if alias != '':
             try:
@@ -248,7 +273,11 @@ class Variables(Widget):
             channel_type = self.variables_json[index]['type']
             tag = self.variables_json[index]['tag']
             if channel_type == 'DO':
-                self.can_com.can_write(index - app_settings.dio_mod_do_data_start, int(value))
+                self.can_com.can_write(index - app_settings.dio_mod_do_data_start, int(value), channel_type)
+            if channel_type == 'STACK_TEMP_WRITE':
+                self.can_com.can_write(index - app_settings.stack_read_data_start, int(value), channel_type)
+            if channel_type == 'SYRUP_TEMP_WRITE':
+                self.can_com.can_write(index - app_settings.syrup_read_data_start, int(value), channel_type)
             if channel_type == 'SYS':
                 self.sys_cmd(tag, value)
         except Exception as e:

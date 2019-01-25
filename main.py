@@ -61,12 +61,6 @@ class MainApp(App):
             'SYS_WIDGET_BACKGROUND_ON_COLOR': '#8fff7fff',
             'SYS_WIDGET_TEXT_OFF_COLOR': '#00000000',
             'SYS_WIDGET_TEXT_ON_COLOR': '#00000000',})
-        '''for key in app_settings.auto_var_tags:
-            config.setdefaults('AutoVars', {key: ''})
-        for key in app_settings.arduino_input_tags:
-            config.setdefaults('InputAliases', {key: key})
-        for key in app_settings.arduino_output_tags:
-            config.setdefaults('OutputAliases', {key: key})'''
 
     def build_settings(self, settings):
         settings.register_type('alias', SettingAlias)
@@ -83,6 +77,10 @@ class MainApp(App):
             aliases = json.loads(app_settings.dio_aliases_json)
         if self.variables.get('SYS_FLAME_DETECT') == '1':
             aliases = aliases + json.loads(app_settings.row_aliases_json)
+        if self.variables.get('SYS_STACK_TEMP') == '1':
+            aliases = aliases + json.loads(app_settings.stack_aliases_json)
+        if self.variables.get('SYS_SYRUP_TEMP') == '1':
+            aliases = aliases + json.loads(app_settings.syrup_aliases_json)
         aliases = aliases + json.loads(app_settings.aliases_json)
         aliases = json.dumps(aliases)
         settings.add_json_panel('Aliases', self.config, data=aliases)
@@ -94,6 +92,10 @@ class MainApp(App):
             self.hide_variables(value, app_settings.dio_mod_di_data_start, app_settings.dio_mod_len)
         if key == 'SYS_FLAME_DETECT':
             self.hide_variables(value, app_settings.flame_detect_data_start, app_settings.flame_detect_len)
+        if key == 'SYS_STACK_TEMP':
+            self.hide_variables(value, app_settings.stack_read_data_start, app_settings.stack_read_data_len)
+        if key == 'SYS_SYRUP_TEMP':
+            self.hide_variables(value, app_settings.syrup_read_data_start, app_settings.syrup_read_data_len)
         #if key == "SYS_LAYOUT_FILE":
             #self.dynamic_layout.build_layout()
         self.get_aliases()
@@ -135,6 +137,10 @@ class MainApp(App):
         for (key, value) in self.config.items('OutputAliases'):
             self.config_aliases.append(value)
         for (key, value) in self.config.items('RowAliases'):
+            self.config_aliases.append(value)
+        for (key, value) in self.config.items('StackAliases'):
+            self.config_aliases.append(value)
+        for (key, value) in self.config.items('SyrupAliases'):
             self.config_aliases.append(value)
         for (key, value) in self.config.items('UserVarAliases'):
             self.config_aliases.append(value)

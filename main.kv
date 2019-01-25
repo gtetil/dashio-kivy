@@ -113,6 +113,7 @@
     app_ref: app
     item_edit_popup: item_edit_popup.__self__
     engine_kill_popup: engine_kill_popup.__self__
+    numeric_input_popup: numeric_input_popup.__self__
     datetime_popup: datetime_popup.__self__
     color_select: color_select.__self__
     icon_select: icon_select.__self__
@@ -148,8 +149,7 @@
         graphic_type_spinner: graphic_type_spinner
         title: "Modify"
         size_hint: None, None
-        #size: 450, 265
-        size: 450, 480
+        size: 450, 265
         pos_hint: {'middle': 1, 'top': 1}
         on_parent: if self.parent == main_screen: self.parent.remove_widget(self)
 
@@ -206,7 +206,7 @@
                             option_cls: Factory.get("SpinnerLabel")
                             font_size: '13sp'
                             text: 'Toggle Button'
-                            values: ['Indicator', 'Button', 'Toggle Button', 'Label', 'Image']
+                            values: ['Indicator', 'Button', 'Toggle Button', 'Label', 'Numeric Input', 'Image']
 
                     BoxLayout:
                         orientation: 'horizontal'
@@ -225,7 +225,7 @@
                             option_cls: Factory.get("SpinnerLabel")
                             font_size: '13sp'
                             text: 'Text'
-                            values: ['Text', 'Icon', 'Picture']
+                            values: ['Text', 'Icon']
                             on_text: item_edit_popup.graphic_type(self.text)
 
                     BoxLayout:
@@ -443,6 +443,40 @@
                 text: 'OK'
                 on_release: engine_kill_popup.dismiss()
 
+    NumericInputPopup:
+        id: numeric_input_popup
+        app_ref: app
+        title: "Numeric Input"
+        size_hint: None, None
+        size: 150, 250
+        pos_hint: {'middle': 1, 'top': 1}
+        numeric_input: numeric_input
+        on_parent: if self.parent == main_screen: self.parent.remove_widget(self)
+
+        BoxLayout:
+            orientation: 'vertical'
+            padding: 5
+
+            TextInput:
+                id: numeric_input
+                size_hint: 1, 0.25
+                font_size: '25sp'
+                input_filter: 'float'
+
+            SettingSpacer:
+
+            ModernButton:
+                text: 'OK'
+                size_hint: 1, .37
+                on_release: numeric_input_popup.save_numeric()
+
+            SettingSpacer:
+
+            ModernButton:
+                text: 'Cancel'
+                size_hint: 1, .37
+                on_release: numeric_input_popup.dismiss()
+
     Popup:
         id: datetime_popup
         title: "Set Date/Time"
@@ -603,6 +637,13 @@
     valign: 'middle'
     color: 0,0,0,1
 
+<DynNumericInput>:
+    text_size: self.size
+    font_size: self.size[1] / 2
+    halign: 'center'
+    valign: 'middle'
+    color: 0,0,0,1
+
 <DynItem>:
     app_ref: app
     data_change: app.variables.data_change
@@ -620,6 +661,7 @@
     icon_on: ''
     icon_off: ''
     graphic_type: ''
+    value: ''
 
 <PasscodeScreen>:
     id: passcode_screen

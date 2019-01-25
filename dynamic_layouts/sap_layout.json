@@ -1,0 +1,306 @@
+{
+    "10": {
+        "border_color": "#ffffffff", 
+        "color_off": "#00000000", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#ffffffff", 
+        "color_on_text": "#000000ff", 
+        "enable": true, 
+        "graphic_type": "Text", 
+        "icon_off": "no-selection", 
+        "icon_on": "no-selection", 
+        "invert": false, 
+        "off_text": "", 
+        "on_text": "%d", 
+        "pos": [
+            250.0, 
+            220.0
+        ], 
+        "size": [
+            140, 
+            60
+        ], 
+        "value": "10", 
+        "var_alias": "STACK_TEMP_SETPOINT_READ", 
+        "var_tag": "STACK_TEMP_SETPOINT_READ", 
+        "widget": "Numeric Input"
+    }, 
+    "11": {
+        "border_color": "#ffffffff", 
+        "color_off": "#00000000", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#ffffffff", 
+        "color_on_text": "#000000ff", 
+        "enable": true, 
+        "graphic_type": "Text", 
+        "icon_off": "no-selection", 
+        "icon_on": "no-selection", 
+        "invert": false, 
+        "off_text": "", 
+        "on_text": "%d", 
+        "pos": [
+            250.0, 
+            290.0
+        ], 
+        "size": [
+            140, 
+            110
+        ], 
+        "value": "0", 
+        "var_alias": "STACK_CURRENT_TEMP", 
+        "var_tag": "STACK_CURRENT_TEMP", 
+        "widget": "Label"
+    }, 
+    "12": {
+        "border_color": "#00000000", 
+        "color_off": "#00000000", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#00000000", 
+        "color_on_text": "#000000ff", 
+        "graphic_type": "text", 
+        "icon_off": "no-selection", 
+        "icon_on": "no-selection", 
+        "invert": false, 
+        "off_text": "", 
+        "on_text": "Current Temp:", 
+        "pos": [
+            60.0, 
+            320.0
+        ], 
+        "size": [
+            180, 
+            50
+        ], 
+        "value": "0", 
+        "var_alias": "", 
+        "var_tag": "", 
+        "widget": "Label"
+    }, 
+    "13": {
+        "border_color": "#00000000", 
+        "color_off": "#00000000", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#00000000", 
+        "color_on_text": "#000000ff", 
+        "graphic_type": "text", 
+        "icon_off": "no-selection", 
+        "icon_on": "no-selection", 
+        "invert": false, 
+        "off_text": "", 
+        "on_text": "Setpoint:", 
+        "pos": [
+            130.0, 
+            230.0
+        ], 
+        "size": [
+            110, 
+            40
+        ], 
+        "value": "0", 
+        "var_alias": "", 
+        "var_tag": "", 
+        "widget": "Label"
+    }, 
+    "14": {
+        "border_color": "#ffffffff", 
+        "color_off": "#00000000", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#ffffffff", 
+        "color_on_text": "#000000ff", 
+        "enable": true, 
+        "graphic_type": "Text", 
+        "icon_off": "no-selection", 
+        "icon_on": "no-selection", 
+        "invert": false, 
+        "off_text": "", 
+        "on_text": "%d", 
+        "pos": [
+            450.0, 
+            290.0
+        ], 
+        "size": [
+            140, 
+            110
+        ], 
+        "value": "0", 
+        "var_alias": "SYRUP_CURRENT_TEMP", 
+        "var_tag": "SYRUP_CURRENT_TEMP", 
+        "widget": "Label"
+    }, 
+    "15": {
+        "border_color": "#ffffffff", 
+        "color_off": "#00000000", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#ffffffff", 
+        "color_on_text": "#000000ff", 
+        "enable": true, 
+        "graphic_type": "Text", 
+        "icon_off": "no-selection", 
+        "icon_on": "no-selection", 
+        "invert": false, 
+        "off_text": "", 
+        "on_text": "%d", 
+        "pos": [
+            450.0, 
+            220.0
+        ], 
+        "size": [
+            140, 
+            60
+        ], 
+        "value": "0", 
+        "var_alias": "SYRUP_TEMP_SETPOINT_READ", 
+        "var_tag": "SYRUP_TEMP_SETPOINT_READ", 
+        "widget": "Label"
+    }, 
+    "16": {
+        "border_color": "#00000000", 
+        "color_off": "#00000000", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#00000000", 
+        "color_on_text": "#000000ff", 
+        "graphic_type": "Text", 
+        "icon_off": "no-selection", 
+        "icon_on": "no-selection", 
+        "invert": false, 
+        "off_text": "Auto Mode:", 
+        "on_text": "Auto Mode:", 
+        "pos": [
+            450.0, 
+            140.0
+        ], 
+        "size": [
+            100, 
+            70
+        ], 
+        "value": "0", 
+        "var_alias": "SYRUP_TEMP_AUTO_MODE", 
+        "var_tag": "SYRUP_TEMP_AUTO_MODE", 
+        "widget": "Button"
+    }, 
+    "17": {
+        "border_color": "#00000000", 
+        "color_off": "#00000000", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#36ff19ff", 
+        "color_on_text": "#000000ff", 
+        "graphic_type": "Text", 
+        "icon_off": "no-selection", 
+        "icon_on": "no-selection", 
+        "invert": false, 
+        "off_text": "Off", 
+        "on_text": "On", 
+        "pos": [
+            550.0, 
+            140.0
+        ], 
+        "size": [
+            40, 
+            70
+        ], 
+        "value": "0", 
+        "var_alias": "SYRUP_TEMP_AUTO_MODE_STATE", 
+        "var_tag": "SYRUP_TEMP_AUTO_MODE_STATE", 
+        "widget": "Indicator"
+    }, 
+    "18": {
+        "border_color": "#00000000", 
+        "color_off": "#00000000", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#00000000", 
+        "color_on_text": "#000000ff", 
+        "graphic_type": "Text", 
+        "icon_off": "no-selection", 
+        "icon_on": "no-selection", 
+        "invert": false, 
+        "off_text": "Close Valve:", 
+        "on_text": "Close Valve:", 
+        "pos": [
+            450.0, 
+            70.0
+        ], 
+        "size": [
+            100, 
+            70
+        ], 
+        "value": "0", 
+        "var_alias": "SYRUP_TEMP_CLOSE_VALVE", 
+        "var_tag": "SYRUP_TEMP_CLOSE_VALVE", 
+        "widget": "Button"
+    }, 
+    "19": {
+        "border_color": "#00000000", 
+        "color_off": "#00000000", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#00000000", 
+        "color_on_text": "#000000ff", 
+        "graphic_type": "Text", 
+        "icon_off": "no-selection", 
+        "icon_on": "no-selection", 
+        "invert": false, 
+        "off_text": "Off", 
+        "on_text": "On", 
+        "pos": [
+            550.0, 
+            70.0
+        ], 
+        "size": [
+            40, 
+            70
+        ], 
+        "value": "0", 
+        "var_alias": "SYRUP_TEMP_CLOSE_VALVE_STATE", 
+        "var_tag": "SYRUP_TEMP_CLOSE_VALVE_STATE", 
+        "widget": "Indicator"
+    }, 
+    "20": {
+        "border_color": "#00000000", 
+        "color_off": "#00000000", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#00000000", 
+        "color_on_text": "#000000ff", 
+        "graphic_type": "Text", 
+        "icon_off": "no-selection", 
+        "icon_on": "no-selection", 
+        "invert": false, 
+        "off_text": "Open Valve:", 
+        "on_text": "Open Valve:", 
+        "pos": [
+            450.0, 
+            0.0
+        ], 
+        "size": [
+            100, 
+            70
+        ], 
+        "value": "0", 
+        "var_alias": "SYRUP_TEMP_OPEN_VALVE", 
+        "var_tag": "SYRUP_TEMP_OPEN_VALVE", 
+        "widget": "Button"
+    }, 
+    "21": {
+        "border_color": "#00000000", 
+        "color_off": "#00000000", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#00000000", 
+        "color_on_text": "#000000ff", 
+        "graphic_type": "Text", 
+        "icon_off": "no-selection", 
+        "icon_on": "no-selection", 
+        "invert": false, 
+        "off_text": "Off", 
+        "on_text": "On", 
+        "pos": [
+            550.0, 
+            0.0
+        ], 
+        "size": [
+            40, 
+            70
+        ], 
+        "value": "0", 
+        "var_alias": "SYRUP_TEMP_OPEN_VALVE_STATE", 
+        "var_tag": "SYRUP_TEMP_OPEN_VALVE_STATE", 
+        "widget": "Indicator"
+    }
+}
