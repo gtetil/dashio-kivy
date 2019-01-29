@@ -468,7 +468,7 @@
             ModernButton:
                 text: 'OK'
                 size_hint: 1, .37
-                on_release: numeric_input_popup.save_numeric()
+                on_release: numeric_input_popup.save_numeric(numeric_input.text)
 
             SettingSpacer:
 
@@ -661,7 +661,7 @@
     icon_on: ''
     icon_off: ''
     graphic_type: ''
-    value: ''
+    var_value: ''
 
 <PasscodeScreen>:
     id: passcode_screen

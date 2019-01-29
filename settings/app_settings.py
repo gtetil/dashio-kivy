@@ -14,10 +14,12 @@ flame_detect_data_start = 14
 flame_detect_len = 24
 
 stack_id_start = 300
+stack_write_data_start = 38
 stack_read_data_start = 40
 stack_read_data_len = 2
 
 syrup_id_start = 350
+syrup_write_data_start = 42
 syrup_read_data_start = 46
 syrup_read_data_len = 5
 

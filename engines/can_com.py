@@ -30,8 +30,11 @@ class CANcom(Widget):
         self.flame_detect = flame_detect
         self.stack_temp = stack_temp
         self.stack_temp_can_read_data = [0] * app_settings.stack_read_data_len
+        self.stack_temp_write_can_data = [0] * 3
         self.syrup_temp = syrup_temp
         self.syrup_temp_can_read_data = [0] * app_settings.syrup_read_data_len
+        self.stack_temp_can_read_data[0] = 4000
+        self.syrup_temp_can_read_data[0] = 4000
 
     def can_read(self, dt):
         try:
@@ -73,33 +76,36 @@ class CANcom(Widget):
         except Exception as e:
             pass
 
-    def can_write(self, index, value, channel_type):
+    def can_write(self, index, value, channel_type, scale, offset):
         if self.dio_module or self.flame_detect:
             self.can_write_data = self.set_bit(self.can_write_data, index, value)
             self.msg = can.Message(arbitration_id=0x000+0x010, extended_id=False, data=[0, 0, 0, 0, 0, 0, 0, self.can_write_data])
 
         if self.stack_temp:
             if channel_type == 'STACK_TEMP_WRITE':
-                can_data = [0]*3
-                can_data[0] = value & 0xff  # 0-1:  Temp Setpoint (0-8192)
-                can_data[1] = value >> 8
-                can_data[2] = 1  # 2:  Output Enable (0-1)
-                self.msg = can.Message(arbitration_id=0x000, extended_id=False, data=can_data)
+                cal_value = int(value * float(scale) + float(offset))
+                if index == 0:
+                    self.stack_temp_write_can_data[0] = cal_value & 0xff  # 0-1:  Temp Setpoint (0-8192)
+                    self.stack_temp_write_can_data[1] = cal_value >> 8
+                elif index == 1:
+                    self.stack_temp_write_can_data[2] = cal_value  # 2:  Output Enable (0-1)
+                print self.stack_temp_write_can_data
+                self.msg = can.Message(arbitration_id=0x000, extended_id=False, data=self.stack_temp_write_can_data)
 
         if self.syrup_temp:
             if channel_type == 'SYRUP_TEMP_WRITE':
-                # set data requested to be written
-                self.syrup_temp_can_read_data[index] = value
+                # set data requested to be written, offset by 1 because CAN read has Current Temp at index 0
+                self.syrup_temp_can_read_data[index + 1] = int(value * float(scale) + float(offset))
 
                 # build message with current data, and requested data to be written
                 can_data = [0]*5
-                can_data[0] = self.syrup_temp_can_read_data[0] & 0xff  # 0-1:  Temp Setpoint (0-8192)
-                can_data[1] = self.syrup_temp_can_read_data[0] >> 8
+                can_data[0] = self.syrup_temp_can_read_data[1] & 0xff  # 0-1:  Temp Setpoint (0-8192)
+                can_data[1] = self.syrup_temp_can_read_data[1] >> 8
                 can_data[2] = self.syrup_temp_can_read_data[2]  # 2:  Auto Mode (0-1)
                 can_data[3] = self.syrup_temp_can_read_data[3]  # 3:  Close Valve (0-1, 2 = timed)
                 can_data[4] = self.syrup_temp_can_read_data[4]  # 4:  Open Valve (0-1, 2 = timed)
-
-                self.msg = can.Message(arbitration_id=0x000, extended_id=False, data=can_data)
+                print can_data
+                self.msg = can.Message(arbitration_id=0x001, extended_id=False, data=can_data)
 
         bus.send(self.msg)
 

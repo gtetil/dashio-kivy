@@ -172,11 +172,19 @@ class Variables(Widget):
 
         if self.stack_temp:
             for i in range (0, app_settings.stack_read_data_len):
-                self.variable_data[i + app_settings.stack_read_data_start] = str(self.stack_temp_can_read_data[i])
+                index = i + app_settings.stack_read_data_start
+                scale = self.variables_json[index]['scale']
+                offset = self.variables_json[index]['offset']
+                value = str(int(float(self.stack_temp_can_read_data[i]) * scale + offset))
+                self.variable_data[index] = value
 
         if self.syrup_temp:
             for i in range (0, app_settings.syrup_read_data_len):
-                self.variable_data[i + app_settings.syrup_read_data_start] = str(self.syrup_temp_can_read_data[i])
+                index = i + app_settings.syrup_read_data_start
+                scale = self.variables_json[index]['scale']
+                offset = self.variables_json[index]['offset']
+                value = str(int(float(self.syrup_temp_can_read_data[i]) * scale + offset))
+                self.variable_data[index] = value
 
         if (self.variable_data != self.old_variable_data) or self.refresh_data:
             self.data_change = True
@@ -272,12 +280,14 @@ class Variables(Widget):
             self.variable_data[index] = value
             channel_type = self.variables_json[index]['type']
             tag = self.variables_json[index]['tag']
+            scale = self.variables_json[index]['scale']
+            offset = self.variables_json[index]['offset']
             if channel_type == 'DO':
                 self.can_com.can_write(index - app_settings.dio_mod_do_data_start, int(value), channel_type)
             if channel_type == 'STACK_TEMP_WRITE':
-                self.can_com.can_write(index - app_settings.stack_read_data_start, int(value), channel_type)
+                self.can_com.can_write(index - app_settings.stack_write_data_start, int(value), channel_type, scale, offset)
             if channel_type == 'SYRUP_TEMP_WRITE':
-                self.can_com.can_write(index - app_settings.syrup_read_data_start, int(value), channel_type)
+                self.can_com.can_write(index - app_settings.syrup_write_data_start, int(value), channel_type, scale, offset)
             if channel_type == 'SYS':
                 self.sys_cmd(tag, value)
         except Exception as e:

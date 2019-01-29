@@ -67,7 +67,7 @@ class DynamicLayout(Widget):
                                          icon_on=self.dyn_layout_json[id].setdefault('icon_on', 'no-selection'),
                                          icon_off=self.dyn_layout_json[id].setdefault('icon_off', 'no-selection'),
                                          graphic_type=self.dyn_layout_json[id].setdefault('graphic_type', 'Text'),
-                                         value=self.dyn_layout_json[id].setdefault('value', '0'))
+                                         var_value=self.dyn_layout_json[id].setdefault('var_value', '0'))
         elif widget == 'Button':
             dyn_widget = DynButton(text='',
                                          id=str(id),
@@ -85,7 +85,7 @@ class DynamicLayout(Widget):
                                          icon_on=self.dyn_layout_json[id].setdefault('icon_on', 'no-selection'),
                                          icon_off=self.dyn_layout_json[id].setdefault('icon_off', 'no-selection'),
                                          graphic_type=self.dyn_layout_json[id].setdefault('graphic_type', 'Text'),
-                                         value=self.dyn_layout_json[id].setdefault('value', '0'))
+                                         var_value=self.dyn_layout_json[id].setdefault('var_value', '0'))
         elif widget == 'Label':
             dyn_widget = DynLabel(text='',
                                          id=str(id),
@@ -103,7 +103,7 @@ class DynamicLayout(Widget):
                                          icon_on=self.dyn_layout_json[id].setdefault('icon_on', 'no-selection'),
                                          icon_off=self.dyn_layout_json[id].setdefault('icon_off', 'no-selection'),
                                          graphic_type=self.dyn_layout_json[id].setdefault('graphic_type', 'Text'),
-                                         value=self.dyn_layout_json[id].setdefault('value', '0'))
+                                        var_value=self.dyn_layout_json[id].setdefault('var_value', '0'))
         elif widget == 'Numeric Input':
             dyn_widget = DynNumericInput(text='',
                                          id=str(id),
@@ -121,7 +121,7 @@ class DynamicLayout(Widget):
                                          icon_on=self.dyn_layout_json[id].setdefault('icon_on', 'no-selection'),
                                          icon_off=self.dyn_layout_json[id].setdefault('icon_off', 'no-selection'),
                                          graphic_type=self.dyn_layout_json[id].setdefault('graphic_type', 'Text'),
-                                         value=self.dyn_layout_json[id].setdefault('value', '0'))
+                                         var_value=self.dyn_layout_json[id].setdefault('var_value', '0'))
         else:
             dyn_widget = DynImage(text='',
                                          id=str(id),
@@ -139,7 +139,7 @@ class DynamicLayout(Widget):
                                          icon_on=self.dyn_layout_json[id].setdefault('icon_on', 'no-selection'),
                                          icon_off=self.dyn_layout_json[id].setdefault('icon_off', 'no-selection'),
                                          graphic_type=self.dyn_layout_json[id].setdefault('graphic_type', 'Text'),
-                                         value=self.dyn_layout_json[id].setdefault('value', '0'))
+                                         var_value=self.dyn_layout_json[id].setdefault('var_value', '0'))
         scatter_layout = MyScatterLayout(id=str(id) + '_scatter',
                                          do_rotation=False,
                                          size=(self.dyn_layout_json[id]['size'][0], self.dyn_layout_json[id]['size'][1]),
@@ -176,7 +176,8 @@ class DynamicLayout(Widget):
                 else:
                     dyn_widget_ref.text = dyn_widget_ref.button_on_text
         else:
-            dyn_widget_ref.text = dyn_widget_ref.button_on_text
+            if dyn_widget_ref.widget != 'Numeric Input':
+                dyn_widget_ref.text = dyn_widget_ref.button_on_text
 
     def add_widget_json(self):
         id_list = []
@@ -273,14 +274,12 @@ class DynamicLayout(Widget):
         self.modify_mode = True
         self.app_ref.main_screen_ref.screen_edit_label(True)
         for id, dyn_widget in self.dyn_widget_dict.items():
-            #if dyn_widget.widget == 'Label':
             dyn_widget.dyn_label_background()
 
     def end_modify(self):
         self.modify_mode = False
         self.app_ref.main_screen_ref.screen_edit_label(False)
         for id, dyn_widget in self.dyn_widget_dict.items():
-            #if dyn_widget.widget == 'Label':
             dyn_widget.dyn_label_background()
         self.save_layout() #save for size and position changes
         self.app_ref.variables.refresh_data = True
@@ -403,15 +402,16 @@ class DynItem(Widget):
     icon_on = StringProperty("")
     icon_off = StringProperty("")
     graphic_type = StringProperty("")
-    value = StringProperty("")
+    var_value = StringProperty("")
     ignition_input = NumericProperty(0)
     digital_inputs = NumericProperty(0)
     app_ref = ObjectProperty(None)
     data_change = BooleanProperty(False)
 
     def on_data_change(self, instance, data):
-        if not self.app_ref.dynamic_layout.modify_mode:
-            value = self.app_ref.variables.get(self.var_alias)
+        value = self.app_ref.variables.get(self.var_alias)
+        self.var_value = value
+        if not self.app_ref.dynamic_layout.modify_mode and self.widget != 'Numeric Input':
             if value == '1':
                 bool_state = True
             else:
@@ -520,13 +520,18 @@ class DynItem(Widget):
         if self.app_ref.dynamic_layout.modify_mode:
             self.canvas_color = get_hex_from_color([.298, .298, .047, .3])
 
+    def on_var_value(self, instance, value):
+        self.text = value
+        try:
+            self.app_ref.variables.set_by_alias(self.var_alias, value)
+            self.app_ref.variables.refresh_data = True
+        except:
+            pass
+
 class DynToggleButton(DynItem, ToggleButton):
     pass
 
 class DynButton(DynItem, Button):
-    pass
-
-class DynNumericInput(DynItem, Label):
     pass
 
 class DynImage(DynItem, Image):
@@ -556,16 +561,32 @@ class DynLabel(DynItem, Label):
     def on_size(self, *args):
         self.dyn_label_background()
 
+class DynNumericInput(DynItem, Label):
+
+    def dyn_label_background(self):
+        self.canvas.before.clear()
+        with self.canvas.before:
+            if self.app_ref.dynamic_layout.modify_mode:
+                Color(.298, .298, .047, .3)
+            else:
+                Color(rgba=get_color_from_hex(self.color_on))
+                self.color = get_color_from_hex(self.color_on_text)
+            Rectangle(pos=self.pos, size=self.size)
+
+    def on_size(self, *args):
+        self.dyn_label_background()
+
 class NumericInputPopup(Popup):
     app_ref = ObjectProperty(None)
     item = ObjectProperty(None)
 
     def open_popup(self, item):
         self.item = item
-        self.numeric_input.text = self.item.value
+        self.numeric_input.text = self.item.var_value
         self.open()
 
-    def save_numeric(self):
+    def save_numeric(self, value):
+        self.item.var_value = value
         self.dismiss()
 
 class ColorSelector(Popup):

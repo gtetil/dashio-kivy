@@ -11,7 +11,7 @@
         "icon_on": "no-selection", 
         "invert": false, 
         "off_text": "", 
-        "on_text": "%d", 
+        "on_text": "", 
         "pos": [
             250.0, 
             220.0
@@ -20,9 +20,9 @@
             140, 
             60
         ], 
-        "value": "10", 
-        "var_alias": "STACK_TEMP_SETPOINT_READ", 
-        "var_tag": "STACK_TEMP_SETPOINT_READ", 
+        "var_alias": "STACK_TEMP_SETPOINT_WRITE", 
+        "var_tag": "STACK_TEMP_SETPOINT_WRITE", 
+        "var_value": "10", 
         "widget": "Numeric Input"
     }, 
     "11": {
@@ -46,9 +46,9 @@
             140, 
             110
         ], 
-        "value": "0", 
         "var_alias": "STACK_CURRENT_TEMP", 
         "var_tag": "STACK_CURRENT_TEMP", 
+        "var_value": "0", 
         "widget": "Label"
     }, 
     "12": {
@@ -71,9 +71,9 @@
             180, 
             50
         ], 
-        "value": "0", 
         "var_alias": "", 
         "var_tag": "", 
+        "var_value": "0", 
         "widget": "Label"
     }, 
     "13": {
@@ -96,9 +96,9 @@
             110, 
             40
         ], 
-        "value": "0", 
         "var_alias": "", 
         "var_tag": "", 
+        "var_value": "0", 
         "widget": "Label"
     }, 
     "14": {
@@ -122,9 +122,9 @@
             140, 
             110
         ], 
-        "value": "0", 
         "var_alias": "SYRUP_CURRENT_TEMP", 
         "var_tag": "SYRUP_CURRENT_TEMP", 
+        "var_value": "0", 
         "widget": "Label"
     }, 
     "15": {
@@ -139,7 +139,7 @@
         "icon_on": "no-selection", 
         "invert": false, 
         "off_text": "", 
-        "on_text": "%d", 
+        "on_text": "", 
         "pos": [
             450.0, 
             220.0
@@ -148,10 +148,10 @@
             140, 
             60
         ], 
-        "value": "0", 
-        "var_alias": "SYRUP_TEMP_SETPOINT_READ", 
-        "var_tag": "SYRUP_TEMP_SETPOINT_READ", 
-        "widget": "Label"
+        "var_alias": "SYRUP_TEMP_SETPOINT_WRITE", 
+        "var_tag": "SYRUP_TEMP_SETPOINT_WRITE", 
+        "var_value": "0", 
+        "widget": "Numeric Input"
     }, 
     "16": {
         "border_color": "#00000000", 
@@ -173,9 +173,9 @@
             100, 
             70
         ], 
-        "value": "0", 
         "var_alias": "SYRUP_TEMP_AUTO_MODE", 
         "var_tag": "SYRUP_TEMP_AUTO_MODE", 
+        "var_value": "0", 
         "widget": "Button"
     }, 
     "17": {
@@ -198,9 +198,9 @@
             40, 
             70
         ], 
-        "value": "0", 
         "var_alias": "SYRUP_TEMP_AUTO_MODE_STATE", 
         "var_tag": "SYRUP_TEMP_AUTO_MODE_STATE", 
+        "var_value": "0", 
         "widget": "Indicator"
     }, 
     "18": {
@@ -223,9 +223,9 @@
             100, 
             70
         ], 
-        "value": "0", 
         "var_alias": "SYRUP_TEMP_CLOSE_VALVE", 
         "var_tag": "SYRUP_TEMP_CLOSE_VALVE", 
+        "var_value": "0", 
         "widget": "Button"
     }, 
     "19": {
@@ -248,9 +248,9 @@
             40, 
             70
         ], 
-        "value": "0", 
         "var_alias": "SYRUP_TEMP_CLOSE_VALVE_STATE", 
         "var_tag": "SYRUP_TEMP_CLOSE_VALVE_STATE", 
+        "var_value": "0", 
         "widget": "Indicator"
     }, 
     "20": {
@@ -273,9 +273,9 @@
             100, 
             70
         ], 
-        "value": "0", 
         "var_alias": "SYRUP_TEMP_OPEN_VALVE", 
         "var_tag": "SYRUP_TEMP_OPEN_VALVE", 
+        "var_value": "0", 
         "widget": "Button"
     }, 
     "21": {
@@ -298,9 +298,59 @@
             40, 
             70
         ], 
-        "value": "0", 
         "var_alias": "SYRUP_TEMP_OPEN_VALVE_STATE", 
         "var_tag": "SYRUP_TEMP_OPEN_VALVE_STATE", 
+        "var_value": "0", 
+        "widget": "Indicator"
+    }, 
+    "22": {
+        "border_color": "#00000000", 
+        "color_off": "#00000000", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#00000000", 
+        "color_on_text": "#000000ff", 
+        "graphic_type": "Text", 
+        "icon_off": "no-selection", 
+        "icon_on": "no-selection", 
+        "invert": false, 
+        "off_text": "Output Enable:", 
+        "on_text": "Output Enable:", 
+        "pos": [
+            220.0, 
+            140.0
+        ], 
+        "size": [
+            130, 
+            70
+        ], 
+        "var_alias": "STACK_TEMP_OUTPUT_ENABLE", 
+        "var_tag": "STACK_TEMP_OUTPUT_ENABLE", 
+        "var_value": "0", 
+        "widget": "Button"
+    }, 
+    "23": {
+        "border_color": "#00000000", 
+        "color_off": "#00000000", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#36ff19ff", 
+        "color_on_text": "#000000ff", 
+        "graphic_type": "Text", 
+        "icon_off": "no-selection", 
+        "icon_on": "no-selection", 
+        "invert": false, 
+        "off_text": "Off", 
+        "on_text": "On", 
+        "pos": [
+            350.0, 
+            140.0
+        ], 
+        "size": [
+            40, 
+            70
+        ], 
+        "var_alias": "STACK_TEMP_OUTPUT_ENABLE", 
+        "var_tag": "STACK_TEMP_OUTPUT_ENABLE", 
+        "var_value": "0", 
         "widget": "Indicator"
     }
 }
