@@ -402,7 +402,6 @@ class DynItem(Widget):
     icon_on = StringProperty("")
     icon_off = StringProperty("")
     graphic_type = StringProperty("")
-    var_value = StringProperty("")
     ignition_input = NumericProperty(0)
     digital_inputs = NumericProperty(0)
     app_ref = ObjectProperty(None)
@@ -520,13 +519,7 @@ class DynItem(Widget):
         if self.app_ref.dynamic_layout.modify_mode:
             self.canvas_color = get_hex_from_color([.298, .298, .047, .3])
 
-    def on_var_value(self, instance, value):
-        self.text = value
-        try:
-            self.app_ref.variables.set_by_alias(self.var_alias, value)
-            self.app_ref.variables.refresh_data = True
-        except:
-            pass
+
 
 class DynToggleButton(DynItem, ToggleButton):
     pass
@@ -562,6 +555,7 @@ class DynLabel(DynItem, Label):
         self.dyn_label_background()
 
 class DynNumericInput(DynItem, Label):
+    var_value = StringProperty("")
 
     def dyn_label_background(self):
         self.canvas.before.clear()
@@ -575,6 +569,14 @@ class DynNumericInput(DynItem, Label):
 
     def on_size(self, *args):
         self.dyn_label_background()
+
+    def on_var_value(self, instance, value):
+        self.text = value
+        try:
+            self.app_ref.variables.set_by_alias(self.var_alias, value)
+            self.app_ref.variables.refresh_data = True
+        except:
+            pass
 
 class NumericInputPopup(Popup):
     app_ref = ObjectProperty(None)

@@ -176,7 +176,7 @@
         "var_alias": "SYRUP_TEMP_AUTO_MODE", 
         "var_tag": "SYRUP_TEMP_AUTO_MODE", 
         "var_value": "0", 
-        "widget": "Button"
+        "widget": "Toggle Button"
     }, 
     "17": {
         "border_color": "#00000000", 
@@ -198,8 +198,8 @@
             40, 
             70
         ], 
-        "var_alias": "SYRUP_TEMP_AUTO_MODE_STATE", 
-        "var_tag": "SYRUP_TEMP_AUTO_MODE_STATE", 
+        "var_alias": "SYRUP_TEMP_AUTO_MODE", 
+        "var_tag": "SYRUP_TEMP_AUTO_MODE", 
         "var_value": "0", 
         "widget": "Indicator"
     }, 
@@ -226,13 +226,13 @@
         "var_alias": "SYRUP_TEMP_CLOSE_VALVE", 
         "var_tag": "SYRUP_TEMP_CLOSE_VALVE", 
         "var_value": "0", 
-        "widget": "Button"
+        "widget": "Toggle Button"
     }, 
     "19": {
         "border_color": "#00000000", 
         "color_off": "#00000000", 
         "color_off_text": "#000000ff", 
-        "color_on": "#00000000", 
+        "color_on": "#36ff19ff", 
         "color_on_text": "#000000ff", 
         "graphic_type": "Text", 
         "icon_off": "no-selection", 
@@ -248,8 +248,8 @@
             40, 
             70
         ], 
-        "var_alias": "SYRUP_TEMP_CLOSE_VALVE_STATE", 
-        "var_tag": "SYRUP_TEMP_CLOSE_VALVE_STATE", 
+        "var_alias": "SYRUP_TEMP_CLOSE_VALVE", 
+        "var_tag": "SYRUP_TEMP_CLOSE_VALVE", 
         "var_value": "0", 
         "widget": "Indicator"
     }, 
@@ -276,13 +276,13 @@
         "var_alias": "SYRUP_TEMP_OPEN_VALVE", 
         "var_tag": "SYRUP_TEMP_OPEN_VALVE", 
         "var_value": "0", 
-        "widget": "Button"
+        "widget": "Toggle Button"
     }, 
     "21": {
         "border_color": "#00000000", 
         "color_off": "#00000000", 
         "color_off_text": "#000000ff", 
-        "color_on": "#00000000", 
+        "color_on": "#36ff19ff", 
         "color_on_text": "#000000ff", 
         "graphic_type": "Text", 
         "icon_off": "no-selection", 
@@ -298,8 +298,8 @@
             40, 
             70
         ], 
-        "var_alias": "SYRUP_TEMP_OPEN_VALVE_STATE", 
-        "var_tag": "SYRUP_TEMP_OPEN_VALVE_STATE", 
+        "var_alias": "SYRUP_TEMP_OPEN_VALVE", 
+        "var_tag": "SYRUP_TEMP_OPEN_VALVE", 
         "var_value": "0", 
         "widget": "Indicator"
     }, 
@@ -326,7 +326,7 @@
         "var_alias": "STACK_TEMP_OUTPUT_ENABLE", 
         "var_tag": "STACK_TEMP_OUTPUT_ENABLE", 
         "var_value": "0", 
-        "widget": "Button"
+        "widget": "Toggle Button"
     }, 
     "23": {
         "border_color": "#00000000", 
@@ -352,5 +352,55 @@
         "var_tag": "STACK_TEMP_OUTPUT_ENABLE", 
         "var_value": "0", 
         "widget": "Indicator"
+    }, 
+    "24": {
+        "border_color": "#00000000", 
+        "color_off": "#00000000", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#00000000", 
+        "color_on_text": "#000000ff", 
+        "graphic_type": "text", 
+        "icon_off": "no-selection", 
+        "icon_on": "no-selection", 
+        "invert": false, 
+        "off_text": "", 
+        "on_text": "STACK", 
+        "pos": [
+            220.0, 
+            400.0
+        ], 
+        "size": [
+            200, 
+            70
+        ], 
+        "var_alias": "", 
+        "var_tag": "", 
+        "var_value": "0", 
+        "widget": "Label"
+    }, 
+    "25": {
+        "border_color": "#00000000", 
+        "color_off": "#00000000", 
+        "color_off_text": "#000000ff", 
+        "color_on": "#00000000", 
+        "color_on_text": "#000000ff", 
+        "graphic_type": "text", 
+        "icon_off": "no-selection", 
+        "icon_on": "no-selection", 
+        "invert": false, 
+        "off_text": "", 
+        "on_text": "SYRUP", 
+        "pos": [
+            420.0, 
+            400.0
+        ], 
+        "size": [
+            200, 
+            70
+        ], 
+        "var_alias": "", 
+        "var_tag": "", 
+        "var_value": "0", 
+        "widget": "Label"
     }
 }

@@ -460,12 +460,12 @@
         "data_index": 38, 
         "hidden": false, 
         "id": 300, 
-        "offset": -145.636, 
+        "offset": 5.76577, 
         "save": true, 
-        "scale": 4.55111, 
+        "scale": 4.46847, 
         "tag": "STACK_TEMP_SETPOINT_WRITE", 
         "type": "STACK_TEMP_WRITE", 
-        "value": "700"
+        "value": "701"
     }, 
     {
         "alias": "STACK_TEMP_OUTPUT_ENABLE", 
@@ -484,9 +484,9 @@
         "data_index": 40, 
         "hidden": false, 
         "id": 310, 
-        "offset": 32, 
+        "offset": 2.77102,
         "save": false, 
-        "scale": 0.219727, 
+        "scale": 0.201579,
         "tag": "STACK_CURRENT_TEMP", 
         "type": "STACK_TEMP_READ", 
         "value": "0"
@@ -508,12 +508,12 @@
         "data_index": 42, 
         "hidden": false, 
         "id": 350, 
-        "offset": 5.76577, 
+        "offset": -30.3578,
         "save": true, 
-        "scale": 4.46847, 
+        "scale": 4.91743,
         "tag": "SYRUP_TEMP_SETPOINT_WRITE", 
         "type": "SYRUP_TEMP_WRITE", 
-        "value": "257"
+        "value": "261"
     }, 
     {
         "alias": "SYRUP_TEMP_AUTO_MODE", 
@@ -556,9 +556,9 @@
         "data_index": 46, 
         "hidden": false, 
         "id": 360, 
-        "offset": -1.29032, 
+        "offset": 6.17351,
         "save": false, 
-        "scale": 0.22379, 
+        "scale": 0.203358,
         "tag": "SYRUP_CURRENT_TEMP", 
         "type": "SYRUP_TEMP_READ", 
         "value": "0"
@@ -1053,7 +1053,7 @@
         "scale": 1, 
         "tag": "SYS_COLOR_HISTORY", 
         "type": "SYS", 
-        "value": "#000000ff"
+        "value": "#36ff19ff"
     }, 
     {
         "alias": "SYS_DEBUG_MODE", 
