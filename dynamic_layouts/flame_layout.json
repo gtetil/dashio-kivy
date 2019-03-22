@@ -22,6 +22,7 @@
         ], 
         "var_alias": "ROW 17", 
         "var_tag": "ROW_17", 
+        "var_value": "0", 
         "widget": "Indicator"
     }, 
     "1": {
@@ -47,6 +48,7 @@
         ], 
         "var_alias": "ROW 18", 
         "var_tag": "ROW_18", 
+        "var_value": "0", 
         "widget": "Indicator"
     }, 
     "10": {
@@ -72,6 +74,7 @@
         ], 
         "var_alias": "ROW 9", 
         "var_tag": "ROW_9", 
+        "var_value": "0", 
         "widget": "Indicator"
     }, 
     "11": {
@@ -97,6 +100,7 @@
         ], 
         "var_alias": "ROW 10", 
         "var_tag": "ROW_10", 
+        "var_value": "0", 
         "widget": "Indicator"
     }, 
     "12": {
@@ -122,6 +126,7 @@
         ], 
         "var_alias": "ROW 11", 
         "var_tag": "ROW_11", 
+        "var_value": "0", 
         "widget": "Indicator"
     }, 
     "13": {
@@ -147,6 +152,7 @@
         ], 
         "var_alias": "ROW 12", 
         "var_tag": "ROW_12", 
+        "var_value": "0", 
         "widget": "Indicator"
     }, 
     "14": {
@@ -172,6 +178,7 @@
         ], 
         "var_alias": "ROW 13", 
         "var_tag": "ROW_13", 
+        "var_value": "0", 
         "widget": "Indicator"
     }, 
     "15": {
@@ -197,6 +204,7 @@
         ], 
         "var_alias": "ROW 14", 
         "var_tag": "ROW_14", 
+        "var_value": "0", 
         "widget": "Indicator"
     }, 
     "16": {
@@ -222,6 +230,7 @@
         ], 
         "var_alias": "ROW 15", 
         "var_tag": "ROW_15", 
+        "var_value": "0", 
         "widget": "Indicator"
     }, 
     "17": {
@@ -247,6 +256,7 @@
         ], 
         "var_alias": "ROW 16", 
         "var_tag": "ROW_16", 
+        "var_value": "0", 
         "widget": "Indicator"
     }, 
     "2": {
@@ -272,6 +282,7 @@
         ], 
         "var_alias": "ROW 19", 
         "var_tag": "ROW_19", 
+        "var_value": "0", 
         "widget": "Indicator"
     }, 
     "21": {
@@ -297,6 +308,7 @@
         ], 
         "var_alias": "ROW 2", 
         "var_tag": "ROW_2", 
+        "var_value": "0", 
         "widget": "Toggle Button"
     }, 
     "22": {
@@ -322,6 +334,7 @@
         ], 
         "var_alias": "ROW 3", 
         "var_tag": "ROW_3", 
+        "var_value": "0", 
         "widget": "Indicator"
     }, 
     "23": {
@@ -347,6 +360,7 @@
         ], 
         "var_alias": "ROW 4", 
         "var_tag": "ROW_4", 
+        "var_value": "0", 
         "widget": "Indicator"
     }, 
     "25": {
@@ -372,6 +386,7 @@
         ], 
         "var_alias": "ROW 6", 
         "var_tag": "ROW_6", 
+        "var_value": "0", 
         "widget": "Indicator"
     }, 
     "26": {
@@ -397,6 +412,7 @@
         ], 
         "var_alias": "ROW 7", 
         "var_tag": "ROW_7", 
+        "var_value": "0", 
         "widget": "Indicator"
     }, 
     "27": {
@@ -422,6 +438,7 @@
         ], 
         "var_alias": "ROW 8", 
         "var_tag": "ROW_8", 
+        "var_value": "0", 
         "widget": "Indicator"
     }, 
     "28": {
@@ -446,6 +463,7 @@
         ], 
         "var_alias": "SYS_TIME", 
         "var_tag": "SYS_TIME", 
+        "var_value": "0", 
         "widget": "Label"
     }, 
     "29": {
@@ -470,6 +488,7 @@
         ], 
         "var_alias": "SYS_TIME", 
         "var_tag": "SYS_TIME", 
+        "var_value": "0", 
         "widget": "Label"
     }, 
     "3": {
@@ -495,6 +514,7 @@
         ], 
         "var_alias": "ROW 20", 
         "var_tag": "ROW_20", 
+        "var_value": "0", 
         "widget": "Indicator"
     }, 
     "30": {
@@ -519,6 +539,7 @@
         ], 
         "var_alias": "SYS_DIM_BACKLIGHT", 
         "var_tag": "SYS_DIM_BACKLIGHT", 
+        "var_value": "0", 
         "widget": "Toggle Button"
     }, 
     "31": {
@@ -543,6 +564,7 @@
         ], 
         "var_alias": "ROW 5", 
         "var_tag": "ROW_5", 
+        "var_value": "0", 
         "widget": "Indicator"
     }, 
     "33": {
@@ -568,6 +590,7 @@
         ], 
         "var_alias": "ROW 1", 
         "var_tag": "ROW_1", 
+        "var_value": "0", 
         "widget": "Toggle Button"
     }, 
     "34": {
@@ -592,6 +615,7 @@
         ], 
         "var_alias": "", 
         "var_tag": "", 
+        "var_value": "0", 
         "widget": "Image"
     }, 
     "4": {
@@ -617,6 +641,7 @@
         ], 
         "var_alias": "ROW 21", 
         "var_tag": "ROW_21", 
+        "var_value": "0", 
         "widget": "Indicator"
     }, 
     "5": {
@@ -642,6 +667,7 @@
         ], 
         "var_alias": "ROW 22", 
         "var_tag": "ROW_22", 
+        "var_value": "0", 
         "widget": "Indicator"
     }, 
     "6": {
@@ -667,6 +693,7 @@
         ], 
         "var_alias": "ROW 23", 
         "var_tag": "ROW_23", 
+        "var_value": "0", 
         "widget": "Indicator"
     }, 
     "7": {
@@ -692,6 +719,7 @@
         ], 
         "var_alias": "ROW 24", 
         "var_tag": "ROW_24", 
+        "var_value": "0", 
         "widget": "Indicator"
     }
 }

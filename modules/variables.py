@@ -175,7 +175,7 @@ class Variables(Widget):
                 index = i + app_settings.stack_read_data_start
                 scale = self.variables_json[index]['scale']
                 offset = self.variables_json[index]['offset']
-                value = str(int(float(self.stack_temp_can_read_data[i]) * scale + offset))
+                value = str(float(self.stack_temp_can_read_data[i]) * scale + offset)
                 self.variable_data[index] = value
 
         if self.syrup_temp:
@@ -183,7 +183,7 @@ class Variables(Widget):
                 index = i + app_settings.syrup_read_data_start
                 scale = self.variables_json[index]['scale']
                 offset = self.variables_json[index]['offset']
-                value = str(int(float(self.syrup_temp_can_read_data[i]) * scale + offset))
+                value = str(float(self.syrup_temp_can_read_data[i]) * scale + offset)
                 self.variable_data[index] = value
 
         if (self.variable_data != self.old_variable_data) or self.refresh_data:
@@ -287,7 +287,7 @@ class Variables(Widget):
             if channel_type == 'STACK_TEMP_WRITE':
                 self.can_com.can_write(index - app_settings.stack_write_data_start, int(value), channel_type, scale, offset)
             if channel_type == 'SYRUP_TEMP_WRITE':
-                self.can_com.can_write(index - app_settings.syrup_write_data_start, int(value), channel_type, scale, offset)
+                self.can_com.can_write(index - app_settings.syrup_write_data_start, float(value), channel_type, scale, offset)
             if channel_type == 'SYS':
                 self.sys_cmd(tag, value)
         except Exception as e:

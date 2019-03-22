@@ -619,7 +619,7 @@
             radius: (dp(0),)
 
 <DynImage>:
-    source: 'pics/ti_auto_long.png'
+    source: 'pics/nick_jamima.png'
     allow_stretch: True
     keep_ratio: False
 
@@ -757,6 +757,43 @@
                 font_size: '15sp'
 
 <-SettingAction>:
+    app_ref: app
+    size_hint: .25, None
+    height: labellayout.texture_size[1] + dp(20)
+    content: content
+    canvas:
+        Color:
+            rgba: 47 / 255., 167 / 255., 212 / 255., self.selected_alpha
+        Rectangle:
+            pos: self.x, self.y + 1
+            size: self.size
+        Color:
+            rgb: .2, .2, .2
+        Rectangle:
+            pos: self.x, self.y - 2
+            size: self.width, 1
+
+    BoxLayout:
+        pos: root.pos
+
+        Label:
+            size_hint_x: .66
+            id: labellayout
+            markup: True
+            text: root.title or ''
+            font_size: '15sp'
+            text_size: self.width - 32, None
+
+        BoxLayout:
+            id: content
+            size_hint_x: .33
+
+            Label:
+                #text: root.value or ''
+                pos: root.pos
+                font_size: '15sp'
+
+<-SettingIPAddress>:
     app_ref: app
     size_hint: .25, None
     height: labellayout.texture_size[1] + dp(20)

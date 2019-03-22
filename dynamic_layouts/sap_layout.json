@@ -29,15 +29,15 @@
         "border_color": "#ffffffff", 
         "color_off": "#00000000", 
         "color_off_text": "#000000ff", 
-        "color_on": "#ffffffff", 
-        "color_on_text": "#000000ff", 
+        "color_on": "#ff1919ff", 
+        "color_on_text": "#ffffffff", 
         "enable": true, 
         "graphic_type": "Text", 
         "icon_off": "no-selection", 
         "icon_on": "no-selection", 
         "invert": false, 
         "off_text": "", 
-        "on_text": "%d", 
+        "on_text": "%.0f", 
         "pos": [
             250.0, 
             290.0
@@ -105,21 +105,21 @@
         "border_color": "#ffffffff", 
         "color_off": "#00000000", 
         "color_off_text": "#000000ff", 
-        "color_on": "#ffffffff", 
-        "color_on_text": "#000000ff", 
+        "color_on": "#4c1c00ff", 
+        "color_on_text": "#ffffffff", 
         "enable": true, 
         "graphic_type": "Text", 
         "icon_off": "no-selection", 
         "icon_on": "no-selection", 
         "invert": false, 
         "off_text": "", 
-        "on_text": "%d", 
+        "on_text": "%.1f", 
         "pos": [
-            450.0, 
+            440.0, 
             290.0
         ], 
         "size": [
-            140, 
+            160, 
             110
         ], 
         "var_alias": "SYRUP_CURRENT_TEMP", 
@@ -358,7 +358,7 @@
         "color_off": "#00000000", 
         "color_off_text": "#000000ff", 
         "color_on": "#00000000", 
-        "color_on_text": "#000000ff", 
+        "color_on_text": "#ff1919ff", 
         "graphic_type": "text", 
         "icon_off": "no-selection", 
         "icon_on": "no-selection", 
@@ -383,7 +383,7 @@
         "color_off": "#00000000", 
         "color_off_text": "#000000ff", 
         "color_on": "#00000000", 
-        "color_on_text": "#000000ff", 
+        "color_on_text": "#4c1c00ff", 
         "graphic_type": "text", 
         "icon_off": "no-selection", 
         "icon_on": "no-selection", 
@@ -402,5 +402,30 @@
         "var_tag": "", 
         "var_value": "0", 
         "widget": "Label"
+    }, 
+    "26": {
+        "border_color": "#00000000", 
+        "color_off": "#ffffffff", 
+        "color_off_text": "#ffffffff", 
+        "color_on": "#ffffffff", 
+        "color_on_text": "#ffffffff", 
+        "graphic_type": "Text", 
+        "icon_off": "no-selection", 
+        "icon_on": "no-selection", 
+        "invert": false, 
+        "off_text": "", 
+        "on_text": "", 
+        "pos": [
+            10.0, 
+            10.0
+        ], 
+        "size": [
+            160, 
+            160
+        ], 
+        "var_alias": "", 
+        "var_tag": "", 
+        "var_value": "0", 
+        "widget": "Image"
     }
 }

@@ -3,11 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="27b3c643-4da9-4ab8-8fac-19f30f795262" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dynamic_layouts/flame_layout.json" afterPath="$PROJECT_DIR$/dynamic_layouts/flame_layout.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dynamic_layouts/sap_layout.json" afterPath="$PROJECT_DIR$/dynamic_layouts/sap_layout.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/engines/can_com.py" afterPath="$PROJECT_DIR$/engines/can_com.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.ini" afterPath="$PROJECT_DIR$/main.ini" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.kv" afterPath="$PROJECT_DIR$/main.kv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/dynamic_layout.py" afterPath="$PROJECT_DIR$/modules/dynamic_layout.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/variables.py" afterPath="$PROJECT_DIR$/modules/variables.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings/app_settings.py" afterPath="$PROJECT_DIR$/settings/app_settings.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings/settings_popups.py" afterPath="$PROJECT_DIR$/settings/settings_popups.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings/variables.json" afterPath="$PROJECT_DIR$/settings/variables.json" />
     </list>
     <list id="1e95b302-9845-4a63-bdc7-46bebc48f801" name="Revert: " comment="" />
@@ -33,8 +38,18 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="645">
-              <caret line="98" column="37" lean-forward="false" selection-start-line="98" selection-start-column="37" selection-end-line="98" selection-end-column="37" />
+            <state relative-caret-position="-612">
+              <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="settings_popups.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/settings/settings_popups.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="466">
+              <caret line="456" column="37" lean-forward="true" selection-start-line="456" selection-start-column="37" selection-end-line="456" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -43,42 +58,8 @@
       <file leaf-file-name="main.kv" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.kv">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="305">
-              <caret line="645" column="17" lean-forward="false" selection-start-line="645" selection-start-column="17" selection-end-line="645" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dynamic_layout.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/dynamic_layout.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="344">
-              <caret line="574" column="12" lean-forward="false" selection-start-line="574" selection-start-column="12" selection-end-line="574" selection-end-column="12" />
-              <folding>
-                <element signature="e#0#34#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="variables.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/variables.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="285" column="16" lean-forward="false" selection-start-line="285" selection-start-column="16" selection-end-line="285" selection-end-column="16" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="variables.json" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/settings/variables.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="364">
-              <caret line="486" column="26" lean-forward="true" selection-start-line="486" selection-start-column="26" selection-end-line="486" selection-end-column="26" />
+            <state relative-caret-position="407">
+              <caret line="816" column="28" lean-forward="true" selection-start-line="816" selection-start-column="28" selection-end-line="816" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -87,9 +68,56 @@
       <file leaf-file-name="app_settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/settings/app_settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="21" column="27" lean-forward="false" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
+            <state relative-caret-position="550">
+              <caret line="436" column="26" lean-forward="false" selection-start-line="436" selection-start-column="26" selection-end-line="436" selection-end-column="26" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.ini" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main.ini">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1207">
+              <caret line="122" column="17" lean-forward="false" selection-start-line="122" selection-start-column="17" selection-end-line="122" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dynamic_layout.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modules/dynamic_layout.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="616">
+              <caret line="537" column="31" lean-forward="false" selection-start-line="537" selection-start-column="31" selection-end-line="537" selection-end-column="31" />
+              <folding>
+                <element signature="e#0#34#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="variables.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/modules/variables.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="573">
+              <caret line="283" column="57" lean-forward="false" selection-start-line="283" selection-start-column="57" selection-end-line="283" selection-end-column="57" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="variables.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/settings/variables.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="160">
+              <caret line="938" column="26" lean-forward="false" selection-start-line="938" selection-start-column="18" selection-end-line="938" selection-end-column="26" />
+              <folding>
+                <marker date="1553194911152" expanded="true" signature="10690:10838" ph="{&quot;id&quot;: 350...}" />
+                <marker date="1553194911152" expanded="true" signature="12091:12192" ph="{&quot;id&quot;: 360...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -97,8 +125,8 @@
       <file leaf-file-name="can_com.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/engines/can_com.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="93" column="30" lean-forward="true" selection-start-line="93" selection-start-column="30" selection-end-line="93" selection-end-column="30" />
+            <state relative-caret-position="610">
+              <caret line="97" column="69" lean-forward="false" selection-start-line="97" selection-start-column="69" selection-end-line="97" selection-end-column="69" />
               <folding>
                 <element signature="e#15#39#0" expanded="true" />
               </folding>
@@ -109,12 +137,11 @@
       <file leaf-file-name="sap_layout.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dynamic_layouts/sap_layout.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="17" lean-forward="true" selection-start-line="18" selection-start-column="17" selection-end-line="18" selection-end-column="17" />
+            <state relative-caret-position="119">
+              <caret line="19" column="17" lean-forward="false" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="17" />
               <folding>
-                <marker date="1550593804148" expanded="true" signature="0:10747" ph="{...}" />
-                <marker date="1550593804148" expanded="true" signature="4048:4703" ph="{&quot;border_color&quot;: &quot;##00000000&quot;...}" />
-                <marker date="1550593804148" expanded="true" signature="10738:10745" ph="{&quot;border_color&quot;: &quot;##00000000&quot;...}" />
+                <marker date="1553194910829" expanded="true" signature="10137:11368" ph="{&quot;border_color&quot;: &quot;##00000000&quot;...}" />
+                <marker date="1553194910829" expanded="true" signature="10742:11368" ph="{&quot;border_color&quot;: &quot;##00000000&quot;...}" />
               </folding>
             </state>
           </provider>
@@ -131,7 +158,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>color_select</find>
       <find>color_se</find>
       <find>midd</find>
       <find>middl</find>
@@ -161,6 +187,7 @@
       <find>},</find>
       <find>{</find>
       <find>&quot;scale&quot;: 0,</find>
+      <find>SYS_SHUT</find>
     </findStrings>
     <replaceStrings>
       <replace>_4</replace>
@@ -224,7 +251,6 @@
         <option value="$PROJECT_DIR$/color_wheel.py" />
         <option value="$PROJECT_DIR$/modules/test.py" />
         <option value="$PROJECT_DIR$/modules/data_viewer.py" />
-        <option value="$PROJECT_DIR$/settings/settings_popups.py" />
         <option value="$PROJECT_DIR$/button_test.py" />
         <option value="$PROJECT_DIR$/md_test.py" />
         <option value="$PROJECT_DIR$/round_button.py" />
@@ -237,15 +263,16 @@
         <option value="$PROJECT_DIR$/modules/image_picker.py" />
         <option value="$PROJECT_DIR$/modules/icon_picker.py" />
         <option value="$PROJECT_DIR$/modules/color_picker.py" />
-        <option value="$PROJECT_DIR$/main.py" />
-        <option value="$PROJECT_DIR$/main.ini" />
-        <option value="$PROJECT_DIR$/dynamic_layouts/sap_layout.json" />
-        <option value="$PROJECT_DIR$/settings/app_settings.py" />
-        <option value="$PROJECT_DIR$/main.kv" />
         <option value="$PROJECT_DIR$/modules/dynamic_layout.py" />
+        <option value="$PROJECT_DIR$/dynamic_layouts/sap_layout.json" />
         <option value="$PROJECT_DIR$/modules/variables.py" />
         <option value="$PROJECT_DIR$/engines/can_com.py" />
+        <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/main.ini" />
+        <option value="$PROJECT_DIR$/settings/app_settings.py" />
+        <option value="$PROJECT_DIR$/main.kv" />
         <option value="$PROJECT_DIR$/settings/variables.json" />
+        <option value="$PROJECT_DIR$/settings/settings_popups.py" />
       </list>
     </option>
   </component>
@@ -270,7 +297,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -408,6 +434,7 @@
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -714,13 +741,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1484573106753</updated>
-    </task>
-    <task id="LOCAL-00022" summary="- integrated scatter widgets into main application, and debugged.">
-      <created>1500482341533</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1500482341533</updated>
     </task>
     <task id="LOCAL-00023" summary="- working out a few variable bugs related to alias addition">
       <created>1500492780888</created>
@@ -1058,7 +1078,14 @@
       <option name="project" value="LOCAL" />
       <updated>1548780216498</updated>
     </task>
-    <option name="localTasksCounter" value="71" />
+    <task id="LOCAL-00071" summary="- More debug of Stack and Syrup code.  Ready to try out on actual system.">
+      <created>1550683492918</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1550683492920</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1142,7 +1169,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="- Added popup to adjust date/time." />
     <MESSAGE value="- Added flame alarm." />
     <MESSAGE value="- Fixed some bugs with the time/date popup." />
     <MESSAGE value="- Buttons now use a canvas for future flexibility.&#10;- Button colors can now be changed.&#10;- Screen item edit mode is now a little more obvious and easier to exit from." />
@@ -1167,7 +1193,8 @@
     <MESSAGE value="- Finished icons, and started on image picker." />
     <MESSAGE value="- Started created Numeric Input widget.&#10;- Added functionality for Stack Temp and Syrup Temp.&#10;- Fixed a few bugs." />
     <MESSAGE value="- Finished debug of Numeric Input and Stack and Syrup code." />
-    <option name="LAST_COMMIT_MESSAGE" value="- Finished debug of Numeric Input and Stack and Syrup code." />
+    <MESSAGE value="- More debug of Stack and Syrup code.  Ready to try out on actual system." />
+    <option name="LAST_COMMIT_MESSAGE" value="- More debug of Stack and Syrup code.  Ready to try out on actual system." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1401,39 +1428,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/settings/settings_popups.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="618">
-          <caret line="434" column="4" lean-forward="false" selection-start-line="434" selection-start-column="4" selection-end-line="434" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modules/screens.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="561">
           <caret line="44" column="0" lean-forward="false" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/settings/app_settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="27" lean-forward="false" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dynamic_layouts/sap_layout.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="17" lean-forward="true" selection-start-line="18" selection-start-column="17" selection-end-line="18" selection-end-column="17" />
-          <folding>
-            <marker date="1550593804148" expanded="true" signature="0:10747" ph="{...}" />
-            <marker date="1550593804148" expanded="true" signature="4048:4703" ph="{&quot;border_color&quot;: &quot;##00000000&quot;...}" />
-            <marker date="1550593804148" expanded="true" signature="10738:10745" ph="{&quot;border_color&quot;: &quot;##00000000&quot;...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1441,7 +1439,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="236">
           <caret line="75" column="0" lean-forward="false" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1449,7 +1446,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1457,7 +1453,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="338">
           <caret line="74" column="0" lean-forward="false" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1465,69 +1460,98 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="23">
           <caret line="1352" column="0" lean-forward="false" selection-start-line="1352" selection-start-column="0" selection-end-line="1352" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
+    <entry file="file://$PROJECT_DIR$/dynamic_layouts/sap_layout.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
-          <caret line="98" column="37" lean-forward="false" selection-start-line="98" selection-start-column="37" selection-end-line="98" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.kv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="645" column="17" lean-forward="false" selection-start-line="645" selection-start-column="17" selection-end-line="645" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/variables.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="285" column="16" lean-forward="false" selection-start-line="285" selection-start-column="16" selection-end-line="285" selection-end-column="16" />
+        <state relative-caret-position="119">
+          <caret line="19" column="17" lean-forward="false" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="17" />
           <folding>
-            <element signature="e#0#11#0" expanded="true" />
+            <marker date="1553194910829" expanded="true" signature="10137:11368" ph="{&quot;border_color&quot;: &quot;##00000000&quot;...}" />
+            <marker date="1553194910829" expanded="true" signature="10742:11368" ph="{&quot;border_color&quot;: &quot;##00000000&quot;...}" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/dynamic_layout.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="574" column="12" lean-forward="false" selection-start-line="574" selection-start-column="12" selection-end-line="574" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1972">
-          <caret line="116" column="11" lean-forward="true" selection-start-line="116" selection-start-column="11" selection-end-line="116" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/engines/can_com.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="93" column="30" lean-forward="true" selection-start-line="93" selection-start-column="30" selection-end-line="93" selection-end-column="30" />
+        <state relative-caret-position="610">
+          <caret line="97" column="69" lean-forward="false" selection-start-line="97" selection-start-column="69" selection-end-line="97" selection-end-column="69" />
           <folding>
             <element signature="e#15#39#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/main.kv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="407">
+          <caret line="816" column="28" lean-forward="true" selection-start-line="816" selection-start-column="28" selection-end-line="816" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/settings/variables.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="486" column="26" lean-forward="true" selection-start-line="486" selection-start-column="26" selection-end-line="486" selection-end-column="26" />
+        <state relative-caret-position="160">
+          <caret line="938" column="26" lean-forward="false" selection-start-line="938" selection-start-column="18" selection-end-line="938" selection-end-column="26" />
+          <folding>
+            <marker date="1553194911152" expanded="true" signature="10690:10838" ph="{&quot;id&quot;: 350...}" />
+            <marker date="1553194911152" expanded="true" signature="12091:12192" ph="{&quot;id&quot;: 360...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/settings/app_settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="436" column="26" lean-forward="false" selection-start-line="436" selection-start-column="26" selection-end-line="436" selection-end-column="26" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1207">
+          <caret line="122" column="17" lean-forward="false" selection-start-line="122" selection-start-column="17" selection-end-line="122" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-612">
+          <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/settings/settings_popups.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="466">
+          <caret line="456" column="37" lean-forward="true" selection-start-line="456" selection-start-column="37" selection-end-line="456" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/dynamic_layout.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="616">
+          <caret line="537" column="31" lean-forward="false" selection-start-line="537" selection-start-column="31" selection-end-line="537" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/variables.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="573">
+          <caret line="283" column="57" lean-forward="false" selection-start-line="283" selection-start-column="57" selection-end-line="283" selection-end-column="57" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

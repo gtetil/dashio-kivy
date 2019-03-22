@@ -535,8 +535,10 @@ class DynLabel(DynItem, Label):
     def on_data_change(self, instance, data):
         value = self.app_ref.variables.get(self.var_alias)
         self.text = self.button_on_text
-        if self.text == '%d':
-            self.text = self.text.replace('%d', value)
+        if self.text == '%.0f':
+            self.text = self.text.replace('%.0f', '%.0f' % float(value))
+        elif self.text == '%.1f':
+            self.text = self.text.replace('%.1f', '%.1f' % float(value))
         else:
             if self.var_alias == 'SYS_TIME':
                 self.text = datetime.fromtimestamp(float(value)).strftime(self.text)

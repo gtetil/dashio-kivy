@@ -35,7 +35,7 @@ class CANcom(Widget):
         self.syrup_temp_can_read_data = [0] * app_settings.syrup_read_data_len
         self.syrup_temp_write_can_data = [0] * 8
         #self.stack_temp_can_read_data[0] = 4000  #debug simulation
-        #self.syrup_temp_can_read_data[0] = 4000  #debug simulation
+        #self.syrup_temp_can_read_data[0] = 1123  #debug simulation
 
     def can_read(self, dt):
         try:

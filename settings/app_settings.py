@@ -430,6 +430,11 @@ developer_json = json.dumps([
      'desc': '',
      'section': 'Developer',
      'key': 'SYS_SHUTDOWN'},
+    {'type': 'ipaddress',
+     'title': 'Get IP Address',
+     'desc': '',
+     'section': 'Developer',
+     'key': 'SYS_IPADDRESS'},
 
     {'type': 'title',
      'title': 'Accessory'},

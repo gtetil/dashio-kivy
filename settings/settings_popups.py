@@ -440,3 +440,43 @@ class SettingViewer(SettingString):
         self.popup = None
         self.data_clock.cancel()
         self.content.remove_widget(self.data_viewer)
+
+class SettingIPAddress(SettingString):
+    app_ref = ObjectProperty(None)
+
+    def _create_popup(self, instance):
+        # create popup layout
+        content = BoxLayout(orientation='vertical', spacing='5dp')
+        popup_width = min(0.95 * Window.width, dp(500))
+        self.popup = popup = Popup(
+            title=self.title, content=content, size_hint=(None, None),
+            size=(popup_width, '250dp'), pos_hint={'middle': 1, 'top': 1})
+        # create the textinput used for numeric input
+        f = os.popen('ifconfig eth0 | grep "inet\ addr" | cut -d: -f2 | cut -d" " -f1')
+        ip_address = f.read()
+        #ip_address = '10.30.189.255'
+        self.label = label = Label(
+            text='LAN:  ' + ip_address)
+
+        f = os.popen('ifconfig wlan0 | grep "inet\ addr" | cut -d: -f2 | cut -d" " -f1')
+        ip_address = f.read()
+        #ip_address = '10.30.189.255'
+        self.label2 = label2 = Label(
+            text='WLAN:  ' + ip_address)
+
+        # construct the content, widget are used as a spacer
+        content.add_widget(Widget())
+        content.add_widget(label)
+        content.add_widget(label2)
+        content.add_widget(Widget())
+        content.add_widget(SettingSpacer())
+
+        # 2 buttons are created for accept or cancel the current value
+        btnlayout = BoxLayout(size_hint_y=None, height='50dp', spacing='5dp')
+        btn = Button(text='Close')
+        btn.bind(on_release=self._dismiss)
+        btnlayout.add_widget(btn)
+        content.add_widget(btnlayout)
+
+        # all done, open the popup !
+        popup.open()
