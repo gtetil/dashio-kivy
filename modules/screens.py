@@ -84,7 +84,7 @@ class ScreenManagement(ScreenManager):
             print(e)
 
     def on_reverse_input(self, instance, state):
-        print('rev state, ' + str(state))
+        print(('rev state, ' + str(state)))
         if state == 1:
             self.current = "camera_screen"
         else:

@@ -236,7 +236,7 @@ class MyColorWheel(ColorWheel):
     def __init__(self, **kwargs):
         pdv = self._piece_divisions
         self.sv_s = [(float(x) / pdv, 1) for x in range(pdv)] + [
-            (1, float(y) / pdv) for y in reversed(range(pdv))]
+            (1, float(y) / pdv) for y in reversed(list(range(pdv)))]
         super(MyColorWheel, self).__init__(**kwargs)
 
     def on__origin(self, instance, value):
@@ -462,7 +462,7 @@ class _ColorArc(InstructionGroup):
         v += (end_point_inner * 2)
         v += (end_point_outer * 2)
 
-        return Mesh(vertices=v, indices=range(int(len(v) / 4)),
+        return Mesh(vertices=v, indices=list(range(int(len(v) / 4))),
                     mode='triangle_strip')
 
     def change_color(self, color=None, color_delta=None, sv=None, a=None):

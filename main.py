@@ -1,5 +1,5 @@
 import kivy
-kivy.require('1.9.1') # replace with your current kivy version !
+kivy.require('1.11.0') # replace with your current kivy version !
 
 from kivy.config import Config
 Config.set('kivy', 'keyboard_mode', 'systemanddock')
@@ -48,6 +48,7 @@ class MainApp(App):
         self.get_aliases()
         self.get_scripts()
         self.get_saved_vars()
+        self.variables.save_variables()
         self.screen_man.current = 'main_screen' #fixes issue where screen is blank when arduino can't initially connect
         return self.slide_layout
 
@@ -123,13 +124,13 @@ class MainApp(App):
             script = script.replace(']', '")')
             script = script.replace('set([', 'self.set_by_alias(("')
             self.scripts.append(script)
-            print script
+            print(script)
 
     def get_saved_vars(self):
         for (key, value) in self.config.items('Settings'):
-            self.variables.set_by_alias(key.upper(), value)
+            self.variables.set_by_alias(key.upper(), value, defer_save=True)  # defer save by variable, save will happen later
         for (key, value) in self.config.items('Accessory'):
-            self.variables.set_by_alias(key.upper(), value)
+            self.variables.set_by_alias(key.upper(), value, defer_save=True)
 
     #get aliases from config file, right them to variables.json, update lists, then rebuild dynamic layout in case there were any alias changes that would effect a screen item
     def get_aliases(self):
@@ -151,7 +152,6 @@ class MainApp(App):
         for i in range(len(self.config_aliases)):
             self.variables.variables_json[i]['alias'] = self.config_aliases[i]
         self.variables.set_var_lists()
-        self.variables.save_variables()
 
     def close_settings(self, settings=None):
         self.get_aliases()
@@ -162,7 +162,7 @@ class MainApp(App):
         try:
             GPIO.cleanup()
         except Exception as e:
-            print e
+            print(e)
         exit()
 
 

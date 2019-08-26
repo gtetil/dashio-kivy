@@ -13,6 +13,7 @@ from kivy.graphics import Color, Rectangle
 from kivy.utils import get_color_from_hex, get_hex_from_color
 from kivy.uix.image import Image
 from copy import deepcopy
+import copy
 from settings.icon_definitions import md_icons
 
 import settings.app_settings as app_settings
@@ -25,9 +26,12 @@ from datetime import datetime
 import re
 from operator import xor
 
+widget_font_size = '18sp'
+
 class DynamicLayout(Widget):
     app_ref = ObjectProperty(None)
     modify_mode = BooleanProperty(False)
+    widget_font_size = widget_font_size
     layout_file = ''
     dyn_widget_dict = {}
     scatter_dict = {}
@@ -43,7 +47,7 @@ class DynamicLayout(Widget):
         self.reconcile_layout()  #in case properties that didn't exist need to be saved
 
     def reconcile_layout(self):
-        for id, dyn_widget in self.dyn_widget_dict.items():
+        for id, dyn_widget in list(self.dyn_widget_dict.items()):
             self.update_widget(id)
             self.edit_widget_json(id)
         self.save_layout()
@@ -52,12 +56,13 @@ class DynamicLayout(Widget):
         widget = self.dyn_layout_json[id]['widget']
         if widget in ['Toggle Button', 'Indicator']:
             dyn_widget = DynToggleButton(text='',
-                                         id=str(id),
+                                         widget_id=str(id),
                                          button_on_text=self.dyn_layout_json[id]['on_text'],
                                          button_off_text=self.dyn_layout_json[id]['off_text'],
                                          var_tag=self.dyn_layout_json[id]['var_tag'],
                                          var_alias=self.dyn_layout_json[id]['var_alias'],
                                          widget=widget,
+                                         widget_font_size=self.dyn_layout_json[id].setdefault('widget_font_size', widget_font_size),
                                          invert=self.dyn_layout_json[id]['invert'],
                                          color_on=self.dyn_layout_json[id].setdefault('color_on', '#8fff7fff'),
                                          color_off=self.dyn_layout_json[id].setdefault('color_off', '#ffffffff'),
@@ -70,12 +75,13 @@ class DynamicLayout(Widget):
                                          var_value=self.dyn_layout_json[id].setdefault('var_value', '0'))
         elif widget == 'Button':
             dyn_widget = DynButton(text='',
-                                         id=str(id),
+                                         widget_id=str(id),
                                          button_on_text=self.dyn_layout_json[id]['on_text'],
                                          button_off_text=self.dyn_layout_json[id]['off_text'],
                                          var_tag=self.dyn_layout_json[id]['var_tag'],
                                          var_alias=self.dyn_layout_json[id]['var_alias'],
                                          widget=widget,
+                                         widget_font_size=self.dyn_layout_json[id].setdefault('widget_font_size', widget_font_size),
                                          invert=self.dyn_layout_json[id]['invert'],
                                          color_on=self.dyn_layout_json[id].setdefault('color_on', '#8fff7fff'),
                                          color_off=self.dyn_layout_json[id].setdefault('color_off', '#ffffffff'),
@@ -88,12 +94,13 @@ class DynamicLayout(Widget):
                                          var_value=self.dyn_layout_json[id].setdefault('var_value', '0'))
         elif widget == 'Label':
             dyn_widget = DynLabel(text='',
-                                         id=str(id),
+                                         widget_id=str(id),
                                          button_on_text=self.dyn_layout_json[id]['on_text'],
                                          button_off_text=self.dyn_layout_json[id]['off_text'],
                                          var_tag=self.dyn_layout_json[id]['var_tag'],
                                          var_alias=self.dyn_layout_json[id]['var_alias'],
                                          widget=widget,
+                                         widget_font_size=self.dyn_layout_json[id].setdefault('widget_font_size', widget_font_size),
                                          invert=self.dyn_layout_json[id]['invert'],
                                          color_on=self.dyn_layout_json[id].setdefault('color_on', '#ffffffff'),
                                          color_off=self.dyn_layout_json[id].setdefault('color_off', '#ffffffff'),
@@ -103,15 +110,16 @@ class DynamicLayout(Widget):
                                          icon_on=self.dyn_layout_json[id].setdefault('icon_on', 'no-selection'),
                                          icon_off=self.dyn_layout_json[id].setdefault('icon_off', 'no-selection'),
                                          graphic_type=self.dyn_layout_json[id].setdefault('graphic_type', 'Text'),
-                                        var_value=self.dyn_layout_json[id].setdefault('var_value', '0'))
+                                         var_value=self.dyn_layout_json[id].setdefault('var_value', '0'))
         elif widget == 'Numeric Input':
             dyn_widget = DynNumericInput(text='',
-                                         id=str(id),
+                                         widget_id=str(id),
                                          button_on_text=self.dyn_layout_json[id]['on_text'],
                                          button_off_text=self.dyn_layout_json[id]['off_text'],
                                          var_tag=self.dyn_layout_json[id]['var_tag'],
                                          var_alias=self.dyn_layout_json[id]['var_alias'],
                                          widget=widget,
+                                         widget_font_size=self.dyn_layout_json[id].setdefault('widget_font_size', widget_font_size),
                                          invert=self.dyn_layout_json[id]['invert'],
                                          color_on=self.dyn_layout_json[id].setdefault('color_on', '#ffffffff'),
                                          color_off=self.dyn_layout_json[id].setdefault('color_off', '#ffffffff'),
@@ -124,12 +132,13 @@ class DynamicLayout(Widget):
                                          var_value=self.dyn_layout_json[id].setdefault('var_value', '0'))
         else:
             dyn_widget = DynImage(text='',
-                                         id=str(id),
+                                         widget_id=str(id),
                                          button_on_text=self.dyn_layout_json[id]['on_text'],
                                          button_off_text=self.dyn_layout_json[id]['off_text'],
                                          var_tag=self.dyn_layout_json[id]['var_tag'],
                                          var_alias=self.dyn_layout_json[id]['var_alias'],
                                          widget=widget,
+                                         widget_font_size=self.dyn_layout_json[id].setdefault('widget_font_size', widget_font_size),
                                          invert=self.dyn_layout_json[id]['invert'],
                                          color_on=self.dyn_layout_json[id].setdefault('color_on', '#ffffffff'),
                                          color_off=self.dyn_layout_json[id].setdefault('color_off', '#ffffffff'),
@@ -140,7 +149,7 @@ class DynamicLayout(Widget):
                                          icon_off=self.dyn_layout_json[id].setdefault('icon_off', 'no-selection'),
                                          graphic_type=self.dyn_layout_json[id].setdefault('graphic_type', 'Text'),
                                          var_value=self.dyn_layout_json[id].setdefault('var_value', '0'))
-        scatter_layout = MyScatterLayout(id=str(id) + '_scatter',
+        scatter_layout = MyScatterLayout(widget_id=str(id) + '_scatter',
                                          do_rotation=False,
                                          size=(self.dyn_layout_json[id]['size'][0], self.dyn_layout_json[id]['size'][1]),
                                          size_hint=(None, None),
@@ -182,7 +191,7 @@ class DynamicLayout(Widget):
     def add_widget_json(self):
         id_list = []
         new_json = {}
-        for id, dyn_widget in self.dyn_widget_dict.items():
+        for id, dyn_widget in list(self.dyn_widget_dict.items()):
             id_list.append(int(id))
         new_id = str(max(id_list) + 1)  #make new id one greater than largest id
         #create default widget parameters
@@ -191,6 +200,7 @@ class DynamicLayout(Widget):
         new_json['var_tag'] = ''
         new_json['var_alias'] = ''
         new_json['widget'] = 'Toggle Button'
+        new_json['widget_font_size'] = widget_font_size
         new_json['invert'] = False
         new_json['size'] = (170, 160)
         new_json['pos'] = (320, 160)
@@ -212,12 +222,12 @@ class DynamicLayout(Widget):
 
     def copy_widget(self, current_id):
         id_list = []
-        for id, dyn_widget in self.dyn_widget_dict.items():
+        for id, dyn_widget in list(self.dyn_widget_dict.items()):
             id_list.append(int(id))
         new_id = str(max(id_list) + 1)  # make new id one greater than largest id
         # copy current widget json data to new one
         current_json = self.dyn_layout_json[current_id]
-        new_json = deepcopy(current_json)
+        new_json = copy.copy(current_json)
         new_json['pos'] = (current_json['pos'][0] + current_json['size'][0], current_json['pos'][1])
         self.dyn_layout_json.update({new_id: new_json})
         self.create_dyn_widget(new_id)
@@ -234,6 +244,7 @@ class DynamicLayout(Widget):
         self.dyn_layout_json[id]['var_tag'] = dyn_widget_ref.var_tag
         self.dyn_layout_json[id]['var_alias'] = dyn_widget_ref.var_alias
         self.dyn_layout_json[id]['widget'] = dyn_widget_ref.widget
+        self.dyn_layout_json[id]['widget_font_size'] = dyn_widget_ref.widget_font_size
         self.dyn_layout_json[id]['invert'] = dyn_widget_ref.invert
         self.dyn_layout_json[id]['color_on'] = dyn_widget_ref.color_on
         self.dyn_layout_json[id]['color_off'] = dyn_widget_ref.color_off
@@ -273,19 +284,22 @@ class DynamicLayout(Widget):
     def modify_screen(self):
         self.modify_mode = True
         self.app_ref.main_screen_ref.screen_edit_label(True)
-        for id, dyn_widget in self.dyn_widget_dict.items():
+        for id, dyn_widget in list(self.dyn_widget_dict.items()):
             dyn_widget.dyn_label_background()
 
     def end_modify(self):
         self.modify_mode = False
         self.app_ref.main_screen_ref.screen_edit_label(False)
-        for id, dyn_widget in self.dyn_widget_dict.items():
+        for id, dyn_widget in list(self.dyn_widget_dict.items()):
             dyn_widget.dyn_label_background()
         self.save_layout() #save for size and position changes
         self.app_ref.variables.refresh_data = True
 
     def global_modify(self, variable):
         color = self.app_ref.variables.get(variable)
+        if variable == 'SYS_SCREEN_BACKGROUND_COLOR':
+            self.app_ref.screen_man.background_color()
+            return
         for id in self.dyn_layout_json:
             if variable == 'SYS_WIDGET_BACKGROUND_OFF_COLOR':
                 self.dyn_layout_json[id]['color_off'] = color
@@ -300,8 +314,7 @@ class DynamicLayout(Widget):
             self.remove_dyn_widget(id)
             self.create_dyn_widget(id)
         self.end_modify()
-        if variable == 'SYS_SCREEN_BACKGROUND_COLOR':
-            self.app_ref.screen_man.background_color()
+
 
 class ScreenItemEditPopup(Popup):
     app_ref = ObjectProperty(None)
@@ -359,19 +372,19 @@ class ScreenItemEditPopup(Popup):
         else:
             exchange = False
         self.item.widget = self.widget_spinner.text
-        self.dynamic_layout.update_widget(self.item.id)
-        self.dynamic_layout.edit_widget_json(self.item.id)
+        self.dynamic_layout.update_widget(self.item.widget_id)
+        self.dynamic_layout.edit_widget_json(self.item.widget_id)
         if exchange:  #a new type of widget has been selected, so exchange it
-            self.dynamic_layout.exchange_widget(self.item.id)
+            self.dynamic_layout.exchange_widget(self.item.widget_id)
         self.dynamic_layout.save_layout()
         self.dismiss()
 
     def delete_item(self):
-        self.dynamic_layout.delete_widget(self.item.id)
+        self.dynamic_layout.delete_widget(self.item.widget_id)
         self.dismiss()
 
     def copy_item(self):
-        self.dynamic_layout.copy_widget(self.item.id)
+        self.dynamic_layout.copy_widget(self.item.widget_id)
         self.dismiss()
 
     def graphic_type(self, value):
@@ -391,6 +404,8 @@ class DynItem(Widget):
     var_alias = StringProperty("")
     var_tag = StringProperty("")
     widget = StringProperty("")
+    widget_font_size = StringProperty("")
+    widget_id = StringProperty("")
     button_on_text = StringProperty("")
     button_off_text = StringProperty("")
     color_on = StringProperty("")
@@ -402,12 +417,15 @@ class DynItem(Widget):
     icon_on = StringProperty("")
     icon_off = StringProperty("")
     graphic_type = StringProperty("")
+    var_value = StringProperty("")
     ignition_input = NumericProperty(0)
     digital_inputs = NumericProperty(0)
     app_ref = ObjectProperty(None)
     data_change = BooleanProperty(False)
 
     def on_data_change(self, instance, data):
+        if self.parent == None:  # when a widget is deleted, this event still occurs (hangs on to ref), so this is the fix for now
+            return
         value = self.app_ref.variables.get(self.var_alias)
         self.var_value = value
         if not self.app_ref.dynamic_layout.modify_mode and self.widget != 'Numeric Input':
@@ -421,30 +439,30 @@ class DynItem(Widget):
                 self.canvas_color = self.color_on
                 if self.graphic_type == 'Text':
                     self.font_name = 'Roboto'
-                    self.font_size = '18sp'
+                    self.font_size = self.widget_font_size
                     if self.button_on_text != '':
                         self.text = self.button_on_text
                     else:
                         self.text = self.var_alias
                 else:
                     self.font_name = 'pics/materialdesignicons-webfont.ttf'
-                    self.font_size = self.size[1]
-                    self.text = u"{}".format(md_icons[self.icon_on])
+                    self.font_size = self.size[1] * .5
+                    self.text = "{}".format(md_icons[self.icon_on])
                 self.color = get_color_from_hex(self.color_on_text)
             else:
                 self.state = 'normal'
                 self.canvas_color = self.color_off
                 if self.graphic_type == 'Text':
                     self.font_name = 'Roboto'
-                    self.font_size = '18sp'
+                    self.font_size = self.widget_font_size
                     if self.button_off_text != '':
                         self.text = self.button_off_text
                     else:
                         self.text = self.var_alias
                 else:
                     self.font_name = 'pics/materialdesignicons-webfont.ttf'
-                    self.font_size = self.size[1]
-                    self.text = u"{}".format(md_icons[self.icon_off])
+                    self.font_size = self.size[1] * .5
+                    self.text = "{}".format(md_icons[self.icon_off])
                 self.color = get_color_from_hex(self.color_off_text)
 
     def on_ignition_input(self, instance, state):
@@ -453,7 +471,7 @@ class DynItem(Widget):
             self.canvas_color = self.color_off
             if self.graphic_type == 'Text':
                 self.font_name = 'Roboto'
-                self.font_size = '18sp'
+                self.font_size = self.widget_font_size
                 if self.button_off_text != '':
                     self.text = self.button_off_text
                 else:
@@ -461,7 +479,7 @@ class DynItem(Widget):
             else:
                 self.font_name = 'pics/materialdesignicons-webfont.ttf'
                 self.font_size = self.size[1]
-                self.text = u"{}".format(md_icons[self.icon_off])
+                self.text = "{}".format(md_icons[self.icon_off])
             self.output_cmd()
 
     def on_touch_down(self, touch):
@@ -670,6 +688,7 @@ class FloatInput(TextInput):
 
 class MyScatterLayout(ScatterLayout):
     app_ref = ObjectProperty(None)
+    widget_id = StringProperty("")
     move_lock = False
     scale_lock_left = False
     scale_lock_right = False
@@ -691,7 +710,7 @@ class MyScatterLayout(ScatterLayout):
             y = round(y, 0)
             y = y * 10
             self.pos = x, y
-            self.app_ref.dynamic_layout.edit_widget_json(self.id.split('_')[0])  # update widget size/pos in json
+            self.app_ref.dynamic_layout.edit_widget_json(self.widget_id.split('_')[0])  # update widget size/pos in json
         return super(MyScatterLayout, self).on_touch_up(touch)
 
     def transform_with_touch(self, touch):

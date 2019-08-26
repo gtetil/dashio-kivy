@@ -1,43 +1,17 @@
 {
-    "10": {
-        "border_color": "#00000000",
-        "color_off": "#00000000",
-        "color_off_text": "#000000ff",
-        "color_on": "#3265ffff",
-        "color_on_text": "#000000ff",
-        "enable": true,
-        "graphic_type": "Text",
-        "icon_off": "no-selection",
-        "icon_on": "no-selection",
-        "invert": false,
-        "off_text": "DIM BACKLIGHT",
-        "on_text": "BACKLIGHT\nDIMMED",
-        "pos": [
-            600.0,
-            10.0
-        ],
-        "size": [
-            190,
-            60
-        ],
-        "var_alias": "SYS_DIM_BACKLIGHT",
-        "var_tag": "SYS_DIM_BACKLIGHT",
-        "var_value": "0",
-        "widget": "Toggle Button"
-    },
     "11": {
-        "border_color": "#00000000",
-        "color_off": "#00000000",
+        "border_color": "#ffffffff",
+        "color_off": "#ccd8ffff",
         "color_off_text": "#000000ff",
-        "color_on": "#3265ffff",
+        "color_on": "#8fff7fff",
         "color_on_text": "#000000ff",
         "enable": true,
         "graphic_type": "Text",
         "icon_off": "no-selection",
         "icon_on": "no-selection",
         "invert": false,
-        "off_text": "LOG IN",
-        "on_text": "LOGGED IN",
+        "off_text": "",
+        "on_text": "",
         "pos": [
             10.0,
             160.0
@@ -46,16 +20,16 @@
             210,
             80
         ],
-        "var_alias": "SYS_LOGGED_IN",
-        "var_tag": "SYS_LOGGED_IN",
+        "var_alias": "DI_2",
+        "var_tag": "DI_2",
         "var_value": "0",
         "widget": "Button"
     },
     "12": {
-        "border_color": "#00000000",
-        "color_off": "#00000000",
+        "border_color": "#ffffffff",
+        "color_off": "#ccd8ffff",
         "color_off_text": "#000000ff",
-        "color_on": "#3265ffff",
+        "color_on": "#8fff7fff",
         "color_on_text": "#000000ff",
         "enable": true,
         "graphic_type": "Text",
@@ -69,19 +43,19 @@
             10.0
         ],
         "size": [
-            210,
+            110,
             70
         ],
-        "var_alias": "ENGINE KILL",
-        "var_tag": "DO_0",
+        "var_alias": "DI_4",
+        "var_tag": "DI_4",
         "var_value": "0",
         "widget": "Indicator"
     },
     "15": {
-        "border_color": "#00000000",
-        "color_off": "#00000000",
+        "border_color": "#ffffffff",
+        "color_off": "#ccd8ffff",
         "color_off_text": "#000000ff",
-        "color_on": "#3265ffff",
+        "color_on": "#8fff7fff",
         "color_on_text": "#000000ff",
         "enable": true,
         "graphic_type": "Text",
@@ -98,23 +72,23 @@
             210,
             70
         ],
-        "var_alias": "DI_2",
-        "var_tag": "DI_2",
+        "var_alias": "DI_1",
+        "var_tag": "DI_1",
         "var_value": "0",
         "widget": "Indicator"
     },
     "17": {
-        "border_color": "#00000000",
-        "color_off": "#00000000",
+        "border_color": "#ffffffff",
+        "color_off": "#ccd8ffff",
         "color_off_text": "#000000ff",
-        "color_on": "#3265ffff",
+        "color_on": "#8fff7fff",
         "color_on_text": "#000000ff",
         "graphic_type": "Text",
         "icon_off": "no-selection",
         "icon_on": "no-selection",
         "invert": false,
-        "off_text": "",
-        "on_text": "",
+        "off_text": "DO_3",
+        "on_text": "DO_3",
         "pos": [
             220.0,
             10.0
@@ -129,17 +103,17 @@
         "widget": "Toggle Button"
     },
     "18": {
-        "border_color": "#00000000",
-        "color_off": "#00000000",
+        "border_color": "#ffffffff",
+        "color_off": "#ccd8ffff",
         "color_off_text": "#000000ff",
-        "color_on": "#3265ffff",
+        "color_on": "#8fff7fff",
         "color_on_text": "#000000ff",
         "graphic_type": "Text",
         "icon_off": "no-selection",
         "icon_on": "no-selection",
         "invert": false,
-        "off_text": "",
-        "on_text": "",
+        "off_text": "DO_2",
+        "on_text": "DO_2",
         "pos": [
             600.0,
             240.0
@@ -154,10 +128,10 @@
         "widget": "Toggle Button"
     },
     "19": {
-        "border_color": "#00000000",
-        "color_off": "#00000000",
+        "border_color": "#ffffffff",
+        "color_off": "#ccd8ffff",
         "color_off_text": "#000000ff",
-        "color_on": "#3265ffff",
+        "color_on": "#8fff7fff",
         "color_on_text": "#000000ff",
         "graphic_type": "Text",
         "icon_off": "no-selection",
@@ -179,10 +153,10 @@
         "widget": "Toggle Button"
     },
     "2": {
-        "border_color": "#00000000",
-        "color_off": "#00000000",
+        "border_color": "#ffffffff",
+        "color_off": "#ccd8ffff",
         "color_off_text": "#000000ff",
-        "color_on": "#3265ffff",
+        "color_on": "#8fff7fff",
         "color_on_text": "#000000ff",
         "enable": true,
         "graphic_type": "Text",
@@ -199,16 +173,16 @@
             210,
             80
         ],
-        "var_alias": "PARK",
-        "var_tag": "DO_2",
+        "var_alias": "DI_3",
+        "var_tag": "DI_3",
         "var_value": "0",
         "widget": "Toggle Button"
     },
     "20": {
-        "border_color": "#00000000",
-        "color_off": "#00000000",
+        "border_color": "#ffffffff",
+        "color_off": "#ccd8ffff",
         "color_off_text": "#000000ff",
-        "color_on": "#3265ffff",
+        "color_on": "#8fff7fff",
         "color_on_text": "#000000ff",
         "graphic_type": "Text",
         "icon_off": "no-selection",
@@ -218,11 +192,11 @@
         "on_text": "",
         "pos": [
             600.0,
-            80.0
+            10.0
         ],
         "size": [
             190,
-            160
+            230
         ],
         "var_alias": "DO_5",
         "var_tag": "DO_5",
@@ -230,35 +204,10 @@
         "widget": "Toggle Button"
     },
     "21": {
-        "border_color": "#00000000",
-        "color_off": "#00000000",
+        "border_color": "#ffffffff",
+        "color_off": "#ccd8ffff",
         "color_off_text": "#000000ff",
-        "color_on": "#3265ffff",
-        "color_on_text": "#000000ff",
-        "graphic_type": "Icon",
-        "icon_off": "engine-outline",
-        "icon_on": "engine-outline",
-        "invert": false,
-        "off_text": "",
-        "on_text": "",
-        "pos": [
-            220.0,
-            240.0
-        ],
-        "size": [
-            190,
-            230
-        ],
-        "var_alias": "ENGINE KILL",
-        "var_tag": "DO_0",
-        "var_value": "0",
-        "widget": "Toggle Button"
-    },
-    "3": {
-        "border_color": "#00000000",
-        "color_off": "#00000000",
-        "color_off_text": "#000000ff",
-        "color_on": "#3265ffff",
+        "color_on": "#8fff7fff",
         "color_on_text": "#000000ff",
         "enable": true,
         "graphic_type": "Text",
@@ -267,6 +216,58 @@
         "invert": false,
         "off_text": "",
         "on_text": "",
+        "pos": [
+            120.0,
+            10.0
+        ],
+        "size": [
+            100,
+            70
+        ],
+        "var_alias": "DI_5",
+        "var_tag": "DI_5",
+        "var_value": "0",
+        "widget": "Indicator"
+    },
+    "22": {
+        "border_color": "#ffffffff",
+        "color_off": "#ccd8ffff",
+        "color_off_text": "#000000ff",
+        "color_on": "#8fff7fff",
+        "color_on_text": "#000000ff",
+        "enable": true,
+        "graphic_type": "Text",
+        "icon_off": "no-selection",
+        "icon_on": "no-selection",
+        "invert": false,
+        "off_text": "DO_1",
+        "on_text": "DO_1",
+        "pos": [
+            410.0,
+            240.0
+        ],
+        "size": [
+            190,
+            230
+        ],
+        "var_alias": "FRONT LIGHTS",
+        "var_tag": "DO_1",
+        "var_value": "0",
+        "widget": "Toggle Button"
+    },
+    "3": {
+        "border_color": "#ffffffff",
+        "color_off": "#ccd8ffff",
+        "color_off_text": "#000000ff",
+        "color_on": "#8fff7fff",
+        "color_on_text": "#000000ff",
+        "enable": true,
+        "graphic_type": "Text",
+        "icon_off": "no-selection",
+        "icon_on": "no-selection",
+        "invert": false,
+        "off_text": "DO_4",
+        "on_text": "DO_4",
         "pos": [
             410.0,
             10.0
@@ -281,10 +282,10 @@
         "widget": "Toggle Button"
     },
     "6": {
-        "border_color": "#00000000",
-        "color_off": "#00000000",
+        "border_color": "#ffffffff",
+        "color_off": "#ccd8ffff",
         "color_off_text": "#000000ff",
-        "color_on": "#3265ffff",
+        "color_on": "#8fff7fff",
         "color_on_text": "#000000ff",
         "enable": true,
         "graphic_type": "Text",
@@ -306,19 +307,45 @@
         "var_value": "0",
         "widget": "Indicator"
     },
-    "9": {
-        "border_color": "#00000000",
-        "color_off": "#00000000",
+    "8": {
+        "border_color": "#ffffffff",
+        "color_off": "#ccd8ffff",
         "color_off_text": "#000000ff",
-        "color_on": "#3265ffff",
+        "color_on": "#8fff7fff",
         "color_on_text": "#000000ff",
         "enable": true,
         "graphic_type": "Text",
         "icon_off": "no-selection",
         "icon_on": "no-selection",
         "invert": false,
-        "off_text": "SYSTEM ACTIVE",
-        "on_text": "SYSTEM INACTIVE",
+        "off_text": "DO_0",
+        "on_text": "DO_0",
+        "pos": [
+            220.0,
+            240.0
+        ],
+        "size": [
+            190,
+            230
+        ],
+        "var_alias": "ENGINE KILL",
+        "var_tag": "DO_0",
+        "var_value": "0",
+        "widget": "Toggle Button"
+    },
+    "9": {
+        "border_color": "#ffffffff",
+        "color_off": "#ccd8ffff",
+        "color_off_text": "#000000ff",
+        "color_on": "#8fff7fff",
+        "color_on_text": "#000000ff",
+        "enable": true,
+        "graphic_type": "Text",
+        "icon_off": "no-selection",
+        "icon_on": "no-selection",
+        "invert": false,
+        "off_text": "",
+        "on_text": "",
         "pos": [
             10.0,
             310.0
@@ -327,8 +354,8 @@
             210,
             80
         ],
-        "var_alias": "SYS_INACTIVE",
-        "var_tag": "SYS_INACTIVE",
+        "var_alias": "DI_0",
+        "var_tag": "DI_0",
         "var_value": "0",
         "widget": "Indicator"
     }

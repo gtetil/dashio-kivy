@@ -91,7 +91,7 @@ class CANcom(Widget):
                 elif index == 1:
                     self.stack_temp_write_can_data[2] = cal_value  # 2:  Output Enable (0-1)
                 self.msg = can.Message(arbitration_id=0x000, extended_id=False, data=self.stack_temp_write_can_data)
-                print self.msg
+                print((self.msg))
 
         if self.syrup_temp:
             if channel_type == 'SYRUP_TEMP_WRITE':
@@ -106,7 +106,7 @@ class CANcom(Widget):
                 elif index == 3:
                     self.syrup_temp_write_can_data[4] = cal_value  # 4:  Open Valve (0-1, 2 = timed)
                 self.msg = can.Message(arbitration_id=0x001, extended_id=False, data=self.syrup_temp_write_can_data)
-                print self.msg
+                print((self.msg))
 
         bus.send(self.msg)
 
@@ -126,7 +126,7 @@ class CanApp(App):
 
     def update(self, dt):
         try:
-            print self.my_can.can_read_data
+            print((self.my_can.can_read_data))
             self.my_can.can_write(0, 1)
             self.my_can.can_write(1, 1)
         except Exception as e:

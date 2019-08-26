@@ -52,7 +52,7 @@ from functools import partial
 from kivy.clock import Clock
 from kivy.effects.scroll import ScrollEffect
 from kivy.factory import Factory
-from kivy.garden.roulette import TimeFormatCyclicRoulette, Roulette, \
+from libs.roulette import TimeFormatCyclicRoulette, Roulette, \
     CyclicRoulette
 from kivy.lang import Builder
 from kivy.metrics import dp
@@ -183,7 +183,7 @@ class DatetimePicker(BoxLayout):
         self.second.select_and_center(now.second)
 
     def set_rpi_datetime(self):
-        print self.selected_datetime
+        print((self.selected_datetime))
         set_time_cmd = "sudo date --set='" + str(self.selected_datetime) + "'"
         os.system(set_time_cmd)  # change system date/time
         p = subprocess.Popen('sudo hwclock -w', shell=True) # write to RTC

@@ -14,11 +14,10 @@ from kivy.uix.filechooser import FileChooserListView
 from kivy.utils import get_color_from_hex, get_hex_from_color
 from modules.color_picker import MyColorPicker
 from modules.data_viewer import DataViewer
-from kivy.uix.listview import ListView
 from kivy.uix.recycleview import RecycleView
 from kivy.uix.recycleboxlayout import RecycleBoxLayout
 from kivy.clock import Clock
-import app_settings
+from . import app_settings
 import os
 import csv
 
@@ -27,7 +26,7 @@ class SettingColorPicker(SettingString):
 
     def _create_popup(self, instance):
         # create popup layout
-        content = BoxLayout(orientation='vertical', color='1,1,1,1', spacing=5)
+        content = BoxLayout(orientation='vertical', spacing=5)
         self.color_popup = popup = Popup(
             title=self.title, content=content, size_hint=(None,None), size=(400,480), pos_hint={'middle': 1, 'center': 1})
         # create the textinput used for numeric input.
@@ -53,7 +52,7 @@ class SettingColorPicker(SettingString):
     def _warning_popup(self, instance):
         if self.key != 'SYS_SCREEN_BACKGROUND_COLOR':
             # create popup layout
-            content = BoxLayout(orientation='vertical', color='1,1,1,1')
+            content = BoxLayout(orientation='vertical')
             popup_width = min(0.95 * Window.width, dp(500))
             self.warning_popup = popup = Popup(
                 title=self.title, content=content, size_hint=(None, None),
@@ -92,7 +91,7 @@ class SettingColorPicker(SettingString):
     def _validate(self, instance):
         self._dismiss_warning(instance)
         self.value = self.color_picker.current_color
-        self.app_ref.variables.set_by_alias('SYS_COLOR_HISTORY', self.value)
+        self.app_ref.variables.set_by_alias('SYS_COLOR_HISTORY', self.value, defer_save=True)
         self.app_ref.dynamic_layout.global_modify(self.key)
 
 
@@ -361,7 +360,7 @@ class SettingCSVReader(SettingPath):
             return
 
         # read csv file
-        with open(value, 'rb') as csvfile:
+        with open(value, 'r') as csvfile:
             reader = csv.reader(csvfile, delimiter=',')
             items = [row for row in reader]
             self.data_viewer.clear()

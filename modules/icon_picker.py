@@ -16,6 +16,8 @@ from kivy.uix.popup import Popup
 from kivy.uix.button import Button
 from kivy.uix.recycleview.layout import RecycleLayoutManagerBehavior
 from kivy.uix.recycleview import RecycleView
+from settings.icon_definitions import md_icons
+print('\\' + md_icons['access-point'])
 
 Builder.load_string('''
 #:import md_icons settings.icon_definitions.md_icons
@@ -129,7 +131,8 @@ class IconPicker(BoxLayout):
 class IconPickerApp(App):
     def build(self):
         icon_picker = IconPicker()
-        icon_picker.select_icon('beats')
+        icon_picker.populate_list()
+        icon_picker.select_icon('access-point')
         return icon_picker
 
 if __name__ == '__main__':

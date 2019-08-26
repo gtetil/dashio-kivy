@@ -596,7 +596,7 @@
 <DynToggleButton, DynButton>:
     ignition_input: int(app.variables.DI_IGNITION)
     text_size: self.size
-    font_size: '18sp'
+    font_size: app.dynamic_layout.widget_font_size
     halign: 'center'
     valign: 'middle'
     background_normal: ''
@@ -612,7 +612,7 @@
             pos: self.pos[0] + 1, self.pos[1] + 1
             radius: (dp(0),)
         Color:
-            rgba: get_color_from_hex(self.canvas_color)
+            rgba: get_color_from_hex(self.canvas_color) or [0,0,0,1]
         RoundedRectangle:
             size: self.size[0] - 4, self.size[1] - 4
             pos: self.pos[0] + 2, self.pos[1] + 2
@@ -651,6 +651,7 @@
     var_tag: ''
     var_alias: ''
     widget: ''
+    widget_id: ''
     button_on_text: ''
     button_off_text: ''
     invert: False
@@ -659,9 +660,11 @@
     color_on_text: ''
     color_off_text: ''
     border_color: ''
+    canvas_color: ''
     icon_on: ''
     icon_off: ''
     graphic_type: ''
+    widget_font_size: ''
 
 
 <PasscodeScreen>:

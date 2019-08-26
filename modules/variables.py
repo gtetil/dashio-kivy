@@ -27,6 +27,7 @@ class Variables(Widget):
     refresh_data = BooleanProperty(False)
     display_var_tags = ListProperty()
     variables_file = 'settings/variables.json'
+    variables_file_backup = 'settings/variables_backup.json'
     DI_IGNITION = StringProperty('0')
     SYS_REVERSE_CAM_ON = StringProperty('0')
     SYS_DEBUG_MODE = BooleanProperty(False)
@@ -111,13 +112,17 @@ class Variables(Widget):
         self.display_var_tags = self.var_display  #this is to defer kivy property updates until the end, otherwise it slows down program for every append
 
     def open_variables(self):
-        with open(self.variables_file, 'r') as file:
-            self.variables_json = json.load(file)
+        try:
+            with open(self.variables_file, 'r') as file:
+                self.variables_json = json.load(file)
+        except Exception as e:
+            with open(self.variables_file_backup, 'r') as file:  # Had an issue where variable file was going blank.  This backup file is a bandaide.
+                self.variables_json = json.load(file)
 
     def set_saved_vars(self):
         # set variables that were saved
         for i in range(len(self.var_save)):
-            self.set_by_alias(self.var_save[i], self.var_save_values[i])
+            self.set_by_alias(self.var_save[i], self.var_save_values[i], defer_save=True)
 
     def save_variables(self):
         for alias in self.var_save:
@@ -125,6 +130,7 @@ class Variables(Widget):
             self.variables_json[data_index]['value'] = self.variable_data[data_index]
         with open(self.variables_file, 'w') as file:
             json.dump(self.variables_json, file, sort_keys=True, indent=4)
+            print('save variable file')
 
     def read_can(self, dt):
         try:
@@ -139,8 +145,10 @@ class Variables(Widget):
     def read_system(self, dt):
         #self.set_by_alias('SYS_TIME_SEC', str((current_milli_time() - initial_time) / 1000))
         self.set_by_alias('SYS_CPU_USAGE', str(psutil.cpu_percent()))
-        self.set_by_alias('SYS_CPU_TEMP', os.popen('vcgencmd measure_temp').readline().replace("temp=", "").replace("'C\n", ""))
         self.set_by_alias('SYS_TIME', str(time.time()))
+
+        if operating_sys != 'Windows':
+            self.set_by_alias('SYS_CPU_TEMP', os.popen('vcgencmd measure_temp').readline().replace("temp=", "").replace("'C\n", ""))
 
         # heartbeat signal to rpi power supply
         if not self.SYS_DEBUG_MODE:
@@ -222,7 +230,7 @@ class Variables(Widget):
         self.exec_scripts()
 
         if self.get('SYS_INIT') == '1':  #turn SYS_INIT right back off, so it should only have been on for for loop cycle
-            print 'init off'
+            print('init off')
             self.set_by_alias('SYS_INIT', '0')
 
     def exec_scripts(self):
@@ -268,12 +276,13 @@ class Variables(Widget):
                 return ''
         return ''
 
-    def set_by_alias(self, alias, value):
+    def set_by_alias(self, alias, value, defer_save=False):
         data_index = self.var_aliases_dict[alias]
         self.set(data_index, value)
-        if self.save_by_alias_dict[alias]: #if variable's 'save' parameter is set to true, then save it
-            self.save_variables()
-            print('saved vars')
+        if not defer_save: # use this to defer saving at startup, so a bunch of variables don't slam the file all at once
+            if self.save_by_alias_dict[alias]: #if variable's 'save' parameter is set to true, then save it
+                self.save_variables()
+                print('saved vars' + alias)
 
     def set(self, index, value):
         try:
@@ -283,7 +292,7 @@ class Variables(Widget):
             scale = self.variables_json[index]['scale']
             offset = self.variables_json[index]['offset']
             if channel_type == 'DO':
-                self.can_com.can_write(index - app_settings.dio_mod_do_data_start, int(value), channel_type)
+                self.can_com.can_write(index - app_settings.dio_mod_do_data_start, int(value), channel_type, '', '')
             if channel_type == 'STACK_TEMP_WRITE':
                 self.can_com.can_write(index - app_settings.stack_write_data_start, int(value), channel_type, scale, offset)
             if channel_type == 'SYRUP_TEMP_WRITE':
@@ -331,7 +340,7 @@ class Variables(Widget):
                 try:
                     GPIO.cleanup()
                 except Exception as e:
-                    print e
+                    print(e)
                 os.system("poweroff")
                 self.set_by_alias(tag, '0')
         if tag == 'SYS_REVERSE_CAM_ON':

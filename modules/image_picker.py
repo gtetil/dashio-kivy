@@ -22,7 +22,7 @@ Builder.load_string('''
 class MyImage(Image):
     def on_touch_down(self, touch):
         if self.collide_point(*touch.pos):
-            print self.source
+            print((self.source))
 
 class ImagePicker(GridLayout):
 
