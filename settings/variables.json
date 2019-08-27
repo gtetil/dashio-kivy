@@ -513,7 +513,7 @@
         "scale": 44.5526,
         "tag": "SYRUP_TEMP_SETPOINT_WRITE",
         "type": "SYRUP_TEMP_WRITE",
-        "value": "211"
+        "value": "212"
     },
     {
         "alias": "SYRUP_TEMP_AUTO_MODE",
@@ -801,7 +801,7 @@
         "scale": 1,
         "tag": "SYS_WIDGET_BACKGROUND_OFF_COLOR",
         "type": "SYS",
-        "value": "#b2ffffff"
+        "value": "#ccffffff"
     },
     {
         "alias": "SYS_WIDGET_BACKGROUND_ON_COLOR",
@@ -1053,7 +1053,7 @@
         "scale": 1,
         "tag": "SYS_COLOR_HISTORY",
         "type": "SYS",
-        "value": "#00000000"
+        "value": "#ffffffff"
     },
     {
         "alias": "SYS_DEBUG_MODE",

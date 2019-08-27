@@ -1,7 +1,7 @@
 {
     "6": {
         "border_color": "#00000000",
-        "color_off": "#b2ffffff",
+        "color_off": "#ccffffff",
         "color_off_text": "#000000ff",
         "color_on": "#3265ffff",
         "color_on_text": "#000000ff",
@@ -24,6 +24,58 @@
         "var_tag": "DO_3",
         "var_value": "0",
         "widget": "Toggle Button",
+        "widget_font_size": "18sp"
+    },
+    "7": {
+        "border_color": "#00000000",
+        "color_off": "#ccffffff",
+        "color_off_text": "#000000ff",
+        "color_on": "#3265ffff",
+        "color_on_text": "#ffffffff",
+        "graphic_type": "Text",
+        "icon_off": "no-selection",
+        "icon_on": "no-selection",
+        "invert": false,
+        "off_text": "",
+        "on_text": "",
+        "pos": [
+            470.0,
+            260.0
+        ],
+        "size": [
+            170,
+            160
+        ],
+        "var_alias": "REAR LIGHTS",
+        "var_tag": "DO_3",
+        "var_value": "0",
+        "widget": "Indicator",
+        "widget_font_size": "18sp"
+    },
+    "8": {
+        "border_color": "#00000000",
+        "color_off": "#ffffffff",
+        "color_off_text": "#000000ff",
+        "color_on": "#ffffffff",
+        "color_on_text": "#000000ff",
+        "graphic_type": "Icon",
+        "icon_off": "near-me",
+        "icon_on": "navigation",
+        "invert": false,
+        "off_text": "",
+        "on_text": "",
+        "pos": [
+            80.0,
+            270.0
+        ],
+        "size": [
+            100,
+            80
+        ],
+        "var_alias": "DO_5",
+        "var_tag": "DO_5",
+        "var_value": "0",
+        "widget": "Button",
         "widget_font_size": "18sp"
     }
 }

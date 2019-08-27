@@ -142,8 +142,8 @@ class DynamicLayout(Widget):
                                          invert=self.dyn_layout_json[id]['invert'],
                                          color_on=self.dyn_layout_json[id].setdefault('color_on', '#ffffffff'),
                                          color_off=self.dyn_layout_json[id].setdefault('color_off', '#ffffffff'),
-                                         color_on_text=self.dyn_layout_json[id].setdefault('color_on_text', '#000000ff'),
-                                         color_off_text=self.dyn_layout_json[id].setdefault('color_off_text', '#000000ff'),
+                                         color_on_text = self.dyn_layout_json[id].setdefault('color_on_text', '#000000ff'),
+                                         color_off_text = self.dyn_layout_json[id].setdefault('color_off_text', '#000000ff'),
                                          border_color=self.dyn_layout_json[id].setdefault('border_color', '#ffffffff'),
                                          icon_on=self.dyn_layout_json[id].setdefault('icon_on', 'no-selection'),
                                          icon_off=self.dyn_layout_json[id].setdefault('icon_off', 'no-selection'),
@@ -400,6 +400,7 @@ class ScreenItemEditPopup(Popup):
             self.icon_off_button.disable_gray = True
 
 class DynItem(Widget):
+    text = StringProperty("")
     invert = BooleanProperty(True)
     var_alias = StringProperty("")
     var_tag = StringProperty("")
@@ -490,6 +491,7 @@ class DynItem(Widget):
                         if self.var_alias != 'SYS_LOGGED_IN': #don't allow SYS_LOGGED_IN to be changed by a button
                             self._do_press()
                             self.output_cmd()
+                            self.app_ref.variables.click_sound()
                         else:
                             self.app_ref.screen_man.passcode_type = 'passcode'
                             self.app_ref.screen_man.current = "passcode_screen"  #open passcode screen with SYS_LOGGED_IN

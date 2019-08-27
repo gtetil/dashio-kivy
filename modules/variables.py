@@ -45,6 +45,7 @@ class Variables(Widget):
         Clock.schedule_interval(self.read_system, 1)
         self.shutdown_pin = 17
         self.ignition_pin = 27
+        self.buzzer_pin = 0
         self.last_shutdown_state = 0
         try:
             GPIO.setmode(GPIO.BCM)
@@ -309,6 +310,21 @@ class Variables(Widget):
         except Exception as e:
             print(e)
 
+    def click_sound(self):
+        try:
+            GPIO.setmode(GPIO.BOARD)  # Numbers GPIOs by physical location
+            GPIO.setup(self.buzzer_pin, GPIO.OUT)  # Set pins' mode is output
+            freq = 698
+            duration = 2
+            buzz = GPIO.PWM(self.buzzer_pin, freq)  # initial frequency.
+            buzz.start(50)  # Start Buzzer pin with 50% duty ration
+            buzz.ChangeFrequency(freq)
+            time.sleep(duration)
+            buzz.stop()  # Stop the buzzer
+            GPIO.output(self.buzzer_pin, 1)  # Set Buzzer pin to High
+            GPIO.cleanup()
+        except Exception as e:
+            print(e)
 
     # SYSTEM COMMANDS#
 
