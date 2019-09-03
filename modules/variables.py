@@ -12,6 +12,7 @@ import settings.app_settings as app_settings
 from engines.can_com import CANcom
 from modules.event_log import EventLog
 from modules.flame_alarm import FlameAlarm
+from tools.file_tools import remove_oldest_file
 
 operating_sys = platform.system()
 BASE = "/sys/class/backlight/rpi_backlight/"
@@ -45,12 +46,13 @@ class Variables(Widget):
         Clock.schedule_interval(self.read_system, 1)
         self.shutdown_pin = 17
         self.ignition_pin = 27
-        self.buzzer_pin = 0
+        self.buzzer_pin = 18
         self.last_shutdown_state = 0
         try:
             GPIO.setmode(GPIO.BCM)
             GPIO.setup(self.shutdown_pin, GPIO.OUT)  # status output for shutdown circuit
             GPIO.setup(self.ignition_pin, GPIO.IN)  # setup input for ignition status
+            GPIO.setup(self.buzzer_pin, GPIO.OUT)  # output for buzzer (button click sound)
         except Exception as e:
             print('GPIO error:')
             print(e)
@@ -67,14 +69,19 @@ class Variables(Widget):
         Clock.schedule_interval(self.read_can, 0.05)
 
         # flame detect init
-        self.flame_alarms = [FlameAlarm() for i in range(app_settings.flame_detect_len)]
-        self.alarm_states = [False] * app_settings.flame_detect_len
-        self.alarm_counters = [0] * app_settings.flame_detect_len
-        self.flame_state_ctrs = [0] * app_settings.flame_detect_len
-        self.flame_log_header = [('Row ' + str(i + 1)) for i in range(0, app_settings.flame_detect_len)]
-        self.flame_alarm_log = EventLog(directory=os.path.join(app_settings.flame_log_dir, 'alarm_counters'), header=self.flame_log_header)
-        self.flame_state_log = EventLog(directory=os.path.join(app_settings.flame_log_dir, 'state_change_counters'), header=self.flame_log_header)
-        Clock.schedule_interval(self.log_files, 1)
+        if self.flame_detect:
+            self.flame_alarms = [FlameAlarm() for i in range(app_settings.flame_detect_len)]
+            self.alarm_states = [False] * app_settings.flame_detect_len
+            self.alarm_counters = [0] * app_settings.flame_detect_len
+            self.flame_state_ctrs = [0] * app_settings.flame_detect_len
+            self.flame_log_header = [('Row ' + str(i + 1)) for i in range(0, app_settings.flame_detect_len)]
+            alarm_counter_dir = os.path.join(app_settings.flame_log_dir, 'alarm_counters')
+            state_change_dir = os.path.join(app_settings.flame_log_dir, 'state_change_counters')
+            remove_oldest_file(alarm_counter_dir)
+            remove_oldest_file(state_change_dir)
+            self.flame_alarm_log = EventLog(directory=alarm_counter_dir, header=self.flame_log_header)
+            self.flame_state_log = EventLog(directory=state_change_dir, header=self.flame_log_header)
+            Clock.schedule_interval(self.log_files, 1)
 
     def set_var_lists(self):
         self.var_aliases = []
@@ -176,8 +183,8 @@ class Variables(Widget):
                 self.alarm_states[i] = self.flame_alarms[i].update(bool(int(flame_state))) # get array of all flame alarm states
                 self.alarm_counters[i] = self.flame_alarms[i].alarm_counter
                 self.flame_state_ctrs[i] = self.flame_alarms[i].state_change_ctr
-        if any(self.alarm_states) and not self.app_ref.screen_man.alarm_state:
-            self.app_ref.screen_man.alarm_animation(True)  # show alarm animation
+            if any(self.alarm_states) and not self.app_ref.screen_man.alarm_state:
+                self.app_ref.screen_man.alarm_animation(True)  # show alarm animation
 
         if self.stack_temp:
             for i in range (0, app_settings.stack_read_data_len):
@@ -312,17 +319,14 @@ class Variables(Widget):
 
     def click_sound(self):
         try:
-            GPIO.setmode(GPIO.BOARD)  # Numbers GPIOs by physical location
-            GPIO.setup(self.buzzer_pin, GPIO.OUT)  # Set pins' mode is output
             freq = 698
-            duration = 2
+            duration = .05
             buzz = GPIO.PWM(self.buzzer_pin, freq)  # initial frequency.
             buzz.start(50)  # Start Buzzer pin with 50% duty ration
             buzz.ChangeFrequency(freq)
             time.sleep(duration)
             buzz.stop()  # Stop the buzzer
             GPIO.output(self.buzzer_pin, 1)  # Set Buzzer pin to High
-            GPIO.cleanup()
         except Exception as e:
             print(e)
 

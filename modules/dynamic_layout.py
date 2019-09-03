@@ -149,6 +149,9 @@ class DynamicLayout(Widget):
                                          icon_off=self.dyn_layout_json[id].setdefault('icon_off', 'no-selection'),
                                          graphic_type=self.dyn_layout_json[id].setdefault('graphic_type', 'Text'),
                                          var_value=self.dyn_layout_json[id].setdefault('var_value', '0'))
+
+        # If there's ever an issue initializing the Dyn widgets, make sure all the kwargs above are listed as properties in the DynItem class.
+
         scatter_layout = MyScatterLayout(widget_id=str(id) + '_scatter',
                                          do_rotation=False,
                                          size=(self.dyn_layout_json[id]['size'][0], self.dyn_layout_json[id]['size'][1]),
@@ -491,7 +494,7 @@ class DynItem(Widget):
                         if self.var_alias != 'SYS_LOGGED_IN': #don't allow SYS_LOGGED_IN to be changed by a button
                             self._do_press()
                             self.output_cmd()
-                            self.app_ref.variables.click_sound()
+                            #self.app_ref.variables.click_sound()
                         else:
                             self.app_ref.screen_man.passcode_type = 'passcode'
                             self.app_ref.screen_man.current = "passcode_screen"  #open passcode screen with SYS_LOGGED_IN

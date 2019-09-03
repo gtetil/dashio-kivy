@@ -20,6 +20,7 @@ from kivy.clock import Clock
 from . import app_settings
 import os
 import csv
+import socket
 
 class SettingColorPicker(SettingString):
     app_ref = ObjectProperty(None)
@@ -451,22 +452,23 @@ class SettingIPAddress(SettingString):
             title=self.title, content=content, size_hint=(None, None),
             size=(popup_width, '250dp'), pos_hint={'middle': 1, 'top': 1})
         # create the textinput used for numeric input
-        f = os.popen('ifconfig eth0 | grep "inet\ addr" | cut -d: -f2 | cut -d" " -f1')
-        ip_address = f.read()
+        #f = os.popen('ifconfig eth0 | grep "inet\ addr" | cut -d: -f2 | cut -d" " -f1')
+        #ip_address = f.read()
         #ip_address = '10.30.189.255'
+        ip_address = get_ip_address()
         self.label = label = Label(
-            text='LAN:  ' + ip_address)
+            text='IP Address:  ' + ip_address)
 
-        f = os.popen('ifconfig wlan0 | grep "inet\ addr" | cut -d: -f2 | cut -d" " -f1')
+        '''f = os.popen('ifconfig wlan0 | grep "inet\ addr" | cut -d: -f2 | cut -d" " -f1')
         ip_address = f.read()
         #ip_address = '10.30.189.255'
         self.label2 = label2 = Label(
-            text='WLAN:  ' + ip_address)
+            text='WLAN:  ' + ip_address)'''
 
         # construct the content, widget are used as a spacer
         content.add_widget(Widget())
         content.add_widget(label)
-        content.add_widget(label2)
+        #content.add_widget(label2)
         content.add_widget(Widget())
         content.add_widget(SettingSpacer())
 
@@ -479,3 +481,8 @@ class SettingIPAddress(SettingString):
 
         # all done, open the popup !
         popup.open()
+
+def get_ip_address():
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.connect(("8.8.8.8", 80))
+    return s.getsockname()[0]
