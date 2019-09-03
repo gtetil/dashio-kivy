@@ -2,13 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="27b3c643-4da9-4ab8-8fac-19f30f795262" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tools/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tools/file_tools.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher.sh" afterPath="$PROJECT_DIR$/launcher.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/dynamic_layout.py" afterPath="$PROJECT_DIR$/modules/dynamic_layout.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/variables.py" afterPath="$PROJECT_DIR$/modules/variables.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings/settings_popups.py" afterPath="$PROJECT_DIR$/settings/settings_popups.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.ini" afterPath="$PROJECT_DIR$/main.ini" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/event_log.py" afterPath="$PROJECT_DIR$/modules/event_log.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings/variables.json" afterPath="$PROJECT_DIR$/settings/variables.json" />
     </list>
     <list id="1e95b302-9845-4a63-bdc7-46bebc48f801" name="Revert: " comment="" />
     <list id="9acf94dc-4ce7-4798-ab9b-5692da952639" name="Revert:" comment="" />
@@ -65,8 +62,8 @@
       <file leaf-file-name="settings_popups.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/settings/settings_popups.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="502">
-              <caret line="470" column="9" lean-forward="false" selection-start-line="470" selection-start-column="9" selection-end-line="470" selection-end-column="9" />
+            <state relative-caret-position="209">
+              <caret line="368" column="63" lean-forward="false" selection-start-line="368" selection-start-column="63" selection-end-line="368" selection-end-column="63" />
               <folding>
                 <element signature="e#0#34#0" expanded="true" />
               </folding>
@@ -74,14 +71,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="variables.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="variables.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modules/variables.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="592">
-              <caret line="86" column="29" lean-forward="true" selection-start-line="86" selection-start-column="29" selection-end-line="86" selection-end-column="29" />
+            <state relative-caret-position="269">
+              <caret line="82" column="100" lean-forward="false" selection-start-line="82" selection-start-column="100" selection-end-line="82" selection-end-column="100" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="event_log.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/modules/event_log.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="24" column="33" lean-forward="true" selection-start-line="24" selection-start-column="33" selection-end-line="24" selection-end-column="33" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -230,7 +237,6 @@
         <option value="$PROJECT_DIR$/dynamic_layouts/dio_debug_layout.json" />
         <option value="$PROJECT_DIR$/libs/datetimepicker/__init__.py" />
         <option value="$PROJECT_DIR$/libs/roulette/__init__.py" />
-        <option value="$PROJECT_DIR$/modules/event_log.py" />
         <option value="$PROJECT_DIR$/libs/tickline/__init__.py" />
         <option value="$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/kivy/effects/kinetic.py" />
         <option value="$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/kivy/uix/widget.py" />
@@ -243,9 +249,10 @@
         <option value="$PROJECT_DIR$/main.kv" />
         <option value="$PROJECT_DIR$/dynamic_layouts/test_layout.json" />
         <option value="$PROJECT_DIR$/modules/dynamic_layout.py" />
+        <option value="$PROJECT_DIR$/tools/file_tools.py" />
         <option value="$PROJECT_DIR$/settings/settings_popups.py" />
         <option value="$PROJECT_DIR$/modules/variables.py" />
-        <option value="$PROJECT_DIR$/tools/file_tools.py" />
+        <option value="$PROJECT_DIR$/modules/event_log.py" />
       </list>
     </option>
   </component>
@@ -687,13 +694,6 @@
       <option name="presentableId" value="Default" />
       <updated>1484573106753</updated>
     </task>
-    <task id="LOCAL-00026" summary="- finished architecture change to keep track of all widgets and not use the mass &quot;clear_widgets&quot;.&#10;- able to add and delete widgets&#10;- start scheme in edit popup to allow for new types of widgets.">
-      <created>1500663515132</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1500663515132</updated>
-    </task>
     <task id="LOCAL-00027" summary="- finished adding and debugging 'label' widget">
       <created>1500738640461</created>
       <option name="number" value="00027" />
@@ -1030,7 +1030,14 @@
       <option name="project" value="LOCAL" />
       <updated>1566909455432</updated>
     </task>
-    <option name="localTasksCounter" value="75" />
+    <task id="LOCAL-00075" summary="- Flame log files only save now when the flame module is active.&#10;- Flame logs are now limited to 25 files per directory.  Oldest is deleted once 25 is reached.">
+      <created>1567531291059</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1567531291060</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1114,7 +1121,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="- Minor button modifications." />
     <MESSAGE value="- Fixed issue with flame alarm.&#10;- Trying out new theme with white background." />
     <MESSAGE value="- Switched from serial to CAN for dio module.  Still needs debug." />
     <MESSAGE value="- Change RPi state output to a heartbeat.&#10;- Fixed some widget color issues.&#10;- New CAN should be fully debugged." />
@@ -1139,11 +1145,12 @@
     <MESSAGE value="- Added a digit of precision to syrup temp setpoint.&#10;- Added a setting to check IP Addresses (not debugged yet)." />
     <MESSAGE value="- Fixed several behind the scenes bugs.&#10;- Added variables_backup.json." />
     <MESSAGE value="- Fixed an inheritance issue with DynImage." />
-    <option name="LAST_COMMIT_MESSAGE" value="- Fixed an inheritance issue with DynImage." />
+    <MESSAGE value="- Flame log files only save now when the flame module is active.&#10;- Flame logs are now limited to 25 files per directory.  Oldest is deleted once 25 is reached." />
+    <option name="LAST_COMMIT_MESSAGE" value="- Flame log files only save now when the flame module is active.&#10;- Flame logs are now limited to 25 files per directory.  Oldest is deleted once 25 is reached." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="54" />
+      <option name="time" value="55" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1257,13 +1264,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="82" column="46" lean-forward="false" selection-start-line="82" selection-start-column="46" selection-end-line="82" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/event_log.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="43" lean-forward="true" selection-start-line="15" selection-start-column="43" selection-end-line="15" selection-end-column="43" />
         </state>
       </provider>
     </entry>
@@ -1451,16 +1451,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/settings/settings_popups.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="502">
-          <caret line="470" column="9" lean-forward="false" selection-start-line="470" selection-start-column="9" selection-end-line="470" selection-end-column="9" />
-          <folding>
-            <element signature="e#0#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modules/screens.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2822">
@@ -1495,6 +1485,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/tools/file_tools.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="30" lean-forward="true" selection-start-line="9" selection-start-column="30" selection-end-line="9" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/modules/dynamic_layout.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="8126">
@@ -1505,21 +1503,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tools/file_tools.py">
+    <entry file="file://$PROJECT_DIR$/settings/settings_popups.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="30" lean-forward="true" selection-start-line="9" selection-start-column="30" selection-end-line="9" selection-end-column="30" />
-          <folding />
+        <state relative-caret-position="209">
+          <caret line="368" column="63" lean-forward="false" selection-start-line="368" selection-start-column="63" selection-end-line="368" selection-end-column="63" />
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modules/variables.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="592">
-          <caret line="86" column="29" lean-forward="true" selection-start-line="86" selection-start-column="29" selection-end-line="86" selection-end-column="29" />
+        <state relative-caret-position="269">
+          <caret line="82" column="100" lean-forward="false" selection-start-line="82" selection-start-column="100" selection-end-line="82" selection-end-column="100" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/event_log.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="24" column="33" lean-forward="true" selection-start-line="24" selection-start-column="33" selection-end-line="24" selection-end-column="33" />
+          <folding />
         </state>
       </provider>
     </entry>
