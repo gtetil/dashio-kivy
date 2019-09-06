@@ -1,7 +1,7 @@
 {
     "10": {
         "border_color": "#00000000",
-        "color_off": "#00000000",
+        "color_off": "#ccffffff",
         "color_off_text": "#000000ff",
         "color_on": "#3265ffff",
         "color_on_text": "#000000ff",
@@ -23,11 +23,12 @@
         "var_alias": "SYS_DIM_BACKLIGHT",
         "var_tag": "SYS_DIM_BACKLIGHT",
         "var_value": "0",
-        "widget": "Toggle Button"
+        "widget": "Toggle Button",
+        "widget_font_size": "18sp"
     },
     "11": {
         "border_color": "#00000000",
-        "color_off": "#00000000",
+        "color_off": "#ccffffff",
         "color_off_text": "#000000ff",
         "color_on": "#3265ffff",
         "color_on_text": "#000000ff",
@@ -49,11 +50,12 @@
         "var_alias": "SYS_LOGGED_IN",
         "var_tag": "SYS_LOGGED_IN",
         "var_value": "0",
-        "widget": "Button"
+        "widget": "Button",
+        "widget_font_size": "18sp"
     },
     "12": {
         "border_color": "#00000000",
-        "color_off": "#00000000",
+        "color_off": "#ccffffff",
         "color_off_text": "#000000ff",
         "color_on": "#3265ffff",
         "color_on_text": "#000000ff",
@@ -75,11 +77,12 @@
         "var_alias": "ENGINE KILL",
         "var_tag": "DO_0",
         "var_value": "0",
-        "widget": "Indicator"
+        "widget": "Indicator",
+        "widget_font_size": "18sp"
     },
     "15": {
         "border_color": "#00000000",
-        "color_off": "#00000000",
+        "color_off": "#ccffffff",
         "color_off_text": "#000000ff",
         "color_on": "#3265ffff",
         "color_on_text": "#000000ff",
@@ -101,11 +104,12 @@
         "var_alias": "DI_2",
         "var_tag": "DI_2",
         "var_value": "0",
-        "widget": "Indicator"
+        "widget": "Indicator",
+        "widget_font_size": "18sp"
     },
     "17": {
         "border_color": "#00000000",
-        "color_off": "#00000000",
+        "color_off": "#ccffffff",
         "color_off_text": "#000000ff",
         "color_on": "#3265ffff",
         "color_on_text": "#000000ff",
@@ -126,11 +130,12 @@
         "var_alias": "REAR LIGHTS",
         "var_tag": "DO_3",
         "var_value": "0",
-        "widget": "Toggle Button"
+        "widget": "Toggle Button",
+        "widget_font_size": "18sp"
     },
     "18": {
         "border_color": "#00000000",
-        "color_off": "#00000000",
+        "color_off": "#ccffffff",
         "color_off_text": "#000000ff",
         "color_on": "#3265ffff",
         "color_on_text": "#000000ff",
@@ -151,11 +156,12 @@
         "var_alias": "PARK",
         "var_tag": "DO_2",
         "var_value": "0",
-        "widget": "Toggle Button"
+        "widget": "Toggle Button",
+        "widget_font_size": "18sp"
     },
     "19": {
         "border_color": "#00000000",
-        "color_off": "#00000000",
+        "color_off": "#ccffffff",
         "color_off_text": "#000000ff",
         "color_on": "#3265ffff",
         "color_on_text": "#000000ff",
@@ -176,11 +182,12 @@
         "var_alias": "FRONT LIGHTS",
         "var_tag": "DO_1",
         "var_value": "0",
-        "widget": "Toggle Button"
+        "widget": "Toggle Button",
+        "widget_font_size": "18sp"
     },
     "2": {
         "border_color": "#00000000",
-        "color_off": "#00000000",
+        "color_off": "#ccffffff",
         "color_off_text": "#000000ff",
         "color_on": "#3265ffff",
         "color_on_text": "#000000ff",
@@ -202,11 +209,12 @@
         "var_alias": "PARK",
         "var_tag": "DO_2",
         "var_value": "0",
-        "widget": "Toggle Button"
+        "widget": "Toggle Button",
+        "widget_font_size": "18sp"
     },
     "20": {
         "border_color": "#00000000",
-        "color_off": "#00000000",
+        "color_off": "#ccffffff",
         "color_off_text": "#000000ff",
         "color_on": "#3265ffff",
         "color_on_text": "#000000ff",
@@ -227,11 +235,12 @@
         "var_alias": "DO_5",
         "var_tag": "DO_5",
         "var_value": "0",
-        "widget": "Toggle Button"
+        "widget": "Toggle Button",
+        "widget_font_size": "18sp"
     },
     "21": {
         "border_color": "#00000000",
-        "color_off": "#00000000",
+        "color_off": "#ccffffff",
         "color_off_text": "#000000ff",
         "color_on": "#3265ffff",
         "color_on_text": "#000000ff",
@@ -252,11 +261,12 @@
         "var_alias": "ENGINE KILL",
         "var_tag": "DO_0",
         "var_value": "0",
-        "widget": "Toggle Button"
+        "widget": "Toggle Button",
+        "widget_font_size": "18sp"
     },
     "3": {
         "border_color": "#00000000",
-        "color_off": "#00000000",
+        "color_off": "#ccffffff",
         "color_off_text": "#000000ff",
         "color_on": "#3265ffff",
         "color_on_text": "#000000ff",
@@ -278,11 +288,12 @@
         "var_alias": "REVERSE",
         "var_tag": "DO_4",
         "var_value": "0",
-        "widget": "Toggle Button"
+        "widget": "Toggle Button",
+        "widget_font_size": "18sp"
     },
     "6": {
         "border_color": "#00000000",
-        "color_off": "#00000000",
+        "color_off": "#ccffffff",
         "color_off_text": "#000000ff",
         "color_on": "#3265ffff",
         "color_on_text": "#000000ff",
@@ -304,11 +315,12 @@
         "var_alias": "DI_IGNITION",
         "var_tag": "DI_IGNITION",
         "var_value": "0",
-        "widget": "Indicator"
+        "widget": "Indicator",
+        "widget_font_size": "18sp"
     },
     "9": {
         "border_color": "#00000000",
-        "color_off": "#00000000",
+        "color_off": "#ccffffff",
         "color_off_text": "#000000ff",
         "color_on": "#3265ffff",
         "color_on_text": "#000000ff",
@@ -330,6 +342,7 @@
         "var_alias": "SYS_INACTIVE",
         "var_tag": "SYS_INACTIVE",
         "var_value": "0",
-        "widget": "Indicator"
+        "widget": "Indicator",
+        "widget_font_size": "18sp"
     }
 }

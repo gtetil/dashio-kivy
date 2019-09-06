@@ -627,8 +627,30 @@
     background_normal: 'pics/button.png'
     background_down: 'pics/button_pressed.png'
 
-<PasscodeButton@ModernButton>:
+<PasscodeButton@Button>:
     on_release: app.screen_man.try_passcode(self.text)
+    background_normal: ''
+    background_down: ''
+    background_color: 1,1,1,0
+    color: 0,0,0,1
+    font_size: '24sp'
+    button_color: 1,1,1,1
+    canvas.before:
+        Clear
+        Color:
+            rgba: 0,0,0,1
+        RoundedRectangle:
+            size: self.size[0] - 2, self.size[1] - 2
+            pos: self.pos[0] + 1, self.pos[1] + 1
+            radius: (dp(0),)
+        Color:
+            rgba: self.button_color
+        RoundedRectangle:
+            size: self.size[0] - 4, self.size[1] - 4
+            pos: self.pos[0] + 2, self.pos[1] + 2
+            radius: (dp(0),)
+    on_state: if self.state == 'down': self.button_color = [0,0,0,1]; self.color = [1,1,1,1]
+    on_state: if self.state == 'normal': self.button_color = [1,1,1,1]; self.color = [0,0,0,1]
 
 <DynLabel>:
     text_size: self.size
@@ -672,35 +694,46 @@
     fail_popup: fail_popup.__self__
     app_ref: app
 
-    GridLayout:
-        cols: 3
-        rows: 4
-        spacing: 5
-        padding: 5
-        size_hint_x: None
-        width: 400
-        pos: 200, 0
+    FloatLayout:
+        id: main_layout
+        orientation: 'horizontal'
 
-        PasscodeButton:
-            text: '7'
-        PasscodeButton:
-            text: '8'
-        PasscodeButton:
-            text: '9'
-        PasscodeButton:
-            text: '4'
-        PasscodeButton:
-            text: '5'
-        PasscodeButton:
-            text: '6'
-        PasscodeButton:
-            text: '1'
-        PasscodeButton:
-            text: '2'
-        PasscodeButton:
-            text: '3'
-        PasscodeButton:
-            text: '0'
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        GridLayout:
+            cols: 3
+            rows: 4
+            spacing: 5
+            padding: 5
+            size_hint_x: None
+            width: 400
+            pos: 200, 0
+
+            PasscodeButton:
+                text: '7'
+            PasscodeButton:
+                text: '8'
+            PasscodeButton:
+                text: '9'
+            PasscodeButton:
+                text: '4'
+            PasscodeButton:
+                text: '5'
+            PasscodeButton:
+                text: '6'
+            PasscodeButton:
+                text: '1'
+            PasscodeButton:
+                text: '2'
+            PasscodeButton:
+                text: '3'
+            PasscodeButton:
+                text: '0'
 
     Popup:
         id: fail_popup
