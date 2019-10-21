@@ -44,13 +44,11 @@ class Variables(Widget):
         self.toggle_update_clock(True)
         self.set_by_alias('SYS_INIT', '1')
         Clock.schedule_interval(self.read_system, 1)
-        self.shutdown_pin = 17
         self.ignition_pin = 27
         self.buzzer_pin = 18
         self.last_shutdown_state = 0
         try:
             GPIO.setmode(GPIO.BCM)
-            GPIO.setup(self.shutdown_pin, GPIO.OUT)  # status output for shutdown circuit
             GPIO.setup(self.ignition_pin, GPIO.IN)  # setup input for ignition status
             GPIO.setup(self.buzzer_pin, GPIO.OUT)  # output for buzzer (button click sound)
         except Exception as e:
@@ -67,6 +65,9 @@ class Variables(Widget):
         self.syrup_temp = self.get_bool('SYS_SYRUP_TEMP')
         self.can_com = CANcom(dio_module=self.dio_module, flame_detect=self.flame_detect, stack_temp=self.stack_temp, syrup_temp=self.syrup_temp)
         Clock.schedule_interval(self.read_can, 0.05)
+        if self.dio_module:
+            self.can_com.send_heartbeat(init=True)
+        Clock.schedule_interval(self.send_can_heartbeat, 1)
 
         # flame detect init
         if self.flame_detect:
@@ -150,6 +151,13 @@ class Variables(Widget):
             #print(e)
             pass
 
+    def send_can_heartbeat(self, dt):
+        try:
+            self.can_com.send_heartbeat() # send the last CAN message again, every second, to keep dio module alive
+        except Exception as e:
+            print(e)
+            pass
+
     def read_system(self, dt):
         #self.set_by_alias('SYS_TIME_SEC', str((current_milli_time() - initial_time) / 1000))
         self.set_by_alias('SYS_CPU_USAGE', str(psutil.cpu_percent()))
@@ -157,11 +165,6 @@ class Variables(Widget):
 
         if operating_sys != 'Windows':
             self.set_by_alias('SYS_CPU_TEMP', os.popen('vcgencmd measure_temp').readline().replace("temp=", "").replace("'C\n", ""))
-
-        # heartbeat signal to rpi power supply
-        if not self.SYS_DEBUG_MODE:
-            self.set_gpio_output(self.shutdown_pin, self.last_shutdown_state)
-            self.last_shutdown_state = not self.last_shutdown_state
 
     def log_files(self, dt):
         self.flame_alarm_log.write(self.alarm_counters)

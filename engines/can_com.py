@@ -27,6 +27,7 @@ class CANcom(Widget):
         self.msg0 = self.msg1 = self.msg2 = 0
         self.write_can_data = False
         self.dio_module = dio_module
+        self.dio_module_send_id = 0x000
         self.flame_detect = flame_detect
         self.stack_temp = stack_temp
         self.stack_temp_can_read_data = [0] * app_settings.stack_read_data_len
@@ -43,15 +44,15 @@ class CANcom(Widget):
             if message:
                 if self.dio_module or self.flame_detect:
                     # get CAN message from module at address 0
-                    if message.arbitration_id == 0x000:
+                    if message.arbitration_id == 0x010:
                         self.msg0 = message.data[0]
                         self.write_can_data = True
                     # get CAN message from module at address 1
-                    if message.arbitration_id == 0x001:
+                    if message.arbitration_id == 0x011:
                         self.msg1 = message.data[0] << 8
                         self.write_can_data = True
                     # get CAN message from module at address 2
-                    if message.arbitration_id == 0x002:
+                    if message.arbitration_id == 0x012:
                         self.msg2 = message.data[0] << 16
                         self.write_can_data = True
 
@@ -80,7 +81,7 @@ class CANcom(Widget):
     def can_write(self, index, value, channel_type, scale, offset):
         if self.dio_module or self.flame_detect:
             self.can_write_data = self.set_bit(self.can_write_data, index, value)
-            self.msg = can.Message(arbitration_id=0x000+0x010, extended_id=False, data=[0, 0, 0, 0, 0, 0, 0, self.can_write_data])
+            self.msg = can.Message(arbitration_id=self.dio_module_send_id, extended_id=False, data=[0, 0, 0, 0, 0, 0, 0, self.can_write_data])
 
         if self.stack_temp:
             if channel_type == 'STACK_TEMP_WRITE':
@@ -109,6 +110,14 @@ class CANcom(Widget):
                 print((self.msg))
 
         bus.send(self.msg)
+
+    def send_heartbeat(self, init=False):
+        try:
+            if init:
+                self.msg = can.Message(arbitration_id=self.dio_module_send_id, extended_id=False, data=[0, 0, 0, 0, 0, 0, 0, 0])
+            bus.send(self.msg)
+        except Exception as e:
+            pass
 
     def set_bit(self, v, index, x):
         """Set the index:th bit of v to 1 if x is truthy, else to 0, and return the new value."""
